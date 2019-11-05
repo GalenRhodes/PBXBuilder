@@ -51,9 +51,11 @@
 		1117D8540DAEB657879E8E4A /* PGRunInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGRunInfo.h; sourceTree = "<group>"; };
 		1117D85A4FCA9A8F505412ED /* PBXBuildFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBXBuildFile.h; path = Target/PBXBuildFile.h; sourceTree = "<group>"; };
 		1117DA1848D6F5F5D2E72841 /* PBXProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXProject.h; sourceTree = "<group>"; };
+		1117DA21A8D95A4F700D8C61 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1117DAE725FA7848DE9623A1 /* PBXNativeTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXNativeTarget.h; sourceTree = "<group>"; };
 		1117DB7A6E01A1B7187E1BBB /* XCConfigurationList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCConfigurationList.h; sourceTree = "<group>"; };
 		1117DC55D3382646BB505AC2 /* PBXGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXGroup.m; sourceTree = "<group>"; };
+		1117DC8D695D8AD4BC6A6803 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		1117DF0EA8EB8A003F400D04 /* PGRunInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGRunInfo.m; sourceTree = "<group>"; };
 		1117DF79B616D7519DBEB87C /* PBXNativeTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXNativeTarget.m; sourceTree = "<group>"; };
 		83E1B3932370808500427C23 /* PBXBuilder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PBXBuilder; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +127,8 @@
 			children = (
 				83E1B3952370808500427C23 /* PBXBuilder */,
 				83E1B3942370808500427C23 /* Products */,
+				1117DA21A8D95A4F700D8C61 /* README.md */,
+				1117DC8D695D8AD4BC6A6803 /* LICENSE */,
 			);
 			sourceTree = "<group>";
 		};
