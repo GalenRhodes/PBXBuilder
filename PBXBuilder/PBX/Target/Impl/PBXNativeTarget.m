@@ -39,7 +39,7 @@
             _name             = [[self iv:@"name"] copy];
             _productName      = [[self iv:@"productName"] copy];
             _productType      = [[self iv:@"productType"] copy];
-            _productReference = (PBXFileReference *)[self.projectFile itemForID:[self iv:@"productReference"]]
+            _productReference = (PBXFileReference *)[self.projectFile itemForID:[self iv:@"productReference"]];
         }
 
         return self;
