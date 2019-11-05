@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXGroup.h
+ *    FILENAME: PBXAggregateTarget.m
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/4/19
+ *        DATE: 11/5/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,24 +20,18 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_PBXGROUP_H__
-#define __PBXBUILDER_PBXGROUP_H__
+#import "PBXAggregateTarget.h"
 
-#import "PBXFileElement.h"
+@implementation PBXAggregateTarget {
+    }
 
-@class PBXFileReference;
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
+        self = [super initWithItemId:itemId projectFile:projectFile];
 
-NS_ASSUME_NONNULL_BEGIN
+        if(self) {
+        }
 
-@interface PBXGroup : PBXFileElement
-
-    @property(readonly, copy, nullable) NSString                    *name;
-    @property(readonly, copy, nullable) NSString                    *path;
-    @property(readonly, copy, nullable) NSString                    *sourceTree;
-    @property(readonly)/*            */ NSArray<PBXFileReference *> *children;
+        return self;
+    }
 
 @end
-
-NS_ASSUME_NONNULL_END
-
-#endif // __PBXBUILDER_PBXGROUP_H__

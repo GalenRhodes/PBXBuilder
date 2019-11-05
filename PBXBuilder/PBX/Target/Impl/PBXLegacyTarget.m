@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PGXNativeTarget.h
+ *    FILENAME: PBXLegacyTarget.m
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/4/19
+ *        DATE: 11/5/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,27 +20,18 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_PGXNATIVETARGET_H__
-#define __PBXBUILDER_PGXNATIVETARGET_H__
+#import "PBXLegacyTarget.h"
 
-#import <Cocoa/Cocoa.h>
-#import "PBXTarget.h"
+@implementation PBXLegacyTarget {
+    }
 
-@class PBXFileReference;
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
+        self = [super initWithItemId:itemId projectFile:projectFile];
 
-NS_ASSUME_NONNULL_BEGIN
+        if(self) {
+        }
 
-@interface PBXNativeTarget : PBXTarget
-
-    @property(copy, nullable, readonly) NSString         *name;
-    @property(copy, nullable, readonly) NSString         *productName;
-    @property(copy, nullable, readonly) NSString         *productType;
-    @property(nullable, readonly)/*  */ PBXFileReference *productReference;
-
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
+        return self;
+    }
 
 @end
-
-NS_ASSUME_NONNULL_END
-
-#endif // __PBXBUILDER_PGXNATIVETARGET_H__

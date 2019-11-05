@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXGroup.h
+ *    FILENAME: PBXFileElement.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/4/19
+ *        DATE: 11/5/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,24 +20,19 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_PBXGROUP_H__
-#define __PBXBUILDER_PBXGROUP_H__
+#ifndef __PBXBUILDER_PBXFILEELEMENT_H__
+#define __PBXBUILDER_PBXFILEELEMENT_H__
 
-#import "PBXFileElement.h"
-
-@class PBXFileReference;
+#import "PBXItem.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PBXGroup : PBXFileElement
+@interface PBXFileElement : PBXItem
 
-    @property(readonly, copy, nullable) NSString                    *name;
-    @property(readonly, copy, nullable) NSString                    *path;
-    @property(readonly, copy, nullable) NSString                    *sourceTree;
-    @property(readonly)/*            */ NSArray<PBXFileReference *> *children;
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
 
 @end
 
 NS_ASSUME_NONNULL_END
 
-#endif // __PBXBUILDER_PBXGROUP_H__
+#endif // __PBXBUILDER_PBXFILEELEMENT_H__

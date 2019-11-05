@@ -1,6 +1,6 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXGroup.h
+ *    FILENAME: PGXNativeTarget.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
  *        DATE: 11/4/19
@@ -20,24 +20,26 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_PBXGROUP_H__
-#define __PBXBUILDER_PBXGROUP_H__
+#ifndef __PBXBUILDER_PGXNATIVETARGET_H__
+#define __PBXBUILDER_PGXNATIVETARGET_H__
 
-#import "PBXFileElement.h"
+#import "PBXTarget.h"
 
 @class PBXFileReference;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PBXGroup : PBXFileElement
+@interface PBXNativeTarget : PBXTarget
 
-    @property(readonly, copy, nullable) NSString                    *name;
-    @property(readonly, copy, nullable) NSString                    *path;
-    @property(readonly, copy, nullable) NSString                    *sourceTree;
-    @property(readonly)/*            */ NSArray<PBXFileReference *> *children;
+    @property(copy, nullable, readonly) NSString         *name;
+    @property(copy, nullable, readonly) NSString         *productName;
+    @property(copy, nullable, readonly) NSString         *productType;
+    @property(nullable, readonly)/*  */ PBXFileReference *productReference;
+
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
 
 @end
 
 NS_ASSUME_NONNULL_END
 
-#endif // __PBXBUILDER_PBXGROUP_H__
+#endif // __PBXBUILDER_PGXNATIVETARGET_H__

@@ -23,12 +23,11 @@
 #ifndef __PBXBUILDER_PBXFILEREFERENCE_H__
 #define __PBXBUILDER_PBXFILEREFERENCE_H__
 
-#import <Cocoa/Cocoa.h>
-#import "PBXItem.h"
+#import "PBXFileElement.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PBXFileReference : PBXItem
+@interface PBXFileReference : PBXFileElement
 
     /*
      * 83E1B3932370808500427C23 = {
