@@ -26,18 +26,18 @@
     }
 
     @synthesize explicitFileType = _explicitFileType;
-    @synthesize path = _path;
-    @synthesize sourceTree = _sourceTree;
     @synthesize includeInIndex = _includeInIndex;
+    @synthesize lastKnownFileType = _lastKnownFileType;
+    @synthesize fileEncoding = _fileEncoding;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
 
         if(self) {
-            _includeInIndex   = [self ivBool:@"includeInIndex"];
-            _explicitFileType = [[self iv:@"explicitFileType"] copy];
-            _sourceTree       = [[self iv:@"sourceTree"] copy];
-            _path             = [[self iv:@"path"] copy];
+            _includeInIndex    = [self ivBool:@"includeInIndex"];
+            _fileEncoding      = [PBXFileElement cleanFileEncoding:[self ivUInt:@"fileEncoding"]];
+            _explicitFileType  = [PBXFileElement fileTypeForId:[self iv:@"explicitFileType"]];
+            _lastKnownFileType = [PBXFileElement fileTypeForId:[self iv:@"lastKnownFileType"]];
         }
 
         return self;

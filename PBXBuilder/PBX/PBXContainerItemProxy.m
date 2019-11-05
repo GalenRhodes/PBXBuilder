@@ -1,6 +1,6 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXVariantGroup.m
+ *    FILENAME: PBXContainerItemProxy.m
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
  *        DATE: 11/5/19
@@ -20,14 +20,28 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import "PBXVariantGroup.h"
+#import "PBXContainerItemProxy.h"
+#import "PBXProject.h"
 #import "PGProjectFile.h"
 
-@implementation PBXVariantGroup {
+@implementation PBXContainerItemProxy {
     }
+
+    @synthesize containerPortal = _containerPortal;
+    @synthesize proxyType = _proxyType;
+    @synthesize remoteInfo = _remoteInfo;
+    @synthesize remoteGlobalIDString = _remoteGlobalIDString;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
+
+        if(self) {
+            _containerPortal      = (PBXProject *)[self.projectFile itemForID:[self iv:@"containerPortal"]];
+            _proxyType            = [self ivInt:@"proxyType"];
+            _remoteGlobalIDString = [[self iv:@"remoteGlobalIDString"] copy];
+            _remoteInfo           = [[self iv:@"remoteInfo"] copy];
+        }
+
         return self;
     }
 

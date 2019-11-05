@@ -25,9 +25,14 @@
 
 #import "PBXBuildPhase.h"
 
+@class PBXBuildFile;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PBXCopyFilesBuildPhase : PBXBuildPhase
+
+    @property(readonly, copy) NSString  *dstPath;
+    @property(readonly)/*  */ NSInteger dstSubfolderSpec;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
 

@@ -21,14 +21,20 @@
  *//************************************************************************/
 
 #import "PBXCopyFilesBuildPhase.h"
+#import "PGProjectFile.h"
 
 @implementation PBXCopyFilesBuildPhase {
     }
+
+    @synthesize dstPath = _dstPath;
+    @synthesize dstSubfolderSpec = _dstSubfolderSpec;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
 
         if(self) {
+            _dstPath          = [self iv:@"dstPath"];
+            _dstSubfolderSpec = [self ivInt:@"dstSubfolderSpec"];
         }
 
         return self;

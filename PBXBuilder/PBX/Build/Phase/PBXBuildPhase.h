@@ -25,9 +25,15 @@
 
 #import "PBXItem.h"
 
+@class PBXBuildFile;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PBXBuildPhase : PBXItem
+
+    @property(readonly) NSArray<PBXBuildFile *> *files;
+    @property(readonly) NSInteger               buildActionMask;
+    @property(readonly) BOOL                    runOnlyForDeploymentPostprocessing;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
 

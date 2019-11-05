@@ -29,6 +29,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PBXShellScriptBuildPhase : PBXBuildPhase
 
+    @property(readonly, copy)/*      */ NSArray<NSString *> *inputPaths;
+    @property(readonly, copy)/*      */ NSArray<NSString *> *outputPaths;
+    @property(nullable, readonly, copy) NSString            *shellPath;
+    @property(nullable, readonly, copy) NSString            *shellScript;
+
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
 
 @end

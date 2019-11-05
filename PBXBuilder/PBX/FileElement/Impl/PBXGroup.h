@@ -25,16 +25,11 @@
 
 #import "PBXFileElement.h"
 
-@class PBXFileReference;
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PBXGroup : PBXFileElement
 
-    @property(readonly, copy, nullable) NSString                    *name;
-    @property(readonly, copy, nullable) NSString                    *path;
-    @property(readonly, copy, nullable) NSString                    *sourceTree;
-    @property(readonly)/*            */ NSArray<PBXFileReference *> *children;
+    @property(readonly) NSArray<PBXFileElement *> *children;
 
 @end
 

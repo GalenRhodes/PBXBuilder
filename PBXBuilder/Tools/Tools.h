@@ -1,6 +1,6 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXVariantGroup.m
+ *    FILENAME: Tools.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
  *        DATE: 11/5/19
@@ -20,15 +20,15 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import "PBXVariantGroup.h"
-#import "PGProjectFile.h"
+#ifndef __PBXBUILDER_TOOLS_H__
+#define __PBXBUILDER_TOOLS_H__
 
-@implementation PBXVariantGroup {
-    }
+#import <Cocoa/Cocoa.h>
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
-        self = [super initWithItemId:itemId projectFile:projectFile];
-        return self;
-    }
+NS_ASSUME_NONNULL_BEGIN
 
-@end
+FOUNDATION_EXPORT dispatch_queue_t PGWorkQueue(void);
+
+NS_ASSUME_NONNULL_END
+
+#endif // __PBXBUILDER_TOOLS_H__

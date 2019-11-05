@@ -23,13 +23,14 @@
 #ifndef __PBXBUILDER_PBXVARIANTGROUP_H__
 #define __PBXBUILDER_PBXVARIANTGROUP_H__
 
-#import "PBXFileElement.h"
+#import "PBXGroup.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PBXVariantGroup : PBXFileElement
+@interface PBXVariantGroup : PBXGroup
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
+
 @end
 
 NS_ASSUME_NONNULL_END

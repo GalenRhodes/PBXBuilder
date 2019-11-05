@@ -21,14 +21,30 @@
  *//************************************************************************/
 
 #import "PBXBuildPhase.h"
+#import "PBXBuildFile.h"
+#import "PGProjectFile.h"
 
 @implementation PBXBuildPhase {
     }
+
+    @synthesize files = _files;
+    @synthesize buildActionMask = _buildActionMask;
+    @synthesize runOnlyForDeploymentPostprocessing = _runOnlyForDeploymentPostprocessing;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
 
         if(self) {
+            _runOnlyForDeploymentPostprocessing = [self ivBool:@"runOnlyForDeploymentPostprocessing"];
+            _buildActionMask                    = [self ivInt:@"buildActionMask"];
+
+            NSMutableArray      *array = (NSMutableArray *)_files = [NSMutableArray new];
+            NSArray<NSString *> *refs  = (NSArray<NSString *> *)[self iv:@"files"];
+
+            [refs enumerateObjectsUsingBlock:^(NSString *itemId, NSUInteger idx, BOOL *stop) {
+                PBXBuildFile *buildFile = (PBXBuildFile *)[self.projectFile itemForID:itemId];
+                if(buildFile) [array addObject:buildFile];
+            }];
         }
 
         return self;

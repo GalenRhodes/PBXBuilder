@@ -22,30 +22,22 @@
 
 #import "PBXGroup.h"
 #import "PGProjectFile.h"
-#import "PBXFileReference.h"
 
 @implementation PBXGroup {
     }
 
-    @synthesize name = _name;
-    @synthesize path = _path;
-    @synthesize sourceTree = _sourceTree;
     @synthesize children = _children;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
 
         if(self) {
-            _name       = [[self iv:@"name"] copy];
-            _path       = [[self iv:@"path"] copy];
-            _sourceTree = [[self iv:@"sourceTree"] copy];
-            _children   = [NSMutableArray new];
-
+            NSMutableArray      *array       = (NSMutableArray *)_children = [NSMutableArray new];
             NSArray<NSString *> *childrenIDs = [self iv:@"children"];
 
             [childrenIDs enumerateObjectsUsingBlock:^(NSString *childId, NSUInteger idx, BOOL *stop) {
-                PBXFileReference *item = (PBXFileReference *)[self.projectFile itemForID:childId];
-                if(item) [((NSMutableArray *)_children) addObject:item];
+                PBXFileElement *item = (PBXFileElement *)[self.projectFile itemForID:childId];
+                if(item) [array addObject:item];
             }];
         }
 

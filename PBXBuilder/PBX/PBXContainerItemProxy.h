@@ -1,6 +1,6 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXVariantGroup.m
+ *    FILENAME: PBXContainerItemProxy.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
  *        DATE: 11/5/19
@@ -20,15 +20,26 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import "PBXVariantGroup.h"
-#import "PGProjectFile.h"
+#ifndef __PBXBUILDER_PBXCONTAINERITEMPROXY_H__
+#define __PBXBUILDER_PBXCONTAINERITEMPROXY_H__
 
-@implementation PBXVariantGroup {
-    }
+#import "PBXItem.h"
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
-        self = [super initWithItemId:itemId projectFile:projectFile];
-        return self;
-    }
+@class PBXProject;
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface PBXContainerItemProxy : PBXItem
+
+    @property(readonly)/*  */ PBXProject *containerPortal;
+    @property(readonly)/*  */ NSInteger  proxyType;
+    @property(readonly, copy) NSString   *remoteInfo;
+    @property(readonly, copy) NSString   *remoteGlobalIDString;
+
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#endif // __PBXBUILDER_PBXCONTAINERITEMPROXY_H__

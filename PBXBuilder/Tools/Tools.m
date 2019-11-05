@@ -1,6 +1,6 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXVariantGroup.m
+ *    FILENAME: Tools.m
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
  *        DATE: 11/5/19
@@ -20,15 +20,13 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import "PBXVariantGroup.h"
-#import "PGProjectFile.h"
+#import "Tools.h"
 
-@implementation PBXVariantGroup {
-    }
+dispatch_queue_t PGWorkQueue(void) {
+    static dispatch_queue_t _workQueue     = NULL;
+    static dispatch_once_t  _workQueueOnce = 0;
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
-        self = [super initWithItemId:itemId projectFile:projectFile];
-        return self;
-    }
+    _dispatch_once(&_workQueueOnce, ^{ _workQueue = dispatch_queue_create("PGWorkQueue", DISPATCH_QUEUE_SERIAL); });
+    return _workQueue;
+}
 
-@end

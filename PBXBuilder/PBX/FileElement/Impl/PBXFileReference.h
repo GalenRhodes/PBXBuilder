@@ -29,21 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PBXFileReference : PBXFileElement
 
-    /*
-     * 83E1B3932370808500427C23 = {
-     *     isa = PBXFileReference;
-     *     explicitFileType = "compiled.mach-o.executable";
-     *     includeInIndex = 0;
-     *     path = PBXBuilder;
-     *     sourceTree = BUILT_PRODUCTS_DIR;
-     * };
-     *
-     */
-
-    @property(copy, readonly, nullable) NSString *explicitFileType;
-    @property(copy, readonly, nullable) NSString *path;
-    @property(copy, readonly, nullable) NSString *sourceTree;
-    @property(readonly)/*            */ BOOL     includeInIndex;
+    @property(readonly) PBXFileType     explicitFileType;
+    @property(readonly) PBXFileType     lastKnownFileType;
+    @property(readonly) PBXFileEncoding fileEncoding;
+    @property(readonly) BOOL            includeInIndex;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
 

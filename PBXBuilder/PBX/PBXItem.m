@@ -20,7 +20,6 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import <DiscRecordingUI/DiscRecordingUI.h>
 #import "PBXItem.h"
 #import "PGProjectFile.h"
 
@@ -54,8 +53,18 @@
     }
 
     -(BOOL)ivBool:(NSString *)key {
-        NSString *str = ([[self iv:key] description] ?: @"0");
-        return (str.length && !([str isEqualToString:@"0"] || [str isEqualToString:@"NO"]));
+        return ([[self iv:key] description] ?: @"0").boolValue;
+    }
+
+    -(NSInteger)ivInt:(NSString *)key {
+        return ([[self iv:key] description] ?: @"0").integerValue;
+    }
+
+    -(NSUInteger)ivUInt:(NSString *)key {
+        NSScanner          *scanner = [[NSScanner alloc] initWithString:([[self iv:key] description] ?: @"0")];
+        unsigned long long ullValue = 0;
+        BOOL               f        = [scanner scanUnsignedLongLong:&ullValue];
+        return (NSUInteger)(f ? ullValue : 0);
     }
 
 @end

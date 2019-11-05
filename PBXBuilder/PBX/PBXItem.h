@@ -41,6 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
 
     -(BOOL)ivBool:(NSString *)key;
 
+    -(NSInteger)ivInt:(NSString *)key;
+
+    -(NSUInteger)ivUInt:(NSString *)key;
 @end
 
 NS_ASSUME_NONNULL_END
