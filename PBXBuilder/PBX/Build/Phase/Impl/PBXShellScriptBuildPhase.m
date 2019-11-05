@@ -1,6 +1,6 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXBuildPhase.h
+ *    FILENAME: PBXShellScriptBuildPhase.m
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
  *        DATE: 11/5/19
@@ -20,19 +20,18 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_PBXBUILDPHASE_H__
-#define __PBXBUILDER_PBXBUILDPHASE_H__
+#import "PBXShellScriptBuildPhase.h"
 
-#import "PBXItem.h"
+@implementation PBXShellScriptBuildPhase {
+    }
 
-NS_ASSUME_NONNULL_BEGIN
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
+        self = [super initWithItemId:itemId projectFile:projectFile];
 
-@interface PBXBuildPhase : PBXItem
+        if(self) {
+        }
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
+        return self;
+    }
 
 @end
-
-NS_ASSUME_NONNULL_END
-
-#endif // __PBXBUILDER_PBXBUILDPHASE_H__

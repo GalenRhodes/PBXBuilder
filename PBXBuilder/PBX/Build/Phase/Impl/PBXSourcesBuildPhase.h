@@ -1,6 +1,6 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXBuildPhase.h
+ *    FILENAME: PBXSourcesBuildPhase.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
  *        DATE: 11/5/19
@@ -20,14 +20,14 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_PBXBUILDPHASE_H__
-#define __PBXBUILDER_PBXBUILDPHASE_H__
+#ifndef __PBXBUILDER_PBXSOURCESBUILDPHASE_H__
+#define __PBXBUILDER_PBXSOURCESBUILDPHASE_H__
 
-#import "PBXItem.h"
+#import "PBXBuildPhase.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PBXBuildPhase : PBXItem
+@interface PBXSourcesBuildPhase : PBXBuildPhase
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
 
@@ -35,4 +35,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#endif // __PBXBUILDER_PBXBUILDPHASE_H__
+#endif // __PBXBUILDER_PBXSOURCESBUILDPHASE_H__
