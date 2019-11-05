@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1117D130C154ED3877473A4F /* PGRunInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DF0EA8EB8A003F400D04 /* PGRunInfo.m */; };
+		1117D35DCFD3FE73578AAC8F /* PBXBuildFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D7A68072DA188B754234 /* PBXBuildFile.m */; };
+		1117D3E93DD7D9FFBCA4B66C /* PBXFileReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D32D94923679776804B3 /* PBXFileReference.m */; };
+		1117D46E89D587A6B24C7818 /* PBXTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D4A80DF8B12D3C4B1F45 /* PBXTarget.m */; };
+		1117D47FDB8E521E9794247D /* XCBuildConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D456B74F51DDB3C5C560 /* XCBuildConfiguration.m */; };
+		1117D59D82018B00FB6E5EC0 /* PBXItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D7DE1E0A4802AA39D97F /* PBXItem.m */; };
+		1117D9C992BF1A49890553D5 /* XCConfigurationList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D0F08FD0466F0F7FE917 /* XCConfigurationList.m */; };
+		1117D9CEC7E8CBC59852AF3C /* PBXNativeTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DF79B616D7519DBEB87C /* PBXNativeTarget.m */; };
+		1117DD221DB7CC4910F140BC /* PGProjectFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D15D6188A08C9670BAE9 /* PGProjectFile.m */; };
+		1117DD8A17AA1BBDFD73D8AB /* PBXGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DC55D3382646BB505AC2 /* PBXGroup.m */; };
+		1117DDCB761B6E8D3B0E6DE6 /* PBXProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D3591C1E4899179E1D30 /* PBXProject.m */; };
 		83E1B3972370808500427C23 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E1B3962370808500427C23 /* main.m */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +34,28 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1117D0F08FD0466F0F7FE917 /* XCConfigurationList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCConfigurationList.m; sourceTree = "<group>"; };
+		1117D15D6188A08C9670BAE9 /* PGProjectFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGProjectFile.m; sourceTree = "<group>"; };
+		1117D250D3A2952935DB4F92 /* PBXItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXItem.h; sourceTree = "<group>"; };
+		1117D29C921994A1775BDC67 /* PBXTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXTarget.h; sourceTree = "<group>"; };
+		1117D32D94923679776804B3 /* PBXFileReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXFileReference.m; sourceTree = "<group>"; };
+		1117D3591C1E4899179E1D30 /* PBXProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXProject.m; sourceTree = "<group>"; };
+		1117D3FC9C98FC9489A87139 /* PBXGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXGroup.h; sourceTree = "<group>"; };
+		1117D456B74F51DDB3C5C560 /* XCBuildConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCBuildConfiguration.m; sourceTree = "<group>"; };
+		1117D4A80DF8B12D3C4B1F45 /* PBXTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXTarget.m; sourceTree = "<group>"; };
+		1117D61B61400A5DE31674A9 /* PGProjectFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGProjectFile.h; sourceTree = "<group>"; };
+		1117D640ADEC5E0A2E653355 /* XCBuildConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCBuildConfiguration.h; sourceTree = "<group>"; };
+		1117D64297A7DAD670A43773 /* PBXFileReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXFileReference.h; sourceTree = "<group>"; };
+		1117D7A68072DA188B754234 /* PBXBuildFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBXBuildFile.m; path = Target/PBXBuildFile.m; sourceTree = "<group>"; };
+		1117D7DE1E0A4802AA39D97F /* PBXItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXItem.m; sourceTree = "<group>"; };
+		1117D8540DAEB657879E8E4A /* PGRunInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGRunInfo.h; sourceTree = "<group>"; };
+		1117D85A4FCA9A8F505412ED /* PBXBuildFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBXBuildFile.h; path = Target/PBXBuildFile.h; sourceTree = "<group>"; };
+		1117DA1848D6F5F5D2E72841 /* PBXProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXProject.h; sourceTree = "<group>"; };
+		1117DAE725FA7848DE9623A1 /* PBXNativeTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXNativeTarget.h; sourceTree = "<group>"; };
+		1117DB7A6E01A1B7187E1BBB /* XCConfigurationList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCConfigurationList.h; sourceTree = "<group>"; };
+		1117DC55D3382646BB505AC2 /* PBXGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXGroup.m; sourceTree = "<group>"; };
+		1117DF0EA8EB8A003F400D04 /* PGRunInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGRunInfo.m; sourceTree = "<group>"; };
+		1117DF79B616D7519DBEB87C /* PBXNativeTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXNativeTarget.m; sourceTree = "<group>"; };
 		83E1B3932370808500427C23 /* PBXBuilder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PBXBuilder; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E1B3962370808500427C23 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -38,6 +71,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1117D4D8C8349909B7618CA5 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				1117D64297A7DAD670A43773 /* PBXFileReference.h */,
+				1117D32D94923679776804B3 /* PBXFileReference.m */,
+				1117D3FC9C98FC9489A87139 /* PBXGroup.h */,
+				1117DC55D3382646BB505AC2 /* PBXGroup.m */,
+				1117D7A68072DA188B754234 /* PBXBuildFile.m */,
+				1117D85A4FCA9A8F505412ED /* PBXBuildFile.h */,
+			);
+			name = Files;
+			sourceTree = "<group>";
+		};
+		1117D4E62053D39B5C9BC623 /* PBX */ = {
+			isa = PBXGroup;
+			children = (
+				1117D7DE1E0A4802AA39D97F /* PBXItem.m */,
+				1117D250D3A2952935DB4F92 /* PBXItem.h */,
+				1117D3591C1E4899179E1D30 /* PBXProject.m */,
+				1117DA1848D6F5F5D2E72841 /* PBXProject.h */,
+				1117DA153F61E8CDF143C671 /* Target */,
+				1117D6E162FB7398363D788E /* BuildConfig */,
+				1117D4D8C8349909B7618CA5 /* Files */,
+			);
+			path = PBX;
+			sourceTree = "<group>";
+		};
+		1117D6E162FB7398363D788E /* BuildConfig */ = {
+			isa = PBXGroup;
+			children = (
+				1117D456B74F51DDB3C5C560 /* XCBuildConfiguration.m */,
+				1117D640ADEC5E0A2E653355 /* XCBuildConfiguration.h */,
+				1117D0F08FD0466F0F7FE917 /* XCConfigurationList.m */,
+				1117DB7A6E01A1B7187E1BBB /* XCConfigurationList.h */,
+			);
+			name = BuildConfig;
+			sourceTree = "<group>";
+		};
+		1117DA153F61E8CDF143C671 /* Target */ = {
+			isa = PBXGroup;
+			children = (
+				1117D4A80DF8B12D3C4B1F45 /* PBXTarget.m */,
+				1117D29C921994A1775BDC67 /* PBXTarget.h */,
+				1117DF79B616D7519DBEB87C /* PBXNativeTarget.m */,
+				1117DAE725FA7848DE9623A1 /* PBXNativeTarget.h */,
+			);
+			path = Target;
+			sourceTree = "<group>";
+		};
 		83E1B38A2370808500427C23 = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +140,11 @@
 			isa = PBXGroup;
 			children = (
 				83E1B3962370808500427C23 /* main.m */,
+				1117DF0EA8EB8A003F400D04 /* PGRunInfo.m */,
+				1117D8540DAEB657879E8E4A /* PGRunInfo.h */,
+				1117D4E62053D39B5C9BC623 /* PBX */,
+				1117D15D6188A08C9670BAE9 /* PGProjectFile.m */,
+				1117D61B61400A5DE31674A9 /* PGProjectFile.h */,
 			);
 			path = PBXBuilder;
 			sourceTree = "<group>";
@@ -120,6 +207,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				83E1B3972370808500427C23 /* main.m in Sources */,
+				1117D130C154ED3877473A4F /* PGRunInfo.m in Sources */,
+				1117D59D82018B00FB6E5EC0 /* PBXItem.m in Sources */,
+				1117DDCB761B6E8D3B0E6DE6 /* PBXProject.m in Sources */,
+				1117D46E89D587A6B24C7818 /* PBXTarget.m in Sources */,
+				1117D9CEC7E8CBC59852AF3C /* PBXNativeTarget.m in Sources */,
+				1117D47FDB8E521E9794247D /* XCBuildConfiguration.m in Sources */,
+				1117D9C992BF1A49890553D5 /* XCConfigurationList.m in Sources */,
+				1117DD221DB7CC4910F140BC /* PGProjectFile.m in Sources */,
+				1117D3E93DD7D9FFBCA4B66C /* PBXFileReference.m in Sources */,
+				1117DD8A17AA1BBDFD73D8AB /* PBXGroup.m in Sources */,
+				1117D35DCFD3FE73578AAC8F /* PBXBuildFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +336,7 @@
 		83E1B39B2370808500427C23 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q5XWZ7S7E9;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -248,6 +347,7 @@
 		83E1B39C2370808500427C23 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q5XWZ7S7E9;
 				ENABLE_HARDENED_RUNTIME = YES;
