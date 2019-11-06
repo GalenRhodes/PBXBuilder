@@ -23,31 +23,36 @@
 #import "XCConfigurationList.h"
 #import "XCBuildConfiguration.h"
 #import "PGProjectFile.h"
+#import "Tools.h"
 
 @implementation XCConfigurationList {
+        NSArray         *_buildConfigurations;
+        dispatch_once_t _buildConfigurationsOnce;
     }
-
-    @synthesize defaultConfigurationIsVisible = _defaultConfigurationIsVisible;
-    @synthesize defaultConfigurationName = _defaultConfigurationName;
-    @synthesize buildConfigurations = _buildConfigurations;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
-
-        if(self) {
-            _defaultConfigurationIsVisible = [self ivBool:@"defaultConfigurationIsVisible"];
-            _defaultConfigurationName      = [[self iv:@"defaultConfigurationName"] copy];
-
-            NSArray<NSString *> *list = [self iv:@"buildConfigurations"];
-            _buildConfigurations = [NSMutableArray arrayWithCapacity:list.count ?: 10];
-
-            for(NSString *str in list) {
-                XCBuildConfiguration *bc = (XCBuildConfiguration *)[self.projectFile itemForID:str];
-                if(bc) [((NSMutableArray *)_buildConfigurations) addObject:bc];
-            }
-        }
-
         return self;
+    }
+
+    -(BOOL)defaultConfigurationIsVisible {
+        return [self ivBool:@"defaultConfigurationIsVisible"];
+    }
+
+    -(NSString *)defaultConfigurationName {
+        return [self iv:@"defaultConfigurationName"];
+    }
+
+    -(NSArray<XCBuildConfiguration *> *)buildConfigurations {
+        dispatch_once(&_buildConfigurationsOnce, ^{
+            NSArray<NSString *> *list  = [self iv:@"buildConfigurations"];
+            NSMutableArray      *array = [NSMutableArray arrayWithCapacity:list.count ?: 10];
+
+            [list enumerateObjectsUsingBlock:^(NSString *str, NSUInteger idx, BOOL *stop) { [array addObjectWithCheck:[self itemForID:str]]; }];
+            _buildConfigurations = array;
+        });
+
+        return _buildConfigurations;
     }
 
 @end

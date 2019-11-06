@@ -25,22 +25,25 @@
 @implementation PBXFileReference {
     }
 
-    @synthesize explicitFileType = _explicitFileType;
-    @synthesize includeInIndex = _includeInIndex;
-    @synthesize lastKnownFileType = _lastKnownFileType;
-    @synthesize fileEncoding = _fileEncoding;
-
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
-
-        if(self) {
-            _includeInIndex    = [self ivBool:@"includeInIndex"];
-            _fileEncoding      = [PBXFileElement cleanFileEncoding:[self ivUInt:@"fileEncoding"]];
-            _explicitFileType  = [PBXFileElement fileTypeForId:[self iv:@"explicitFileType"]];
-            _lastKnownFileType = [PBXFileElement fileTypeForId:[self iv:@"lastKnownFileType"]];
-        }
-
         return self;
+    }
+
+    -(BOOL)includeInIndex {
+        return [self ivBool:@"includeInIndex"];
+    }
+
+    -(PBXFileEncoding)fileEncoding {
+        return [PBXFileElement cleanFileEncoding:[self ivUInt:@"fileEncoding"]];
+    }
+
+    -(PBXFileType)explicitFileType {
+        return [PBXFileElement fileTypeForId:[self iv:@"explicitFileType"]];
+    }
+
+    -(PBXFileType)lastKnownFileType {
+        return [PBXFileElement fileTypeForId:[self iv:@"lastKnownFileType"]];
     }
 
 @end

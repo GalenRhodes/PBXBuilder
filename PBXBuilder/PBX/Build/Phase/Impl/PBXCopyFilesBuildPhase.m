@@ -26,18 +26,18 @@
 @implementation PBXCopyFilesBuildPhase {
     }
 
-    @synthesize dstPath = _dstPath;
-    @synthesize dstSubfolderSpec = _dstSubfolderSpec;
-
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
-
-        if(self) {
-            _dstPath          = [self iv:@"dstPath"];
-            _dstSubfolderSpec = [self ivInt:@"dstSubfolderSpec"];
-        }
-
         return self;
     }
+
+    -(NSString *)dstPath {
+        return [self iv:@"dstPath"];
+    }
+
+    -(NSInteger)dstSubfolderSpec {
+        return [self ivInt:@"dstSubfolderSpec"];
+    }
+
 
 @end

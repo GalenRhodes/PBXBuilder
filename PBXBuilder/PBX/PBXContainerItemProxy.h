@@ -31,10 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PBXContainerItemProxy : PBXItem
 
-    @property(readonly)/*  */ PBXProject *containerPortal;
-    @property(readonly)/*  */ NSInteger  proxyType;
-    @property(readonly, copy) NSString   *remoteInfo;
-    @property(readonly, copy) NSString   *remoteGlobalIDString;
+    @property(readonly) PBXProject *containerPortal;
+    @property(readonly) NSInteger  proxyType;
+    @property(readonly) NSString   *remoteInfo;
+    @property(readonly) NSString   *remoteGlobalIDString;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
 

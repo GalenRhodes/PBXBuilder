@@ -26,9 +26,19 @@
 #import <Cocoa/Cocoa.h>
 #import "PBXItem.h"
 
+@class XCConfigurationList;
+@class PBXBuildPhase;
+@class PBXTargetDependency;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PBXTarget : PBXItem
+
+    @property(nullable, readonly) NSString                       *name;
+    @property(nullable, readonly) NSString                       *productName;
+    @property(nullable, readonly) XCConfigurationList            *buildConfigurationList;
+    @property(readonly)/*      */ NSArray<PBXBuildPhase *>       *buildPhases;
+    @property(readonly)/*      */ NSArray<PBXTargetDependency *> *dependencies;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
 

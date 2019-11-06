@@ -29,10 +29,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PBXItem : NSObject
+@interface PBXItem : NSObject<NSLocking>
 
-    @property(copy)/**/ NSString      *itemId;
-    @property(copy)/**/ NSString      *objType;
+    @property(readonly) NSString      *itemId;
+    @property(readonly) NSString      *objType;
     @property(readonly) PGProjectFile *projectFile;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
@@ -44,6 +44,11 @@ NS_ASSUME_NONNULL_BEGIN
     -(NSInteger)ivInt:(NSString *)key;
 
     -(NSUInteger)ivUInt:(NSString *)key;
+
+    -(nullable id)itemForKey:(NSString *)key;
+
+    -(nullable id)itemForID:(NSString *)itemId;
+
 @end
 
 NS_ASSUME_NONNULL_END

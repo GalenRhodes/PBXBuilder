@@ -27,18 +27,24 @@
 #import "PBXItem.h"
 
 @class XCConfigurationList;
+@class PBXTarget;
+@class PBXGroup;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PBXProject : PBXItem
 
-    @property(copy, readonly, nullable) NSString            *compatibilityVersion;  // "Xcode 9.3"
-    @property(copy, readonly, nullable) NSString            *developmentRegion;     // en
-    @property(readonly)/*            */ BOOL                hasScannedForEncodings; // 0
-    @property(copy, readonly, nullable) NSArray<NSString *> *knownRegions;          // (en, Base,)
-    @property(copy, readonly, nullable) NSString            *projectDirPath;        // ""
-    @property(copy, readonly, nullable) NSString            *projectRoot;           // ""
-    @property(readonly, nullable)/*  */ XCConfigurationList *buildConfigurationList;
+    @property(readonly, nullable) NSString                     *compatibilityVersion;  // "Xcode 9.3"
+    @property(readonly, nullable) NSString                     *developmentRegion;     // en
+    @property(readonly)/*      */ BOOL                         hasScannedForEncodings; // 0
+    @property(readonly)/*      */ NSArray<NSString *>          *knownRegions;          // (en, Base,)
+    @property(readonly, nullable) NSString                     *projectDirPath;        // ""
+    @property(readonly, nullable) NSString                     *projectRoot;           // ""
+    @property(readonly, nullable) XCConfigurationList          *buildConfigurationList;
+    @property(readonly)/*      */ NSArray<PBXTarget *>         *targets;
+    @property(readonly)/*      */ NSDictionary<NSString *, id> *attributes;
+    @property(readonly, nullable) PBXGroup                     *productRefGroup;
+    @property(readonly, nullable) PBXGroup                     *mainGroup;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
 

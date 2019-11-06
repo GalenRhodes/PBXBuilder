@@ -23,15 +23,15 @@
 #ifndef __PBXBUILDER_XCBUILDCONFIGURATION_H__
 #define __PBXBUILDER_XCBUILDCONFIGURATION_H__
 
-#import <Cocoa/Cocoa.h>
 #import "PBXItem.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface XCBuildConfiguration : PBXItem
 
-    @property(copy, readonly, nullable) NSString                     *name;
-    @property(copy, readonly)/*      */ NSDictionary<NSString *, id> *buildSettings;
+    @property(readonly, nullable) NSString                     *name;
+    @property(readonly, nullable) NSString                     *baseConfigurationReference;
+    @property(readonly)/*      */ NSDictionary<NSString *, id> *buildSettings;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
 

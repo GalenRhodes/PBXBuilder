@@ -79,6 +79,7 @@
 		1117D7DE1E0A4802AA39D97F /* PBXItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXItem.m; sourceTree = "<group>"; };
 		1117D8374C061266D853CB13 /* Swift.xcspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xcspec; path = Swift.xcspec; sourceTree = "<group>"; };
 		1117D8540DAEB657879E8E4A /* PGRunInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGRunInfo.h; sourceTree = "<group>"; };
+		1117D90BF4990C94920D4413 /* PBXFileElementTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXFileElementTypes.h; sourceTree = "<group>"; };
 		1117D92DC5B71238EA841518 /* PBXShellScriptBuildPhase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXShellScriptBuildPhase.h; sourceTree = "<group>"; };
 		1117D95F1C0420644CAC1E52 /* PBXFrameworksBuildPhase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXFrameworksBuildPhase.m; sourceTree = "<group>"; };
 		1117D9A87E94FE1A27BCF8C7 /* PBXLegacyTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXLegacyTarget.m; sourceTree = "<group>"; };
@@ -243,6 +244,7 @@
 				1117D3C0337390B310F13D1B /* Impl */,
 				1117D66D2903769B7803E5AD /* PBXFileElement.h */,
 				1117D185CEF64CC4C899EA52 /* PBXFileElement.m */,
+				1117D90BF4990C94920D4413 /* PBXFileElementTypes.h */,
 			);
 			path = FileElement;
 			sourceTree = "<group>";

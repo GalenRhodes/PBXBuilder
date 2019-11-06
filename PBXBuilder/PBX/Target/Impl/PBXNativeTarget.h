@@ -27,14 +27,23 @@
 
 @class PBXFileReference;
 
+typedef NS_ENUM(NSUInteger, PBXProductType) {
+    PBX_PRODUCTTYPE_NONE = 0,             //
+    PBX_PRODUCTTYPE_APPLICATION,          // com.apple.product-type.application
+    PBX_PRODUCTTYPE_TOOL,                 // com.apple.product-type.tool
+    PBX_PRODUCTTYPE_LIBRARYSTATIC,        // com.apple.product-type.library.static
+    PBX_PRODUCTTYPE_LIBRARYDYNAMIC,       // com.apple.product-type.library.dynamic
+    PBX_PRODUCTTYPE_KERNELEXTENSION,      // com.apple.product-type.kernel-extension
+    PBX_PRODUCTTYPE_KERNELEXTENSIONIOKIT, // com.apple.product-type.kernel-extension.iokit
+};
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PBXNativeTarget : PBXTarget
 
-    @property(copy, nullable, readonly) NSString         *name;
-    @property(copy, nullable, readonly) NSString         *productName;
-    @property(copy, nullable, readonly) NSString         *productType;
-    @property(nullable, readonly)/*  */ PBXFileReference *productReference;
+    @property(nullable, readonly) NSString         *productInstallPath;
+    @property(readonly)/*      */ PBXProductType   productType;
+    @property(nullable, readonly) PBXFileReference *productReference;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
 

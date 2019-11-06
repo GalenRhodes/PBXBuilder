@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 
     -(instancetype)initWithProjectName:(NSString *)projectName projectPath:(NSString *)projectPath error:(NSError **)error;
 
-    -(nullable PBXItem *)itemForID:(NSString *)itemId;
+    -(nullable id)itemForID:(NSString *)itemId;
 
 @end
 

@@ -7,16 +7,20 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <DiscRecordingUI/DiscRecordingUI.h>
+#import "Tools.h"
+
+NSString const *xcodePluginsPath = @"/Applications/Xcode.app/Contents/PlugIns/Xcode3Core.ideplugin/Contents/SharedSupport/Developer/Library/Xcode/Plug-ins";
+NSString const *clangXcodeMap    = @"Clang LLVM 1.0.xcplugin/Contents/Resources/Clang LLVM 1.0.xcspec";
 
 int main(int argc, const char *argv[]) {
     int returnCode = 0;
 
     @autoreleasepool {
-        NSPropertyListFormat pbxFormat    = NSPropertyListOpenStepFormat;
-        NSString             *pbxProjPath = @"~/Projects/2019/PBXBuilder/PBXBuilder.xcodeproj/project.pbxproj";
-        NSError              *error       = nil;
-        NSInputStream        *stream      = [NSInputStream inputStreamWithFileAtPath:pbxProjPath.stringByExpandingTildeInPath];
+        NSPropertyListFormat pbxFormat     = NSPropertyListOpenStepFormat;
+        NSString             *pbxProjPath1 = @"~/Projects/2019/PBXBuilder/PBXBuilder.xcodeproj/project.pbxproj";
+        NSString             *pbxProjPath2 = PGFormat(@"%@/%@", xcodePluginsPath, clangXcodeMap);
+        NSError              *error        = nil;
+        NSInputStream        *stream       = [NSInputStream inputStreamWithFileAtPath:pbxProjPath1.stringByExpandingTildeInPath];
 
         [stream open];
         while(stream.streamStatus == NSStreamStatusOpening);
@@ -27,12 +31,8 @@ int main(int argc, const char *argv[]) {
         }
         else {
             NSDictionary<NSString *, id> *data = [NSPropertyListSerialization propertyListWithStream:stream options:NSPropertyListImmutable format:&pbxFormat error:&error];
+            //PGPrintPlist(data);
 
-            id obj = data[@"objectVersion"];
-            NSLog(@"objectVersion type> %@; Value> %@", NSStringFromClass([obj class]), [obj description]);
-
-            obj = @(([obj description].integerValue));
-            NSLog(@"objectVersion type> %@; Value> %@", NSStringFromClass([obj class]), [obj description]);
         }
     }
 

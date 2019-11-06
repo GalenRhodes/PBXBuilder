@@ -25,9 +25,15 @@
 
 #import "PBXItem.h"
 
+@class PBXNativeTarget;
+@class PBXContainerItemProxy;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PBXTargetDependency : PBXItem
+
+    @property(readonly, nullable) PBXNativeTarget       *target;
+    @property(readonly, nullable) PBXContainerItemProxy *targetProxy;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
 

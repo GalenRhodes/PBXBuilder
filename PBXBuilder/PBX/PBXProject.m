@@ -23,32 +23,68 @@
 #import "PBXProject.h"
 #import "XCConfigurationList.h"
 #import "PGProjectFile.h"
+#import "PBXTarget.h"
+#import "PBXGroup.h"
+#import "Tools.h"
 
 @implementation PBXProject {
+        NSArray<PBXTarget *> *_targets;
+        dispatch_once_t      _targetsOnce;
     }
-
-    @synthesize compatibilityVersion = _compatibilityVersion;
-    @synthesize developmentRegion = _developmentRegion;
-    @synthesize hasScannedForEncodings = _hasScannedForEncodings;
-    @synthesize knownRegions = _knownRegions;
-    @synthesize projectDirPath = _projectDirPath;
-    @synthesize projectRoot = _projectRoot;
-    @synthesize buildConfigurationList = _buildConfigurationList;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
-
-        if(self) {
-            _compatibilityVersion   = [[self iv:@"compatibilityVersion"] copy];
-            _developmentRegion      = [[self iv:@"developmentRegion"] copy];
-            _hasScannedForEncodings = [self ivBool:@"hasScannedForEncodings"];
-            _knownRegions           = [[self iv:@"knownRegions"] copy];
-            _projectDirPath         = [[self iv:@"projectDirPath"] copy];
-            _projectRoot            = [[self iv:@"projectRoot"] copy];
-            _buildConfigurationList = (XCConfigurationList *)[self.projectFile itemForID:[self iv:@"buildConfigurationList"]];
-        }
-
         return self;
+    }
+
+    -(NSString *)compatibilityVersion {
+        return [self iv:@"compatibilityVersion"];
+    }
+
+    -(NSString *)developmentRegion {
+        return [self iv:@"developmentRegion"];
+    }
+
+    -(BOOL)hasScannedForEncodings {
+        return [self ivBool:@"hasScannedForEncodings"];
+    }
+
+    -(NSArray<NSString *> *)knownRegions {
+        return [self iv:@"knownRegions"];
+    }
+
+    -(NSString *)projectDirPath {
+        return [self iv:@"projectDirPath"];
+    }
+
+    -(NSString *)projectRoot {
+        return [self iv:@"projectRoot"];
+    }
+
+    -(XCConfigurationList *)buildConfigurationList {
+        return [self itemForKey:@"buildConfigurationList"];
+    }
+
+    -(NSArray<PBXTarget *> *)targets {
+        dispatch_once(&_targetsOnce, ^{
+            NSMutableArray<PBXTarget *> *array = [NSMutableArray new];
+            NSArray<NSString *>         *refs  = [self iv:@"targets"];
+            [refs enumerateObjectsUsingBlock:^(NSString *itemId, NSUInteger idx, BOOL *stop) { [array addObjectWithCheck:[self itemForID:itemId]]; }];
+            _targets = array;
+        });
+        return _targets;
+    }
+
+    -(NSDictionary<NSString *, id> *)attributes {
+        return ([self iv:@"attributes"] ?: [NSDictionary new]);
+    }
+
+    -(PBXGroup *)productRefGroup {
+        return [self itemForKey:@"productRefGroup"];
+    }
+
+    -(PBXGroup *)mainGroup {
+        return [self itemForKey:@"mainGroup"];
     }
 
 @end

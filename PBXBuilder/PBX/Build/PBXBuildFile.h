@@ -32,8 +32,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PBXBuildFile : PBXItem
 
-    @property(readonly) PBXFileReference *fileRef;
-    @property(readonly) BOOL             isPublic;
+    @property(readonly, nullable) PBXFileReference             *fileRef;
+    @property(readonly)/*      */ BOOL                         isPublic;
+    @property(readonly)/*      */ BOOL                         isPrivate;
+    @property(readonly)/*      */ NSDictionary<NSString *, id> *settings;
+    @property(readonly)/*      */ NSArray<NSString *>          *attributes;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
 

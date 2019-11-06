@@ -23,31 +23,34 @@
 #import "PBXBuildPhase.h"
 #import "PBXBuildFile.h"
 #import "PGProjectFile.h"
+#import "Tools.h"
 
 @implementation PBXBuildPhase {
+        NSArray<PBXBuildFile *> *_files;
+        dispatch_once_t         _filesOnce;
     }
-
-    @synthesize files = _files;
-    @synthesize buildActionMask = _buildActionMask;
-    @synthesize runOnlyForDeploymentPostprocessing = _runOnlyForDeploymentPostprocessing;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
-
-        if(self) {
-            _runOnlyForDeploymentPostprocessing = [self ivBool:@"runOnlyForDeploymentPostprocessing"];
-            _buildActionMask                    = [self ivInt:@"buildActionMask"];
-
-            NSMutableArray      *array = (NSMutableArray *)_files = [NSMutableArray new];
-            NSArray<NSString *> *refs  = (NSArray<NSString *> *)[self iv:@"files"];
-
-            [refs enumerateObjectsUsingBlock:^(NSString *itemId, NSUInteger idx, BOOL *stop) {
-                PBXBuildFile *buildFile = (PBXBuildFile *)[self.projectFile itemForID:itemId];
-                if(buildFile) [array addObject:buildFile];
-            }];
-        }
-
         return self;
+    }
+
+    -(NSArray<PBXBuildFile *> *)files {
+        dispatch_once(&_filesOnce, ^{
+            NSMutableArray      *array = [NSMutableArray new];
+            NSArray<NSString *> *refs  = (NSArray<NSString *> *)[self iv:@"files"];
+            [refs enumerateObjectsUsingBlock:^(NSString *itemId, NSUInteger idx, BOOL *stop) { [array addObjectWithCheck:[self itemForID:itemId]]; }];
+            _files = array;
+        });
+        return _files;
+    }
+
+    -(NSInteger)buildActionMask {
+        return [self ivInt:@"buildActionMask"];
+    }
+
+    -(BOOL)runOnlyForDeploymentPostprocessing {
+        return [self ivBool:@"runOnlyForDeploymentPostprocessing"];
     }
 
 @end

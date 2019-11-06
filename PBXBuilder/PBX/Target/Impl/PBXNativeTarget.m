@@ -27,22 +27,37 @@
 @implementation PBXNativeTarget {
     }
 
-    @synthesize name = _name;
-    @synthesize productName = _productName;
-    @synthesize productType = _productType;
-    @synthesize productReference = _productReference;
-
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
-
-        if(self) {
-            _name             = [[self iv:@"name"] copy];
-            _productName      = [[self iv:@"productName"] copy];
-            _productType      = [[self iv:@"productType"] copy];
-            _productReference = (PBXFileReference *)[self.projectFile itemForID:[self iv:@"productReference"]];
-        }
-
         return self;
+    }
+
+    -(NSString *)productInstallPath {
+        return [self iv:@"productInstallPath"];
+    }
+
+    -(PBXProductType)productType {
+        static NSDictionary<NSString *, NSNumber *> *_prodTypes    = nil;
+        static dispatch_once_t                      _prodTypesOnce = 0;
+
+        dispatch_once(&_prodTypesOnce, ^{
+            _prodTypes = @{
+                @"com.apple.product-type.application"           : @(PBX_PRODUCTTYPE_APPLICATION),
+                @"com.apple.product-type.tool"                  : @(PBX_PRODUCTTYPE_TOOL),
+                @"com.apple.product-type.library.static"        : @(PBX_PRODUCTTYPE_LIBRARYSTATIC),
+                @"com.apple.product-type.library.dynamic"       : @(PBX_PRODUCTTYPE_LIBRARYDYNAMIC),
+                @"com.apple.product-type.kernel-extension"      : @(PBX_PRODUCTTYPE_KERNELEXTENSION),
+                @"com.apple.product-type.kernel-extension.iokit": @(PBX_PRODUCTTYPE_KERNELEXTENSIONIOKIT),
+            };
+        });
+
+        NSString *key = [self iv:@"productType"];
+        NSNumber *num = (key ? _prodTypes[key] : nil);
+        return (num ? (PBXProductType)num.unsignedIntegerValue : PBX_PRODUCTTYPE_NONE);
+    }
+
+    -(PBXFileReference *)productReference {
+        return [self itemForKey:@"productReference"];
     }
 
 @end

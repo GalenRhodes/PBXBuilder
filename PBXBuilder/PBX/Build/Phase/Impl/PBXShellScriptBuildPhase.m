@@ -25,22 +25,25 @@
 @implementation PBXShellScriptBuildPhase {
     }
 
-    @synthesize inputPaths = _inputPaths;
-    @synthesize outputPaths = _outputPaths;
-    @synthesize shellPath = _shellPath;
-    @synthesize shellScript = _shellScript;
-
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
-
-        if(self) {
-            _shellPath   = [[self iv:@"shellPath"] copy];
-            _shellScript = [[self iv:@"shellScript"] copy];
-            _inputPaths  = ([[self iv:@"inputPaths"] copy] ?: [NSArray new]);
-            _outputPaths = ([[self iv:@"outputPaths"] copy] ?: [NSArray new]);
-        }
-
         return self;
+    }
+
+    -(NSArray<NSString *> *)inputPaths {
+        return ([self iv:@"inputPaths"] ?: [NSArray new]);
+    }
+
+    -(NSArray<NSString *> *)outputPaths {
+        return ([self iv:@"outputPaths"] ?: [NSArray new]);
+    }
+
+    -(NSString *)shellPath {
+        return [self iv:@"shellPath"];
+    }
+
+    -(NSString *)shellScript {
+        return [self iv:@"shellScript"];
     }
 
 @end

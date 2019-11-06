@@ -32,9 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XCConfigurationList : PBXItem
 
-    @property(readonly)/*            */ BOOL                            defaultConfigurationIsVisible;
-    @property(copy, readonly, nullable) NSString                        *defaultConfigurationName;
-    @property(readonly)/*            */ NSArray<XCBuildConfiguration *> *buildConfigurations;
+    @property(readonly)/*      */ BOOL                            defaultConfigurationIsVisible;
+    @property(readonly, nullable) NSString                        *defaultConfigurationName;
+    @property(readonly)/*      */ NSArray<XCBuildConfiguration *> *buildConfigurations;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
 

@@ -24,31 +24,32 @@
 
 /*
 
-/Applications/Xcode.app/Contents/PlugIns/Xcode3Core.ideplugin/Contents/SharedSupport/Developer/Library/Xcode/Plug-ins
+    /Applications/Xcode.app/Contents/PlugIns/Xcode3Core.ideplugin/Contents/SharedSupport/Developer/Library/Xcode/Plug-ins
 
-/Clang LLVM 1.0.xcplugin/Contents/Resources/Clang LLVM 1.0.xcspec
-/CoreBuildTasks.xcplugin/Contents/Resources/Ld.xcspec
-/XCLanguageSupport.xcplugin/Contents/Resources/SwiftBuildSettings.xcspec
-/XCLanguageSupport.xcplugin/Contents/Resources/SwiftBuildSteps.xcspec
-/XCLanguageSupport.xcplugin/Contents/Resources/Swift.xcspec
+    /Clang LLVM 1.0.xcplugin/Contents/Resources/Clang LLVM 1.0.xcspec
+    /CoreBuildTasks.xcplugin/Contents/Resources/Ld.xcspec
+    /XCLanguageSupport.xcplugin/Contents/Resources/Swift.xcspec
 
  */
 
 @implementation XCBuildConfiguration {
     }
 
-    @synthesize name = _name;
-    @synthesize buildSettings = _buildSettings;
-
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
-
-        if(self) {
-            _name          = [[self iv:@"name"] copy];
-            _buildSettings = ([((NSDictionary<NSString *, id> *)[self iv:@"buildSettings"]) copy] ?: [NSDictionary new]);
-        }
-
         return self;
+    }
+
+    -(NSString *)name {
+        return [self iv:@"name"];
+    }
+
+    -(NSDictionary<NSString *, id> *)buildSettings {
+        return ([self iv:@"buildSettings"] ?: [NSDictionary new]);
+    }
+
+    -(NSString *)baseConfigurationReference {
+        return [self iv:@"baseConfigurationReference"];
     }
 
 @end

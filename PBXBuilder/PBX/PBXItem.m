@@ -20,14 +20,15 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
+#import <DiscRecordingUI/DiscRecordingUI.h>
 #import "PBXItem.h"
 #import "PGProjectFile.h"
 
 @implementation PBXItem {
+        NSRecursiveLock *_lock;
     }
 
     @synthesize itemId = _itemId;
-    @synthesize objType = _objType;
     @synthesize projectFile = _projectFile;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
@@ -35,9 +36,9 @@
 
         if(self) {
             if(itemId) {
+                _lock        = [NSRecursiveLock new];
                 _projectFile = projectFile;
                 _itemId      = [itemId copy];
-                _objType     = [[self iv:@"isa"] copy];
             }
             else {
                 return nil;
@@ -45,6 +46,10 @@
         }
 
         return self;
+    }
+
+    -(NSString *)objType {
+        return [self iv:@"isa"];
     }
 
     -(nullable id)iv:(NSString *)key {
@@ -65,6 +70,22 @@
         unsigned long long ullValue = 0;
         BOOL               f        = [scanner scanUnsignedLongLong:&ullValue];
         return (NSUInteger)(f ? ullValue : 0);
+    }
+
+    -(id)itemForKey:(NSString *)key {
+        return (key ? [self itemForID:[[self iv:key] description]] : nil);
+    }
+
+    -(id)itemForID:(NSString *)itemId {
+        return (itemId ? [self.projectFile itemForID:itemId] : nil);
+    }
+
+    -(void)lock {
+        [_lock lock];
+    }
+
+    -(void)unlock {
+        [_lock unlock];
     }
 
 @end

@@ -59,35 +59,39 @@
 
             if(pbx == nil) return nil;
             _projectPBX = pbx[@"objects"];
-            _project    = (PBXProject *)[self itemForID:pbx[@"rootObject"]];
+            _project    = [self itemForID:pbx[@"rootObject"]];
         }
 
         return self;
     }
 
-    -(nullable PBXItem *)itemForID:(NSString *)itemId {
-        @synchronized(self.pbxItemCache) {
-            PBXItem *item = self.pbxItemCache[itemId];
+    -(id)itemForID:(NSString *)itemId {
+        if(itemId) {
+            @synchronized(self.pbxItemCache) {
+                PBXItem *item = self.pbxItemCache[itemId];
 
-            if(!item) {
-                NSString *className = ((NSDictionary *)self.projectPBX[itemId])[@"isa"];
-                Class    pbxClass   = NSClassFromString(className);
+                if(!item) {
+                    NSString *className = ((NSDictionary *)self.projectPBX[itemId])[@"isa"];
+                    Class    pbxClass   = NSClassFromString(className);
 
-                if(pbxClass == nil) {
-                    /*
-                     * Look to see if this is simply an unknown version of an existing subclass...
-                     */
-                    if([className matches:@"PBX\\w+?BuildPhase"]) pbxClass = [PBXBuildPhase class];
-                    else if([className matches:@"PBX\\w+?Target"]) pbxClass = [PBXTarget class];
-                    else pbxClass = [PBXItem class];
+                    if(pbxClass == nil) {
+                        /*
+                         * Look to see if this is simply an unknown version of an existing subclass...
+                         */
+                        if([className matches:@"PBX\\w+?BuildPhase"]) pbxClass = [PBXBuildPhase class];
+                        else if([className matches:@"PBX\\w+?Target"]) pbxClass = [PBXTarget class];
+                        else pbxClass = [PBXItem class];
+                    }
+
+                    item = [((PBXItem *)[pbxClass alloc]) initWithItemId:itemId projectFile:self];
+                    if(item) ((NSMutableDictionary *)self.pbxItemCache)[itemId] = item;
                 }
 
-                item = [((PBXItem *)[pbxClass alloc]) initWithItemId:itemId projectFile:self];
-                if(item) ((NSMutableDictionary *)self.pbxItemCache)[itemId] = item;
+                return item;
             }
-
-            return item;
         }
+
+        return nil;
     }
 
 @end

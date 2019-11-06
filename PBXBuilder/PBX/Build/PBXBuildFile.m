@@ -27,24 +27,33 @@
 @implementation PBXBuildFile {
     }
 
-    @synthesize fileRef = _fileRef;
-    @synthesize isPublic = _isPublic;  //settings = {ATTRIBUTES = (Public, ); };
-
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
-
-        if(self) {
-            _fileRef = (PBXFileReference *)[self.projectFile itemForID:[self iv:@"fileRef"]];
-
-            [((NSArray<NSString *> *)((NSDictionary *)[self iv:@"settings"])[@"ATTRIBUTES"]) enumerateObjectsUsingBlock:^(NSString *str, NSUInteger idx, BOOL *stop) {
-                if([str isEqualToString:@"Public"]) {
-                    self->_isPublic = YES;
-                    *stop = YES;
-                }
-            }];
-        }
-
         return self;
+    }
+
+    -(NSDictionary<NSString *, id> *)settings {
+        return ((NSDictionary *)[self iv:@"settings"] ?: [NSDictionary new]);
+    }
+
+    -(NSArray<NSString *> *)attributes {
+        return ((NSArray<NSString *> *)self.settings[@"ATTRIBUTES"] ?: [NSArray new]);
+    }
+
+    -(BOOL)isPublic {
+        __block BOOL flag = NO;
+        [self.attributes enumerateObjectsUsingBlock:^(NSString *str, NSUInteger idx, BOOL *stop) { if([str isEqualToString:@"Public"]) *stop = flag = YES; }];
+        return flag;
+    }
+
+    -(BOOL)isPrivate {
+        __block BOOL flag = NO;
+        [self.attributes enumerateObjectsUsingBlock:^(NSString *str, NSUInteger idx, BOOL *stop) { if([str isEqualToString:@"Private"]) *stop = flag = YES; }];
+        return flag;
+    }
+
+    -(PBXFileReference *)fileRef {
+        return [self itemForKey:@"fileRef"];
     }
 
 @end

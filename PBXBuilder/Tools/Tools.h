@@ -25,9 +25,19 @@
 
 #import <Cocoa/Cocoa.h>
 
+typedef void (^PGPrintStructBlock)(NSString *_Nonnull prefix, BOOL addCR);
+
 NS_ASSUME_NONNULL_BEGIN
 
 FOUNDATION_EXPORT dispatch_queue_t PGWorkQueue(void);
+
+FOUNDATION_EXPORT void PGPrintf(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
+
+FOUNDATION_EXPORT NSString *PGFormat(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
+
+FOUNDATION_EXPORT NSString *PGClassName(id obj);
+
+FOUNDATION_EXPORT void PGPrintPlist(id obj);
 
 @interface NSString(PBXBuilder)
 
@@ -42,6 +52,12 @@ FOUNDATION_EXPORT dispatch_queue_t PGWorkQueue(void);
     -(BOOL)contains:(NSString *)pattern error:(NSError **)error;
 
     -(BOOL)contains:(NSString *)pattern options:(NSRegularExpressionOptions)options error:(NSError **)error;
+
+@end
+
+@interface NSMutableArray(PBXBuilder)
+
+    -(void)addObjectWithCheck:(id)obj;
 
 @end
 

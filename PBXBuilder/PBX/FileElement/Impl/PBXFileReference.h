@@ -24,6 +24,7 @@
 #define __PBXBUILDER_PBXFILEREFERENCE_H__
 
 #import "PBXFileElement.h"
+#include "PBXFileElementTypes.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

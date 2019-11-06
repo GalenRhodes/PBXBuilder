@@ -22,26 +22,27 @@
 
 #import "PBXGroup.h"
 #import "PGProjectFile.h"
+#import "Tools.h"
 
 @implementation PBXGroup {
+        NSArray<PBXFileElement *> *_children;
+        dispatch_once_t           _childrenOnce;
     }
-
-    @synthesize children = _children;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
-
-        if(self) {
-            NSMutableArray      *array       = (NSMutableArray *)_children = [NSMutableArray new];
-            NSArray<NSString *> *childrenIDs = [self iv:@"children"];
-
-            [childrenIDs enumerateObjectsUsingBlock:^(NSString *childId, NSUInteger idx, BOOL *stop) {
-                PBXFileElement *item = (PBXFileElement *)[self.projectFile itemForID:childId];
-                if(item) [array addObject:item];
-            }];
-        }
-
         return self;
     }
+
+    -(NSArray<PBXFileElement *> *)children {
+        dispatch_once(&_childrenOnce, ^{
+            NSArray<NSString *> *childrenIDs = [self iv:@"children"];
+            NSMutableArray      *array       = [NSMutableArray new];
+            [childrenIDs enumerateObjectsUsingBlock:^(NSString *childId, NSUInteger idx, BOOL *stop) { [array addObjectWithCheck:[self itemForID:childId]]; }];
+            _children = array;
+        });
+        return _children;
+    }
+
 
 @end
