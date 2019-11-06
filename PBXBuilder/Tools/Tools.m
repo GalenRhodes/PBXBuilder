@@ -30,3 +30,38 @@ dispatch_queue_t PGWorkQueue(void) {
     return _workQueue;
 }
 
+@implementation NSString(PBXBuilder)
+
+    -(BOOL)matches:(NSString *)pattern {
+        NSError *error = nil;
+        return [self matches:pattern error:&error];
+    }
+
+    -(BOOL)matches:(NSString *)pattern error:(NSError **)error {
+        return [self matches:pattern options:0 error:error];
+    }
+
+    -(BOOL)matches:(NSString *)pattern options:(NSRegularExpressionOptions)options error:(NSError **)error {
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:options error:error];
+        NSUInteger          len    = self.length;
+        NSRange             range  = [regex rangeOfFirstMatchInString:self options:0 range:NSMakeRange(0, len)];
+        return ((range.location == 0) && (range.length == len));
+    }
+
+    -(BOOL)contains:(NSString *)pattern {
+        NSError *error = nil;
+        return [self contains:pattern options:0 error:&error];
+    }
+
+    -(BOOL)contains:(NSString *)pattern error:(NSError **)error {
+        return [self contains:pattern options:0 error:error];
+    }
+
+    -(BOOL)contains:(NSString *)pattern options:(NSRegularExpressionOptions)options error:(NSError **)error {
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:options error:error];
+        NSUInteger          len    = self.length;
+        NSRange             range  = [regex rangeOfFirstMatchInString:self options:0 range:NSMakeRange(0, len)];
+        return NO;
+    }
+
+@end

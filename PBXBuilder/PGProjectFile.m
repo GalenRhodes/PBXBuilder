@@ -23,6 +23,9 @@
 #import "PGProjectFile.h"
 #import "PBXItem.h"
 #import "PBXProject.h"
+#import "Tools.h"
+#import "PBXBuildPhase.h"
+#import "PBXTarget.h"
 
 @implementation PGProjectFile {
     }
@@ -42,7 +45,7 @@
             _projectPath  = [projectPath copy];
             _pbxItemCache = [NSMutableDictionary new];
 
-            NSString      *pbxPath   = [NSString stringWithFormat:@"%@/project.pbxproj", _projectPath];
+            NSString      *pbxPath   = [NSString stringWithFormat:@"%@/%@.xcodeproj/project.pbxproj", _projectName, _projectPath];
             NSInputStream *pbxStream = [NSInputStream inputStreamWithFileAtPath:pbxPath];
 
             [pbxStream open];
@@ -69,6 +72,15 @@
             if(!item) {
                 NSString *className = ((NSDictionary *)self.projectPBX[itemId])[@"isa"];
                 Class    pbxClass   = NSClassFromString(className);
+
+                if(pbxClass == nil) {
+                    /*
+                     * Look to see if this is simply an unknown version of an existing subclass...
+                     */
+                    if([className matches:@"PBX\\w+?BuildPhase"]) pbxClass = [PBXBuildPhase class];
+                    else if([className matches:@"PBX\\w+?Target"]) pbxClass = [PBXTarget class];
+                    else pbxClass = [PBXItem class];
+                }
 
                 item = [((PBXItem *)[pbxClass alloc]) initWithItemId:itemId projectFile:self];
                 if(item) ((NSMutableDictionary *)self.pbxItemCache)[itemId] = item;

@@ -53,6 +53,7 @@
 		1117D06EE89AB70368A00D3B /* PBXAppleScriptBuildPhase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXAppleScriptBuildPhase.m; sourceTree = "<group>"; };
 		1117D07540C76FD128476F36 /* PBXSourcesBuildPhase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXSourcesBuildPhase.m; sourceTree = "<group>"; };
 		1117D085F238B39EF20474BB /* XCBuildConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCBuildConfiguration.h; sourceTree = "<group>"; };
+		1117D0B4746D40CE2DC20D5C /* Ld.xcspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xcspec; path = Ld.xcspec; sourceTree = "<group>"; };
 		1117D0E6328E9752489B41D4 /* PBXTargetDependency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXTargetDependency.m; sourceTree = "<group>"; };
 		1117D15D6188A08C9670BAE9 /* PGProjectFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGProjectFile.m; sourceTree = "<group>"; };
 		1117D185CEF64CC4C899EA52 /* PBXFileElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXFileElement.m; sourceTree = "<group>"; };
@@ -76,6 +77,7 @@
 		1117D7B0C1414783EE69BBE7 /* PBXAppleScriptBuildPhase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXAppleScriptBuildPhase.h; sourceTree = "<group>"; };
 		1117D7DB3CB2BD8BEAF7FF43 /* PBXBuildFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXBuildFile.h; sourceTree = "<group>"; };
 		1117D7DE1E0A4802AA39D97F /* PBXItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXItem.m; sourceTree = "<group>"; };
+		1117D8374C061266D853CB13 /* Swift.xcspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xcspec; path = Swift.xcspec; sourceTree = "<group>"; };
 		1117D8540DAEB657879E8E4A /* PGRunInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGRunInfo.h; sourceTree = "<group>"; };
 		1117D92DC5B71238EA841518 /* PBXShellScriptBuildPhase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXShellScriptBuildPhase.h; sourceTree = "<group>"; };
 		1117D95F1C0420644CAC1E52 /* PBXFrameworksBuildPhase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXFrameworksBuildPhase.m; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 		1117DC8D695D8AD4BC6A6803 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		1117DC9C964AEE0421178951 /* PBXCopyFilesBuildPhase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXCopyFilesBuildPhase.m; sourceTree = "<group>"; };
 		1117DD20800FFE368F535032 /* PBXGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXGroup.m; sourceTree = "<group>"; };
+		1117DD3A5D0AF976CFB7C308 /* Clang LLVM 1.0.xcspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xcspec; path = "Clang LLVM 1.0.xcspec"; sourceTree = "<group>"; };
 		1117DD40F15C0A31FEA7645C /* XCConfigurationList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCConfigurationList.m; sourceTree = "<group>"; };
 		1117DD5D7B75243608FDD913 /* PBXNativeTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXNativeTarget.h; sourceTree = "<group>"; };
 		1117DD615A681AF8C3D22DD9 /* PBXVariantGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXVariantGroup.h; sourceTree = "<group>"; };
@@ -244,6 +247,16 @@
 			path = FileElement;
 			sourceTree = "<group>";
 		};
+		1117DD640E012E1AF8B15017 /* Mappings */ = {
+			isa = PBXGroup;
+			children = (
+				1117DD3A5D0AF976CFB7C308 /* Clang LLVM 1.0.xcspec */,
+				1117D0B4746D40CE2DC20D5C /* Ld.xcspec */,
+				1117D8374C061266D853CB13 /* Swift.xcspec */,
+			);
+			path = Mappings;
+			sourceTree = "<group>";
+		};
 		83E1B38A2370808500427C23 = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +264,7 @@
 				83E1B3942370808500427C23 /* Products */,
 				1117DA21A8D95A4F700D8C61 /* README.md */,
 				1117DC8D695D8AD4BC6A6803 /* LICENSE */,
+				1117DD640E012E1AF8B15017 /* Mappings */,
 			);
 			sourceTree = "<group>";
 		};

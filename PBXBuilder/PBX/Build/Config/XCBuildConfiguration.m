@@ -22,6 +22,18 @@
 
 #import "XCBuildConfiguration.h"
 
+/*
+
+/Applications/Xcode.app/Contents/PlugIns/Xcode3Core.ideplugin/Contents/SharedSupport/Developer/Library/Xcode/Plug-ins
+
+/Clang LLVM 1.0.xcplugin/Contents/Resources/Clang LLVM 1.0.xcspec
+/CoreBuildTasks.xcplugin/Contents/Resources/Ld.xcspec
+/XCLanguageSupport.xcplugin/Contents/Resources/SwiftBuildSettings.xcspec
+/XCLanguageSupport.xcplugin/Contents/Resources/SwiftBuildSteps.xcspec
+/XCLanguageSupport.xcplugin/Contents/Resources/Swift.xcspec
+
+ */
+
 @implementation XCBuildConfiguration {
     }
 
@@ -33,7 +45,7 @@
 
         if(self) {
             _name          = [[self iv:@"name"] copy];
-            _buildSettings = ([[self iv:@"buildSettings"] copy] ?: [NSDictionary new]);
+            _buildSettings = ([((NSDictionary<NSString *, id> *)[self iv:@"buildSettings"]) copy] ?: [NSDictionary new]);
         }
 
         return self;

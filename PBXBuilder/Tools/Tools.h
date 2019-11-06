@@ -29,6 +29,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 FOUNDATION_EXPORT dispatch_queue_t PGWorkQueue(void);
 
+@interface NSString(PBXBuilder)
+
+    -(BOOL)matches:(NSString *)pattern;
+
+    -(BOOL)matches:(NSString *)pattern error:(NSError **)error;
+
+    -(BOOL)matches:(NSString *)pattern options:(NSRegularExpressionOptions)options error:(NSError **)error;
+
+    -(BOOL)contains:(NSString *)pattern;
+
+    -(BOOL)contains:(NSString *)pattern error:(NSError **)error;
+
+    -(BOOL)contains:(NSString *)pattern options:(NSRegularExpressionOptions)options error:(NSError **)error;
+
+@end
+
 NS_ASSUME_NONNULL_END
 
 #endif // __PBXBUILDER_TOOLS_H__
