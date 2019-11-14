@@ -20,7 +20,6 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import <DiscRecordingUI/DiscRecordingUI.h>
 #import "PBXItem.h"
 #import "PGProjectFile.h"
 

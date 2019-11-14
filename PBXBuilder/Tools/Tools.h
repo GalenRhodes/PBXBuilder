@@ -61,6 +61,16 @@ FOUNDATION_EXPORT void PGPrintPlist(id obj);
 
 @end
 
+@interface NSScanner(PBXBuilder)
+
+#ifndef __APPLE__
+
+    -(BOOL)scanUnsignedLongLong:(unsigned long long *)ullVal;
+
+#endif
+
+@end
+
 NS_ASSUME_NONNULL_END
 
 #endif // __PBXBUILDER_TOOLS_H__

@@ -175,3 +175,25 @@ void PGPrintPlist(id obj) {
     }
 
 @end
+
+@implementation NSScanner(PBXBuilder)
+
+#ifndef __APPLE__
+
+-(BOOL)scanUnsignedLongLong:(unsigned long long *)ullVal {
+    char *s = strdup(self.string.UTF8String);
+    char *t = NULL;
+    unsigned long long v = strtoull(s, &t, 10);
+
+    if(s == t) {
+        return NO;
+    }
+    else {
+        if(ullVal) *ullVal = v;
+        return YES;
+    }
+}
+
+#endif
+
+@end
