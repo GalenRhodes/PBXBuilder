@@ -6,21 +6,39 @@ cd "${y}"
 PRJDIR="${PWD}"
 cd "${x}"
 
-OBJCOPTS="$(gnustep-config --objc-flags) -fobjc-arc"
-LINKOPTS=$(gnustep-config --base-libs)
-HEADERS="$(find "${PRJDIR}" -name "*.h")"
+echo "Project Path: \"${PRJDIR}\""
+
+CC="/opt/objc/llvm/bin/clang"
+CXX="/opt/objc/llvm/bin/clang++"
+
+HEADERS=$(find "${PRJDIR}" -name "*.h")
 HEADERS_DIR="${PRJDIR}/tmp1"
+SOURCE_FILES=$(find "${PRJDIR}" -name "*.m")
+
+OBJCOPTS="$(gnustep-config --objc-flags) -fobjc-arc -I${HEADERS_DIR}"
+LINKOPTS="$(gnustep-config --base-libs) -ldispatch"
 
 rm -fr "${HEADERS_DIR}"
 mkdir -p "${HEADERS_DIR}"
 
 for y in ${HEADERS}; do
-  echo "Found header> ${y}"
   cp "${y}" "${HEADERS_DIR}/"
 done
 
-/opt/objc/llvm/bin/clang -c ${OBJCOPTS} -I${HEADERS_DIR} $(find "${PRJDIR}" -name "*.m")
+################################################################################################
+# COMPILE
+#
+"${CC}" -c ${OBJCOPTS} ${SOURCE_FILES}
 
-/opt/objc/llvm/bin/clang -o test ${LINKOPTS} -ldispatch $(find "${PRJDIR}" -name "*.o")
+################################################################################################
+# LINK
+#
+"${CC}" -o PBXBuilder ${LINKOPTS} $(find "${PRJDIR}" -name "*.o")
 
+################################################################################################
+# CLEAN UP
+#
 find "${PRJDIR}" -name "*.[od]" -delete
+rm -fr "${HEADERS_DIR}"
+
+exit 0

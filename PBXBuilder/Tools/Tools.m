@@ -30,10 +30,14 @@ dispatch_queue_t PGWorkQueue(void) {
     return _workQueue;
 }
 
+void PGPrintStr(NSString *str) {
+    [str writeToFile:@"/dev/stdout" atomically:NO encoding:NSUTF8StringEncoding error:nil];
+}
+
 void PGPrintf(NSString *format, ...) {
     va_list args;
     va_start(args, format);
-    [[[NSString alloc] initWithFormat:format arguments:args] writeToFile:@"/dev/stdout" atomically:NO encoding:NSUTF8StringEncoding error:nil];
+    PGPrintStr([[NSString alloc] initWithFormat:format arguments:args]);
     va_end(args);
 }
 
@@ -88,11 +92,11 @@ void PGPrintItem(NSString *pfx, id obj) {
             BOOL comma = NO;
 
             for(id _obj in ((NSArray *)obj)) {
-                if(comma) { if(addCR) PGPrintf(@",\n"); else PGPrintf(@","); } else comma = YES;
+                if(comma) { if(addCR) PGPrintStr(@",\n"); else PGPrintStr(@","); } else comma = YES;
                 PGPrintItem(_pfx, _obj);
             }
 
-            if(addCR) PGPrintf(@"\n");
+            if(addCR) PGPrintStr(@"\n");
         });
     }
     else if([obj isKindOfClass:[NSDictionary class]]) {
@@ -105,13 +109,13 @@ void PGPrintItem(NSString *pfx, id obj) {
             NSString *s2 = PGFormat(@"%%%lus", (len + 2));
 
             for(NSString *s1 in dict.keyEnumerator) {
-                if(comma) { if(addCR) PGPrintf(@",\n"); else PGPrintf(@","); } else comma = YES;
+                if(comma) { if(addCR) PGPrintStr(@",\n"); else PGPrintStr(@","); } else comma = YES;
                 NSString *s3 = PGFormat(@"\"%@\"", s1);
                 NSString *s4 = PGFormat(@"%@%@ = ", _pfx, PGFormat(s2, s3.UTF8String));
                 PGPrintItem(s4, dict[s1]);
             }
 
-            if(addCR) PGPrintf(@"\n");
+            if(addCR) PGPrintStr(@"\n");
         });
     }
     else if([obj isKindOfClass:[NSData class]]) {
@@ -129,6 +133,7 @@ void PGPrintItem(NSString *pfx, id obj) {
 
 void PGPrintPlist(id obj) {
     PGPrintItem(@"", obj);
+    PGPrintStr(@"\n");
 }
 
 @implementation NSString(PBXBuilder)

@@ -42,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 FOUNDATION_EXPORT dispatch_queue_t PGWorkQueue(void);
 
+FOUNDATION_EXPORT void PGPrintStr(NSString *str);
+
 FOUNDATION_EXPORT void PGPrintf(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
 
 FOUNDATION_EXPORT NSString *PGFormat(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
