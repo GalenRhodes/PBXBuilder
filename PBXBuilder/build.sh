@@ -19,8 +19,8 @@ for y in ${HEADERS}; do
   cp "${y}" "${HEADERS_DIR}/"
 done
 
-/opt/objc/llvm/bin/clang -c ${OBJCOPTS} -I${HEADERS_DIR} `find "${PRJDIR}" -name "*.m"`
+/opt/objc/llvm/bin/clang -c ${OBJCOPTS} -I${HEADERS_DIR} $(find "${PRJDIR}" -name "*.m")
 
-/opt/objc/llvm/bin/clang -o test ${LINKOPTS} -ldispatch `find "${PRJDIR}" -name "*.o"`
+/opt/objc/llvm/bin/clang -o test ${LINKOPTS} -ldispatch $(find "${PRJDIR}" -name "*.o")
 
 find "${PRJDIR}" -name "*.[od]" -delete

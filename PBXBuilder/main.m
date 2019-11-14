@@ -16,15 +16,16 @@ int main(int argc, const char *argv[]) {
     int returnCode = 0;
 
     @autoreleasepool {
-        NSPropertyListFormat pbxFormat     = NSPropertyListOpenStepFormat;
-        NSString             *pbxProjPath1 = @"~/Projects/2019/PBXBuilder/PBXBuilder.xcodeproj/project.pbxproj";
+        NSPropertyListFormat pbxFormat      = NSPropertyListOpenStepFormat;
+        NSString             *pbxProjPath1  = @"~/Projects/2019/PBXBuilder/PBXBuilder.xcodeproj/project.pbxproj";
         // NSString             *pbxProjPath1 = [NSString stringWithUTF8String:argv[1]];
         // NSString             *pbxProjPath2 = PGFormat(@"%@/%@", xcodePluginsPath, clangXcodeMap);
-        NSError              *error        = nil;
+        NSError              *error         = nil;
+        NSString             *plistFilename = pbxProjPath1.stringByExpandingTildeInPath;
 
-        NSLog(@"Reading: %@", pbxProjPath1.stringByExpandingTildeInPath);
+        NSLog(@"Reading: %@", plistFilename);
 
-        NSData *plistData = [NSData dataWithContentsOfFile:pbxProjPath1.stringByExpandingTildeInPath options:NSDataReadingMappedIfSafe error:&error];
+        NSData *plistData = [NSData dataWithContentsOfFile:plistFilename options:NSDataReadingMappedIfSafe error:&error];
 
         if(!plistData) {
             NSLog(@"Error: %@", error.localizedDescription);
@@ -32,17 +33,8 @@ int main(int argc, const char *argv[]) {
         }
         else {
             NSDictionary<NSString *, id> *data = [NSPropertyListSerialization propertyListWithData:plistData options:NSPropertyListImmutable format:&pbxFormat error:&error];
+            if(!data) NSLog(@"Error: %@", error.localizedDescription);
             PGPrintPlist(data);
-
-            NSLog(@"Error: %@", error);
-
-            for(NSString *s in data.keyEnumerator) {
-                NSLog(@"Key: %@", s);
-                [PGFormat(@"Key: %@\n", s) writeToFile:@"/dev/stdout" atomically:NO encoding:NSUTF8StringEncoding error:nil];
-            }
-
-            //NSLog(@"data: %@", data.description);
-            //NSLog(@"data: %@", data.description);
         }
     }
 

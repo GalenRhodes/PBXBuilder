@@ -178,22 +178,58 @@ void PGPrintPlist(id obj) {
 
 @implementation NSScanner(PBXBuilder)
 
+    +(unsigned long long)atoull:(NSString *)str success:(BOOL *)success {
+        unsigned long long v = 0;
+        BOOL               f = NO;
+
+        if(str.length) {
+#ifdef __APPLE__
+            f = [[[NSScanner alloc] initWithString:str] scanUnsignedLongLong:&v];
+#else
+            char *s = strdup(str.UTF8String);
+            char *t = NULL;
+
+            v = strtoull(s, &t, 10);
+            f = (s != t);
+            free(s);
+#endif
+        }
+
+        if(success) *success = f;
+        return v;
+    }
+
+//@f:0
 #ifndef __APPLE__
 
--(BOOL)scanUnsignedLongLong:(unsigned long long *)ullVal {
-    char *s = strdup(self.string.UTF8String);
-    char *t = NULL;
-    unsigned long long v = strtoull(s, &t, 10);
+    -(BOOL)scanUnsignedLongLong:(unsigned long long *)ullVal {
+        char               *s = strdup(self.string.UTF8String);
+        char               *t = NULL;
+        unsigned long long v  = strtoull(s, &t, 10);
+        BOOL               f  = (s != t);
 
-    if(s == t) {
-        return NO;
+        free(s);
+        if(f && ullVal) *ullVal = v;
+        return f;
     }
-    else {
-        if(ullVal) *ullVal = v;
-        return YES;
-    }
-}
 
 #endif
+//@f:1
+
+@end
+
+@implementation NSData(PBXBuilder)
+
+//@f:0
+#ifndef __APPLE__
+
+    +(instancetype)dataWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr {
+        NSData *data = [NSData dataWithContentsOfMappedFile:path];
+        if(!data && errorPtr) *errorPtr = [NSError errorWithDomain:NSCocoaErrorDomain code:1001001 userInfo:@{ NSLocalizedDescriptionKey: @"Unknown Error" }];
+        return data;
+    }
+
+#endif
+//@f:1
 
 @end

@@ -105,6 +105,7 @@
 		1117DDE29F95395F83425ACC /* PBXTargetDependency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXTargetDependency.h; sourceTree = "<group>"; };
 		1117DDF9822F1E82D4762BE9 /* PBXNativeTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXNativeTarget.m; sourceTree = "<group>"; };
 		1117DE6B249B85831991F8AE /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
+		1117DE8F6AB63B8602D5595D /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		1117DE9F6A17CE87E1337AD6 /* PBXFrameworksBuildPhase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXFrameworksBuildPhase.h; sourceTree = "<group>"; };
 		1117DF0EA8EB8A003F400D04 /* PGRunInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGRunInfo.m; sourceTree = "<group>"; };
 		83E1B3932370808500427C23 /* PBXBuilder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PBXBuilder; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -288,6 +289,7 @@
 				1117D15D6188A08C9670BAE9 /* PGProjectFile.m */,
 				1117D61B61400A5DE31674A9 /* PGProjectFile.h */,
 				1117DA5D335DE3C11C8FD0C3 /* Tools */,
+				1117DE8F6AB63B8602D5595D /* build.sh */,
 			);
 			path = PBXBuilder;
 			sourceTree = "<group>";

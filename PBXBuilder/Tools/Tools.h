@@ -27,6 +27,17 @@
 
 typedef void (^PGPrintStructBlock)(NSString *_Nonnull prefix, BOOL addCR);
 
+#ifndef __APPLE__
+
+typedef NS_OPTIONS(NSUInteger, NSDataReadingOptions) {
+    NSDataReadingMappedIfSafe = 1UL << 0,	// Hint to map the file in if possible and safe
+    NSDataReadingUncached     = 1UL << 1,	// Hint to get the file not to be cached in the kernel
+    NSDataReadingMappedAlways = 1UL << 3,	// Hint to map the file in if possible. This takes precedence over NSDataReadingMappedIfSafe if both are given.
+};
+
+#endif
+
+
 NS_ASSUME_NONNULL_BEGIN
 
 FOUNDATION_EXPORT dispatch_queue_t PGWorkQueue(void);
@@ -63,11 +74,25 @@ FOUNDATION_EXPORT void PGPrintPlist(id obj);
 
 @interface NSScanner(PBXBuilder)
 
+    +(unsigned long long)atoull:(NSString *)str success:(BOOL *)success;
+
 #ifndef __APPLE__
 
     -(BOOL)scanUnsignedLongLong:(unsigned long long *)ullVal;
 
 #endif
+
+@end
+
+@interface NSData(PBXBuilder)
+
+//@f:0
+#ifndef __APPLE__
+
+    +(nullable instancetype)dataWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
+
+#endif
+//@f:1
 
 @end
 

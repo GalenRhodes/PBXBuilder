@@ -22,6 +22,7 @@
 
 #import "PBXItem.h"
 #import "PGProjectFile.h"
+#import "Tools.h"
 
 @implementation PBXItem {
         NSRecursiveLock *_lock;
@@ -65,10 +66,8 @@
     }
 
     -(NSUInteger)ivUInt:(NSString *)key {
-        NSScanner          *scanner = [[NSScanner alloc] initWithString:([[self iv:key] description] ?: @"0")];
-        unsigned long long ullValue = 0;
-        BOOL               f        = [scanner scanUnsignedLongLong:&ullValue];
-        return (NSUInteger)(f ? ullValue : 0);
+        BOOL f = NO;
+        return (NSUInteger)[NSScanner atoull:key success:&f];
     }
 
     -(id)itemForKey:(NSString *)key {
