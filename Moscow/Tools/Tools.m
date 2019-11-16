@@ -22,6 +22,32 @@
 
 #import "Tools.h"
 
+NSInteger PGExecuteApplication(NSString *appPath, NSArray *appParams, NSString **appOutput, NSError **error) {
+    if(error) *error         = nil;
+    if(appOutput) *appOutput = nil;
+
+    NSInteger st    = 0;
+    NSTask    *task = [[NSTask alloc] init];
+    task.launchPath     = appPath;
+    task.arguments      = appParams;
+    task.standardOutput = [NSPipe pipe];
+    task.standardError  = [NSPipe pipe];
+    [task launch];
+    [task waitUntilExit];
+
+    if((st = task.terminationStatus)) {
+        NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: PGStringFromPipe((NSPipe *)task.standardError) };
+        if(error) *error = [NSError errorWithDomain:NSCocoaErrorDomain code:1001001 userInfo:userInfo];
+    }
+
+    if(appOutput) *appOutput = PGStringFromPipe((NSPipe *)task.standardOutput);
+    return st;
+}
+
+NSString *PGStringFromPipe(NSPipe *pipe) {
+    return [[NSString alloc] initWithData:pipe.fileHandleForReading.readDataToEndOfFile encoding:NSUTF8StringEncoding];
+}
+
 dispatch_queue_t PGWorkQueue(void) {
     static dispatch_queue_t _workQueue     = NULL;
     static dispatch_once_t  _workQueueOnce = 0;
@@ -138,6 +164,10 @@ void PGPrintPlist(id obj) {
 
 @implementation NSString(PBXBuilder)
 
+    -(NSString *)nullIfEmpty {
+        return ((self.length) ? self : nil);
+    }
+
     -(BOOL)matches:(NSString *)pattern {
         NSError *error = nil;
         return [self matches:pattern error:&error];
@@ -169,6 +199,14 @@ void PGPrintPlist(id obj) {
         NSRange             range  = [regex rangeOfFirstMatchInString:self options:0 range:NSMakeRange(0, len)];
         // TODO: Finish...
         return NO;
+    }
+
+    -(NSString *)trim {
+        return [self stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
+    }
+
+    -(NSString *)copyIfSameObjectAs:(NSString *)other {
+        return ((self == other) ? self.copy : self);
     }
 
 @end
@@ -238,3 +276,4 @@ void PGPrintPlist(id obj) {
 //@f:1
 
 @end
+

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1117D130C154ED3877473A4F /* PGRunInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DF0EA8EB8A003F400D04 /* PGRunInfo.m */; };
-		1117D1E253BFE524831AE0E6 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DE6B249B85831991F8AE /* Tools.m */; };
 		1117D24659AEA5B32EF1DD13 /* PBXContainerItemProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D241A5603A238ADEEF16 /* PBXContainerItemProxy.m */; };
 		1117D283F30FC63CDC9C5780 /* PBXAggregateTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D5E62FF61A23C17291DC /* PBXAggregateTarget.m */; };
 		1117D28E151A3CAEAFCA7ECA /* PBXHeadersBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DA4C990459CD92C20437 /* PBXHeadersBuildPhase.m */; };
@@ -27,16 +26,43 @@
 		1117DB5039A2054A65A79F53 /* XCBuildConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D765CDF5534CD55A2B80 /* XCBuildConfiguration.m */; };
 		1117DBE5355E94A2B78D2748 /* PBXBuildFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D203BC1EBEF34E55295A /* PBXBuildFile.m */; };
 		1117DC3415B8B9A03E09FB14 /* PBXAppleScriptBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D06EE89AB70368A00D3B /* PBXAppleScriptBuildPhase.m */; };
+		1117DCC7520C9C18B64AFECB /* GNUstepInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DECEE06F80DA7FDFC14F /* GNUstepInfo.m */; };
 		1117DD221DB7CC4910F140BC /* PGProjectFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D15D6188A08C9670BAE9 /* PGProjectFile.m */; };
 		1117DD86D357EF372D14C774 /* PBXVariantGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D36711304D750673F6AF /* PBXVariantGroup.m */; };
 		1117DDCB761B6E8D3B0E6DE6 /* PBXProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D3591C1E4899179E1D30 /* PBXProject.m */; };
 		1117DE81E264CA96C67F3EEF /* PBXLegacyTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D9A87E94FE1A27BCF8C7 /* PBXLegacyTarget.m */; };
 		1117DE9AB3653ABD34F79BDD /* PBXBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D3F95229E211675E3E1A /* PBXBuildPhase.m */; };
 		1117DFA95E1F298D58D36AF3 /* PBXResourcesBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DB4C9C5CF1EEF13A14C8 /* PBXResourcesBuildPhase.m */; };
+		839B512623806C2600662BA3 /* Moscow.h in Headers */ = {isa = PBXBuildFile; fileRef = 839B512423806C2600662BA3 /* Moscow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		839B512D23806C6C00662BA3 /* Moscow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839B512223806C2600662BA3 /* Moscow.framework */; };
+		839B512E23806C6C00662BA3 /* Moscow.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 839B512223806C2600662BA3 /* Moscow.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		839B513223806D1800662BA3 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DE6B249B85831991F8AE /* Tools.m */; };
+		839B513323806D1800662BA3 /* Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DB05B8FA099CFA2EBD24 /* Tools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83E1B3972370808500427C23 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E1B3962370808500427C23 /* main.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		839B512F23806C6C00662BA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83E1B38B2370808500427C23 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 839B512123806C2600662BA3;
+			remoteInfo = Moscow;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
+		839B513123806C6C00662BA3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				839B512E23806C6C00662BA3 /* Moscow.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		83E1B3912370808500427C23 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -63,6 +89,7 @@
 		1117D250D3A2952935DB4F92 /* PBXItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXItem.h; sourceTree = "<group>"; };
 		1117D29C921994A1775BDC67 /* PBXTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXTarget.h; sourceTree = "<group>"; };
 		1117D2BB4C35D2B27BDFC9C4 /* PBXCopyFilesBuildPhase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXCopyFilesBuildPhase.h; sourceTree = "<group>"; };
+		1117D30D2C9E76A46DA66B36 /* GNUstepInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNUstepInfo.h; sourceTree = "<group>"; };
 		1117D3591C1E4899179E1D30 /* PBXProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXProject.m; sourceTree = "<group>"; };
 		1117D36711304D750673F6AF /* PBXVariantGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXVariantGroup.m; sourceTree = "<group>"; };
 		1117D3BF5FF1DD90267EC33E /* PBXFileReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXFileReference.m; sourceTree = "<group>"; };
@@ -79,6 +106,7 @@
 		1117D7DE1E0A4802AA39D97F /* PBXItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXItem.m; sourceTree = "<group>"; };
 		1117D8374C061266D853CB13 /* Swift.xcspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xcspec; path = Swift.xcspec; sourceTree = "<group>"; };
 		1117D8540DAEB657879E8E4A /* PGRunInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGRunInfo.h; sourceTree = "<group>"; };
+		1117D8627AEF17859F1D2E34 /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		1117D90BF4990C94920D4413 /* PBXFileElementTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXFileElementTypes.h; sourceTree = "<group>"; };
 		1117D92DC5B71238EA841518 /* PBXShellScriptBuildPhase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXShellScriptBuildPhase.h; sourceTree = "<group>"; };
 		1117D95F1C0420644CAC1E52 /* PBXFrameworksBuildPhase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXFrameworksBuildPhase.m; sourceTree = "<group>"; };
@@ -105,18 +133,29 @@
 		1117DDE29F95395F83425ACC /* PBXTargetDependency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXTargetDependency.h; sourceTree = "<group>"; };
 		1117DDF9822F1E82D4762BE9 /* PBXNativeTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXNativeTarget.m; sourceTree = "<group>"; };
 		1117DE6B249B85831991F8AE /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
-		1117DE8F6AB63B8602D5595D /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		1117DE9F6A17CE87E1337AD6 /* PBXFrameworksBuildPhase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXFrameworksBuildPhase.h; sourceTree = "<group>"; };
+		1117DECEE06F80DA7FDFC14F /* GNUstepInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNUstepInfo.m; sourceTree = "<group>"; };
 		1117DF0EA8EB8A003F400D04 /* PGRunInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGRunInfo.m; sourceTree = "<group>"; };
+		839B512223806C2600662BA3 /* Moscow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Moscow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		839B512423806C2600662BA3 /* Moscow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Moscow.h; sourceTree = "<group>"; };
+		839B512523806C2600662BA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83E1B3932370808500427C23 /* PBXBuilder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PBXBuilder; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E1B3962370808500427C23 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		839B511F23806C2600662BA3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		83E1B3902370808500427C23 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				839B512D23806C6C00662BA3 /* Moscow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,14 +299,34 @@
 			path = Mappings;
 			sourceTree = "<group>";
 		};
+		839B512323806C2600662BA3 /* Moscow */ = {
+			isa = PBXGroup;
+			children = (
+				1117DA5D335DE3C11C8FD0C3 /* Tools */,
+				839B512423806C2600662BA3 /* Moscow.h */,
+				839B512523806C2600662BA3 /* Info.plist */,
+			);
+			path = Moscow;
+			sourceTree = "<group>";
+		};
+		839B512C23806C6C00662BA3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		83E1B38A2370808500427C23 = {
 			isa = PBXGroup;
 			children = (
 				83E1B3952370808500427C23 /* PBXBuilder */,
+				839B512323806C2600662BA3 /* Moscow */,
 				83E1B3942370808500427C23 /* Products */,
 				1117DA21A8D95A4F700D8C61 /* README.md */,
 				1117DC8D695D8AD4BC6A6803 /* LICENSE */,
 				1117DD640E012E1AF8B15017 /* Mappings */,
+				839B512C23806C6C00662BA3 /* Frameworks */,
+				1117D8627AEF17859F1D2E34 /* build.sh */,
 			);
 			sourceTree = "<group>";
 		};
@@ -275,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				83E1B3932370808500427C23 /* PBXBuilder */,
+				839B512223806C2600662BA3 /* Moscow.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -288,15 +348,45 @@
 				1117D4E62053D39B5C9BC623 /* PBX */,
 				1117D15D6188A08C9670BAE9 /* PGProjectFile.m */,
 				1117D61B61400A5DE31674A9 /* PGProjectFile.h */,
-				1117DA5D335DE3C11C8FD0C3 /* Tools */,
-				1117DE8F6AB63B8602D5595D /* build.sh */,
+				1117DECEE06F80DA7FDFC14F /* GNUstepInfo.m */,
+				1117D30D2C9E76A46DA66B36 /* GNUstepInfo.h */,
 			);
 			path = PBXBuilder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		839B511D23806C2600662BA3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				839B513323806D1800662BA3 /* Tools.h in Headers */,
+				839B512623806C2600662BA3 /* Moscow.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		839B512123806C2600662BA3 /* Moscow */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 839B512923806C2600662BA3 /* Build configuration list for PBXNativeTarget "Moscow" */;
+			buildPhases = (
+				839B511D23806C2600662BA3 /* Headers */,
+				839B511E23806C2600662BA3 /* Sources */,
+				839B511F23806C2600662BA3 /* Frameworks */,
+				839B512023806C2600662BA3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Moscow;
+			productName = Moscow;
+			productReference = 839B512223806C2600662BA3 /* Moscow.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		83E1B3922370808500427C23 /* PBXBuilder */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 83E1B39A2370808500427C23 /* Build configuration list for PBXNativeTarget "PBXBuilder" */;
@@ -304,10 +394,12 @@
 				83E1B38F2370808500427C23 /* Sources */,
 				83E1B3902370808500427C23 /* Frameworks */,
 				83E1B3912370808500427C23 /* CopyFiles */,
+				839B513123806C6C00662BA3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				839B513023806C6C00662BA3 /* PBXTargetDependency */,
 			);
 			name = PBXBuilder;
 			productName = PBXBuilder;
@@ -323,6 +415,9 @@
 				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "Project Galen";
 				TargetAttributes = {
+					839B512123806C2600662BA3 = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
 					83E1B3922370808500427C23 = {
 						CreatedOnToolsVersion = 11.2;
 					};
@@ -342,11 +437,30 @@
 			projectRoot = "";
 			targets = (
 				83E1B3922370808500427C23 /* PBXBuilder */,
+				839B512123806C2600662BA3 /* Moscow */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		839B512023806C2600662BA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		839B511E23806C2600662BA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				839B513223806D1800662BA3 /* Tools.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		83E1B38F2370808500427C23 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -377,13 +491,73 @@
 				1117D8CDA4C428F298051EEC /* PBXShellScriptBuildPhase.m in Sources */,
 				1117D8187C26761963F643C2 /* PBXSourcesBuildPhase.m in Sources */,
 				1117D24659AEA5B32EF1DD13 /* PBXContainerItemProxy.m in Sources */,
-				1117D1E253BFE524831AE0E6 /* Tools.m in Sources */,
+				1117DCC7520C9C18B64AFECB /* GNUstepInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		839B513023806C6C00662BA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 839B512123806C2600662BA3 /* Moscow */;
+			targetProxy = 839B512F23806C6C00662BA3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		839B512723806C2600662BA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = Q5XWZ7S7E9;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Moscow/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.projectgalen.Moscow;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		839B512823806C2600662BA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = Q5XWZ7S7E9;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Moscow/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.projectgalen.Moscow;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		83E1B3982370808500427C23 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -500,6 +674,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q5XWZ7S7E9;
 				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.projectgalen.PBXBuilder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -511,6 +686,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q5XWZ7S7E9;
 				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.projectgalen.PBXBuilder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -518,6 +694,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		839B512923806C2600662BA3 /* Build configuration list for PBXNativeTarget "Moscow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				839B512723806C2600662BA3 /* Debug */,
+				839B512823806C2600662BA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		83E1B38E2370808500427C23 /* Build configuration list for PBXProject "PBXBuilder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

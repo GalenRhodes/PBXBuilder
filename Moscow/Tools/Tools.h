@@ -25,6 +25,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+#define setpptr(p, e) ({ if(p) (*(p)) = (e); })
+
 typedef void (^PGPrintStructBlock)(NSString *_Nonnull prefix, BOOL addCR);
 
 #ifndef __APPLE__
@@ -37,8 +39,11 @@ typedef NS_OPTIONS(NSUInteger, NSDataReadingOptions) {
 
 #endif
 
-
 NS_ASSUME_NONNULL_BEGIN
+
+FOUNDATION_EXPORT NSInteger PGExecuteApplication(NSString *appPath, NSArray *appParams, NSString *_Nullable *_Nullable appOutput, NSError **error);
+
+FOUNDATION_EXPORT NSString *PGStringFromPipe(NSPipe *pipe);
 
 FOUNDATION_EXPORT dispatch_queue_t PGWorkQueue(void);
 
@@ -54,6 +59,8 @@ FOUNDATION_EXPORT void PGPrintPlist(id obj);
 
 @interface NSString(PBXBuilder)
 
+    -(NSString *)nullIfEmpty;
+
     -(BOOL)matches:(NSString *)pattern;
 
     -(BOOL)matches:(NSString *)pattern error:(NSError **)error;
@@ -65,6 +72,10 @@ FOUNDATION_EXPORT void PGPrintPlist(id obj);
     -(BOOL)contains:(NSString *)pattern error:(NSError **)error;
 
     -(BOOL)contains:(NSString *)pattern options:(NSRegularExpressionOptions)options error:(NSError **)error;
+
+    -(NSString *)trim;
+
+    -(NSString *)copyIfSameObjectAs:(NSString *)other;
 
 @end
 
