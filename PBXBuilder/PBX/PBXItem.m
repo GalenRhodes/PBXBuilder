@@ -22,7 +22,7 @@
 
 #import "PBXItem.h"
 #import "PGProjectFile.h"
-#import "Tools.h"
+#import <Moscow/Moscow.h>
 
 @implementation PBXItem {
         NSRecursiveLock *_lock;

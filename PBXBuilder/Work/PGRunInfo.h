@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: Tools.h
+ *    FILENAME: PGRunInfo.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/5/19
+ *        DATE: 11/4/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,41 +20,28 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_TOOLS_H__
-#define __PBXBUILDER_TOOLS_H__
+#ifndef __PBXBUILDER_PGRUNINFO_H__
+#define __PBXBUILDER_PGRUNINFO_H__
 
 #import <Cocoa/Cocoa.h>
 
-#define setpptr(p, e) ({ if(p) (*(p)) = (e); })
-
-typedef void (^PGPrintStructBlock)(NSString *_Nonnull prefix, BOOL addCR);
+@class PGProjectFile;
+@class GNUstepInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSInteger PGExecuteApplication(NSString *appPath, NSArray *appParams, NSString *_Nullable *_Nullable appOutput, NSError **error);
+FOUNDATION_EXPORT NSString *const PGProjErrorDomain;
 
-FOUNDATION_EXPORT NSString *PGStringFromPipe(NSPipe *pipe);
+@interface PGRunInfo : NSObject
 
-FOUNDATION_EXPORT dispatch_queue_t PGWorkQueue(void);
+    @property(readonly, copy) NSString                 *programPath;
+    @property(readonly)/*  */ GNUstepInfo              *gnustepInfo;
+    @property(readonly)/*  */ NSArray<PGProjectFile *> *projects;
 
-FOUNDATION_EXPORT void PGPrintStr(NSString *str);
+    -(instancetype)initWithCommandLine:(const char *_Nonnull *_Nonnull)argv argCount:(int)argc error:(NSError **)pError;
 
-FOUNDATION_EXPORT void PGPrintf(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
-
-FOUNDATION_EXPORT NSString *PGFormat(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
-
-FOUNDATION_EXPORT NSString *PGClassName(id obj);
-
-FOUNDATION_EXPORT void PGPrintPlist(id obj);
-
-NS_INLINE BOOL NSRangeNotFound(NSRange range) {
-    return ((range.location == NSNotFound) && (range.length == 0));
-}
-
-NS_INLINE BOOL NSRangeValid(NSRange range) {
-    return !((range.location == NSNotFound) && (range.length == 0));
-}
+@end
 
 NS_ASSUME_NONNULL_END
 
-#endif // __PBXBUILDER_TOOLS_H__
+#endif // __PBXBUILDER_PGRUNINFO_H__

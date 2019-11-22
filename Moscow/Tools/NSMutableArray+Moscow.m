@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXGroup.m
+ *    FILENAME: NSMutableArray+Moscow.m
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/4/19
+ *        DATE: 11/16/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,29 +20,12 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import "PBXGroup.h"
-#import "PGProjectFile.h"
-#import <Moscow/Moscow.h>
+#import "NSMutableArray+Moscow.h"
 
-@implementation PBXGroup {
-        NSArray<PBXFileElement *> *_children;
-        dispatch_once_t           _childrenOnce;
+@implementation NSMutableArray(Moscow)
+
+    -(void)addObjectWithCheck:(id)obj {
+        if(obj) [self addObject:obj];
     }
-
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
-        self = [super initWithItemId:itemId projectFile:projectFile];
-        return self;
-    }
-
-    -(NSArray<PBXFileElement *> *)children {
-        dispatch_once(&_childrenOnce, ^{
-            NSArray<NSString *> *childrenIDs = [self iv:@"children"];
-            NSMutableArray      *array       = [NSMutableArray new];
-            [childrenIDs enumerateObjectsUsingBlock:^(NSString *childId, NSUInteger idx, BOOL *stop) { [array addObjectWithCheck:[self itemForID:childId]]; }];
-            _children = array;
-        });
-        return _children;
-    }
-
 
 @end

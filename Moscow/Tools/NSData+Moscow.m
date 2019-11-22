@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXGroup.m
+ *    FILENAME: NSData+Moscow.m
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/4/19
+ *        DATE: 11/16/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,29 +20,20 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import "PBXGroup.h"
-#import "PGProjectFile.h"
-#import <Moscow/Moscow.h>
+#import "NSData+Moscow.h"
 
-@implementation PBXGroup {
-        NSArray<PBXFileElement *> *_children;
-        dispatch_once_t           _childrenOnce;
+@implementation NSData(Moscow)
+
+//@f:0
+#ifndef __APPLE__
+
+    +(instancetype)dataWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr {
+        NSData *data = [NSData dataWithContentsOfMappedFile:path];
+        if(!data && errorPtr) *errorPtr = [NSError errorWithDomain:NSCocoaErrorDomain code:1001001 userInfo:@{ NSLocalizedDescriptionKey: @"Unknown Error" }];
+        return data;
     }
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
-        self = [super initWithItemId:itemId projectFile:projectFile];
-        return self;
-    }
-
-    -(NSArray<PBXFileElement *> *)children {
-        dispatch_once(&_childrenOnce, ^{
-            NSArray<NSString *> *childrenIDs = [self iv:@"children"];
-            NSMutableArray      *array       = [NSMutableArray new];
-            [childrenIDs enumerateObjectsUsingBlock:^(NSString *childId, NSUInteger idx, BOOL *stop) { [array addObjectWithCheck:[self itemForID:childId]]; }];
-            _children = array;
-        });
-        return _children;
-    }
-
+#endif
+//@f:1
 
 @end

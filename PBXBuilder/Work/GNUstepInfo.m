@@ -21,13 +21,14 @@
  *//************************************************************************/
 
 #import "GNUstepInfo.h"
-#import "Tools.h"
+#import <Moscow/Moscow.h>
 
 @implementation GNUstepInfo {
     }
 
     @synthesize gnustepConfig = _gnustepConfig;
     @synthesize ccPath = _ccPath;
+    @synthesize cxxPath = _cxxPath;
     @synthesize applcationPath = _applcationPath;
     @synthesize toolsPath = _toolsPath;
     @synthesize libraryPath = _libraryPath;
@@ -37,9 +38,13 @@
     @synthesize manPath = _manPath;
     @synthesize infoPath = _infoPath;
     @synthesize objcOpts = _objcOpts;
-    @synthesize linkOpts = _linkOpts;
+    @synthesize linkBaseOpts = _linkBaseOpts;
     @synthesize linkGuiOpts = _linkGuiOpts;
     @synthesize cpuCount = _cpuCount;
+
+    -(instancetype)init {
+        return (self = [self init:NULL]);
+    }
 
     -(instancetype)init:(NSError **)pError {
         self = [super init];
@@ -58,6 +63,7 @@
 
             NSArray<NSString *> *results = [self getGNUstepEnv:@[
                 @"--variable=CC",                      // --
+                @"--variable=CXX",                     // --
                 @"--variable=GNUSTEP_LOCAL_APPS",      // --
                 @"--variable=GNUSTEP_LOCAL_TOOLS",     // --
                 @"--variable=GNUSTEP_LOCAL_LIBRARY",   // --
@@ -73,46 +79,50 @@
             }
 
             _ccPath         = results[0];
-            _applcationPath = results[1];
-            _toolsPath      = results[2];
-            _libraryPath    = results[3];
-            _headersPath    = results[4];
-            _libsPath       = results[5];
-            _docPath        = results[6];
-            _manPath        = results[7];
-            _infoPath       = results[8];
+            _cxxPath        = results[1];
+            _applcationPath = results[2];
+            _toolsPath      = results[3];
+            _libraryPath    = results[4];
+            _headersPath    = results[5];
+            _libsPath       = results[6];
+            _docPath        = results[7];
+            _manPath        = results[8];
+            _infoPath       = results[9];
 
-            _objcOpts = [self getGNUstepFlags:@"--objc-flags" error:&error].mutableCopy;
-            if(!_objcOpts) {
+            if(!(_objcOpts = [self getGNUstepFlags:@"--objc-flags" error:&error].mutableCopy)) {
                 setpptr(pError, error);
                 return nil;
             }
 
-            _linkOpts = [self getGNUstepFlags:@"--base-libs" error:&error].mutableCopy;
-            if(!_linkOpts) {
+            if(!(_linkBaseOpts = [self getGNUstepFlags:@"--base-libs" error:&error].mutableCopy)) {
                 setpptr(pError, error);
                 return nil;
             }
 
-            _linkGuiOpts = [self getGNUstepFlags:@"--gui-libs" error:&error].mutableCopy;
-            if(!_linkGuiOpts) {
+            if(!(_linkGuiOpts = [self getGNUstepFlags:@"--gui-libs" error:&error].mutableCopy)) {
                 setpptr(pError, error);
                 return nil;
             }
 
             [(NSMutableArray *)_objcOpts addObject:@"-fobjc-arc"];
-            [(NSMutableArray *)_linkOpts addObject:@"-ldispatch"];
+            [(NSMutableArray *)_objcOpts addObject:@"-fobjc-nonfragile-abi"];
+            [(NSMutableArray *)_linkBaseOpts addObject:@"-ldispatch"];
             [(NSMutableArray *)_linkGuiOpts addObject:@"-ldispatch"];
 
-            _cpuCount = 1;
-            NSString *procInfo = [NSString stringWithContentsOfFile:@"/proc/cpuinfo" encoding:NSUTF8StringEncoding error:&error];
-            if(procInfo) {
-                NSRegularExpression *rx2 = [NSRegularExpression regularExpressionWithPattern:@"processor\\s+:" options:0 error:&error];
-                if(rx2) _cpuCount = [rx2 matchesInString:procInfo options:0 range:NSMakeRange(0, procInfo.length)].count;
-            }
+            _cpuCount = [self getCpuCount:&error];
         }
 
         return self;
+    }
+
+    -(NSUInteger)getCpuCount:(NSError **)error {
+        NSString *procInfo = [NSString stringWithContentsOfFile:@"/proc/cpuinfo" encoding:NSUTF8StringEncoding error:error];
+        if(!procInfo) return 1;
+
+        NSRegularExpression *rx2 = [NSRegularExpression regularExpressionWithPattern:@"processor\\s+:" options:0 error:error];
+        if(!rx2) return 1;
+
+        return [rx2 matchesInString:procInfo options:0 range:procInfo.range].count;
     }
 
     -(NSArray<NSString *> *)getGNUstepEnv:(NSArray<NSString *> *)keys error:(NSError **)error {
@@ -137,29 +147,29 @@
     }
 
     -(NSArray<NSString *> *)getGNUstepFlags:(NSString *)op error:(NSError **)error {
-        NSMutableArray<NSString *> *objcOpts   = nil;
-        NSString                   *taskOutput = nil;
+        NSString *taskOutput = nil;
+        setpptr(error, nil);
+        if(PGExecuteApplication(_gnustepConfig, @[ op ], &taskOutput, error)) return nil;
 
-        if(!PGExecuteApplication(_gnustepConfig, @[ op ], &taskOutput, error)) {
-            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\s+" options:0 error:error];
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\s+" options:0 error:error];
+        if(!regex) return nil;
 
-            if(regex) {
-                taskOutput = taskOutput.trim;
+        NSMutableArray<NSString *> *objcOpts = [NSMutableArray arrayWithCapacity:10];
+        NSRange                    fullRange = NSMakeRange(0, (taskOutput = taskOutput.trim).length);
 
-                NSArray<NSTextCheckingResult *> *array  = [regex matchesInString:taskOutput options:0 range:NSMakeRange(0, taskOutput.length)];
-                NSUInteger                      lastIdx = 0;
+        if(fullRange.length) {
+            NSArray<NSTextCheckingResult *> *array  = [regex matchesInString:taskOutput options:0 range:fullRange];
+            NSUInteger                      lastIdx = 0;
 
-                objcOpts = [NSMutableArray arrayWithCapacity:array.count ?: 10];
+            for(NSTextCheckingResult *tcr in array) {
+                NSRange  rng  = tcr.range;
+                NSString *opt = [taskOutput substringWithRange:NSMakeRange(lastIdx, (rng.location - lastIdx))].trim;
 
-                for(NSTextCheckingResult *tcr in array) {
-                    NSRange  rng  = tcr.range;
-                    NSString *opt = [taskOutput substringWithRange:NSMakeRange(lastIdx, (rng.location - lastIdx))];
-
-                    if(![objcOpts containsObject:opt]) [objcOpts addObject:opt];
-                    lastIdx = (rng.location + rng.length);
-                }
-
-                setpptr(error, nil);
+                /*
+                 * Leave out empty opts (doubtful) and duplicates.
+                 */
+                if(opt.length && ![objcOpts containsObject:opt]) [objcOpts addObject:opt];
+                lastIdx = (rng.location + rng.length);
             }
         }
 

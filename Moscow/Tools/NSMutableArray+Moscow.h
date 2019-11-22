@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PGRunInfo.h
+ *    FILENAME: NSMutableArray+Moscow.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/4/19
+ *        DATE: 11/16/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,23 +20,19 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_PGRUNINFO_H__
-#define __PBXBUILDER_PGRUNINFO_H__
+#ifndef __PBXBUILDER_NSMUTABLEARRAY_MOSCOW_H__
+#define __PBXBUILDER_NSMUTABLEARRAY_MOSCOW_H__
 
-#import <Cocoa/Cocoa.h>
+#import <Moscow/Tools.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PGRunInfo : NSObject
+@interface NSMutableArray(Moscow)
 
-    @property(copy) NSString *projectName;
-    @property(copy) NSString *projectPath;
-
-    -(instancetype)initWithProjectName:(NSString *)projectName path:(NSString *)projectPath;
-
+    -(void)addObjectWithCheck:(id)obj;
 
 @end
 
 NS_ASSUME_NONNULL_END
 
-#endif // __PBXBUILDER_PGRUNINFO_H__
+#endif // __PBXBUILDER_NSMUTABLEARRAY_MOSCOW_H__

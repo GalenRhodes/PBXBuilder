@@ -23,7 +23,7 @@
 #import "XCConfigurationList.h"
 #import "XCBuildConfiguration.h"
 #import "PGProjectFile.h"
-#import "Tools.h"
+#import <Moscow/Moscow.h>
 
 @implementation XCConfigurationList {
         NSArray         *_buildConfigurations;

@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
     @property(nullable, readonly, copy) NSString            *gnustepConfig;
     @property(nullable, readonly, copy) NSString            *ccPath;
+    @property(nullable, readonly, copy) NSString            *cxxPath;
     @property(nullable, readonly, copy) NSString            *applcationPath;
     @property(nullable, readonly, copy) NSString            *toolsPath;
     @property(nullable, readonly, copy) NSString            *libraryPath;
@@ -41,10 +42,10 @@ NS_ASSUME_NONNULL_BEGIN
     @property(nullable, readonly, copy) NSString            *infoPath;
     @property(readonly)/*            */ NSUInteger          cpuCount;
     @property(readonly)/*            */ NSArray<NSString *> *objcOpts;
-    @property(readonly)/*            */ NSArray<NSString *> *linkOpts;
+    @property(readonly)/*            */ NSArray<NSString *> *linkBaseOpts;
     @property(readonly)/*            */ NSArray<NSString *> *linkGuiOpts;
 
-    -(instancetype)init:(NSError **)pError;
+    -(instancetype)init:(NSError **)pError NS_DESIGNATED_INITIALIZER;
 
 @end
 

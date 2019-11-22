@@ -23,7 +23,7 @@
 #import "PBXBuildPhase.h"
 #import "PBXBuildFile.h"
 #import "PGProjectFile.h"
-#import "Tools.h"
+#import <Moscow/Moscow.h>
 
 @implementation PBXBuildPhase {
         NSArray<PBXBuildFile *> *_files;

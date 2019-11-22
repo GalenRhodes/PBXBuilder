@@ -25,7 +25,7 @@
 #import "PGProjectFile.h"
 #import "PBXTarget.h"
 #import "PBXGroup.h"
-#import "Tools.h"
+#import <Moscow/Moscow.h>
 
 @implementation PBXProject {
         NSArray<PBXTarget *> *_targets;

@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXGroup.m
+ *    FILENAME: NSScanner+Moscow.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/4/19
+ *        DATE: 11/16/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,29 +20,25 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import "PBXGroup.h"
-#import "PGProjectFile.h"
-#import <Moscow/Moscow.h>
+#ifndef __PBXBUILDER_NSSCANNER_MOSCOW_H__
+#define __PBXBUILDER_NSSCANNER_MOSCOW_H__
 
-@implementation PBXGroup {
-        NSArray<PBXFileElement *> *_children;
-        dispatch_once_t           _childrenOnce;
-    }
+#import <Moscow/Tools.h>
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
-        self = [super initWithItemId:itemId projectFile:projectFile];
-        return self;
-    }
+NS_ASSUME_NONNULL_BEGIN
 
-    -(NSArray<PBXFileElement *> *)children {
-        dispatch_once(&_childrenOnce, ^{
-            NSArray<NSString *> *childrenIDs = [self iv:@"children"];
-            NSMutableArray      *array       = [NSMutableArray new];
-            [childrenIDs enumerateObjectsUsingBlock:^(NSString *childId, NSUInteger idx, BOOL *stop) { [array addObjectWithCheck:[self itemForID:childId]]; }];
-            _children = array;
-        });
-        return _children;
-    }
+@interface NSScanner(Moscow)
 
+    +(unsigned long long)atoull:(NSString *)str success:(BOOL *)success;
+
+#ifndef __APPLE__
+
+    -(BOOL)scanUnsignedLongLong:(unsigned long long *)ullVal;
+
+#endif
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#endif // __PBXBUILDER_NSSCANNER_MOSCOW_H__

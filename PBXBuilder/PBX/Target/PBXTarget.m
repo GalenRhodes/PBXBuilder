@@ -25,7 +25,7 @@
 #import "PBXBuildPhase.h"
 #import "PBXTargetDependency.h"
 #import "PGProjectFile.h"
-#import "Tools.h"
+#import <Moscow/Moscow.h>
 
 @implementation PBXTarget {
         NSArray<PBXBuildPhase *>       *_buildPhases;

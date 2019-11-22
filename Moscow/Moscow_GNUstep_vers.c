@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PGRunInfo.m
+ *    FILENAME: Moscow_GNUstep_vers.c
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/4/19
+ *        DATE: 11/16/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,23 +20,8 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import "PGRunInfo.h"
+extern const unsigned char MoscowVersionString[];
+extern const double        MoscowVersionNumber;
 
-@implementation PGRunInfo {
-    }
-
-    @synthesize projectName = _projectName;
-    @synthesize projectPath = _projectPath;
-
-    -(instancetype)initWithProjectName:(NSString *)projectName path:(NSString *)projectPath {
-        self = [super init];
-
-        if(self) {
-            _projectName = projectName.copy;
-            _projectPath = projectPath.copy;
-        }
-
-        return self;
-    }
-
-@end
+const unsigned char MoscowVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:Moscow  PROJECT:PBXBuilder-1" "\n";
+const double        MoscowVersionNumber __attribute__ ((used))   = (double)1.;

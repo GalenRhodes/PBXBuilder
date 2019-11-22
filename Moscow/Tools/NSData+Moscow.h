@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXGroup.m
+ *    FILENAME: NSData+Moscow.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/4/19
+ *        DATE: 11/16/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,29 +20,35 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import "PBXGroup.h"
-#import "PGProjectFile.h"
-#import <Moscow/Moscow.h>
+#ifndef __PBXBUILDER_NSDATA_MOSCOW_H__
+#define __PBXBUILDER_NSDATA_MOSCOW_H__
 
-@implementation PBXGroup {
-        NSArray<PBXFileElement *> *_children;
-        dispatch_once_t           _childrenOnce;
-    }
+#import <Moscow/Tools.h>
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
-        self = [super initWithItemId:itemId projectFile:projectFile];
-        return self;
-    }
+#ifndef __APPLE__
 
-    -(NSArray<PBXFileElement *> *)children {
-        dispatch_once(&_childrenOnce, ^{
-            NSArray<NSString *> *childrenIDs = [self iv:@"children"];
-            NSMutableArray      *array       = [NSMutableArray new];
-            [childrenIDs enumerateObjectsUsingBlock:^(NSString *childId, NSUInteger idx, BOOL *stop) { [array addObjectWithCheck:[self itemForID:childId]]; }];
-            _children = array;
-        });
-        return _children;
-    }
+typedef NS_OPTIONS(NSUInteger, NSDataReadingOptions) {
+    NSDataReadingMappedIfSafe = 1UL << 0,	// Hint to map the file in if possible and safe
+    NSDataReadingUncached     = 1UL << 1,	// Hint to get the file not to be cached in the kernel
+    NSDataReadingMappedAlways = 1UL << 3,	// Hint to map the file in if possible. This takes precedence over NSDataReadingMappedIfSafe if both are given.
+};
 
+#endif
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface NSData(Moscow)
+
+//@f:0
+#ifndef __APPLE__
+
+    +(nullable instancetype)dataWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
+
+#endif
+//@f:1
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#endif // __PBXBUILDER_NSDATA_MOSCOW_H__

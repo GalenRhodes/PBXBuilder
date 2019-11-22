@@ -22,6 +22,8 @@
 
 #import "Tools.h"
 
+NSString *const PGX_STDOUT = @"/dev/stdout";
+
 NSInteger PGExecuteApplication(NSString *appPath, NSArray *appParams, NSString **appOutput, NSError **error) {
     if(error) *error         = nil;
     if(appOutput) *appOutput = nil;
@@ -57,7 +59,9 @@ dispatch_queue_t PGWorkQueue(void) {
 }
 
 void PGPrintStr(NSString *str) {
-    [str writeToFile:@"/dev/stdout" atomically:NO encoding:NSUTF8StringEncoding error:nil];
+#ifdef DEBUG
+    [str writeToFile:PGX_STDOUT atomically:NO encoding:NSUTF8StringEncoding error:NULL];
+#endif
 }
 
 void PGPrintf(NSString *format, ...) {
@@ -161,119 +165,3 @@ void PGPrintPlist(id obj) {
     PGPrintItem(@"", obj);
     PGPrintStr(@"\n");
 }
-
-@implementation NSString(PBXBuilder)
-
-    -(NSString *)nullIfEmpty {
-        return ((self.length) ? self : nil);
-    }
-
-    -(BOOL)matches:(NSString *)pattern {
-        NSError *error = nil;
-        return [self matches:pattern error:&error];
-    }
-
-    -(BOOL)matches:(NSString *)pattern error:(NSError **)error {
-        return [self matches:pattern options:0 error:error];
-    }
-
-    -(BOOL)matches:(NSString *)pattern options:(NSRegularExpressionOptions)options error:(NSError **)error {
-        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:options error:error];
-        NSUInteger          len    = self.length;
-        NSRange             range  = [regex rangeOfFirstMatchInString:self options:0 range:NSMakeRange(0, len)];
-        return ((range.location == 0) && (range.length == len));
-    }
-
-    -(BOOL)contains:(NSString *)pattern {
-        NSError *error = nil;
-        return [self contains:pattern options:0 error:&error];
-    }
-
-    -(BOOL)contains:(NSString *)pattern error:(NSError **)error {
-        return [self contains:pattern options:0 error:error];
-    }
-
-    -(BOOL)contains:(NSString *)pattern options:(NSRegularExpressionOptions)options error:(NSError **)error {
-        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:options error:error];
-        NSUInteger          len    = self.length;
-        NSRange             range  = [regex rangeOfFirstMatchInString:self options:0 range:NSMakeRange(0, len)];
-        // TODO: Finish...
-        return NO;
-    }
-
-    -(NSString *)trim {
-        return [self stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
-    }
-
-    -(NSString *)copyIfSameObjectAs:(NSString *)other {
-        return ((self == other) ? self.copy : self);
-    }
-
-@end
-
-@implementation NSMutableArray(PBXBuilder)
-
-    -(void)addObjectWithCheck:(id)obj {
-        if(obj) [self addObject:obj];
-    }
-
-@end
-
-@implementation NSScanner(PBXBuilder)
-
-    +(unsigned long long)atoull:(NSString *)str success:(BOOL *)success {
-        unsigned long long v = 0;
-        BOOL               f = NO;
-
-        if(str.length) {
-#ifdef __APPLE__
-            f = [[[NSScanner alloc] initWithString:str] scanUnsignedLongLong:&v];
-#else
-            char *s = strdup(str.UTF8String);
-            char *t = NULL;
-
-            v = strtoull(s, &t, 10);
-            f = (s != t);
-            free(s);
-#endif
-        }
-
-        if(success) *success = f;
-        return v;
-    }
-
-//@f:0
-#ifndef __APPLE__
-
-    -(BOOL)scanUnsignedLongLong:(unsigned long long *)ullVal {
-        char               *s = strdup(self.string.UTF8String);
-        char               *t = NULL;
-        unsigned long long v  = strtoull(s, &t, 10);
-        BOOL               f  = (s != t);
-
-        free(s);
-        if(f && ullVal) *ullVal = v;
-        return f;
-    }
-
-#endif
-//@f:1
-
-@end
-
-@implementation NSData(PBXBuilder)
-
-//@f:0
-#ifndef __APPLE__
-
-    +(instancetype)dataWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr {
-        NSData *data = [NSData dataWithContentsOfMappedFile:path];
-        if(!data && errorPtr) *errorPtr = [NSError errorWithDomain:NSCocoaErrorDomain code:1001001 userInfo:@{ NSLocalizedDescriptionKey: @"Unknown Error" }];
-        return data;
-    }
-
-#endif
-//@f:1
-
-@end
-

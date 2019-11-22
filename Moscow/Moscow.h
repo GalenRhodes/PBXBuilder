@@ -20,9 +20,14 @@
 * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 *//************************************************************************/
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 FOUNDATION_EXPORT double              MoscowVersionNumber;
 FOUNDATION_EXPORT const unsigned char MoscowVersionString[];
 
 #import <Moscow/Tools.h>
+#import <Moscow/NSString+Moscow.h>
+#import <Moscow/NSMutableArray+Moscow.h>
+#import <Moscow/NSScanner+Moscow.h>
+#import <Moscow/NSData+Moscow.h>
+#import <Moscow/NSRegularExpression+Moscow.h>

@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXGroup.m
+ *    FILENAME: NSScanner+Moscow.m
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/4/19
+ *        DATE: 11/16/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,29 +20,46 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import "PBXGroup.h"
-#import "PGProjectFile.h"
-#import <Moscow/Moscow.h>
+#import "NSScanner+Moscow.h"
 
-@implementation PBXGroup {
-        NSArray<PBXFileElement *> *_children;
-        dispatch_once_t           _childrenOnce;
+@implementation NSScanner(Moscow)
+
+    +(unsigned long long)atoull:(NSString *)str success:(BOOL *)success {
+        unsigned long long v = 0;
+        BOOL               f = NO;
+
+        if(str.length) {
+#ifdef __APPLE__
+            f = [[[NSScanner alloc] initWithString:str] scanUnsignedLongLong:&v];
+#else
+            char *s = strdup(str.UTF8String);
+            char *t = NULL;
+
+            v = strtoull(s, &t, 10);
+            f = (s != t);
+            free(s);
+#endif
+        }
+
+        if(success) *success = f;
+        return v;
     }
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
-        self = [super initWithItemId:itemId projectFile:projectFile];
-        return self;
+//@f:0
+#ifndef __APPLE__
+
+    -(BOOL)scanUnsignedLongLong:(unsigned long long *)ullVal {
+        char               *s = strdup(self.string.UTF8String);
+        char               *t = NULL;
+        unsigned long long v  = strtoull(s, &t, 10);
+        BOOL               f  = (s != t);
+
+        free(s);
+        if(f && ullVal) *ullVal = v;
+        return f;
     }
 
-    -(NSArray<PBXFileElement *> *)children {
-        dispatch_once(&_childrenOnce, ^{
-            NSArray<NSString *> *childrenIDs = [self iv:@"children"];
-            NSMutableArray      *array       = [NSMutableArray new];
-            [childrenIDs enumerateObjectsUsingBlock:^(NSString *childId, NSUInteger idx, BOOL *stop) { [array addObjectWithCheck:[self itemForID:childId]]; }];
-            _children = array;
-        });
-        return _children;
-    }
-
+#endif
+//@f:1
 
 @end

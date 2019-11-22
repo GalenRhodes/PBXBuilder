@@ -23,7 +23,7 @@
 #import "PGProjectFile.h"
 #import "PBXItem.h"
 #import "PBXProject.h"
-#import "Tools.h"
+#import <Moscow/Moscow.h>
 #import "PBXBuildPhase.h"
 #import "PBXTarget.h"
 
@@ -45,7 +45,7 @@
             _projectPath  = [projectPath copy];
             _pbxItemCache = [NSMutableDictionary new];
 
-            NSString      *pbxPath   = [NSString stringWithFormat:@"%@/%@.xcodeproj/project.pbxproj", _projectName, _projectPath];
+            NSString      *pbxPath   = [NSString stringWithFormat:@"%@/%@.xcodeproj/project.pbxproj", _projectPath, _projectName];
             NSInputStream *pbxStream = [NSInputStream inputStreamWithFileAtPath:pbxPath];
 
             [pbxStream open];
