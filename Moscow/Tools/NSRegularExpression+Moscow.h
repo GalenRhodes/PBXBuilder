@@ -78,56 +78,60 @@ NS_ASSUME_NONNULL_BEGIN
 
     +(NSRange)rangeOfFirstMatchInString:(NSString *)s pattern:(NSString *)p;
 
-    +(instancetype)regularExpressionWithPattern:(NSString *)p error:(NSError **)error;
+    +(nullable instancetype)regularExpressionWithPattern:(NSString *)p error:(NSError **)error;
 
-    +(instancetype)regularExpressionWithPattern:(NSString *)p;
+    +(nullable instancetype)regularExpressionWithPattern:(NSString *)p;
 
-    +(instancetype)cachedRegularExpressionWithPattern:(NSString *)p rxOptions:(NSRegularExpressionOptions)ro error:(NSError **)e;
+    +(nullable instancetype)cachedRegularExpressionWithPattern:(NSString *)p rxOptions:(NSRegularExpressionOptions)ro error:(NSError **)e;
 
-    +(instancetype)cachedRegularExpressionWithPattern:(NSString *)p error:(NSError **)e;
+    +(nullable instancetype)cachedRegularExpressionWithPattern:(NSString *)p error:(NSError **)e;
 
-    +(instancetype)cachedRegularExpressionWithPattern:(NSString *)p;
+    +(nullable instancetype)cachedRegularExpressionWithPattern:(NSString *)p;
 
-    +(NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s range:(NSRange)r pattern:(NSString *)p rxOptions:(NSRegularExpressionOptions)ro error:(NSError **)e;
+    +(nullable NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s range:(NSRange)r pattern:(NSString *)p rxOptions:(NSRegularExpressionOptions)ro error:(NSError **)e;
 
-    +(NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s range:(NSRange)r pattern:(NSString *)p error:(NSError **)e;
+    +(nullable NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s range:(NSRange)r pattern:(NSString *)p error:(NSError **)e;
 
-    +(NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s range:(NSRange)r pattern:(NSString *)p rxOptions:(NSRegularExpressionOptions)ro;
+    +(nullable NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s range:(NSRange)r pattern:(NSString *)p rxOptions:(NSRegularExpressionOptions)ro;
 
-    +(NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s range:(NSRange)r pattern:(NSString *)p;
+    +(nullable NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s range:(NSRange)r pattern:(NSString *)p;
 
-    +(NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s
+    +(nullable NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s
                                                 options:(NSMatchingOptions)o
                                                   range:(NSRange)r
                                                 pattern:(NSString *)p
                                               rxOptions:(NSRegularExpressionOptions)ro
                                                   error:(NSError **)e;
 
-    +(NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s options:(NSMatchingOptions)o pattern:(NSString *)p error:(NSError **)e;
+    +(nullable NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s options:(NSMatchingOptions)o pattern:(NSString *)p error:(NSError **)e;
 
-    +(NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s
+    +(nullable NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s
                                                 options:(NSMatchingOptions)o
                                                 pattern:(NSString *)p
                                               rxOptions:(NSRegularExpressionOptions)ro
                                                   error:(NSError **)e;
 
-    +(NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s options:(NSMatchingOptions)o range:(NSRange)r pattern:(NSString *)p error:(NSError **)e;
+    +(nullable NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s options:(NSMatchingOptions)o range:(NSRange)r pattern:(NSString *)p error:(NSError **)e;
 
-    +(NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s options:(NSMatchingOptions)o range:(NSRange)r pattern:(NSString *)p rxOptions:(NSRegularExpressionOptions)ro;
+    +(nullable NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s
+                                                         options:(NSMatchingOptions)o
+                                                           range:(NSRange)r
+                                                         pattern:(NSString *)p
+                                                       rxOptions:(NSRegularExpressionOptions)ro;
 
-    +(NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s options:(NSMatchingOptions)o pattern:(NSString *)p;
+    +(nullable NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s options:(NSMatchingOptions)o pattern:(NSString *)p;
 
-    +(NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s options:(NSMatchingOptions)o pattern:(NSString *)p rxOptions:(NSRegularExpressionOptions)ro;
+    +(nullable NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s options:(NSMatchingOptions)o pattern:(NSString *)p rxOptions:(NSRegularExpressionOptions)ro;
 
-    +(NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s options:(NSMatchingOptions)o range:(NSRange)r pattern:(NSString *)p;
+    +(nullable NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s options:(NSMatchingOptions)o range:(NSRange)r pattern:(NSString *)p;
 
-    +(NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s pattern:(NSString *)p rxOptions:(NSRegularExpressionOptions)ro error:(NSError **)e;
+    +(nullable NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s pattern:(NSString *)p rxOptions:(NSRegularExpressionOptions)ro error:(NSError **)e;
 
-    +(NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s pattern:(NSString *)p rxOptions:(NSRegularExpressionOptions)ro;
+    +(nullable NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s pattern:(NSString *)p rxOptions:(NSRegularExpressionOptions)ro;
 
-    +(NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s pattern:(NSString *)p error:(NSError **)e;
+    +(nullable NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s pattern:(NSString *)p error:(NSError **)e;
 
-    +(NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s pattern:(NSString *)p;
+    +(nullable NSArray<NSTextCheckingResult *> *)matchesInString:(NSString *)s pattern:(NSString *)p;
 
 @end
 

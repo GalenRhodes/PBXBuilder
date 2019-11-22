@@ -28,12 +28,10 @@ NSString *const PGMacroPattern = @"((?<!\\\\)(?:\\\\\\\\)*)\\$\\{(\\w+)\\}";
 
 NSArray<NSString *> *split(NSString *string, NSString *pattern, NSInteger limit);
 
-NSString *stringByReplacingMatches(NSString *string,
+NSString *stringByReplacingMatches(NSString *_Nonnull string,
                                    NSMatchingOptions options,
-                                   NSRange range,
-                                   NSString *pattern,
-                                   NSRegularExpressionOptions rxOptions,
-                                   PGReplaceBlock block,
+                                   NSRange range, NSString *_Nonnull pattern,
+                                   NSRegularExpressionOptions rxOptions, PGReplaceBlock _Nonnull block,
                                    NSError **error);
 
 NS_INLINE BOOL foo(NSString *s, NSRange r) {

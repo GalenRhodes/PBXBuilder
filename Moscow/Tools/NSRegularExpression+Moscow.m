@@ -24,11 +24,16 @@
 #import "NSString+Moscow.h"
 #import "Tools.h"
 
-NSRange PGRangeOfFirstMatchInString(NSString *s, NSMatchingOptions o, NSRange r, NSString *p, NSRegularExpressionOptions ro, NSError **e);
+NSRange PGRangeOfFirstMatchInString(NSString *_Nonnull s, NSMatchingOptions o, NSRange r, NSString *_Nonnull p, NSRegularExpressionOptions ro, NSError **e);
 
-NSRegularExpression *PGCachedRegexWithPattern(NSString *p, NSRegularExpressionOptions ro, NSError **e);
+NSRegularExpression *_Nullable PGCachedRegexWithPattern(NSString *_Nonnull p, NSRegularExpressionOptions ro, NSError **e);
 
-NSArray<NSTextCheckingResult *> *PGMatchesInString(NSString *s, NSMatchingOptions o, NSRange r, NSString *p, NSRegularExpressionOptions ro, NSError **e);
+NSArray<NSTextCheckingResult *> *_Nullable PGMatchesInString(NSString *_Nonnull s,
+                                                             NSMatchingOptions o,
+                                                             NSRange r,
+                                                             NSString *_Nonnull p,
+                                                             NSRegularExpressionOptions ro,
+                                                             NSError **e);
 
 @implementation NSRegularExpression(Moscow)
 

@@ -25,6 +25,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+FOUNDATION_EXPORT NSString *const PGMacroPattern;
+
 typedef NSString *_Nullable (^PGReplaceBlock)(NSTextCheckingResult *_Nonnull match, BOOL *_Nonnull pStop);
 
 typedef NSString *_Nullable (^PGMacroBlock)(NSString *_Nonnull macro, BOOL *_Nonnull pStop);
