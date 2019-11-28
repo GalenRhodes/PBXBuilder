@@ -25,11 +25,27 @@
 
 #import <Cocoa/Cocoa.h>
 
+#ifndef __APPLE__
+    #if !defined(NS_INLINE)
+        #if defined(__GNUC__)
+            #define NS_INLINE static __inline__ __attribute__((always_inline))
+        #elif defined(__MWERKS__) || defined(__cplusplus)
+            #define NS_INLINE static inline
+        #elif defined(_MSC_VER)
+            #define NS_INLINE static __inline
+        #endif
+    #endif
+#endif
+
 #define setpptr(p, e) ({ if(p) (*(p)) = (e); })
 
-typedef void (^PGPrintStructBlock)(NSString *_Nonnull prefix, BOOL addCR);
-
 NS_ASSUME_NONNULL_BEGIN
+
+typedef void (^PGPrintStructBlock)(NSString *prefix, BOOL addCR);
+
+typedef BOOL (^PGFindBlock)(NSString *path, NSString *filename);
+
+FOUNDATION_EXPORT NSString *const MoscowErrorDomain;
 
 FOUNDATION_EXPORT NSInteger PGExecuteApplication(NSString *appPath, NSArray *appParams, NSString *_Nullable *_Nullable appOutput, NSError **error);
 
@@ -46,6 +62,12 @@ FOUNDATION_EXPORT NSString *PGFormat(NSString *format, ...) NS_FORMAT_FUNCTION(1
 FOUNDATION_EXPORT NSString *PGClassName(id obj);
 
 FOUNDATION_EXPORT void PGPrintPlist(id obj);
+
+FOUNDATION_EXPORT NSArray<NSString *> *PGFindWithBlock(NSString *dir, PGFindBlock block, NSError **error);
+
+FOUNDATION_EXPORT NSArray<NSString *> *PGFindByRegex(NSString *dir, NSString *regexPattern, BOOL includePath, NSError **error);
+
+FOUNDATION_EXPORT NSArray<NSString *> *PGFindByName(NSString *dir, NSString *filename, NSError **error);
 
 NS_INLINE BOOL NSRangeNotFound(NSRange range) {
     return ((range.location == NSNotFound) && (range.length == 0));

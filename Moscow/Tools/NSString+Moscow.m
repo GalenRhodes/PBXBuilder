@@ -243,7 +243,6 @@ NSArray<NSString *> *split(NSString *string, NSString *pattern, NSInteger limit)
      * Is the compiler smart enough to know that the result is supposed to survive
      * beyond the auto release pool?
      */
-    @autoreleasepool {
         NSArray<NSString *> *_array = @[ string ];
 
         if(pattern.length && (limit != 1)) {
@@ -277,6 +276,5 @@ NSArray<NSString *> *split(NSString *string, NSString *pattern, NSInteger limit)
         }
 
         return _array;
-    }
 }
 

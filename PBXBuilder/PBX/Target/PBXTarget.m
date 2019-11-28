@@ -71,4 +71,11 @@
         return _dependencies;
     }
 
+    -(NSString *)description {
+        NSMutableString *str = [NSMutableString stringWithFormat:@"<%@: ", NSStringFromClass([self class])];
+
+        [str appendString:@">"];
+        return str;
+    }
+
 @end

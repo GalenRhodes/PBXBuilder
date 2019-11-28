@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXContainerItemProxy.m
+ *    FILENAME: PBX.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/5/19
+ *        DATE: 11/26/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,39 +20,34 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import "PBXContainerItemProxy.h"
+#ifndef ____PBXBUILDER_PBX_H____
+#define ____PBXBUILDER_PBX_H____
+
+#import <Cocoa/Cocoa.h>
+
 #import "PBXProject.h"
-#import "PGProjectFile.h"
+#import "PBXAggregateTarget.h"
+#import "PBXNativeTarget.h"
+#import "PBXLegacyTarget.h"
+#import "PBXTarget.h"
+#import "PBXTargetDependency.h"
+#import "PBXContainerItemProxy.h"
+#import "PBXGroup.h"
+#import "PBXVariantGroup.h"
+#import "PBXFileReference.h"
+#import "PBXFileElement.h"
+#import "PBXFileElementTypes.h"
+#import "PBXItem.h"
+#import "PBXCopyFilesBuildPhase.h"
+#import "PBXSourcesBuildPhase.h"
+#import "PBXFrameworksBuildPhase.h"
+#import "PBXAppleScriptBuildPhase.h"
+#import "PBXResourcesBuildPhase.h"
+#import "PBXShellScriptBuildPhase.h"
+#import "PBXHeadersBuildPhase.h"
+#import "PBXBuildPhase.h"
+#import "XCConfigurationList.h"
+#import "XCBuildConfiguration.h"
+#import "PBXBuildFile.h"
 
-@implementation PBXContainerItemProxy {
-    }
-
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
-        self = [super initWithItemId:itemId projectFile:projectFile];
-        return self;
-    }
-
-    -(PBXProject *)containerPortal {
-        return [self itemForKey:@"containerPortal"];
-    }
-
-    -(NSInteger)proxyType {
-        return [self ivInt:@"proxyType"];
-    }
-
-    -(NSString *)remoteInfo {
-        return [self iv:@"remoteInfo"];
-    }
-
-    -(NSString *)remoteGlobalIDString {
-        return [self iv:@"remoteGlobalIDString"];
-    }
-
-    -(NSString *)description {
-        NSMutableString *str = [NSMutableString stringWithFormat:@"<%@: ", NSStringFromClass([self class])];
-
-        [str appendString:@">"];
-        return str;
-    }
-
-@end
+#endif // ____PBXBUILDER_PBX_H____

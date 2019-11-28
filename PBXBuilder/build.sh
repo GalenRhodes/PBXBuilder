@@ -20,8 +20,14 @@ for x in $(gnustep-config --objc-flags); do
     fi
 done
 
-OPTS="${y:1} -fobjc-arc -fobjc-nonfragile-abi -I${SUBPRJHEADERSPATH} -I${PWD}/Moscow/build/include -Ofast -g0"
-LOPTS="$(gnustep-config --base-libs) -ldispatch ${PWD}/libMoscow.so"
+OPTS="${y:1} -fobjc-arc -fobjc-nonfragile-abi -Ofast -g0 -I${SUBPRJHEADERSPATH}"
+for _a in $@; do
+    cd "${_a}"
+    OPTS="${OPTS} -I${PWD}/build/include"
+done
+cd "$b"
+echo "${OPTS}"
+LOPTS="$(gnustep-config --base-libs) -ldispatch -L${SUBPRJPATH}/.. -lMoscow"
 
 mkdir -p "${SUBPRJBUILDPATH}" || exit $?
 mkdir -p "${SUBPRJHEADERSPATH}" || exit $?
@@ -40,8 +46,5 @@ for x in $(find "${SUBPRJPATH}" -name "*.m"); do
     echo "${y} ==> ${z}"
     "${CC}" ${OPTS} -c "${x}" -o "${z}" || exit $?
 done
-
-"${CC}" ${LOPTS} $(find "${SUBPRJOBJPATH}" -name "*.o") -o "pbxbuild"
-strip --strip-all "pbxbuild"
 
 exit $?

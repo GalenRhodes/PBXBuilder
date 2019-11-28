@@ -25,13 +25,13 @@
 
 #import <Cocoa/Cocoa.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 FOUNDATION_EXPORT NSString *const PGMacroPattern;
 
 typedef NSString *_Nullable (^PGReplaceBlock)(NSTextCheckingResult *_Nonnull match, BOOL *_Nonnull pStop);
 
 typedef NSString *_Nullable (^PGMacroBlock)(NSString *_Nonnull macro, BOOL *_Nonnull pStop);
-
-NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString(Moscow)
 

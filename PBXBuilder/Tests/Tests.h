@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXContainerItemProxy.m
+ *    FILENAME: Tests.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/5/19
+ *        DATE: 11/26/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,39 +20,20 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import "PBXContainerItemProxy.h"
-#import "PBXProject.h"
-#import "PGProjectFile.h"
+#ifndef __PBXBUILDER_TESTS_H__
+#define __PBXBUILDER_TESTS_H__
 
-@implementation PBXContainerItemProxy {
-    }
+#import <Cocoa/Cocoa.h>
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
-        self = [super initWithItemId:itemId projectFile:projectFile];
-        return self;
-    }
+NS_ASSUME_NONNULL_BEGIN
 
-    -(PBXProject *)containerPortal {
-        return [self itemForKey:@"containerPortal"];
-    }
+FOUNDATION_EXPORT NSString const *xcodePluginsPath;
+FOUNDATION_EXPORT NSString const *clangXcodeMap;
 
-    -(NSInteger)proxyType {
-        return [self ivInt:@"proxyType"];
-    }
+FOUNDATION_EXPORT int testFindProjectUsingFind(NSString *dir);
 
-    -(NSString *)remoteInfo {
-        return [self iv:@"remoteInfo"];
-    }
+FOUNDATION_EXPORT int testFindProjectUsingNSFileManager(NSString *dir);
 
-    -(NSString *)remoteGlobalIDString {
-        return [self iv:@"remoteGlobalIDString"];
-    }
+NS_ASSUME_NONNULL_END
 
-    -(NSString *)description {
-        NSMutableString *str = [NSMutableString stringWithFormat:@"<%@: ", NSStringFromClass([self class])];
-
-        [str appendString:@">"];
-        return str;
-    }
-
-@end
+#endif // __PBXBUILDER_TESTS_H__

@@ -45,19 +45,16 @@
             _projectPath  = [projectPath copy];
             _pbxItemCache = [NSMutableDictionary new];
 
-            NSString      *pbxPath   = [NSString stringWithFormat:@"%@/%@.xcodeproj/project.pbxproj", _projectPath, _projectName];
-            NSInputStream *pbxStream = [NSInputStream inputStreamWithFileAtPath:pbxPath];
+            NSString *pbxPath = [NSString stringWithFormat:@"%@/%@.xcodeproj/project.pbxproj", _projectPath, _projectName];
+#ifdef DEBUG
+            PGPrintf(@"Loading Project: \"%@\"\n", pbxPath);
+#endif
+            NSData *pbxData = [NSData dataWithContentsOfFile:pbxPath options:NSDataReadingMappedIfSafe error:error];
+            if(pbxData == nil) return nil;
 
-            [pbxStream open];
-            while(pbxStream.streamStatus == NSStreamStatusOpening);
-            if(pbxStream.streamStatus == NSStreamStatusError) {
-                if(error) *error = pbxStream.streamError;
-                return nil;
-            }
-
-            NSDictionary *pbx = [NSPropertyListSerialization propertyListWithStream:pbxStream options:NSPropertyListImmutable format:&_pbxFormat error:error];
-
+            NSDictionary *pbx = [NSPropertyListSerialization propertyListWithData:pbxData options:NSPropertyListImmutable format:&_pbxFormat error:error];
             if(pbx == nil) return nil;
+
             _projectPBX = pbx[@"objects"];
             _project    = [self itemForID:pbx[@"rootObject"]];
         }

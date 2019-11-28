@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXContainerItemProxy.m
+ *    FILENAME: Tests.m
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/5/19
+ *        DATE: 11/26/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,39 +20,20 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import "PBXContainerItemProxy.h"
-#import "PBXProject.h"
-#import "PGProjectFile.h"
+#import <Moscow/Moscow.h>
+#import "Tests.h"
+#import "PBXTools.h"
 
-@implementation PBXContainerItemProxy {
-    }
+NSString const *xcodePluginsPath = @"/Applications/Xcode.app/Contents/PlugIns/Xcode3Core.ideplugin/Contents/SharedSupport/Developer/Library/Xcode/Plug-ins";
+NSString const *clangXcodeMap    = @"Clang LLVM 1.0.xcplugin/Contents/Resources/Clang LLVM 1.0.xcspec";
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
-        self = [super initWithItemId:itemId projectFile:projectFile];
-        return self;
-    }
+int testFindProjectUsingFind(NSString *dir) {
+    NSError *error = nil;
+    return parseFindProjectResults(dir, PGFindByName(dir, @"project.pbxproj", &error), NULL, NULL, &error);
+}
 
-    -(PBXProject *)containerPortal {
-        return [self itemForKey:@"containerPortal"];
-    }
+int testFindProjectUsingNSFileManager(NSString *dir) {
+    NSError *error = nil;
+    return parseFindProjectResults(dir, PGFindByName(dir, @"project.pbxproj", &error), NULL, NULL, &error);
+}
 
-    -(NSInteger)proxyType {
-        return [self ivInt:@"proxyType"];
-    }
-
-    -(NSString *)remoteInfo {
-        return [self iv:@"remoteInfo"];
-    }
-
-    -(NSString *)remoteGlobalIDString {
-        return [self iv:@"remoteGlobalIDString"];
-    }
-
-    -(NSString *)description {
-        NSMutableString *str = [NSMutableString stringWithFormat:@"<%@: ", NSStringFromClass([self class])];
-
-        [str appendString:@">"];
-        return str;
-    }
-
-@end

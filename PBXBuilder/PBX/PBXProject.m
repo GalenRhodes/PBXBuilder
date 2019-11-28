@@ -20,12 +20,9 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import "PBXProject.h"
-#import "XCConfigurationList.h"
-#import "PGProjectFile.h"
-#import "PBXTarget.h"
-#import "PBXGroup.h"
 #import <Moscow/Moscow.h>
+#import "PGProjectFile.h"
+#import "PBX.h"
 
 @implementation PBXProject {
         NSArray<PBXTarget *> *_targets;
@@ -87,4 +84,22 @@
         return [self itemForKey:@"mainGroup"];
     }
 
+    -(NSString *)description {
+        NSMutableString *str = [NSMutableString new];
+
+        [str appendFormat:@"<%@:", NSStringFromClass([self class])];
+        [str appendFormat:@" %@=\"%@\"", @"compatibilityVersion", self.compatibilityVersion];
+        [str appendFormat:@"; %@=\"%@\"", @"developmentRegion", self.developmentRegion];
+        [str appendFormat:@"; %@=\"%@\"", @"hasScannedForEncodings", @(self.hasScannedForEncodings)];
+        [str appendFormat:@"; %@=\"%@\"", @"knownRegions", self.knownRegions];
+        [str appendFormat:@"; %@=\"%@\"", @"projectDirPath", self.projectDirPath];
+        [str appendFormat:@"; %@=\"%@\"", @"projectRoot", self.projectRoot];
+        [str appendFormat:@"; %@=\"%@\"", @"buildConfigurationList", self.buildConfigurationList];
+        [str appendFormat:@"; %@=\"%@\"", @"targets", self.targets];
+        [str appendFormat:@"; %@=\"%@\"", @"attributes", self.attributes];
+        [str appendFormat:@"; %@=\"%@\"", @"productRefGroup", self.productRefGroup];
+        [str appendFormat:@"; %@=\"%@\">", @"mainGroup", self.mainGroup];
+
+        return str;
+    }
 @end

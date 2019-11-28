@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXContainerItemProxy.m
+ *    FILENAME: PGXTools.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/5/19
+ *        DATE: 11/26/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,39 +20,25 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import "PBXContainerItemProxy.h"
-#import "PBXProject.h"
-#import "PGProjectFile.h"
+#ifndef __PBXBUILDER_PGXTOOLS_H__
+#define __PBXBUILDER_PGXTOOLS_H__
 
-@implementation PBXContainerItemProxy {
-    }
+#import <Cocoa/Cocoa.h>
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
-        self = [super initWithItemId:itemId projectFile:projectFile];
-        return self;
-    }
+typedef NS_ENUM(NSInteger, PBXErrorCodes) {
+    PBX_NO_ERROR = 0, PBX_INVALID_REGEX_PATTERN, PBX_NO_PROJECT_FILE_FOUND, PBX_MULTIPLE_PROJECT_FILES_FOUND, PBX_INVALID_PROJECT_FILENAME
+};
 
-    -(PBXProject *)containerPortal {
-        return [self itemForKey:@"containerPortal"];
-    }
+NS_ASSUME_NONNULL_BEGIN
 
-    -(NSInteger)proxyType {
-        return [self ivInt:@"proxyType"];
-    }
+FOUNDATION_EXPORT NSString *const PGFoundProjectFilesKey;
 
-    -(NSString *)remoteInfo {
-        return [self iv:@"remoteInfo"];
-    }
+FOUNDATION_EXPORT PBXErrorCodes parseFindProjectResults(NSString *dir,
+                                                        NSArray<NSString *> *array,
+                                                        NSString *_Nullable *_Nullable pProjectName,
+                                                        NSString *_Nullable *_Nullable pProjectFilename,
+                                                        NSError **error);
 
-    -(NSString *)remoteGlobalIDString {
-        return [self iv:@"remoteGlobalIDString"];
-    }
+NS_ASSUME_NONNULL_END
 
-    -(NSString *)description {
-        NSMutableString *str = [NSMutableString stringWithFormat:@"<%@: ", NSStringFromClass([self class])];
-
-        [str appendString:@">"];
-        return str;
-    }
-
-@end
+#endif // __PBXBUILDER_PGXTOOLS_H__

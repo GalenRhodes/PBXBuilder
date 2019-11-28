@@ -21,29 +21,56 @@
  *//************************************************************************/
 
 #import "Tools.h"
+#import "NSString+Moscow.h"
 
 NSString *const PGX_STDOUT = @"/dev/stdout";
 
+NSString *const MoscowErrorDomain = @"com.projectgalen.Moscow";
+
 NSInteger PGExecuteApplication(NSString *appPath, NSArray *appParams, NSString **appOutput, NSError **error) {
-    if(error) *error         = nil;
-    if(appOutput) *appOutput = nil;
+    @try {
+        setpptr(error, nil);
 
-    NSInteger st    = 0;
-    NSTask    *task = [[NSTask alloc] init];
-    task.launchPath     = appPath;
-    task.arguments      = appParams;
-    task.standardOutput = [NSPipe pipe];
-    task.standardError  = [NSPipe pipe];
-    [task launch];
-    [task waitUntilExit];
+        NSInteger st    = 0;
+        NSTask    *task = [[NSTask alloc] init];
+        task.launchPath     = appPath;
+        task.arguments      = appParams;
+        task.standardOutput = [NSPipe pipe];
+        task.standardError  = [NSPipe pipe];
+#ifdef DEBUG
+        PGPrintf(@"Launching: \"%@\"", appPath);
+        for(NSString *p in appParams) PGPrintf(@" \"%@\"", p);
+#endif
+        [task launch];
+        NSString *output = PGStringFromPipe((NSPipe *)task.standardOutput);
+#ifdef DEBUG
+        PGPrintf(@"\nWaiting...");
+#endif
+        [task waitUntilExit];
+#ifdef DEBUG
+        PGPrintf(@"\nDone wating: %li\n", task.terminationStatus);
+#endif
 
-    if((st = task.terminationStatus)) {
-        NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: PGStringFromPipe((NSPipe *)task.standardError) };
-        if(error) *error = [NSError errorWithDomain:NSCocoaErrorDomain code:1001001 userInfo:userInfo];
+        if((st = task.terminationStatus)) {
+            NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: PGStringFromPipe((NSPipe *)task.standardError) };
+            setpptr(error, [NSError errorWithDomain:NSCocoaErrorDomain code:1001001 userInfo:userInfo]);
+        }
+
+        setpptr(appOutput, output);
+
+        return st;
     }
+    @catch(NSException *exception) {
+#ifdef DEBUG
+        for(NSString *key in exception.userInfo.keyEnumerator) {
+            PGPrintf(@"Exception UserInfo Key: \"%@\"\n", key);
+        }
+#endif
 
-    if(appOutput) *appOutput = PGStringFromPipe((NSPipe *)task.standardOutput);
-    return st;
+        setpptr(error, [NSError errorWithDomain:MoscowErrorDomain code:1021 userInfo:@{ NSLocalizedDescriptionKey: exception.reason }]);
+        setpptr(appOutput, nil);
+        return 1021;
+    }
 }
 
 NSString *PGStringFromPipe(NSPipe *pipe) {
@@ -59,9 +86,7 @@ dispatch_queue_t PGWorkQueue(void) {
 }
 
 void PGPrintStr(NSString *str) {
-#ifdef DEBUG
     [str writeToFile:PGX_STDOUT atomically:NO encoding:NSUTF8StringEncoding error:NULL];
-#endif
 }
 
 void PGPrintf(NSString *format, ...) {
@@ -165,3 +190,84 @@ void PGPrintPlist(id obj) {
     PGPrintItem(@"", obj);
     PGPrintStr(@"\n");
 }
+
+NSArray<NSString *> *PGFindByName(NSString *dir, NSString *filename, NSError **error) {
+    return PGFindWithBlock(dir, ^BOOL(NSString *path, NSString *fn) {
+        return ([fn isEqualToString:filename]);
+    }, error);
+}
+
+NSArray<NSString *> *PGFindByRegex(NSString *dir, NSString *regexPattern, BOOL includePath, NSError **error) {
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexPattern options:0 error:error];
+
+    return (regex ? PGFindWithBlock(dir, ^BOOL(NSString *path, NSString *filename) {
+        NSString *fn = (includePath ? PGFormat(@"%@/%@", path, filename) : filename);
+        return ([regex numberOfMatchesInString:fn options:0 range:fn.range] != 0);
+    }, error) : nil);
+}
+
+NSArray<NSString *> *PGFindWithBlock(NSString *dir, PGFindBlock block, NSError **error) {
+    NSMutableArray<NSString *> *results = nil;
+    NSError                    *e       = nil;
+    NSFileManager              *fm      = [NSFileManager defaultManager];
+
+    setpptr(error, e);
+
+#ifdef __APPLE__
+    NSError             *e2     = nil;
+    NSArray<NSString *> *files  = [fm contentsOfDirectoryAtPath:dir error:&e];
+    NSString            *output = @"";
+    NSInteger           i       = e.code;
+
+    if(files) {
+        results = [NSMutableArray new];
+
+        for(NSString *str in files) {
+            BOOL     isDir  = NO;
+            NSString *path  = PGFormat(@"%@/%@", dir, str);
+            BOOL     exists = [fm fileExistsAtPath:path isDirectory:&isDir];
+
+            if(exists) {
+                if(isDir) {
+                    NSArray<NSString *> *subResults = PGFindWithBlock(path, block, &e2);
+                    if(subResults) [results addObjectsFromArray:subResults];
+                    else if(!e) e = e2;
+                }
+                else if(block(dir, str)) [results addObject:path];
+            }
+        }
+    }
+#else
+        NSString  *output = nil;
+        NSInteger i       = PGExecuteApplication(@"/usr/bin/find", @[ dir ], &output, &e);
+
+        if(output && i == 0) {
+#ifdef DEBUG
+            PGPrintf(@"Results: %li; Output:\n%@\n", i, output);
+#endif
+            NSArray<NSString *> *files = [output split:@"\\r\\n?|\\n" limit:0];
+
+            results = [NSMutableArray new];
+
+            for(NSString *path in files) {
+                BOOL     isDir  = NO;
+                BOOL     exists = [fm fileExistsAtPath:path isDirectory:&isDir];
+                NSString *file  = path.lastPathComponent;
+                NSString *fpath = path.stringByDeletingLastPathComponent;
+
+                if(exists && !isDir && block(fpath, file)) [results addObject:path];
+            }
+        }
+#endif
+    else {
+#ifdef DEBUG
+        PGPrintf(@"Results: %li\nError: %@\nOutput:\n%@\n", i, e.localizedDescription, output);
+#endif
+        setpptr(error, [NSError errorWithDomain:MoscowErrorDomain code:1024 userInfo:@{
+            NSLocalizedDescriptionKey: PGFormat(@"Results: %li\nError: %@\nOutput:\n%@\n", i, e.localizedDescription, output)
+        }]);
+    }
+
+    return results;
+}
+

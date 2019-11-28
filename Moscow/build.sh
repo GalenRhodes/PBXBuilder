@@ -49,6 +49,4 @@ for x in $(find "${SUBPRJPATH}" -name "${SUBPRJNAME}_GNUstep_vers.[cm]"); do
     "${CC}" -c "${x}" -o "${z}" || exit $?
 done
 
-"${CC}" -shared -fpic ${LOPTS} $(find "${SUBPRJOBJPATH}" -name "*.o") -o "lib${SUBPRJNAME}.so"
-
 exit $?

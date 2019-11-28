@@ -41,4 +41,11 @@
         return [self itemForKey:@"targetProxy"];
     }
 
+    -(NSString *)description {
+        NSMutableString *str = [NSMutableString stringWithFormat:@"<%@: ", NSStringFromClass([self class])];
+
+        [str appendString:@">"];
+        return str;
+    }
+
 @end

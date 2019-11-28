@@ -22,6 +22,8 @@
 
 #import "PGRunInfo.h"
 #import "GNUstepInfo.h"
+#import "PBXTools.h"
+#import "PGProjectFile.h"
 #import <Moscow/Moscow.h>
 
 NSString *const PGProjErrorDomain = @"com.projectgalen.PBXBuilder";
@@ -72,6 +74,9 @@ NSString *const PGProjErrorDomain = @"com.projectgalen.PBXBuilder";
 
             int i = 1;
 
+            NSMutableArray<PGProjectFile *> *projectsList = [NSMutableArray new];
+            _projects = projectsList;
+
             while(i < argc) {
                 const char *arg = argv[i++];
 
@@ -82,23 +87,65 @@ NSString *const PGProjErrorDomain = @"com.projectgalen.PBXBuilder";
                         return nil;
                     }
                     else {
-                        NSString *str = [NSString stringWithUTF8String:arg].trim;
+                        /*
+                         * Seriously GNUstep?  We're returning "id" instead of "instancetype"? What year is it?
+                         */
+                        NSString *str = ((NSString *)[NSString stringWithUTF8String:arg]).trim;
 
                         if(str.length) {
-                            NSString *path     = str.stringByStandardizingPath;
-                            NSString *filename = path.lastPathComponent;
+                            NSFileManager *fm              = NSFileManager.defaultManager;
+                            NSString      *path            = str.stringByStandardizingPath;
+                            NSString      *filename        = path.lastPathComponent;
+                            BOOL          isDir            = NO;
+                            NSString      *projectName     = nil;
+                            NSString      *projectFilename = nil;
 
-                            if(![filename isEqualToString:@"project.pbxproj"]) {
-                                NSString  *y = nil;
-                                NSInteger x  = PGExecuteApplication(@"find", @[ path, @"-name", @"\"project.pbxproj\"" ], &y, &error);
-
-                                if(x || ((y = y.trim).length == 0)) {
-                                    NSString *reason = PGFormat(@"ERROR (%li): Failed to locate project file.", x);
-                                    setpptr(pError, [NSError errorWithDomain:PGProjErrorDomain code:100 userInfo:@{ NSLocalizedDescriptionKey: reason }]);
+                            if([filename isEqualToString:@"project.pbxproj"]) {
+                                if([fm fileExistsAtPath:filename isDirectory:&isDir]) {
+                                    if(!isDir) {
+                                        projectFilename = filename;
+                                        projectName     = filename.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent.lastPathComponent;
+                                    }
+                                    else {
+                                        NSString *reason = PGFormat(@"ERROR: File is a directory: \"%@\"\n", path);
+                                        error = [NSError errorWithDomain:PGProjErrorDomain code:PBX_INVALID_PROJECT_FILENAME userInfo:@{ NSLocalizedDescriptionKey: reason }];
+                                        setpptr(pError, error);
+                                        return nil;
+                                    }
+                                }
+                                else {
+                                    NSString *reason = PGFormat(@"ERROR: File does not exist: \"%@\"\n", path);
+                                    error = [NSError errorWithDomain:PGProjErrorDomain code:PBX_INVALID_PROJECT_FILENAME userInfo:@{ NSLocalizedDescriptionKey: reason }];
+                                    setpptr(pError, error);
                                     return nil;
                                 }
+                            }
+                            else {
+                                NSArray   *files = PGFindByName(path, @"project.pbxproj", &error);
+                                NSInteger rc     = (files ? parseFindProjectResults(path, files, &projectName, &projectFilename, &error) : error.code);
 
-                                NSArray<NSString *> *array = [y split:@"(\\r\\n?|\\n)*"];
+                                if(rc) {
+                                    setpptr(pError, error);
+                                    return nil;
+                                }
+                            }
+
+                            if(projectName.length && projectFilename.length) {
+                                NSString      *projectPath = projectFilename.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent;
+                                PGProjectFile *projectFile = [[PGProjectFile alloc] initWithProjectName:projectName projectPath:projectPath error:&error];
+
+                                if(projectFile) {
+                                    [projectsList addObject:projectFile];
+                                }
+                                else {
+                                    setpptr(pError, error);
+                                    return nil;
+                                }
+                            }
+                            else {
+                                NSString *reason = PGFormat(@"ERROR: No project found in path: \"%@\"\n", path);
+                                setpptr(pError, [NSError errorWithDomain:PGProjErrorDomain code:PBX_NO_PROJECT_FILE_FOUND userInfo:@{ NSLocalizedDescriptionKey: reason }]);
+                                return nil;
                             }
                         }
                     }
