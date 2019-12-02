@@ -39,5 +39,10 @@
         return [self ivInt:@"dstSubfolderSpec"];
     }
 
-
+    -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {
+        [super appendDescBody:str indent:indent];
+        PBXAppendItem(str, indent, @"dstPath", self.dstPath);
+        PBXAppendItem(str, indent, @"dstSubfolderSpec", @(self.dstSubfolderSpec));
+        return str;
+    }
 @end

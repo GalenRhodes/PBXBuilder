@@ -214,11 +214,32 @@
         return (num ? (PBXFileType)num.unsignedIntegerValue : PBX_FILETYPE_NONE);
     }
 
-    -(NSString *)description {
-        NSMutableString *str = [NSMutableString stringWithFormat:@"<%@: ", NSStringFromClass([self class])];
-
-        [str appendString:@">"];
+    -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {
+        [super appendDescBody:str indent:indent];
+        PBXAppendItem(str, indent, @"name", self.name);
+        PBXAppendItem(str, indent, @"path", self.path);
+        NSString *st = nil;
+        switch(self.sourceTree) {
+            case PBX_SOURCETREE_ABSOLUTE:
+                st = @"<absolute>";
+                break;
+            case PBX_SOURCETREE_GROUP:
+                st = @"<group>";
+                break;
+            case PBX_SOURCETREE_SOURCE_ROOT:
+                st = @"SOURCE_ROOT";
+                break;
+            case PBX_SOURCETREE_BUILD_PRODUCTS_DIR:
+                st = @"BUILD_PRODUCTS_DIR";
+                break;
+            case PBX_SOURCETREE_SDKROOT:
+                st = @"SDKROOT";
+                break;
+            default:
+                st = @"<none>";
+                break;
+        }
+        PBXAppendItem(str, indent, @"sourceTree", st);
         return str;
     }
-
 @end

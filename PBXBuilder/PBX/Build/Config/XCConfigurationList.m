@@ -23,7 +23,6 @@
 #import "XCConfigurationList.h"
 #import "XCBuildConfiguration.h"
 #import "PGProjectFile.h"
-#import <Moscow/Moscow.h>
 
 @implementation XCConfigurationList {
         NSArray         *_buildConfigurations;
@@ -55,10 +54,12 @@
         return _buildConfigurations;
     }
 
-    -(NSString *)description {
-        NSMutableString *str = [NSMutableString stringWithFormat:@"<%@: ", NSStringFromClass([self class])];
-
-        [str appendString:@">"];
+    -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {
+        [super appendDescBody:str indent:indent];
+        id item = boolStr(self.defaultConfigurationIsVisible);
+        PBXAppendItem(str, indent, @"defaultConfigurationIsVisible", item);
+        PBXAppendItem(str, indent, @"defaultConfigurationName", self.defaultConfigurationName);
+        PBXAppendItem(str, indent, @"buildConfigurations", self.buildConfigurations);
         return str;
     }
 

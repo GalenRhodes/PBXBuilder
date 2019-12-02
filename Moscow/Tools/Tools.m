@@ -48,7 +48,7 @@ NSInteger PGExecuteApplication(NSString *appPath, NSArray *appParams, NSString *
 #endif
         [task waitUntilExit];
 #ifdef DEBUG
-        PGPrintf(@"\nDone wating: %li\n", task.terminationStatus);
+        PGPrintf(@"\nDone wating: %d\n", task.terminationStatus);
 #endif
 
         if((st = task.terminationStatus)) {

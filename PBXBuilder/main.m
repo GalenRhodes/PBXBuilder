@@ -24,7 +24,7 @@ int main(int argc, const char *argv[]) {
 
             for(PGProjectFile *projectFile in runInfo.projects) {
                 PGPrintf(@"     - \"%@\"\n", projectFile.projectName);
-                PGPrintStr([projectFile.project description]);
+                PGPrintf(@"\n%@\n", [projectFile.project description]);
             }
         }
         else {

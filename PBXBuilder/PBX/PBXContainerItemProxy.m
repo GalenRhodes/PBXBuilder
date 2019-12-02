@@ -48,10 +48,12 @@
         return [self iv:@"remoteGlobalIDString"];
     }
 
-    -(NSString *)description {
-        NSMutableString *str = [NSMutableString stringWithFormat:@"<%@: ", NSStringFromClass([self class])];
-
-        [str appendString:@">"];
+    -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {
+        [super appendDescBody:str indent:indent];
+        PBXAppendItem(str, indent, @"containerPortal", self.containerPortal);
+        PBXAppendItem(str, indent, @"proxyType", @(self.proxyType));
+        PBXAppendItem(str, indent, @"remoteInfo", self.remoteInfo);
+        PBXAppendItem(str, indent, @"remoteGlobalIDString", self.remoteGlobalIDString);
         return str;
     }
 

@@ -84,22 +84,20 @@
         return [self itemForKey:@"mainGroup"];
     }
 
-    -(NSString *)description {
-        NSMutableString *str = [NSMutableString new];
-
-        [str appendFormat:@"<%@:", NSStringFromClass([self class])];
-        [str appendFormat:@" %@=\"%@\"", @"compatibilityVersion", self.compatibilityVersion];
-        [str appendFormat:@"; %@=\"%@\"", @"developmentRegion", self.developmentRegion];
-        [str appendFormat:@"; %@=\"%@\"", @"hasScannedForEncodings", @(self.hasScannedForEncodings)];
-        [str appendFormat:@"; %@=\"%@\"", @"knownRegions", self.knownRegions];
-        [str appendFormat:@"; %@=\"%@\"", @"projectDirPath", self.projectDirPath];
-        [str appendFormat:@"; %@=\"%@\"", @"projectRoot", self.projectRoot];
-        [str appendFormat:@"; %@=\"%@\"", @"buildConfigurationList", self.buildConfigurationList];
-        [str appendFormat:@"; %@=\"%@\"", @"targets", self.targets];
-        [str appendFormat:@"; %@=\"%@\"", @"attributes", self.attributes];
-        [str appendFormat:@"; %@=\"%@\"", @"productRefGroup", self.productRefGroup];
-        [str appendFormat:@"; %@=\"%@\">", @"mainGroup", self.mainGroup];
-
+    -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {
+        [super appendDescBody:str indent:indent];
+        PBXAppendItem(str, indent, @"compatibilityVersion", self.compatibilityVersion);
+        PBXAppendItem(str, indent, @"developmentRegion", self.developmentRegion);
+        PBXAppendItem(str, indent, @"hasScannedForEncodings", @(self.hasScannedForEncodings));
+        PBXAppendItem(str, indent, @"knownRegions", self.knownRegions);
+        PBXAppendItem(str, indent, @"projectDirPath", self.projectDirPath);
+        PBXAppendItem(str, indent, @"projectRoot", self.projectRoot);
+        PBXAppendItem(str, indent, @"buildConfigurationList", self.buildConfigurationList);
+        PBXAppendItem(str, indent, @"targets", self.targets);
+        PBXAppendItem(str, indent, @"attributes", self.attributes);
+        PBXAppendItem(str, indent, @"productRefGroup", self.productRefGroup);
+        PBXAppendItem(str, indent, @"mainGroup", self.mainGroup);
         return str;
     }
+
 @end

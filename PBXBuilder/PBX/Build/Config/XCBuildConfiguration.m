@@ -52,10 +52,11 @@
         return [self iv:@"baseConfigurationReference"];
     }
 
-    -(NSString *)description {
-        NSMutableString *str = [NSMutableString stringWithFormat:@"<%@: ", NSStringFromClass([self class])];
-
-        [str appendString:@">"];
+    -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {
+        [super appendDescBody:str indent:indent];
+        PBXAppendItem(str, indent, @"name", self.name);
+        PBXAppendItem(str, indent, @"baseConfigurationReference", self.baseConfigurationReference);
+        PBXAppendItem(str, indent, @"buildSettings", self.buildSettings);
         return str;
     }
 

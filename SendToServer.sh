@@ -5,7 +5,8 @@ cd $(dirname "$0")
 SCRIPTDIR="${PWD}"
 cd "${CURRDIR}"
 
-REMOTE_HOST="goober"
+#REMOTE_HOST="goober"
+REMOTE_HOST="thissmallworld.com"
 REMOTE_USER="grhodes"
 REMOTE_PATH="Projects/2019"
 

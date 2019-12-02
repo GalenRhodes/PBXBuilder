@@ -23,7 +23,6 @@
 #import "PBXBuildPhase.h"
 #import "PBXBuildFile.h"
 #import "PGProjectFile.h"
-#import <Moscow/Moscow.h>
 
 @implementation PBXBuildPhase {
         NSArray<PBXBuildFile *> *_files;
@@ -53,10 +52,12 @@
         return [self ivBool:@"runOnlyForDeploymentPostprocessing"];
     }
 
-    -(NSString *)description {
-        NSMutableString *str = [NSMutableString stringWithFormat:@"<%@: ", NSStringFromClass([self class])];
-
-        [str appendString:@">"];
+    -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {
+        [super appendDescBody:str indent:indent];
+        PBXAppendItem(str, indent, @"files", self.files);
+        PBXAppendItem(str, indent, @"buildActionMask", @(self.buildActionMask));
+        id item = boolStr(self.runOnlyForDeploymentPostprocessing);
+        PBXAppendItem(str, indent, @"runOnlyForDeploymentPostprocessing", item);
         return str;
     }
 

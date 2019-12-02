@@ -29,11 +29,11 @@ NSString const *clangXcodeMap    = @"Clang LLVM 1.0.xcplugin/Contents/Resources/
 
 int testFindProjectUsingFind(NSString *dir) {
     NSError *error = nil;
-    return parseFindProjectResults(dir, PGFindByName(dir, @"project.pbxproj", &error), NULL, NULL, &error);
+    return (int)parseFindProjectResults(dir, PGFindByName(dir, @"project.pbxproj", &error), NULL, NULL, &error);
 }
 
 int testFindProjectUsingNSFileManager(NSString *dir) {
     NSError *error = nil;
-    return parseFindProjectResults(dir, PGFindByName(dir, @"project.pbxproj", &error), NULL, NULL, &error);
+    return (int)parseFindProjectResults(dir, PGFindByName(dir, @"project.pbxproj", &error), NULL, NULL, &error);
 }
 

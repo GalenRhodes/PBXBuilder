@@ -41,11 +41,10 @@
         return [self itemForKey:@"targetProxy"];
     }
 
-    -(NSString *)description {
-        NSMutableString *str = [NSMutableString stringWithFormat:@"<%@: ", NSStringFromClass([self class])];
-
-        [str appendString:@">"];
+    -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {
+        [super appendDescBody:str indent:indent];
+        PBXAppendItem(str, indent, @"target", self.target);
+        PBXAppendItem(str, indent, @"targetProxy", self.targetProxy);
         return str;
     }
-
 @end

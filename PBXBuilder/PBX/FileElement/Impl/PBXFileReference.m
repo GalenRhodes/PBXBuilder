@@ -46,4 +46,17 @@
         return [PBXFileElement fileTypeForId:[self iv:@"lastKnownFileType"]];
     }
 
+    -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {
+        [super appendDescBody:str indent:indent];
+        id item = [self iv:@"explicitFileType"];
+        PBXAppendItem(str, indent, @"explicitFileType", item);
+        id item1 = [self iv:@"lastKnownFileType"];
+        PBXAppendItem(str, indent, @"lastKnownFileType", item1);
+        id item2 = [PBXFileElement fileEncodingForId:self.fileEncoding];
+        PBXAppendItem(str, indent, @"fileEncoding", item2);
+        id item3 = boolStr(self.includeInIndex);
+        PBXAppendItem(str, indent, @"includeInIndex", item3);
+        return str;
+    }
+
 @end

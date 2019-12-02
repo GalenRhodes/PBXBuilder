@@ -24,6 +24,7 @@
 #define __PBXBUILDER_PBXITEM_H__
 
 #import <Cocoa/Cocoa.h>
+#import <Moscow/Moscow.h>
 
 @class PGProjectFile;
 
@@ -49,7 +50,15 @@ NS_ASSUME_NONNULL_BEGIN
 
     -(nullable id)itemForID:(NSString *)itemId;
 
+    -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent;
+
 @end
+
+NS_INLINE NSString *boolStr(BOOL b) {
+    return (b ? @"YES" : @"NO");
+}
+
+NSMutableString *PBXAppendItem(NSMutableString *buffer, NSString *indent, NSString *name, id item);
 
 NS_ASSUME_NONNULL_END
 

@@ -11,6 +11,8 @@ SUBPRJBUILDPATH="${SUBPRJPATH}/build"
 SUBPRJHEADERSPATH="${SUBPRJBUILDPATH}/include"
 SUBPRJOBJPATH="${SUBPRJBUILDPATH}/objs"
 
+rm -fr "${SUBPRJBUILDPATH}"
+
 CC=$(gnustep-config --variable=CC)
 
 y=""

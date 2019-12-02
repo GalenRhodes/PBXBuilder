@@ -25,7 +25,6 @@
 #import "PBXBuildPhase.h"
 #import "PBXTargetDependency.h"
 #import "PGProjectFile.h"
-#import <Moscow/Moscow.h>
 
 @implementation PBXTarget {
         NSArray<PBXBuildPhase *>       *_buildPhases;
@@ -71,11 +70,13 @@
         return _dependencies;
     }
 
-    -(NSString *)description {
-        NSMutableString *str = [NSMutableString stringWithFormat:@"<%@: ", NSStringFromClass([self class])];
-
-        [str appendString:@">"];
+    -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {
+        [super appendDescBody:str indent:indent];
+        PBXAppendItem(str, indent, @"name", self.name);
+        PBXAppendItem(str, indent, @"productName", self.productName);
+        PBXAppendItem(str, indent, @"buildConfigurationList", self.buildConfigurationList);
+        PBXAppendItem(str, indent, @"buildPhases", self.buildPhases);
+        PBXAppendItem(str, indent, @"dependencies", self.dependencies);
         return str;
     }
-
 @end

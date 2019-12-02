@@ -46,4 +46,12 @@
         return [self iv:@"shellScript"];
     }
 
+    -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {
+        [super appendDescBody:str indent:indent];
+        PBXAppendItem(str, indent, @"inputPaths", self.inputPaths);
+        PBXAppendItem(str, indent, @"outputPaths", self.outputPaths);
+        PBXAppendItem(str, indent, @"shellPath", self.shellPath);
+        PBXAppendItem(str, indent, @"shellScript", self.shellScript);
+        return str;
+    }
 @end
