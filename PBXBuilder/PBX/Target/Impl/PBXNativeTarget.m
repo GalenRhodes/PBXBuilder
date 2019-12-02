@@ -63,8 +63,7 @@
     -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {
         [super appendDescBody:str indent:indent];
         PBXAppendItem(str, indent, @"productInstallPath", self.productInstallPath);
-        id item = [self iv:@"productType"];
-        PBXAppendItem(str, indent, @"productType", item);
+        PBXAppendItem(str, indent, @"productType", [self iv:@"productType"]);
         PBXAppendItem(str, indent, @"productReference", self.productReference);
         return str;
     }

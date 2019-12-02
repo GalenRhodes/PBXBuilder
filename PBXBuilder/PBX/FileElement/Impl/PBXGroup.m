@@ -22,7 +22,6 @@
 
 #import "PBXGroup.h"
 #import "PGProjectFile.h"
-#import <Moscow/Moscow.h>
 
 @implementation PBXGroup {
         NSArray<PBXFileElement *> *_children;
@@ -44,5 +43,10 @@
         return _children;
     }
 
+    -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {
+        [super appendDescBody:str indent:indent];
+        PBXAppendItem(str, indent, @"children", self.children);
+        return str;
+    }
 
 @end

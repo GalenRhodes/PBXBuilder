@@ -48,14 +48,10 @@
 
     -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {
         [super appendDescBody:str indent:indent];
-        id item = [self iv:@"explicitFileType"];
-        PBXAppendItem(str, indent, @"explicitFileType", item);
-        id item1 = [self iv:@"lastKnownFileType"];
-        PBXAppendItem(str, indent, @"lastKnownFileType", item1);
-        id item2 = [PBXFileElement fileEncodingForId:self.fileEncoding];
-        PBXAppendItem(str, indent, @"fileEncoding", item2);
-        id item3 = [PGBool boolObj:self.includeInIndex];
-        PBXAppendItem(str, indent, @"includeInIndex", item3);
+        PBXAppendItem(str, indent, @"explicitFileType", [self iv:@"explicitFileType"]);
+        PBXAppendItem(str, indent, @"lastKnownFileType", [self iv:@"lastKnownFileType"]);
+        PBXAppendItem(str, indent, @"fileEncoding", [PBXFileElement fileEncodingForId:self.fileEncoding]);
+        PBXAppendItem(str, indent, @"includeInIndex", [PGBool boolObj:self.includeInIndex]);
         return str;
     }
 

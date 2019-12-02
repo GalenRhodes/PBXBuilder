@@ -56,8 +56,7 @@
         [super appendDescBody:str indent:indent];
         PBXAppendItem(str, indent, @"files", self.files);
         PBXAppendItem(str, indent, @"buildActionMask", @(self.buildActionMask));
-        id item = [PGBool boolObj:self.runOnlyForDeploymentPostprocessing];
-        PBXAppendItem(str, indent, @"runOnlyForDeploymentPostprocessing", item);
+        PBXAppendItem(str, indent, @"runOnlyForDeploymentPostprocessing", [PGBool boolObj:self.runOnlyForDeploymentPostprocessing]);
         return str;
     }
 

@@ -218,28 +218,13 @@
         [super appendDescBody:str indent:indent];
         PBXAppendItem(str, indent, @"name", self.name);
         PBXAppendItem(str, indent, @"path", self.path);
-        NSString *st = nil;
-        switch(self.sourceTree) {
-            case PBX_SOURCETREE_ABSOLUTE:
-                st = @"<absolute>";
-                break;
-            case PBX_SOURCETREE_GROUP:
-                st = @"<group>";
-                break;
-            case PBX_SOURCETREE_SOURCE_ROOT:
-                st = @"SOURCE_ROOT";
-                break;
-            case PBX_SOURCETREE_BUILD_PRODUCTS_DIR:
-                st = @"BUILD_PRODUCTS_DIR";
-                break;
-            case PBX_SOURCETREE_SDKROOT:
-                st = @"SDKROOT";
-                break;
-            default:
-                st = @"<none>";
-                break;
-        }
-        PBXAppendItem(str, indent, @"sourceTree", st);
-        return str;
+        switch(self.sourceTree) {//@f:0
+            case PBX_SOURCETREE_ABSOLUTE:           return PBXAppendItem(str, indent, @"sourceTree", @"<absolute>");
+            case PBX_SOURCETREE_GROUP:              return PBXAppendItem(str, indent, @"sourceTree", @"<group>");
+            case PBX_SOURCETREE_SOURCE_ROOT:        return PBXAppendItem(str, indent, @"sourceTree", @"SOURCE_ROOT");
+            case PBX_SOURCETREE_BUILD_PRODUCTS_DIR: return PBXAppendItem(str, indent, @"sourceTree", @"BUILD_PRODUCTS_DIR");
+            case PBX_SOURCETREE_SDKROOT:            return PBXAppendItem(str, indent, @"sourceTree", @"SDKROOT");
+            default:                                return PBXAppendItem(str, indent, @"sourceTree", @"<none>");
+        }//@f:1
     }
 @end
