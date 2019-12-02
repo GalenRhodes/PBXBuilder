@@ -154,64 +154,60 @@ NS_INLINE NSString *blankString(NSUInteger length) {
 
 @end
 
-NS_INLINE NSString *dictPrefix(id key, NSString *indent) {
-    return PGFormat(@"%@%@: ", indent, [key description]);
+NSMutableString *appendItem(NSMutableString *buffer, NSString *indent, NSString *joiner, NSString *prefix, id item);
+
+void appendSingleLine(NSMutableString *buffer, NSString *prefix, id item) {
+    [buffer appendString:@" "];
+    appendItem(buffer, @"", @"", prefix, item);
+    [buffer appendString:@" "];
 }
 
-NSMutableString *appendItem(NSMutableString *buffer, NSString *indent, NSString *joiner, NSString *prefix, id item);
+NSString *dictKey(NSString *indent, NSString *key) {
+    return PGFormat(@"%@%@: ", indent, key);
+}
+
+void appendIndent(NSMutableString *buffer, NSString *prefix) {
+    [buffer appendFormat:@"\n%@", blankString(prefix.length)];
+}
+
+NSMutableString *appendObject(NSMutableString *buffer, NSString *joiner, NSString *prefix, id item) {
+    if(item) [buffer appendFormat:@"%@%@\"%@\"", joiner, prefix, item];
+    else [buffer appendFormat:@"%@%@<NULL>", joiner, prefix];
+    return buffer;
+}
+
+NSMutableString *append3(NSMutableString *buffer, NSString *joiner, NSString *prefix, NSString *desc) {
+    [buffer appendFormat:@"%@%@%@", joiner, prefix, desc];
+    return buffer;
+}
+
+NSMutableString *appendPBXItemLines(NSMutableString *buffer, NSString *joiner, NSString *indent, NSString *prefix, NSArray<NSString *> *lines) {
+    append3(buffer, joiner, prefix, lines[0]);
+    for(NSUInteger i = 1; i < lines.count; ++i) append3(buffer, @"\n", indent, lines[i]);
+    return buffer;
+}
 
 NSMutableString *appendPBXItem(NSMutableString *buffer, NSString *joiner, NSString *prefix, id item) {
     NSString            *desc  = [item description];
     NSArray<NSString *> *lines = [desc split:@"\\r\\n?|\\n" limit:-1];
-
-    if(lines.count > 1) {
-        NSString *q = blankString(prefix.length);
-
-        [buffer appendString:joiner];
-        [buffer appendString:prefix];
-        [buffer appendString:lines[0]];
-
-        for(NSUInteger i = 1; i < lines.count; ++i) {
-            [buffer appendString:@"\n"];
-            [buffer appendString:q];
-            [buffer appendString:lines[i]];
-        }
-    }
-    else {
-        [buffer appendString:joiner];
-        [buffer appendString:prefix];
-        [buffer appendString:desc];
-    }
-
-    return buffer;
+    return ((lines.count == 1) ? append3(buffer, joiner, prefix, desc) : appendPBXItemLines(buffer, joiner, blankString(prefix.length), prefix, lines));
 }
 
 NSMutableString *appendDictionary(NSMutableString *buffer, NSString *indent, NSString *joiner, NSString *prefix, NSDictionary *dict) {
-    [buffer appendString:joiner];
-    [buffer appendString:prefix];
-    [buffer appendString:@"{"];
+    [buffer appendFormat:@"%@%@{", joiner, prefix];
 
     if(dict.count == 1) {
-        for(id key in dict.allKeys) {
-            id item = dict[key];
-            [buffer appendString:@" "];
-            appendItem(buffer, @"", @"", dictPrefix(key, @""), item);
-            [buffer appendString:@" "];
-        }
+        for(id key in dict.allKeys) appendSingleLine(buffer, dictKey(@"", key), dict[key]);
     }
     else {
-        NSEnumerator *en = [dict keyEnumerator];
-        id           key = en.nextObject;
+        NSComparator             cmptr = ^NSComparisonResult(id obj1, id obj2) { return [((NSString *)obj1) compare:((NSString *)obj2)]; };
+        NSEnumerator<NSString *> *en   = [dict.allKeys sortedArrayUsingComparator:cmptr].objectEnumerator;
+        NSString                 *key  = en.nextObject;
 
         if(key) {
-            appendItem(buffer, indent, @"\n", dictPrefix(key, indent), dict[key]);
-
-            while((key = en.nextObject)) {
-                appendItem(buffer, indent, @",\n", dictPrefix(key, indent), dict[key]);
-            }
-
-            [buffer appendString:@"\n"];
-            [buffer appendString:blankString(prefix.length)];
+            appendItem(buffer, indent, @"\n", dictKey(indent, key), dict[key]);
+            while((key = en.nextObject)) appendItem(buffer, indent, @",\n", dictKey(indent, key), dict[key]);
+            appendIndent(buffer, prefix);
         }
     }
 
@@ -220,24 +216,20 @@ NSMutableString *appendDictionary(NSMutableString *buffer, NSString *indent, NSS
 }
 
 NSMutableString *appendArray(NSMutableString *buffer, NSString *indent, NSString *joiner, NSString *prefix, NSArray *array) {
-    [buffer appendString:joiner];
-    [buffer appendString:prefix];
-    [buffer appendString:@"("];
+    [buffer appendFormat:@"%@%@(", joiner, prefix];
 
     if(array.count == 1) {
-        [buffer appendString:@" "];
-        appendItem(buffer, @"", @"", @"", array[0]);
-        [buffer appendString:@" "];
+        appendSingleLine(buffer, @"", array[0]);
     }
     else if(array.count > 1) {
-        appendItem(buffer, indent, @"\n", indent, array[0]);
+        NSEnumerator *en  = array.objectEnumerator;
+        id           item = en.nextObject;
 
-        for(NSUInteger i = 1; i < array.count; ++i) {
-            appendItem(buffer, indent, @",\n", indent, array[i]);
+        if(item) {
+            appendItem(buffer, indent, @"\n", indent, item);
+            while((item = en.nextObject)) appendItem(buffer, indent, @",\n", indent, item);
+            appendIndent(buffer, prefix);
         }
-
-        [buffer appendString:@"\n"];
-        [buffer appendString:blankString(prefix.length)];
     }
 
     [buffer appendString:@")"];
@@ -245,20 +237,10 @@ NSMutableString *appendArray(NSMutableString *buffer, NSString *indent, NSString
 }
 
 NSMutableString *appendItem(NSMutableString *buffer, NSString *indent, NSString *joiner, NSString *prefix, id item) {
-    NSUInteger idxlen = (indent.length + 4);
-
-    if([item isKindOfClass:[NSArray class]]) {
-        return appendArray(buffer, blankString(idxlen), joiner, prefix, (NSArray *)item);
-    }
-    else if([item isKindOfClass:[NSDictionary class]]) {
-        return appendDictionary(buffer, blankString(idxlen), joiner, prefix, item);
-    }
-    else if([item isKindOfClass:[PBXItem class]]) {
-        return appendPBXItem(buffer, joiner, prefix, item);
-    }
-
-    [buffer appendFormat:@"%@%@\"%@\"", joiner, prefix, [item description]];
-    return buffer;
+    if([item isKindOfClass:[NSArray class]]) return appendArray(buffer, blankString(indent.length + 4), joiner, prefix, item);
+    else if([item isKindOfClass:[NSDictionary class]]) return appendDictionary(buffer, blankString(indent.length + 4), joiner, prefix, item);
+    else if([item isKindOfClass:[PBXItem class]]) return appendPBXItem(buffer, joiner, prefix, item);
+    else return appendObject(buffer, joiner, prefix, item);
 }
 
 NSMutableString *PBXAppendItem(NSMutableString *buffer, NSString *indent, NSString *name, id item) {
