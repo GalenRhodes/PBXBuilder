@@ -92,6 +92,7 @@
 		1117D085F238B39EF20474BB /* XCBuildConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCBuildConfiguration.h; sourceTree = "<group>"; };
 		1117D0B4746D40CE2DC20D5C /* Ld.xcspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xcspec; path = Ld.xcspec; sourceTree = "<group>"; };
 		1117D0E6328E9752489B41D4 /* PBXTargetDependency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXTargetDependency.m; sourceTree = "<group>"; };
+		1117D112D33F1583A77A8596 /* sample.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sample.txt; sourceTree = "<group>"; };
 		1117D185CEF64CC4C899EA52 /* PBXFileElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXFileElement.m; sourceTree = "<group>"; };
 		1117D18E1729388DF87DF904 /* NSRegularExpression+Moscow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSRegularExpression+Moscow.m"; sourceTree = "<group>"; };
 		1117D1C3490B1FC43AD0ABCD /* PBXShellScriptBuildPhase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXShellScriptBuildPhase.m; sourceTree = "<group>"; };
@@ -394,6 +395,7 @@
 				839B512C23806C6C00662BA3 /* Frameworks */,
 				1117D8627AEF17859F1D2E34 /* build.sh */,
 				1117D657E37085B8E000CFFC /* SendToServer.sh */,
+				1117D112D33F1583A77A8596 /* sample.txt */,
 			);
 			sourceTree = "<group>";
 		};

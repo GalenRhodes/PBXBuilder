@@ -1,0 +1,861 @@
+
+<PBXProject: itemId="83E1B38B2370808500427C23";
+             compatibilityVersion="Xcode 9.3";
+             developmentRegion="en";
+             hasScannedForEncodings="0";
+             knownRegions=(
+                 "en",
+                 "Base"
+                          );
+             projectDirPath="";
+             projectRoot="";
+             buildConfigurationList=<XCConfigurationList: itemId="83E1B38E2370808500427C23";
+                                                          defaultConfigurationIsVisible="NO";
+                                                          defaultConfigurationName="Release";
+                                                          buildConfigurations=(
+                                                              <XCBuildConfiguration: itemId="83E1B3982370808500427C23";
+                                                                                     name="Debug";
+                                                                                     baseConfigurationReference="(null)";
+                                                                                     buildSettings={
+                                                                                         CLANG_WARN_CONSTANT_CONVERSION: "YES",
+                                                                                         CLANG_WARN_SUSPICIOUS_MOVE: "YES",
+                                                                                         GCC_WARN_UNUSED_FUNCTION: "YES",
+                                                                                         ONLY_ACTIVE_ARCH: "YES",
+                                                                                         CLANG_ENABLE_OBJC_WEAK: "YES",
+                                                                                         GCC_WARN_UNDECLARED_SELECTOR: "YES",
+                                                                                         GCC_WARN_UNUSED_VARIABLE: "YES",
+                                                                                         CLANG_WARN_OBJC_ROOT_CLASS: "YES_ERROR",
+                                                                                         GCC_WARN_UNINITIALIZED_AUTOS: "YES_AGGRESSIVE",
+                                                                                         CLANG_WARN_UNREACHABLE_CODE: "YES",
+                                                                                         GCC_OPTIMIZATION_LEVEL: "0",
+                                                                                         CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION: "YES_AGGRESSIVE",
+                                                                                         ENABLE_TESTABILITY: "YES",
+                                                                                         CLANG_ANALYZER_NONNULL: "YES",
+                                                                                         GCC_C_LANGUAGE_STANDARD: "gnu11",
+                                                                                         GCC_WARN_64_TO_32_BIT_CONVERSION: "YES",
+                                                                                         ENABLE_STRICT_OBJC_MSGSEND: "YES",
+                                                                                         GCC_WARN_ABOUT_RETURN_TYPE: "YES_ERROR",
+                                                                                         CLANG_WARN_ENUM_CONVERSION: "YES",
+                                                                                         CLANG_WARN_RANGE_LOOP_ANALYSIS: "YES",
+                                                                                         GCC_DYNAMIC_NO_PIC: "NO",
+                                                                                         GCC_NO_COMMON_BLOCKS: "YES",
+                                                                                         CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING: "YES",
+                                                                                         COPY_PHASE_STRIP: "NO",
+                                                                                         CLANG_CXX_LIBRARY: "libc++",
+                                                                                         CLANG_WARN__DUPLICATE_METHOD_MATCH: "YES",
+                                                                                         CLANG_ENABLE_MODULES: "YES",
+                                                                                         CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS: "YES",
+                                                                                         CLANG_CXX_LANGUAGE_STANDARD: "gnu++14",
+                                                                                         MACOSX_DEPLOYMENT_TARGET: "10.15",
+                                                                                         CLANG_ENABLE_OBJC_ARC: "YES",
+                                                                                         MTL_ENABLE_DEBUG_INFO: "INCLUDE_SOURCE",
+                                                                                         CLANG_WARN_UNGUARDED_AVAILABILITY: "YES_AGGRESSIVE",
+                                                                                         SDKROOT: "macosx",
+                                                                                         CLANG_WARN_INFINITE_RECURSION: "YES",
+                                                                                         DEBUG_INFORMATION_FORMAT: "dwarf",
+                                                                                         CLANG_WARN_DIRECT_OBJC_ISA_USAGE: "YES_ERROR",
+                                                                                         CLANG_WARN_BOOL_CONVERSION: "YES",
+                                                                                         CLANG_WARN_COMMA: "YES",
+                                                                                         CLANG_WARN_EMPTY_BODY: "YES",
+                                                                                         CLANG_WARN_DOCUMENTATION_COMMENTS: "YES",
+                                                                                         MTL_FAST_MATH: "YES",
+                                                                                         ALWAYS_SEARCH_USER_PATHS: "NO",
+                                                                                         CLANG_WARN_STRICT_PROTOTYPES: "YES",
+                                                                                         CLANG_WARN_OBJC_LITERAL_CONVERSION: "YES",
+                                                                                         CLANG_WARN_NON_LITERAL_NULL_CONVERSION: "YES",
+                                                                                         GCC_PREPROCESSOR_DEFINITIONS: (
+                                                                                             "DEBUG=1",
+                                                                                             "$(inherited)"
+                                                                                                                       ),
+                                                                                         CLANG_WARN_INT_CONVERSION: "YES",
+                                                                                         CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF: "YES"
+                                                                                                   }>,
+                                                              <XCBuildConfiguration: itemId="83E1B3992370808500427C23";
+                                                                                     name="Release";
+                                                                                     baseConfigurationReference="(null)";
+                                                                                     buildSettings={
+                                                                                         GCC_WARN_UNINITIALIZED_AUTOS: "YES_AGGRESSIVE",
+                                                                                         DEBUG_INFORMATION_FORMAT: "dwarf-with-dsym",
+                                                                                         CLANG_ENABLE_MODULES: "YES",
+                                                                                         CLANG_WARN_UNREACHABLE_CODE: "YES",
+                                                                                         GCC_NO_COMMON_BLOCKS: "YES",
+                                                                                         CLANG_ANALYZER_NONNULL: "YES",
+                                                                                         CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF: "YES",
+                                                                                         ENABLE_STRICT_OBJC_MSGSEND: "YES",
+                                                                                         CLANG_WARN_EMPTY_BODY: "YES",
+                                                                                         CLANG_WARN_RANGE_LOOP_ANALYSIS: "YES",
+                                                                                         CLANG_WARN_UNGUARDED_AVAILABILITY: "YES_AGGRESSIVE",
+                                                                                         CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS: "YES",
+                                                                                         CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION: "YES_AGGRESSIVE",
+                                                                                         MACOSX_DEPLOYMENT_TARGET: "10.15",
+                                                                                         GCC_WARN_ABOUT_RETURN_TYPE: "YES_ERROR",
+                                                                                         CLANG_WARN_BOOL_CONVERSION: "YES",
+                                                                                         CLANG_WARN_OBJC_ROOT_CLASS: "YES_ERROR",
+                                                                                         CLANG_WARN__DUPLICATE_METHOD_MATCH: "YES",
+                                                                                         GCC_WARN_UNUSED_FUNCTION: "YES",
+                                                                                         SDKROOT: "macosx",
+                                                                                         CLANG_ENABLE_OBJC_WEAK: "YES",
+                                                                                         CLANG_WARN_ENUM_CONVERSION: "YES",
+                                                                                         CLANG_CXX_LIBRARY: "libc++",
+                                                                                         ALWAYS_SEARCH_USER_PATHS: "NO",
+                                                                                         CLANG_WARN_INT_CONVERSION: "YES",
+                                                                                         CLANG_WARN_SUSPICIOUS_MOVE: "YES",
+                                                                                         GCC_WARN_UNUSED_VARIABLE: "YES",
+                                                                                         CLANG_WARN_INFINITE_RECURSION: "YES",
+                                                                                         CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING: "YES",
+                                                                                         CLANG_CXX_LANGUAGE_STANDARD: "gnu++14",
+                                                                                         CLANG_WARN_NON_LITERAL_NULL_CONVERSION: "YES",
+                                                                                         MTL_ENABLE_DEBUG_INFO: "NO",
+                                                                                         GCC_WARN_64_TO_32_BIT_CONVERSION: "YES",
+                                                                                         COPY_PHASE_STRIP: "NO",
+                                                                                         GCC_WARN_UNDECLARED_SELECTOR: "YES",
+                                                                                         CLANG_WARN_DIRECT_OBJC_ISA_USAGE: "YES_ERROR",
+                                                                                         CLANG_WARN_OBJC_LITERAL_CONVERSION: "YES",
+                                                                                         GCC_C_LANGUAGE_STANDARD: "gnu11",
+                                                                                         CLANG_WARN_COMMA: "YES",
+                                                                                         MTL_FAST_MATH: "YES",
+                                                                                         CLANG_WARN_DOCUMENTATION_COMMENTS: "YES",
+                                                                                         CLANG_WARN_CONSTANT_CONVERSION: "YES",
+                                                                                         ENABLE_NS_ASSERTIONS: "NO",
+                                                                                         CLANG_WARN_STRICT_PROTOTYPES: "YES",
+                                                                                         CLANG_ENABLE_OBJC_ARC: "YES"
+                                                                                                   }>
+                                                                              )>;
+             targets=(
+                 <PBXNativeTarget: itemId="83E1B3922370808500427C23";
+                                   name="PBXBuilder";
+                                   productName="PBXBuilder";
+                                   buildConfigurationList=<XCConfigurationList: itemId="83E1B39A2370808500427C23";
+                                                                                defaultConfigurationIsVisible="NO";
+                                                                                defaultConfigurationName="Release";
+                                                                                buildConfigurations=(
+                                                                                    <XCBuildConfiguration: itemId="83E1B39B2370808500427C23";
+                                                                                                           name="Debug";
+                                                                                                           baseConfigurationReference="(null)";
+                                                                                                           buildSettings={
+                                                                                                               CODE_SIGN_STYLE: "Automatic",
+                                                                                                               PRODUCT_NAME: "$(TARGET_NAME)",
+                                                                                                               CODE_SIGN_IDENTITY: "Apple Development",
+                                                                                                               ENABLE_HARDENED_RUNTIME: "YES",
+                                                                                                               DEVELOPMENT_TEAM: "Q5XWZ7S7E9",
+                                                                                                               PRODUCT_BUNDLE_IDENTIFIER: "com.projectgalen.PBXBuilder"
+                                                                                                                         }>,
+                                                                                    <XCBuildConfiguration: itemId="83E1B39C2370808500427C23";
+                                                                                                           name="Release";
+                                                                                                           baseConfigurationReference="(null)";
+                                                                                                           buildSettings={
+                                                                                                               CODE_SIGN_STYLE: "Automatic",
+                                                                                                               PRODUCT_NAME: "$(TARGET_NAME)",
+                                                                                                               CODE_SIGN_IDENTITY: "Apple Development",
+                                                                                                               ENABLE_HARDENED_RUNTIME: "YES",
+                                                                                                               DEVELOPMENT_TEAM: "Q5XWZ7S7E9",
+                                                                                                               PRODUCT_BUNDLE_IDENTIFIER: "com.projectgalen.PBXBuilder"
+                                                                                                                         }>
+                                                                                                    )>;
+                                   buildPhases=(
+                                       <PBXSourcesBuildPhase: itemId="83E1B38F2370808500427C23";
+                                                              files=(
+                                                                  <PBXBuildFile: itemId="83E1B3972370808500427C23";
+                                                                                 fileRef=<PBXFileReference: itemId="83E1B3962370808500427C23";
+                                                                                                            name="(null)";
+                                                                                                            path="main.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117D59D82018B00FB6E5EC0";
+                                                                                 fileRef=<PBXFileReference: itemId="1117D7DE1E0A4802AA39D97F";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXItem.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117DDCB761B6E8D3B0E6DE6";
+                                                                                 fileRef=<PBXFileReference: itemId="1117D3591C1E4899179E1D30";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXProject.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117D46E89D587A6B24C7818";
+                                                                                 fileRef=<PBXFileReference: itemId="1117D4A80DF8B12D3C4B1F45";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXTarget.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117D3178F13224AD2B4B0EB";
+                                                                                 fileRef=<PBXFileReference: itemId="1117DDF9822F1E82D4762BE9";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXNativeTarget.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117D283F30FC63CDC9C5780";
+                                                                                 fileRef=<PBXFileReference: itemId="1117D5E62FF61A23C17291DC";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXAggregateTarget.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117DE81E264CA96C67F3EEF";
+                                                                                 fileRef=<PBXFileReference: itemId="1117D9A87E94FE1A27BCF8C7";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXLegacyTarget.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117DBE5355E94A2B78D2748";
+                                                                                 fileRef=<PBXFileReference: itemId="1117D203BC1EBEF34E55295A";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXBuildFile.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117DB5039A2054A65A79F53";
+                                                                                 fileRef=<PBXFileReference: itemId="1117D765CDF5534CD55A2B80";
+                                                                                                            name="(null)";
+                                                                                                            path="XCBuildConfiguration.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117D7244263595A65CFCD8E";
+                                                                                 fileRef=<PBXFileReference: itemId="1117DD40F15C0A31FEA7645C";
+                                                                                                            name="(null)";
+                                                                                                            path="XCConfigurationList.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117DE9AB3653ABD34F79BDD";
+                                                                                 fileRef=<PBXFileReference: itemId="1117D3F95229E211675E3E1A";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXBuildPhase.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117D6096F99E28D714F7A60";
+                                                                                 fileRef=<PBXFileReference: itemId="1117D3BF5FF1DD90267EC33E";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXFileReference.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117D3876CFE855DD77EC6AE";
+                                                                                 fileRef=<PBXFileReference: itemId="1117DD20800FFE368F535032";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXGroup.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117DD86D357EF372D14C774";
+                                                                                 fileRef=<PBXFileReference: itemId="1117D36711304D750673F6AF";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXVariantGroup.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117D797ED81B215242B7E77";
+                                                                                 fileRef=<PBXFileReference: itemId="1117D185CEF64CC4C899EA52";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXFileElement.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117DB475991EE632782514B";
+                                                                                 fileRef=<PBXFileReference: itemId="1117D0E6328E9752489B41D4";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXTargetDependency.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117DC3415B8B9A03E09FB14";
+                                                                                 fileRef=<PBXFileReference: itemId="1117D06EE89AB70368A00D3B";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXAppleScriptBuildPhase.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117D8F3943DE0EC88720DA2";
+                                                                                 fileRef=<PBXFileReference: itemId="1117DC9C964AEE0421178951";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXCopyFilesBuildPhase.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117D2D5820AC172734855A5";
+                                                                                 fileRef=<PBXFileReference: itemId="1117D95F1C0420644CAC1E52";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXFrameworksBuildPhase.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117D28E151A3CAEAFCA7ECA";
+                                                                                 fileRef=<PBXFileReference: itemId="1117DA4C990459CD92C20437";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXHeadersBuildPhase.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117DFA95E1F298D58D36AF3";
+                                                                                 fileRef=<PBXFileReference: itemId="1117DB4C9C5CF1EEF13A14C8";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXResourcesBuildPhase.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117D8CDA4C428F298051EEC";
+                                                                                 fileRef=<PBXFileReference: itemId="1117D1C3490B1FC43AD0ABCD";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXShellScriptBuildPhase.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117D8187C26761963F643C2";
+                                                                                 fileRef=<PBXFileReference: itemId="1117D07540C76FD128476F36";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXSourcesBuildPhase.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117D24659AEA5B32EF1DD13";
+                                                                                 fileRef=<PBXFileReference: itemId="1117D241A5603A238ADEEF16";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXContainerItemProxy.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117D42EB90895042EF598C9";
+                                                                                 fileRef=<PBXFileReference: itemId="1117D7BF1BFDE2B32DC0CC18";
+                                                                                                            name="(null)";
+                                                                                                            path="GNUstepInfo.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117DB077B632565C88E3448";
+                                                                                 fileRef=<PBXFileReference: itemId="1117DC75D7BED83031E6C47F";
+                                                                                                            name="(null)";
+                                                                                                            path="PGRunInfo.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117D1009272DDAA632030C8";
+                                                                                 fileRef=<PBXFileReference: itemId="1117DDCDC641D953BCD0135E";
+                                                                                                            name="(null)";
+                                                                                                            path="PGProjectFile.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117D75EB0CEBA75ADD782DD";
+                                                                                 fileRef=<PBXFileReference: itemId="1117D4C4F993E676E6487A24";
+                                                                                                            name="(null)";
+                                                                                                            path="PBXTools.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>,
+                                                                  <PBXBuildFile: itemId="1117D227A341D98188E6854D";
+                                                                                 fileRef=<PBXFileReference: itemId="1117D50CB4803945840E84BC";
+                                                                                                            name="(null)";
+                                                                                                            path="Tests.m";
+                                                                                                            sourceTree="<group>";
+                                                                                                            explicitFileType="(null)";
+                                                                                                            lastKnownFileType="sourcecode.c.objc";
+                                                                                                            fileEncoding="(null)";
+                                                                                                            includeInIndex="NO">;
+                                                                                 isPublic="NO";
+                                                                                 isPrivate="NO";
+                                                                                 settings={};
+                                                                                 attributes=()>
+                                                                    );
+                                                              buildActionMask="2147483647";
+                                                              runOnlyForDeploymentPostprocessing="NO">,
+                                       <PBXFrameworksBuildPhase: itemId="83E1B3902370808500427C23";
+                                                                 files=( <PBXBuildFile: itemId="8349E44D238449FB00274FDF";
+                                                      fileRef=<PBXFileReference: itemId="839B512223806C2600662BA3";
+                                                                                 name="(null)";
+                                                                                 path="Moscow.framework";
+                                                                                 sourceTree="<none>";
+                                                                                 explicitFileType="wrapper.framework";
+                                                                                 lastKnownFileType="(null)";
+                                                                                 fileEncoding="(null)";
+                                                                                 includeInIndex="NO">;
+                                                      isPublic="NO";
+                                                      isPrivate="NO";
+                                                      settings={};
+                                                      attributes=()> );
+                                                                 buildActionMask="2147483647";
+                                                                 runOnlyForDeploymentPostprocessing="NO">,
+                                       <PBXCopyFilesBuildPhase: itemId="83E1B3912370808500427C23";
+                                                                files=();
+                                                                buildActionMask="2147483647";
+                                                                runOnlyForDeploymentPostprocessing="YES";
+                                                                dstPath="/usr/share/man/man1/";
+                                                                dstSubfolderSpec="0">,
+                                       <PBXCopyFilesBuildPhase: itemId="839B513123806C6C00662BA3";
+                                                                files=();
+                                                                buildActionMask="2147483647";
+                                                                runOnlyForDeploymentPostprocessing="NO";
+                                                                dstPath="";
+                                                                dstSubfolderSpec="10">,
+                                       <PBXShellScriptBuildPhase: itemId="83F27F492391624C00B1AE14";
+                                                                  files=();
+                                                                  buildActionMask="2147483647";
+                                                                  runOnlyForDeploymentPostprocessing="NO";
+                                                                  inputPaths=();
+                                                                  outputPaths=();
+                                                                  shellPath="/bin/bash";
+                                                                  shellScript="# Type a script or drag a script file from your workspace to insert its path.
+                                       ./SendToServer.sh
+                                       ">
+                                               );
+                                   dependencies=( <PBXTargetDependency: itemId="8349E44F23844A0000274FDF";
+                                       target=<PBXNativeTarget: itemId="839B512123806C2600662BA3";
+                                                                name="Moscow";
+                                                                productName="Moscow";
+                                                                buildConfigurationList=<XCConfigurationList: itemId="839B512923806C2600662BA3";
+                                                                                                             defaultConfigurationIsVisible="NO";
+                                                                                                             defaultConfigurationName="Release";
+                                                                                                             buildConfigurations=(
+                                                                                                                 <XCBuildConfiguration: itemId="839B512723806C2600662BA3";
+                                                                                                                                        name="Debug";
+                                                                                                                                        baseConfigurationReference="(null)";
+                                                                                                                                        buildSettings={
+                                                                                                                                            COMBINE_HIDPI_IMAGES: "YES",
+                                                                                                                                            DEFINES_MODULE: "YES",
+                                                                                                                                            DEVELOPMENT_TEAM: "Q5XWZ7S7E9",
+                                                                                                                                            DYLIB_INSTALL_NAME_BASE: "@rpath",
+                                                                                                                                            VERSION_INFO_PREFIX: "",
+                                                                                                                                            DYLIB_CURRENT_VERSION: "1",
+                                                                                                                                            PRODUCT_BUNDLE_IDENTIFIER: "com.projectgalen.Moscow",
+                                                                                                                                            VERSIONING_SYSTEM: "apple-generic",
+                                                                                                                                            LD_RUNPATH_SEARCH_PATHS: (
+                                                                                                                                                "$(inherited)",
+                                                                                                                                                "@executable_path/../Frameworks",
+                                                                                                                                                "@loader_path/Frameworks"
+                                                                                                                                                                     ),
+                                                                                                                                            CURRENT_PROJECT_VERSION: "1",
+                                                                                                                                            SKIP_INSTALL: "YES",
+                                                                                                                                            INFOPLIST_FILE: "Moscow/Info.plist",
+                                                                                                                                            DYLIB_COMPATIBILITY_VERSION: "1",
+                                                                                                                                            INSTALL_PATH: "$(LOCAL_LIBRARY_DIR)/Frameworks",
+                                                                                                                                            PRODUCT_NAME: "$(TARGET_NAME:c99extidentifier)",
+                                                                                                                                            CODE_SIGN_STYLE: "Automatic"
+                                                                                                                                                      }>,
+                                                                                                                 <XCBuildConfiguration: itemId="839B512823806C2600662BA3";
+                                                                                                                                        name="Release";
+                                                                                                                                        baseConfigurationReference="(null)";
+                                                                                                                                        buildSettings={
+                                                                                                                                            COMBINE_HIDPI_IMAGES: "YES",
+                                                                                                                                            DEFINES_MODULE: "YES",
+                                                                                                                                            DEVELOPMENT_TEAM: "Q5XWZ7S7E9",
+                                                                                                                                            DYLIB_INSTALL_NAME_BASE: "@rpath",
+                                                                                                                                            VERSION_INFO_PREFIX: "",
+                                                                                                                                            DYLIB_CURRENT_VERSION: "1",
+                                                                                                                                            PRODUCT_BUNDLE_IDENTIFIER: "com.projectgalen.Moscow",
+                                                                                                                                            VERSIONING_SYSTEM: "apple-generic",
+                                                                                                                                            LD_RUNPATH_SEARCH_PATHS: (
+                                                                                                                                                "$(inherited)",
+                                                                                                                                                "@executable_path/../Frameworks",
+                                                                                                                                                "@loader_path/Frameworks"
+                                                                                                                                                                     ),
+                                                                                                                                            CURRENT_PROJECT_VERSION: "1",
+                                                                                                                                            SKIP_INSTALL: "YES",
+                                                                                                                                            INFOPLIST_FILE: "Moscow/Info.plist",
+                                                                                                                                            DYLIB_COMPATIBILITY_VERSION: "1",
+                                                                                                                                            INSTALL_PATH: "$(LOCAL_LIBRARY_DIR)/Frameworks",
+                                                                                                                                            PRODUCT_NAME: "$(TARGET_NAME:c99extidentifier)",
+                                                                                                                                            CODE_SIGN_STYLE: "Automatic"
+                                                                                                                                                      }>
+                                                                                                                                 )>;
+                                                                buildPhases=(
+                                                                    <PBXHeadersBuildPhase: itemId="839B511D23806C2600662BA3";
+                                                                                           files=(
+                                                                                               <PBXBuildFile: itemId="839B512623806C2600662BA3";
+                                                                                                              fileRef=<PBXFileReference: itemId="839B512423806C2600662BA3";
+                                                                                                                                         name="(null)";
+                                                                                                                                         path="Moscow.h";
+                                                                                                                                         sourceTree="<group>";
+                                                                                                                                         explicitFileType="(null)";
+                                                                                                                                         lastKnownFileType="sourcecode.c.h";
+                                                                                                                                         fileEncoding="(null)";
+                                                                                                                                         includeInIndex="NO">;
+                                                                                                              isPublic="YES";
+                                                                                                              isPrivate="NO";
+                                                                                                              settings={ ATTRIBUTES: ( "Public" ) };
+                                                                                                              attributes=( "Public" )>,
+                                                                                               <PBXBuildFile: itemId="839B513323806D1800662BA3";
+                                                                                                              fileRef=<PBXFileReference: itemId="1117DB05B8FA099CFA2EBD24";
+                                                                                                                                         name="(null)";
+                                                                                                                                         path="Tools.h";
+                                                                                                                                         sourceTree="<group>";
+                                                                                                                                         explicitFileType="(null)";
+                                                                                                                                         lastKnownFileType="sourcecode.c.h";
+                                                                                                                                         fileEncoding="(null)";
+                                                                                                                                         includeInIndex="NO">;
+                                                                                                              isPublic="YES";
+                                                                                                              isPrivate="NO";
+                                                                                                              settings={ ATTRIBUTES: ( "Public" ) };
+                                                                                                              attributes=( "Public" )>,
+                                                                                               <PBXBuildFile: itemId="1117DA0BBFD95D77F2075015";
+                                                                                                              fileRef=<PBXFileReference: itemId="1117DC194A41538B5B7AF63F";
+                                                                                                                                         name="(null)";
+                                                                                                                                         path="NSString+Moscow.h";
+                                                                                                                                         sourceTree="<group>";
+                                                                                                                                         explicitFileType="(null)";
+                                                                                                                                         lastKnownFileType="sourcecode.c.h";
+                                                                                                                                         fileEncoding="(null)";
+                                                                                                                                         includeInIndex="NO">;
+                                                                                                              isPublic="YES";
+                                                                                                              isPrivate="NO";
+                                                                                                              settings={ ATTRIBUTES: ( "Public" ) };
+                                                                                                              attributes=( "Public" )>,
+                                                                                               <PBXBuildFile: itemId="1117DB11A0DBF8D5BBD02041";
+                                                                                                              fileRef=<PBXFileReference: itemId="1117DE418B3E6B6EE3C62303";
+                                                                                                                                         name="(null)";
+                                                                                                                                         path="NSMutableArray+Moscow.h";
+                                                                                                                                         sourceTree="<group>";
+                                                                                                                                         explicitFileType="(null)";
+                                                                                                                                         lastKnownFileType="sourcecode.c.h";
+                                                                                                                                         fileEncoding="(null)";
+                                                                                                                                         includeInIndex="NO">;
+                                                                                                              isPublic="YES";
+                                                                                                              isPrivate="NO";
+                                                                                                              settings={ ATTRIBUTES: ( "Public" ) };
+                                                                                                              attributes=( "Public" )>,
+                                                                                               <PBXBuildFile: itemId="1117D1E990E1C624DC0FE567";
+                                                                                                              fileRef=<PBXFileReference: itemId="1117DAA2354A874BC1E8DFA4";
+                                                                                                                                         name="(null)";
+                                                                                                                                         path="NSRegularExpression+Moscow.h";
+                                                                                                                                         sourceTree="<group>";
+                                                                                                                                         explicitFileType="(null)";
+                                                                                                                                         lastKnownFileType="sourcecode.c.h";
+                                                                                                                                         fileEncoding="(null)";
+                                                                                                                                         includeInIndex="NO">;
+                                                                                                              isPublic="YES";
+                                                                                                              isPrivate="NO";
+                                                                                                              settings={ ATTRIBUTES: ( "Public" ) };
+                                                                                                              attributes=( "Public" )>,
+                                                                                               <PBXBuildFile: itemId="1117D48E3D58AFCD60DEB54F";
+                                                                                                              fileRef=<PBXFileReference: itemId="1117D004F7887F7A6C4A3CEE";
+                                                                                                                                         name="(null)";
+                                                                                                                                         path="NSScanner+Moscow.h";
+                                                                                                                                         sourceTree="<group>";
+                                                                                                                                         explicitFileType="(null)";
+                                                                                                                                         lastKnownFileType="sourcecode.c.h";
+                                                                                                                                         fileEncoding="(null)";
+                                                                                                                                         includeInIndex="NO">;
+                                                                                                              isPublic="YES";
+                                                                                                              isPrivate="NO";
+                                                                                                              settings={ ATTRIBUTES: ( "Public" ) };
+                                                                                                              attributes=( "Public" )>,
+                                                                                               <PBXBuildFile: itemId="1117DB3C2DA904C03FCC288B";
+                                                                                                              fileRef=<PBXFileReference: itemId="1117DEC789F21593CB715AF4";
+                                                                                                                                         name="(null)";
+                                                                                                                                         path="NSData+Moscow.h";
+                                                                                                                                         sourceTree="<group>";
+                                                                                                                                         explicitFileType="(null)";
+                                                                                                                                         lastKnownFileType="sourcecode.c.h";
+                                                                                                                                         fileEncoding="(null)";
+                                                                                                                                         includeInIndex="NO">;
+                                                                                                              isPublic="YES";
+                                                                                                              isPrivate="NO";
+                                                                                                              settings={ ATTRIBUTES: ( "Public" ) };
+                                                                                                              attributes=( "Public" )>
+                                                                                                 );
+                                                                                           buildActionMask="2147483647";
+                                                                                           runOnlyForDeploymentPostprocessing="NO">,
+                                                                    <PBXSourcesBuildPhase: itemId="839B511E23806C2600662BA3";
+                                                                                           files=(
+                                                                                               <PBXBuildFile: itemId="839B513223806D1800662BA3";
+                                                                                                              fileRef=<PBXFileReference: itemId="1117DE6B249B85831991F8AE";
+                                                                                                                                         name="(null)";
+                                                                                                                                         path="Tools.m";
+                                                                                                                                         sourceTree="<group>";
+                                                                                                                                         explicitFileType="(null)";
+                                                                                                                                         lastKnownFileType="sourcecode.c.objc";
+                                                                                                                                         fileEncoding="(null)";
+                                                                                                                                         includeInIndex="NO">;
+                                                                                                              isPublic="NO";
+                                                                                                              isPrivate="NO";
+                                                                                                              settings={};
+                                                                                                              attributes=()>,
+                                                                                               <PBXBuildFile: itemId="1117D1D36FC8D567695D3443";
+                                                                                                              fileRef=<PBXFileReference: itemId="1117D7904899153BE5C7171A";
+                                                                                                                                         name="(null)";
+                                                                                                                                         path="NSString+Moscow.m";
+                                                                                                                                         sourceTree="<group>";
+                                                                                                                                         explicitFileType="(null)";
+                                                                                                                                         lastKnownFileType="sourcecode.c.objc";
+                                                                                                                                         fileEncoding="(null)";
+                                                                                                                                         includeInIndex="NO">;
+                                                                                                              isPublic="NO";
+                                                                                                              isPrivate="NO";
+                                                                                                              settings={};
+                                                                                                              attributes=()>,
+                                                                                               <PBXBuildFile: itemId="1117D5C279C5E8925476A438";
+                                                                                                              fileRef=<PBXFileReference: itemId="1117D3C6DEC033253D3DD60C";
+                                                                                                                                         name="(null)";
+                                                                                                                                         path="NSMutableArray+Moscow.m";
+                                                                                                                                         sourceTree="<group>";
+                                                                                                                                         explicitFileType="(null)";
+                                                                                                                                         lastKnownFileType="sourcecode.c.objc";
+                                                                                                                                         fileEncoding="(null)";
+                                                                                                                                         includeInIndex="NO">;
+                                                                                                              isPublic="NO";
+                                                                                                              isPrivate="NO";
+                                                                                                              settings={};
+                                                                                                              attributes=()>,
+                                                                                               <PBXBuildFile: itemId="1117D395E404F35C013D4C86";
+                                                                                                              fileRef=<PBXFileReference: itemId="1117D95EAB5D25D46C8A63FB";
+                                                                                                                                         name="(null)";
+                                                                                                                                         path="NSScanner+Moscow.m";
+                                                                                                                                         sourceTree="<group>";
+                                                                                                                                         explicitFileType="(null)";
+                                                                                                                                         lastKnownFileType="sourcecode.c.objc";
+                                                                                                                                         fileEncoding="(null)";
+                                                                                                                                         includeInIndex="NO">;
+                                                                                                              isPublic="NO";
+                                                                                                              isPrivate="NO";
+                                                                                                              settings={};
+                                                                                                              attributes=()>,
+                                                                                               <PBXBuildFile: itemId="1117DD86AC87058D095A37BE";
+                                                                                                              fileRef=<PBXFileReference: itemId="1117DC2FB5AF6342C91EFAA5";
+                                                                                                                                         name="(null)";
+                                                                                                                                         path="NSData+Moscow.m";
+                                                                                                                                         sourceTree="<group>";
+                                                                                                                                         explicitFileType="(null)";
+                                                                                                                                         lastKnownFileType="sourcecode.c.objc";
+                                                                                                                                         fileEncoding="(null)";
+                                                                                                                                         includeInIndex="NO">;
+                                                                                                              isPublic="NO";
+                                                                                                              isPrivate="NO";
+                                                                                                              settings={};
+                                                                                                              attributes=()>,
+                                                                                               <PBXBuildFile: itemId="1117D4D5F1EAF355E0FB5072";
+                                                                                                              fileRef=<PBXFileReference: itemId="1117D18E1729388DF87DF904";
+                                                                                                                                         name="(null)";
+                                                                                                                                         path="NSRegularExpression+Moscow.m";
+                                                                                                                                         sourceTree="<group>";
+                                                                                                                                         explicitFileType="(null)";
+                                                                                                                                         lastKnownFileType="sourcecode.c.objc";
+                                                                                                                                         fileEncoding="(null)";
+                                                                                                                                         includeInIndex="NO">;
+                                                                                                              isPublic="NO";
+                                                                                                              isPrivate="NO";
+                                                                                                              settings={};
+                                                                                                              attributes=()>
+                                                                                                 );
+                                                                                           buildActionMask="2147483647";
+                                                                                           runOnlyForDeploymentPostprocessing="NO">,
+                                                                    <PBXFrameworksBuildPhase: itemId="839B511F23806C2600662BA3";
+                                                                                              files=();
+                                                                                              buildActionMask="2147483647";
+                                                                                              runOnlyForDeploymentPostprocessing="NO">,
+                                                                    <PBXResourcesBuildPhase: itemId="839B512023806C2600662BA3";
+                                                                                             files=();
+                                                                                             buildActionMask="2147483647";
+                                                                                             runOnlyForDeploymentPostprocessing="NO">
+                                                                            );
+                                                                dependencies=();
+                                                                productInstallPath="(null)";
+                                                                productType="com.apple.product-type.framework";
+                                                                productReference=<PBXFileReference: itemId="839B512223806C2600662BA3">>;
+                                       targetProxy=<PBXContainerItemProxy: itemId="8349E44E23844A0000274FDF";
+                                                                           containerPortal=<PBXProject: itemId="83E1B38B2370808500427C23">;
+                                                                           proxyType="1";
+                                                                           remoteInfo="Moscow";
+                                                                           remoteGlobalIDString="839B512123806C2600662BA3">> );
+                                   productInstallPath="(null)";
+                                   productType="com.apple.product-type.tool";
+                                   productReference=<PBXFileReference: itemId="83E1B3932370808500427C23";
+                                                                       name="(null)";
+                                                                       path="PBXBuilder";
+                                                                       sourceTree="<none>";
+                                                                       explicitFileType="compiled.mach-o.executable";
+                                                                       lastKnownFileType="(null)";
+                                                                       fileEncoding="(null)";
+                                                                       includeInIndex="NO">>,
+                 <PBXNativeTarget: itemId="839B512123806C2600662BA3">
+                     );
+             attributes={
+                 TargetAttributes: {
+                     83E1B3922370808500427C23: { CreatedOnToolsVersion: "11.2" },
+                     839B512123806C2600662BA3: { CreatedOnToolsVersion: "11.2.1" }
+                                   },
+                 ORGANIZATIONNAME: "Project Galen",
+                 LastUpgradeCheck: "1120"
+                        };
+             productRefGroup=<PBXGroup: itemId="83E1B3942370808500427C23";
+                                        name="Products";
+                                        path="(null)";
+                                        sourceTree="<group>">;
+             mainGroup=<PBXGroup: itemId="83E1B38A2370808500427C23";
+                                  name="(null)";
+                                  path="(null)";
+                                  sourceTree="<group>">>
