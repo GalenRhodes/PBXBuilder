@@ -56,7 +56,7 @@
 
     -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {
         [super appendDescBody:str indent:indent];
-        id item = boolStr(self.defaultConfigurationIsVisible);
+        id item = [PGBool boolObj:self.defaultConfigurationIsVisible];
         PBXAppendItem(str, indent, @"defaultConfigurationIsVisible", item);
         PBXAppendItem(str, indent, @"defaultConfigurationName", self.defaultConfigurationName);
         PBXAppendItem(str, indent, @"buildConfigurations", self.buildConfigurations);

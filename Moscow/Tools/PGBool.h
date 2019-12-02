@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXItem.h
+ *    FILENAME: PGBool.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/4/19
+ *        DATE: 12/2/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,42 +20,33 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_PBXITEM_H__
-#define __PBXBUILDER_PBXITEM_H__
+#ifndef __PBXBUILDER_PGBOOL_H__
+#define __PBXBUILDER_PGBOOL_H__
 
 #import <Cocoa/Cocoa.h>
-#import <Moscow/Moscow.h>
-
-@class PGProjectFile;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PBXItem : NSObject<NSLocking>
+@interface PGBool : NSObject
 
-    @property(readonly) NSString      *itemId;
-    @property(readonly) NSString      *objType;
-    @property(readonly) PGProjectFile *projectFile;
+    @property(nonatomic, readonly) BOOL boolValue;
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
+    +(PGBool *)boolObj:(BOOL)boolValue;
 
-    -(nullable id)iv:(NSString *)key;
+    +(PGBool *)boolYes;
 
-    -(BOOL)ivBool:(NSString *)key;
+    +(PGBool *)boolNo;
 
-    -(NSInteger)ivInt:(NSString *)key;
+    -(NSString *)description;
 
-    -(NSUInteger)ivUInt:(NSString *)key;
+    -(BOOL)isEqual:(id)other;
 
-    -(nullable id)itemForKey:(NSString *)key;
+    -(BOOL)isEqualToABool:(PGBool *)aBool;
 
-    -(nullable id)itemForID:(NSString *)itemId;
-
-    -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent;
+    -(NSUInteger)hash;
 
 @end
 
-NSMutableString *PBXAppendItem(NSMutableString *buffer, NSString *indent, NSString *name, id item);
-
 NS_ASSUME_NONNULL_END
 
-#endif // __PBXBUILDER_PBXITEM_H__
+#endif // __PBXBUILDER_PGBOOL_H__

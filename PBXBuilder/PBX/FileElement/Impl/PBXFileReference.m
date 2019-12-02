@@ -54,7 +54,7 @@
         PBXAppendItem(str, indent, @"lastKnownFileType", item1);
         id item2 = [PBXFileElement fileEncodingForId:self.fileEncoding];
         PBXAppendItem(str, indent, @"fileEncoding", item2);
-        id item3 = boolStr(self.includeInIndex);
+        id item3 = [PGBool boolObj:self.includeInIndex];
         PBXAppendItem(str, indent, @"includeInIndex", item3);
         return str;
     }

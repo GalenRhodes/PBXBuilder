@@ -59,10 +59,8 @@
     -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {
         [super appendDescBody:str indent:indent];
         PBXAppendItem(str, indent, @"fileRef", self.fileRef);
-        id item = boolStr(self.isPublic);
-        PBXAppendItem(str, indent, @"isPublic", item);
-        id item1 = boolStr(self.isPrivate);
-        PBXAppendItem(str, indent, @"isPrivate", item1);
+        PBXAppendItem(str, indent, @"isPublic", [PGBool boolObj:self.isPublic]);
+        PBXAppendItem(str, indent, @"isPrivate", [PGBool boolObj:self.isPrivate]);
         PBXAppendItem(str, indent, @"settings", self.settings);
         PBXAppendItem(str, indent, @"attributes", self.attributes);
         return str;
