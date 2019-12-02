@@ -240,6 +240,7 @@ NSMutableString *appendItem(NSMutableString *buffer, NSString *indent, NSString 
     if([item isKindOfClass:[NSArray class]]) return appendArray(buffer, blankString(indent.length + 4), joiner, prefix, item);
     else if([item isKindOfClass:[NSDictionary class]]) return appendDictionary(buffer, blankString(indent.length + 4), joiner, prefix, item);
     else if([item isKindOfClass:[PBXItem class]]) return appendPBXItem(buffer, joiner, prefix, item);
+    else if([item isKindOfClass:[PGBool class]]) return append3(buffer, joiner, prefix, [item description]);
     else return appendObject(buffer, joiner, prefix, item);
 }
 
