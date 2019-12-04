@@ -23,14 +23,19 @@
 #import "PBXItem.h"
 #import "PGProjectFile.h"
 
-#define SPACES @"                                                                           "
+typedef void (^ListPrinterBlock)(id _item, NSString **_prefix, id *_subItem);
+
+NSString *const Spaces       = @"                                                                           ";
+NSString *const LinesPattern = @"\\r\\n?|\\n";
+
+NSMutableString *appendItem(NSMutableString *buffer, NSString *indent, NSString *joiner, NSString *prefix, id item);
 
 NS_INLINE NSString *blankString(NSUInteger length) {
     static NSMutableString *_padding    = nil;
     static dispatch_once_t _paddingFlag = 0;
 
-    dispatch_once(&_paddingFlag, ^{ _padding = [NSMutableString stringWithString:SPACES]; });
-    while(_padding.length < length) [_padding appendString:SPACES];
+    dispatch_once(&_paddingFlag, ^{ _padding = [NSMutableString stringWithString:Spaces]; });
+    while(_padding.length < length) [_padding appendString:Spaces];
     return [_padding substringToIndex:length];
 }
 
@@ -100,150 +105,147 @@ NS_INLINE NSString *blankString(NSUInteger length) {
         return str;
     }
 
+    -(NSString *)buildDesc:(NSMutableDictionary<NSString *, NSString *> *)cache {
+        NSMutableString *buffer = [NSMutableString new];
+        NSString        *prefix = PGFormat(@"<%@: ", NSStringFromClass(self.class));
+        NSString        *indent = blankString(prefix.length);
+        NSString        *start  = PGFormat(@"%@itemId=\"%@\"", prefix, self.itemId);
+
+        cache[self.itemId] = [start stringByAppendingString:@" ...>"];
+        [buffer appendString:start];
+        [self appendDescBody:buffer indent:indent];
+        [buffer appendString:@">"];
+        return buffer;
+    }
+
     -(NSString *)description {
-        static dispatch_once_t                             _globalDescriptionLockFlag   = 0;
-        static BOOL                                        _globalDescriptionClearAfter = YES;
-        static NSRecursiveLock                             *_globalDescriptionLock      = nil;
-        static NSMutableDictionary<NSString *, NSString *> *_globalDescriptionDidPrint  = nil;
+        static dispatch_once_t                             _once   = 0;
+        static NSMutableDictionary<NSString *, NSString *> *_cache = nil;
 
-        dispatch_once(&_globalDescriptionLockFlag, ^{
-            _globalDescriptionLock       = [NSRecursiveLock new];
-            _globalDescriptionDidPrint   = [NSMutableDictionary new];
-            _globalDescriptionClearAfter = YES;
-        });
+        dispatch_once(&_once, ^{ _cache = [NSMutableDictionary new]; });
 
-        BOOL            willClear = NO;
-        NSMutableString *str      = [NSMutableString new];
-        [_globalDescriptionLock lock];
-
-        @try {
-            if((willClear = _globalDescriptionClearAfter)) {
-                _globalDescriptionClearAfter = NO;
-                [_globalDescriptionDidPrint removeAllObjects];
+        @synchronized(_cache) {
+            if(_cache.count) {
+                return (_cache[self.itemId] ?: [self buildDesc:_cache]);
             }
-
-            [str appendFormat:@"<%@: ", NSStringFromClass(self.class)];
-            NSUInteger indentSize = str.length;
-            [str appendFormat:@"itemId=\"%@\"", self.itemId];
-
-            if(![_globalDescriptionDidPrint[self.itemId] isEqualToString:self.itemId]) {
-                _globalDescriptionDidPrint[self.itemId] = self.itemId;
-                NSString *indent = blankString(indentSize);
-                [self appendDescBody:str indent:indent];
+            else {
+                NSString *_desc = nil;
+                @try { _desc = [self buildDesc:_cache]; } @finally { [_cache removeAllObjects]; }
+                return _desc;
             }
-
-            [str appendString:@">"];
         }
-        @finally {
-            if(willClear) {
-                [_globalDescriptionDidPrint removeAllObjects];
-                _globalDescriptionClearAfter = YES;
+    }
 
-                NSRegularExpression *regex1 = [NSRegularExpression regularExpressionWithPattern:@"(?:(?:\\\\\\\\)+n|\\\\n)" options:0 error:NULL];
-                NSRegularExpression *regex2 = [NSRegularExpression regularExpressionWithPattern:@"(?:\\\\\\\\)*\\\\(\")" options:0 error:NULL];
-
-                [regex1 replaceMatchesInString:str options:0 range:str.range withTemplate:@"\n"];
-                [regex2 replaceMatchesInString:str options:0 range:str.range withTemplate:@"$1"];
-            }
-
-            [_globalDescriptionLock unlock];
-        }
-
-        return str;
+    -(NSString *)debugDescription {
+        return PGFormat(@"<{%@: itemId=\"%@\"}>", NSStringFromClass(self.class), self.itemId);
     }
 
 @end
 
-NSMutableString *appendItem(NSMutableString *buffer, NSString *indent, NSString *joiner, NSString *prefix, id item);
+void collectionDescription(NSMutableString *buffer, NSArray *array, NSString *opener, NSString *closer, NSUInteger indentLength, ListPrinterBlock block) {
+    id           subItem = nil;
+    NSString     *name   = nil;
+    NSEnumerator *en     = array.objectEnumerator;
 
-void appendSingleLine(NSMutableString *buffer, NSString *prefix, id item) {
-    [buffer appendString:@" "];
-    appendItem(buffer, @"", @"", prefix, item);
-    [buffer appendString:@" "];
-}
-
-NSString *dictKey(NSString *indent, NSString *key) {
-    return PGFormat(@"%@%@: ", indent, key);
-}
-
-void appendIndent(NSMutableString *buffer, NSString *prefix) {
-    [buffer appendFormat:@"\n%@", blankString(prefix.length)];
-}
-
-NSMutableString *appendObject(NSMutableString *buffer, NSString *joiner, NSString *prefix, id item) {
-    if(item) [buffer appendFormat:@"%@%@\"%@\"", joiner, prefix, item];
-    else [buffer appendFormat:@"%@%@<NULL>", joiner, prefix];
-    return buffer;
-}
-
-NSMutableString *append3(NSMutableString *buffer, NSString *joiner, NSString *prefix, NSString *desc) {
-    [buffer appendFormat:@"%@%@%@", joiner, prefix, desc];
-    return buffer;
-}
-
-NSMutableString *appendPBXItemLines(NSMutableString *buffer, NSString *joiner, NSString *indent, NSString *prefix, NSArray<NSString *> *lines) {
-    append3(buffer, joiner, prefix, lines[0]);
-    for(NSUInteger i = 1; i < lines.count; ++i) append3(buffer, @"\n", indent, lines[i]);
-    return buffer;
-}
-
-NSMutableString *appendPBXItem(NSMutableString *buffer, NSString *joiner, NSString *prefix, id item) {
-    NSString            *desc  = [item description];
-    NSArray<NSString *> *lines = [desc split:@"\\r\\n?|\\n" limit:-1];
-    return ((lines.count == 1) ? append3(buffer, joiner, prefix, desc) : appendPBXItemLines(buffer, joiner, blankString(prefix.length), prefix, lines));
-}
-
-NSMutableString *appendDictionary(NSMutableString *buffer, NSString *indent, NSString *joiner, NSString *prefix, NSDictionary *dict) {
-    [buffer appendFormat:@"%@%@{", joiner, prefix];
-
-    if(dict.count == 1) {
-        for(id key in dict.allKeys) appendSingleLine(buffer, dictKey(@"", key), dict[key]);
+    if(array.count == 0) {
+        [buffer appendFormat:@"%@%@", opener, closer];
+    }
+    else if(array.count == 1) {
+        block(en.nextObject, &name, &subItem);
+        [buffer appendFormat:@"%@ ", opener];
+        appendItem(buffer, @"", @"", name, subItem);
+        [buffer appendFormat:@" %@", closer];
     }
     else {
-        NSComparator             cmptr = ^NSComparisonResult(id obj1, id obj2) { return [((NSString *)obj1) compare:((NSString *)obj2)]; };
-        NSEnumerator<NSString *> *en   = [dict.allKeys sortedArrayUsingComparator:cmptr].objectEnumerator;
-        NSString                 *key  = en.nextObject;
+        NSString *closerIndent = blankString(indentLength);
+        NSString *itemIndent   = blankString(indentLength + 2);
+        id       item          = en.nextObject;
 
-        if(key) {
-            appendItem(buffer, indent, @"\n", dictKey(indent, key), dict[key]);
-            while((key = en.nextObject)) appendItem(buffer, indent, @",\n", dictKey(indent, key), dict[key]);
-            appendIndent(buffer, prefix);
+        block(item, &name, &subItem);
+        [buffer appendString:opener];
+        appendItem(buffer, itemIndent, @"\n", name, subItem);
+
+        while((item = en.nextObject)) {
+            block(item, &name, &subItem);
+            appendItem(buffer, itemIndent, @",\n", name, subItem);
         }
-    }
 
-    [buffer appendString:@"}"];
-    return buffer;
+        [buffer appendFormat:@"\n%@%@", closerIndent, closer];
+    }
 }
 
-NSMutableString *appendArray(NSMutableString *buffer, NSString *indent, NSString *joiner, NSString *prefix, NSArray *array) {
-    [buffer appendFormat:@"%@%@(", joiner, prefix];
+void arrayDescription(NSMutableString *buffer, NSArray *array, NSUInteger indentLength) {
+    collectionDescription(buffer, array, @"[", @"]", indentLength, ^(id _item, NSString **_prefix, id *_subItem) {
+        *_subItem = _item;
+        *_prefix  = @"";
+    });
+}
 
-    if(array.count == 1) {
-        appendSingleLine(buffer, @"", array[0]);
+void dictDescription(NSMutableString *buffer, NSDictionary *dict, NSUInteger indentLength) {
+    NSMutableArray<NSString *>                  *array = [NSMutableArray new];
+    NSMutableDictionary<NSString *, NSString *> *foou  = [NSMutableDictionary new];
+    NSUInteger                                  keyLen = 0;
+
+    for(id item in dict.allKeys) {
+        NSString *itemStr = [item description];
+        keyLen = MAX(keyLen, itemStr.length);
+        [array addObject:itemStr];
     }
-    else if(array.count > 1) {
-        NSEnumerator *en  = array.objectEnumerator;
-        id           item = en.nextObject;
 
-        if(item) {
-            appendItem(buffer, indent, @"\n", indent, item);
-            while((item = en.nextObject)) appendItem(buffer, indent, @",\n", indent, item);
-            appendIndent(buffer, prefix);
-        }
+    for(NSString *itemStr in array) {
+        NSString *label = PGFormat(@"%@%@", blankString(keyLen - itemStr.length), itemStr);
+        foou[itemStr] = label;
     }
 
-    [buffer appendString:@")"];
-    return buffer;
+    [array sortUsingComparator:^NSComparisonResult(id obj1, id obj2) { return [obj1 compare:obj2]; }];
+    collectionDescription(buffer, array, @"{", @"}", indentLength, ^(id _item, NSString **_prefix, id *_subItem) {
+        *_subItem = dict[_item];
+        *_prefix  = PGFormat(@"%@: ", foou[_item]);
+    });
+}
+
+void pbxItemDescription(NSMutableString *buffer, PBXItem *pbxItem, NSUInteger indentLength) {
+    NSString            *desc  = [pbxItem description];
+    NSArray<NSString *> *lines = [desc split:LinesPattern limit:-1];
+
+    if(lines.count > 1) {
+        NSEnumerator<NSString *> *en     = lines.objectEnumerator;
+        NSString                 *indent = blankString(indentLength);
+        NSString                 *line   = en.nextObject;
+
+        [buffer appendString:line];
+        while((line = en.nextObject)) [buffer appendFormat:@"\n%@%@", indent, line];
+    }
+    else {
+        [buffer appendString:desc];
+    }
 }
 
 NSMutableString *appendItem(NSMutableString *buffer, NSString *indent, NSString *joiner, NSString *prefix, id item) {
-    if([item isKindOfClass:[NSArray class]]) return appendArray(buffer, blankString(indent.length + 4), joiner, prefix, item);
-    else if([item isKindOfClass:[NSDictionary class]]) return appendDictionary(buffer, blankString(indent.length + 4), joiner, prefix, item);
-    else if([item isKindOfClass:[PBXItem class]]) return appendPBXItem(buffer, joiner, prefix, item);
-    else if([item isKindOfClass:[PGBool class]]) return append3(buffer, joiner, prefix, [item description]);
-    else return appendObject(buffer, joiner, prefix, item);
+    [buffer appendFormat:@"%@%@%@", joiner, indent, prefix];
+
+    if(item == nil) {
+        [buffer appendString:@"<NULL>"];
+    }
+    else if([item isKindOfClass:[NSArray class]]) {
+        arrayDescription(buffer, item, (indent.length + prefix.length));
+    }
+    else if([item isKindOfClass:[NSDictionary class]]) {
+        dictDescription(buffer, item, (indent.length + prefix.length));
+    }
+    else if([item isKindOfClass:[PBXItem class]]) {
+        pbxItemDescription(buffer, item, (indent.length + prefix.length));
+    }
+    else if([item isKindOfClass:[PGBool class]]) {
+        [buffer appendString:[item description]];
+    }
+    else {
+        [buffer appendFormat:@"\"%@\"", [item description]];
+    }
+
+    return buffer;
 }
 
 NSMutableString *PBXAppendItem(NSMutableString *buffer, NSString *indent, NSString *name, id item) {
-    return appendItem(buffer, indent, @";\n", PGFormat(@"%@%@=", indent, name), item);
+    return appendItem(buffer, indent, @";\n", [name stringByAppendingString:@"="], item);
 }
