@@ -28,7 +28,6 @@ for _a in $@; do
     OPTS="${OPTS} -I${PWD}/build/include"
 done
 cd "$b"
-echo "${OPTS}"
 LOPTS="$(gnustep-config --base-libs) -ldispatch -L${SUBPRJPATH}/.. -lMoscow"
 
 mkdir -p "${SUBPRJBUILDPATH}" || exit $?

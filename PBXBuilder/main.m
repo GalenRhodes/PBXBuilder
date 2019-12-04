@@ -7,10 +7,10 @@
 //
 
 #import <Moscow/Moscow.h>
+#import <PBX/PBX.h>
 #import "PGRunInfo.h"
 #import "PGProjectFile.h"
 #import "PBXTools.h"
-#import "PBX.h"
 
 int main(int argc, const char *argv[]) {
     int returnCode = 0;

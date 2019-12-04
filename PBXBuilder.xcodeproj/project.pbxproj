@@ -7,46 +7,71 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1117D00E417096AAD7C40687 /* XCConfigurationList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DD40F15C0A31FEA7645C /* XCConfigurationList.m */; };
+		1117D0320E47956BB843FE1C /* PBXGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D3D63676B08B0532B8B1 /* PBXGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117D100224C7813E91ED305 /* PBXFrameworksBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D95F1C0420644CAC1E52 /* PBXFrameworksBuildPhase.m */; };
 		1117D1009272DDAA632030C8 /* PGProjectFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DDCDC641D953BCD0135E /* PGProjectFile.m */; };
+		1117D199D4FA1DAAEB230A3A /* PBXSourcesBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D07540C76FD128476F36 /* PBXSourcesBuildPhase.m */; };
+		1117D1C797CBB511BD2287DD /* PBXSourcesBuildPhase.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DC3F18DDF2B8454CC291 /* PBXSourcesBuildPhase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117D1D36FC8D567695D3443 /* NSString+Moscow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D7904899153BE5C7171A /* NSString+Moscow.m */; };
 		1117D1E990E1C624DC0FE567 /* NSRegularExpression+Moscow.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DAA2354A874BC1E8DFA4 /* NSRegularExpression+Moscow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117D1FB6A2A123A483E2B06 /* PBXHeadersBuildPhase.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D023A3846D53488A1DDD /* PBXHeadersBuildPhase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117D2226A7F97750B33B29D /* PGBool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DE9CC3AA67BCB92F526B /* PGBool.m */; };
 		1117D227A341D98188E6854D /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D50CB4803945840E84BC /* Tests.m */; };
-		1117D24659AEA5B32EF1DD13 /* PBXContainerItemProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D241A5603A238ADEEF16 /* PBXContainerItemProxy.m */; };
-		1117D283F30FC63CDC9C5780 /* PBXAggregateTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D5E62FF61A23C17291DC /* PBXAggregateTarget.m */; };
-		1117D28E151A3CAEAFCA7ECA /* PBXHeadersBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DA4C990459CD92C20437 /* PBXHeadersBuildPhase.m */; };
-		1117D2D5820AC172734855A5 /* PBXFrameworksBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D95F1C0420644CAC1E52 /* PBXFrameworksBuildPhase.m */; };
-		1117D3178F13224AD2B4B0EB /* PBXNativeTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DDF9822F1E82D4762BE9 /* PBXNativeTarget.m */; };
-		1117D3876CFE855DD77EC6AE /* PBXGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DD20800FFE368F535032 /* PBXGroup.m */; };
+		1117D22B0D2DD85534E4EDEC /* PBXFrameworksBuildPhase.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DE9F6A17CE87E1337AD6 /* PBXFrameworksBuildPhase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117D25E26CCF2C27D4C94AD /* PBXShellScriptBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D1C3490B1FC43AD0ABCD /* PBXShellScriptBuildPhase.m */; };
+		1117D2DFBCEF3C0CDC5D0684 /* PBXAggregateTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D5E62FF61A23C17291DC /* PBXAggregateTarget.m */; };
+		1117D33B865C3E250A29DAC4 /* PBXBuildFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D7DB3CB2BD8BEAF7FF43 /* PBXBuildFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117D350419B3CA9A5FB9962 /* PBXCopyFilesBuildPhase.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D2BB4C35D2B27BDFC9C4 /* PBXCopyFilesBuildPhase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117D384023DF0B0F32E48E5 /* PBXContainerItemProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D241A5603A238ADEEF16 /* PBXContainerItemProxy.m */; };
+		1117D38B3DCD4509131BB7B9 /* PBXAggregateTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D60B10EBB5F947D27ABD /* PBXAggregateTarget.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117D395E404F35C013D4C86 /* NSScanner+Moscow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D95EAB5D25D46C8A63FB /* NSScanner+Moscow.m */; };
+		1117D3DDBDA7C47E9C28FBC4 /* PBXItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D250D3A2952935DB4F92 /* PBXItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117D41AC8087777043C7FB8 /* PBXBuildPhase.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D9FC9C8821CB054613A0 /* PBXBuildPhase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117D42EB90895042EF598C9 /* GNUstepInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D7BF1BFDE2B32DC0CC18 /* GNUstepInfo.m */; };
-		1117D46E89D587A6B24C7818 /* PBXTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D4A80DF8B12D3C4B1F45 /* PBXTarget.m */; };
+		1117D43AEA2DAB68299B051C /* PBXFileElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D185CEF64CC4C899EA52 /* PBXFileElement.m */; };
 		1117D48E3D58AFCD60DEB54F /* NSScanner+Moscow.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D004F7887F7A6C4A3CEE /* NSScanner+Moscow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117D49E538A10B57673394C /* PBXResourcesBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DB4C9C5CF1EEF13A14C8 /* PBXResourcesBuildPhase.m */; };
 		1117D4D5F1EAF355E0FB5072 /* NSRegularExpression+Moscow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D18E1729388DF87DF904 /* NSRegularExpression+Moscow.m */; };
-		1117D59D82018B00FB6E5EC0 /* PBXItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D7DE1E0A4802AA39D97F /* PBXItem.m */; };
+		1117D4DE43051804E982B94D /* PBXFileReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D3BF5FF1DD90267EC33E /* PBXFileReference.m */; };
+		1117D511C61D8EA2454A7BC3 /* PBXLegacyTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DAF15BB09C93919333E5 /* PBXLegacyTarget.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117D538B17754ABE09C5604 /* PBXVariantGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DD615A681AF8C3D22DD9 /* PBXVariantGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117D595FB357B711CE6EFC2 /* PBXCopyFilesBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DC9C964AEE0421178951 /* PBXCopyFilesBuildPhase.m */; };
 		1117D5C279C5E8925476A438 /* NSMutableArray+Moscow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D3C6DEC033253D3DD60C /* NSMutableArray+Moscow.m */; };
-		1117D6096F99E28D714F7A60 /* PBXFileReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D3BF5FF1DD90267EC33E /* PBXFileReference.m */; };
-		1117D7244263595A65CFCD8E /* XCConfigurationList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DD40F15C0A31FEA7645C /* XCConfigurationList.m */; };
+		1117D63B77A7E763587A8DF2 /* XCConfigurationList.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DDD40803A22835BE8D24 /* XCConfigurationList.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117D6BE0A9285206B000B06 /* PBXTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D29C921994A1775BDC67 /* PBXTarget.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117D6DAA625AEEE01F95956 /* PBXFileElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D66D2903769B7803E5AD /* PBXFileElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117D6EB4D7C3EF3EE1CF774 /* PBXFileReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DD6FFD9B35DBB084E95E /* PBXFileReference.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117D6ED27A1651F209A37AD /* PBXTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D4A80DF8B12D3C4B1F45 /* PBXTarget.m */; };
 		1117D75EB0CEBA75ADD782DD /* PBXTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D4C4F993E676E6487A24 /* PBXTools.m */; };
-		1117D797ED81B215242B7E77 /* PBXFileElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D185CEF64CC4C899EA52 /* PBXFileElement.m */; };
-		1117D8187C26761963F643C2 /* PBXSourcesBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D07540C76FD128476F36 /* PBXSourcesBuildPhase.m */; };
-		1117D8CDA4C428F298051EEC /* PBXShellScriptBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D1C3490B1FC43AD0ABCD /* PBXShellScriptBuildPhase.m */; };
+		1117D7FA1B8089839862A133 /* PBXContainerItemProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DA984BC1A42DB2F02160 /* PBXContainerItemProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117D81276B1160E145297EC /* PBXResourcesBuildPhase.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DAF3C26965F048EB37AC /* PBXResourcesBuildPhase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117D87AF9DBDBA2B67DFBB6 /* PBXShellScriptBuildPhase.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D92DC5B71238EA841518 /* PBXShellScriptBuildPhase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117D87CF9D8F8D6797FC830 /* PBXBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D3F95229E211675E3E1A /* PBXBuildPhase.m */; };
 		1117D8D3A333151BDBE6B82E /* PGBool.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DF5ABE9E759A2AEB8B89 /* PGBool.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1117D8F3943DE0EC88720DA2 /* PBXCopyFilesBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DC9C964AEE0421178951 /* PBXCopyFilesBuildPhase.m */; };
 		1117DA0BBFD95D77F2075015 /* NSString+Moscow.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DC194A41538B5B7AF63F /* NSString+Moscow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117DA392DA51C4488FF72D5 /* XCBuildConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D765CDF5534CD55A2B80 /* XCBuildConfiguration.m */; };
+		1117DA594D102E0DEA7D0958 /* PBXAppleScriptBuildPhase.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D7B0C1414783EE69BBE7 /* PBXAppleScriptBuildPhase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117DAEDA165B6C0D488EBF0 /* PBXVariantGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D36711304D750673F6AF /* PBXVariantGroup.m */; };
 		1117DB077B632565C88E3448 /* PGRunInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DC75D7BED83031E6C47F /* PGRunInfo.m */; };
 		1117DB11A0DBF8D5BBD02041 /* NSMutableArray+Moscow.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DE418B3E6B6EE3C62303 /* NSMutableArray+Moscow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117DB29CA4ECBD6E07B92D5 /* PBXHeadersBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DA4C990459CD92C20437 /* PBXHeadersBuildPhase.m */; };
 		1117DB3C2DA904C03FCC288B /* NSData+Moscow.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DEC789F21593CB715AF4 /* NSData+Moscow.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1117DB475991EE632782514B /* PBXTargetDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D0E6328E9752489B41D4 /* PBXTargetDependency.m */; };
-		1117DB5039A2054A65A79F53 /* XCBuildConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D765CDF5534CD55A2B80 /* XCBuildConfiguration.m */; };
-		1117DBE5355E94A2B78D2748 /* PBXBuildFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D203BC1EBEF34E55295A /* PBXBuildFile.m */; };
-		1117DC3415B8B9A03E09FB14 /* PBXAppleScriptBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D06EE89AB70368A00D3B /* PBXAppleScriptBuildPhase.m */; };
+		1117DBAC6571A55E9F76747C /* PBXBuildFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D203BC1EBEF34E55295A /* PBXBuildFile.m */; };
+		1117DC13835DA2227D33A7D3 /* PBXNativeTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DDF9822F1E82D4762BE9 /* PBXNativeTarget.m */; };
+		1117DC294507FAB5756D1B66 /* PBXAppleScriptBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D06EE89AB70368A00D3B /* PBXAppleScriptBuildPhase.m */; };
+		1117DCB41682560D91D4A159 /* XCBuildConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D085F238B39EF20474BB /* XCBuildConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117DCFF615A520A4FBF018E /* PBXItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D7DE1E0A4802AA39D97F /* PBXItem.m */; };
+		1117DD371C31B357C34C6E19 /* PBXTargetDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D0E6328E9752489B41D4 /* PBXTargetDependency.m */; };
 		1117DD86AC87058D095A37BE /* NSData+Moscow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DC2FB5AF6342C91EFAA5 /* NSData+Moscow.m */; };
-		1117DD86D357EF372D14C774 /* PBXVariantGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D36711304D750673F6AF /* PBXVariantGroup.m */; };
-		1117DDCB761B6E8D3B0E6DE6 /* PBXProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D3591C1E4899179E1D30 /* PBXProject.m */; };
-		1117DE81E264CA96C67F3EEF /* PBXLegacyTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D9A87E94FE1A27BCF8C7 /* PBXLegacyTarget.m */; };
-		1117DE9AB3653ABD34F79BDD /* PBXBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D3F95229E211675E3E1A /* PBXBuildPhase.m */; };
-		1117DFA95E1F298D58D36AF3 /* PBXResourcesBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DB4C9C5CF1EEF13A14C8 /* PBXResourcesBuildPhase.m */; };
+		1117DDE409EBCFA050CB7B54 /* PBXTargetDependency.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DDE29F95395F83425ACC /* PBXTargetDependency.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117DE10E7A18F589EAF70CB /* PBXProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D3591C1E4899179E1D30 /* PBXProject.m */; };
+		1117DE3BF6B496F661D599A0 /* PBXGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DD20800FFE368F535032 /* PBXGroup.m */; };
+		1117DE7319D91941CDACF693 /* PBXNativeTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DD5D7B75243608FDD913 /* PBXNativeTarget.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117DECAA9C374EE894255F8 /* PBXProject.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DA1848D6F5F5D2E72841 /* PBXProject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117DF28B3224434A0B71BF7 /* PBXFileElementTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D90BF4990C94920D4413 /* PBXFileElementTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117DF586EFF700CC12921BA /* PBXLegacyTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D9A87E94FE1A27BCF8C7 /* PBXLegacyTarget.m */; };
+		832E0CE0239852250048185F /* PBX.h in Headers */ = {isa = PBXBuildFile; fileRef = 832E0CDE239852250048185F /* PBX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8349E44D238449FB00274FDF /* Moscow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839B512223806C2600662BA3 /* Moscow.framework */; };
 		839B512623806C2600662BA3 /* Moscow.h in Headers */ = {isa = PBXBuildFile; fileRef = 839B512423806C2600662BA3 /* Moscow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		839B513223806D1800662BA3 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DE6B249B85831991F8AE /* Tools.m */; };
@@ -55,6 +80,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		832E0CE4239852330048185F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83E1B38B2370808500427C23 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 839B512123806C2600662BA3;
+			remoteInfo = Moscow;
+		};
+		832E0CE62398525A0048185F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83E1B38B2370808500427C23 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 832E0CDB239852250048185F;
+			remoteInfo = PBX;
+		};
 		8349E44E23844A0000274FDF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83E1B38B2370808500427C23 /* Project object */;
@@ -127,6 +166,7 @@
 		1117D8627AEF17859F1D2E34 /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		1117D90BF4990C94920D4413 /* PBXFileElementTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXFileElementTypes.h; sourceTree = "<group>"; };
 		1117D90F882A6895A9DA4CAC /* PBXTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXTools.h; sourceTree = "<group>"; };
+		1117D92BF911EF7D5D9211CE /* PBX_GNUstep_vers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PBX_GNUstep_vers.c; sourceTree = "<group>"; };
 		1117D92DC5B71238EA841518 /* PBXShellScriptBuildPhase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXShellScriptBuildPhase.h; sourceTree = "<group>"; };
 		1117D95EAB5D25D46C8A63FB /* NSScanner+Moscow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScanner+Moscow.m"; sourceTree = "<group>"; };
 		1117D95F1C0420644CAC1E52 /* PBXFrameworksBuildPhase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXFrameworksBuildPhase.m; sourceTree = "<group>"; };
@@ -136,7 +176,6 @@
 		1117DA21A8D95A4F700D8C61 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1117DA4C990459CD92C20437 /* PBXHeadersBuildPhase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXHeadersBuildPhase.m; sourceTree = "<group>"; };
 		1117DA6307C577FE3D9465BD /* PGRunInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGRunInfo.h; sourceTree = "<group>"; };
-		1117DA96738420A22E3FA42C /* PBX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBX.h; sourceTree = "<group>"; };
 		1117DA984BC1A42DB2F02160 /* PBXContainerItemProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXContainerItemProxy.h; sourceTree = "<group>"; };
 		1117DAA2354A874BC1E8DFA4 /* NSRegularExpression+Moscow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSRegularExpression+Moscow.h"; sourceTree = "<group>"; };
 		1117DAF15BB09C93919333E5 /* PBXLegacyTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXLegacyTarget.h; sourceTree = "<group>"; };
@@ -150,6 +189,7 @@
 		1117DC75D7BED83031E6C47F /* PGRunInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGRunInfo.m; sourceTree = "<group>"; };
 		1117DC8D695D8AD4BC6A6803 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		1117DC9C964AEE0421178951 /* PBXCopyFilesBuildPhase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXCopyFilesBuildPhase.m; sourceTree = "<group>"; };
+		1117DCD7F2E10144D9DEBFCB /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		1117DD20800FFE368F535032 /* PBXGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXGroup.m; sourceTree = "<group>"; };
 		1117DD2C2C6567C8FBA0FEC2 /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		1117DD3A5D0AF976CFB7C308 /* Clang LLVM 1.0.xcspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xcspec; path = "Clang LLVM 1.0.xcspec"; sourceTree = "<group>"; };
@@ -170,6 +210,9 @@
 		1117DF5ABE9E759A2AEB8B89 /* PGBool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGBool.h; sourceTree = "<group>"; };
 		1117DF5C3B0EBB74B50E18F7 /* PGProjectFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGProjectFile.h; sourceTree = "<group>"; };
 		1117DF71D599F3DF94BC992A /* Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tests.h; sourceTree = "<group>"; };
+		832E0CDC239852250048185F /* PBX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PBX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		832E0CDE239852250048185F /* PBX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PBX.h; sourceTree = "<group>"; };
+		832E0CDF239852250048185F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		839B512223806C2600662BA3 /* Moscow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Moscow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		839B512423806C2600662BA3 /* Moscow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Moscow.h; sourceTree = "<group>"; };
 		839B512523806C2600662BA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -178,6 +221,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		832E0CD9239852250048185F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		839B511F23806C2600662BA3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -260,7 +310,6 @@
 				1117DBA578E30B922D2067F7 /* FileElement */,
 				1117D241A5603A238ADEEF16 /* PBXContainerItemProxy.m */,
 				1117DA984BC1A42DB2F02160 /* PBXContainerItemProxy.h */,
-				1117DA96738420A22E3FA42C /* PBX.h */,
 			);
 			path = PBX;
 			sourceTree = "<group>";
@@ -370,6 +419,18 @@
 			path = Mappings;
 			sourceTree = "<group>";
 		};
+		832E0CDD239852250048185F /* PBX */ = {
+			isa = PBXGroup;
+			children = (
+				1117D4E62053D39B5C9BC623 /* PBX */,
+				832E0CDE239852250048185F /* PBX.h */,
+				832E0CDF239852250048185F /* Info.plist */,
+				1117D92BF911EF7D5D9211CE /* PBX_GNUstep_vers.c */,
+				1117DCD7F2E10144D9DEBFCB /* build.sh */,
+			);
+			path = PBX;
+			sourceTree = "<group>";
+		};
 		839B512323806C2600662BA3 /* Moscow */ = {
 			isa = PBXGroup;
 			children = (
@@ -394,6 +455,7 @@
 			children = (
 				83E1B3952370808500427C23 /* PBXBuilder */,
 				839B512323806C2600662BA3 /* Moscow */,
+				832E0CDD239852250048185F /* PBX */,
 				83E1B3942370808500427C23 /* Products */,
 				1117DA21A8D95A4F700D8C61 /* README.md */,
 				1117DC8D695D8AD4BC6A6803 /* LICENSE */,
@@ -410,6 +472,7 @@
 			children = (
 				83E1B3932370808500427C23 /* PBXBuilder */,
 				839B512223806C2600662BA3 /* Moscow.framework */,
+				832E0CDC239852250048185F /* PBX.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -418,7 +481,6 @@
 			isa = PBXGroup;
 			children = (
 				83E1B3962370808500427C23 /* main.m */,
-				1117D4E62053D39B5C9BC623 /* PBX */,
 				1117DC735E9339B57255A797 /* build.sh */,
 				1117D3171ACF9B126917ACE6 /* Work */,
 				1117D8824011B6B81D1DC749 /* Tests */,
@@ -429,6 +491,38 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		832E0CD7239852250048185F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				832E0CE0239852250048185F /* PBX.h in Headers */,
+				1117D7FA1B8089839862A133 /* PBXContainerItemProxy.h in Headers */,
+				1117DECAA9C374EE894255F8 /* PBXProject.h in Headers */,
+				1117D511C61D8EA2454A7BC3 /* PBXLegacyTarget.h in Headers */,
+				1117DE7319D91941CDACF693 /* PBXNativeTarget.h in Headers */,
+				1117DDE409EBCFA050CB7B54 /* PBXTargetDependency.h in Headers */,
+				1117D3DDBDA7C47E9C28FBC4 /* PBXItem.h in Headers */,
+				1117D38B3DCD4509131BB7B9 /* PBXAggregateTarget.h in Headers */,
+				1117D6BE0A9285206B000B06 /* PBXTarget.h in Headers */,
+				1117DF28B3224434A0B71BF7 /* PBXFileElementTypes.h in Headers */,
+				1117D6EB4D7C3EF3EE1CF774 /* PBXFileReference.h in Headers */,
+				1117D6DAA625AEEE01F95956 /* PBXFileElement.h in Headers */,
+				1117D0320E47956BB843FE1C /* PBXGroup.h in Headers */,
+				1117D538B17754ABE09C5604 /* PBXVariantGroup.h in Headers */,
+				1117D33B865C3E250A29DAC4 /* PBXBuildFile.h in Headers */,
+				1117DA594D102E0DEA7D0958 /* PBXAppleScriptBuildPhase.h in Headers */,
+				1117D81276B1160E145297EC /* PBXResourcesBuildPhase.h in Headers */,
+				1117D22B0D2DD85534E4EDEC /* PBXFrameworksBuildPhase.h in Headers */,
+				1117D41AC8087777043C7FB8 /* PBXBuildPhase.h in Headers */,
+				1117D1FB6A2A123A483E2B06 /* PBXHeadersBuildPhase.h in Headers */,
+				1117D1C797CBB511BD2287DD /* PBXSourcesBuildPhase.h in Headers */,
+				1117D350419B3CA9A5FB9962 /* PBXCopyFilesBuildPhase.h in Headers */,
+				1117D87AF9DBDBA2B67DFBB6 /* PBXShellScriptBuildPhase.h in Headers */,
+				1117D63B77A7E763587A8DF2 /* XCConfigurationList.h in Headers */,
+				1117DCB41682560D91D4A159 /* XCBuildConfiguration.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		839B511D23806C2600662BA3 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -447,6 +541,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		832E0CDB239852250048185F /* PBX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 832E0CE3239852250048185F /* Build configuration list for PBXNativeTarget "PBX" */;
+			buildPhases = (
+				832E0CD7239852250048185F /* Headers */,
+				832E0CD8239852250048185F /* Sources */,
+				832E0CD9239852250048185F /* Frameworks */,
+				832E0CDA239852250048185F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				832E0CE5239852330048185F /* PBXTargetDependency */,
+			);
+			name = PBX;
+			productName = PBX;
+			productReference = 832E0CDC239852250048185F /* PBX.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		839B512123806C2600662BA3 /* Moscow */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 839B512923806C2600662BA3 /* Build configuration list for PBXNativeTarget "Moscow" */;
@@ -479,6 +592,7 @@
 			);
 			dependencies = (
 				8349E44F23844A0000274FDF /* PBXTargetDependency */,
+				832E0CE72398525A0048185F /* PBXTargetDependency */,
 			);
 			name = PBXBuilder;
 			productName = PBXBuilder;
@@ -494,6 +608,9 @@
 				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "Project Galen";
 				TargetAttributes = {
+					832E0CDB239852250048185F = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
 					839B512123806C2600662BA3 = {
 						CreatedOnToolsVersion = 11.2.1;
 					};
@@ -517,11 +634,19 @@
 			targets = (
 				83E1B3922370808500427C23 /* PBXBuilder */,
 				839B512123806C2600662BA3 /* Moscow */,
+				832E0CDB239852250048185F /* PBX */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		832E0CDA239852250048185F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		839B512023806C2600662BA3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -552,6 +677,36 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		832E0CD8239852250048185F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1117DC13835DA2227D33A7D3 /* PBXNativeTarget.m in Sources */,
+				1117DCFF615A520A4FBF018E /* PBXItem.m in Sources */,
+				1117D2DFBCEF3C0CDC5D0684 /* PBXAggregateTarget.m in Sources */,
+				1117DF586EFF700CC12921BA /* PBXLegacyTarget.m in Sources */,
+				1117DE10E7A18F589EAF70CB /* PBXProject.m in Sources */,
+				1117D6ED27A1651F209A37AD /* PBXTarget.m in Sources */,
+				1117D384023DF0B0F32E48E5 /* PBXContainerItemProxy.m in Sources */,
+				1117DD371C31B357C34C6E19 /* PBXTargetDependency.m in Sources */,
+				1117DAEDA165B6C0D488EBF0 /* PBXVariantGroup.m in Sources */,
+				1117DE3BF6B496F661D599A0 /* PBXGroup.m in Sources */,
+				1117D43AEA2DAB68299B051C /* PBXFileElement.m in Sources */,
+				1117D4DE43051804E982B94D /* PBXFileReference.m in Sources */,
+				1117D199D4FA1DAAEB230A3A /* PBXSourcesBuildPhase.m in Sources */,
+				1117D87CF9D8F8D6797FC830 /* PBXBuildPhase.m in Sources */,
+				1117DC294507FAB5756D1B66 /* PBXAppleScriptBuildPhase.m in Sources */,
+				1117D25E26CCF2C27D4C94AD /* PBXShellScriptBuildPhase.m in Sources */,
+				1117DB29CA4ECBD6E07B92D5 /* PBXHeadersBuildPhase.m in Sources */,
+				1117D100224C7813E91ED305 /* PBXFrameworksBuildPhase.m in Sources */,
+				1117D49E538A10B57673394C /* PBXResourcesBuildPhase.m in Sources */,
+				1117D595FB357B711CE6EFC2 /* PBXCopyFilesBuildPhase.m in Sources */,
+				1117DBAC6571A55E9F76747C /* PBXBuildFile.m in Sources */,
+				1117D00E417096AAD7C40687 /* XCConfigurationList.m in Sources */,
+				1117DA392DA51C4488FF72D5 /* XCBuildConfiguration.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		839B511E23806C2600662BA3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -571,29 +726,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				83E1B3972370808500427C23 /* main.m in Sources */,
-				1117D59D82018B00FB6E5EC0 /* PBXItem.m in Sources */,
-				1117DDCB761B6E8D3B0E6DE6 /* PBXProject.m in Sources */,
-				1117D46E89D587A6B24C7818 /* PBXTarget.m in Sources */,
-				1117D3178F13224AD2B4B0EB /* PBXNativeTarget.m in Sources */,
-				1117D283F30FC63CDC9C5780 /* PBXAggregateTarget.m in Sources */,
-				1117DE81E264CA96C67F3EEF /* PBXLegacyTarget.m in Sources */,
-				1117DBE5355E94A2B78D2748 /* PBXBuildFile.m in Sources */,
-				1117DB5039A2054A65A79F53 /* XCBuildConfiguration.m in Sources */,
-				1117D7244263595A65CFCD8E /* XCConfigurationList.m in Sources */,
-				1117DE9AB3653ABD34F79BDD /* PBXBuildPhase.m in Sources */,
-				1117D6096F99E28D714F7A60 /* PBXFileReference.m in Sources */,
-				1117D3876CFE855DD77EC6AE /* PBXGroup.m in Sources */,
-				1117DD86D357EF372D14C774 /* PBXVariantGroup.m in Sources */,
-				1117D797ED81B215242B7E77 /* PBXFileElement.m in Sources */,
-				1117DB475991EE632782514B /* PBXTargetDependency.m in Sources */,
-				1117DC3415B8B9A03E09FB14 /* PBXAppleScriptBuildPhase.m in Sources */,
-				1117D8F3943DE0EC88720DA2 /* PBXCopyFilesBuildPhase.m in Sources */,
-				1117D2D5820AC172734855A5 /* PBXFrameworksBuildPhase.m in Sources */,
-				1117D28E151A3CAEAFCA7ECA /* PBXHeadersBuildPhase.m in Sources */,
-				1117DFA95E1F298D58D36AF3 /* PBXResourcesBuildPhase.m in Sources */,
-				1117D8CDA4C428F298051EEC /* PBXShellScriptBuildPhase.m in Sources */,
-				1117D8187C26761963F643C2 /* PBXSourcesBuildPhase.m in Sources */,
-				1117D24659AEA5B32EF1DD13 /* PBXContainerItemProxy.m in Sources */,
 				1117D42EB90895042EF598C9 /* GNUstepInfo.m in Sources */,
 				1117DB077B632565C88E3448 /* PGRunInfo.m in Sources */,
 				1117D1009272DDAA632030C8 /* PGProjectFile.m in Sources */,
@@ -605,6 +737,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		832E0CE5239852330048185F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 839B512123806C2600662BA3 /* Moscow */;
+			targetProxy = 832E0CE4239852330048185F /* PBXContainerItemProxy */;
+		};
+		832E0CE72398525A0048185F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 832E0CDB239852250048185F /* PBX */;
+			targetProxy = 832E0CE62398525A0048185F /* PBXContainerItemProxy */;
+		};
 		8349E44F23844A0000274FDF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 839B512123806C2600662BA3 /* Moscow */;
@@ -613,6 +755,58 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		832E0CE1239852250048185F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = Q5XWZ7S7E9;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = PBX/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.projectgalen.PBX;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		832E0CE2239852250048185F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = Q5XWZ7S7E9;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = PBX/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.projectgalen.PBX;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		839B512723806C2600662BA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -801,6 +995,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		832E0CE3239852250048185F /* Build configuration list for PBXNativeTarget "PBX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				832E0CE1239852250048185F /* Debug */,
+				832E0CE2239852250048185F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		839B512923806C2600662BA3 /* Build configuration list for PBXNativeTarget "Moscow" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -10,7 +10,8 @@ EXENAME="pbxbuild"
 rm -f "${PRJDIR}/${EXENAME}"
 
 "${PRJDIR}/Moscow/build.sh" || exit $?
-"${PRJDIR}/PBXBuilder/build.sh" "${PRJDIR}/Moscow" || exit $?
+"${PRJDIR}/PBX/build.sh" "${PRJDIR}/Moscow" || exit $?
+"${PRJDIR}/PBXBuilder/build.sh" "${PRJDIR}/Moscow" "${PRJDIR}/PBX" || exit $?
 
 CC=$(gnustep-config --variable=CC)
 

@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBX.h
+ *    FILENAME: Moscow_GNUstep_vers.c
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/26/19
+ *        DATE: 11/16/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,34 +20,8 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef ____PBXBUILDER_PBX_H____
-#define ____PBXBUILDER_PBX_H____
+extern const unsigned char PBXVersionString[];
+extern const double        PBXVersionNumber;
 
-#import <Cocoa/Cocoa.h>
-
-#import "PBXProject.h"
-#import "PBXAggregateTarget.h"
-#import "PBXNativeTarget.h"
-#import "PBXLegacyTarget.h"
-#import "PBXTarget.h"
-#import "PBXTargetDependency.h"
-#import "PBXContainerItemProxy.h"
-#import "PBXGroup.h"
-#import "PBXVariantGroup.h"
-#import "PBXFileReference.h"
-#import "PBXFileElement.h"
-#import "PBXFileElementTypes.h"
-#import "PBXItem.h"
-#import "PBXCopyFilesBuildPhase.h"
-#import "PBXSourcesBuildPhase.h"
-#import "PBXFrameworksBuildPhase.h"
-#import "PBXAppleScriptBuildPhase.h"
-#import "PBXResourcesBuildPhase.h"
-#import "PBXShellScriptBuildPhase.h"
-#import "PBXHeadersBuildPhase.h"
-#import "PBXBuildPhase.h"
-#import "XCConfigurationList.h"
-#import "XCBuildConfiguration.h"
-#import "PBXBuildFile.h"
-
-#endif // ____PBXBUILDER_PBX_H____
+const unsigned char PBXVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:Moscow  PROJECT:PBXBuilder-1" "\n";
+const double        PBXVersionNumber __attribute__ ((used))   = (double)1.;
