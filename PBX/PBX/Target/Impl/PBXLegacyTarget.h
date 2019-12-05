@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PBXLegacyTarget : PBXTarget
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 
 @end
 

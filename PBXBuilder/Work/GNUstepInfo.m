@@ -20,8 +20,8 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import "GNUstepInfo.h"
 #import <Moscow/Moscow.h>
+#import "GNUstepInfo.h"
 
 @implementation GNUstepInfo {
     }

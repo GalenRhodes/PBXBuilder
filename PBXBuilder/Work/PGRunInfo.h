@@ -25,7 +25,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class PGProjectFile;
+@class PBXProjectFile;
 @class GNUstepInfo;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -34,9 +34,9 @@ FOUNDATION_EXPORT NSString *const PGProjErrorDomain;
 
 @interface PGRunInfo : NSObject
 
-    @property(readonly, copy) NSString                 *programPath;
-    @property(readonly)/*  */ GNUstepInfo              *gnustepInfo;
-    @property(readonly)/*  */ NSArray<PGProjectFile *> *projects;
+    @property(readonly, copy) NSString                  *programPath;
+    @property(readonly)/*  */ GNUstepInfo               *gnustepInfo;
+    @property(readonly)/*  */ NSArray<PBXProjectFile *> *projects;
 
     -(instancetype)initWithCommandLine:(const char *_Nonnull *_Nonnull)argv argCount:(int)argc error:(NSError **)pError;
 

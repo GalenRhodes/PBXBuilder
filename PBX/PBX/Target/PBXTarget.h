@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
     @property(readonly)/*      */ NSArray<PBXBuildPhase *>       *buildPhases;
     @property(readonly)/*      */ NSArray<PBXTargetDependency *> *dependencies;
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 
 @end
 

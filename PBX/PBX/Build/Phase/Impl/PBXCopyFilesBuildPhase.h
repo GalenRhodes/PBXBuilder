@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
     @property(readonly) NSString  *dstPath;
     @property(readonly) NSInteger dstSubfolderSpec;
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 
 @end
 

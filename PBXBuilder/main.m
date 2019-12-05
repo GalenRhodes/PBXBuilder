@@ -9,7 +9,6 @@
 #import <Moscow/Moscow.h>
 #import <PBX/PBX.h>
 #import "PGRunInfo.h"
-#import "PGProjectFile.h"
 #import "PBXTools.h"
 
 int main(int argc, const char *argv[]) {
@@ -22,7 +21,7 @@ int main(int argc, const char *argv[]) {
         if(runInfo) {
             PGPrintStr(@"\nBuilding the following project(s):\n");
 
-            for(PGProjectFile *projectFile in runInfo.projects) {
+            for(PBXProjectFile *projectFile in runInfo.projects) {
                 PGPrintf(@"     - \"%@\"\n", projectFile.projectName);
                 PGPrintf(@"\n%@\n", [projectFile.project description]);
             }

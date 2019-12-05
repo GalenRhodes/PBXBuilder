@@ -26,17 +26,17 @@
 #import <Cocoa/Cocoa.h>
 #import <Moscow/Moscow.h>
 
-@class PGProjectFile;
+@class PBXProjectFile;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PBXItem : NSObject<NSLocking>
 
-    @property(readonly) NSString      *itemId;
-    @property(readonly) NSString      *objType;
-    @property(readonly) PGProjectFile *projectFile;
+    @property(readonly) NSString       *itemId;
+    @property(readonly) NSString       *objType;
+    @property(readonly) PBXProjectFile *projectFile;
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 
     -(nullable id)iv:(NSString *)key;
 

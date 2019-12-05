@@ -20,11 +20,11 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
+#import <Moscow/Moscow.h>
+#import <PBX/PBX.h>
 #import "PGRunInfo.h"
 #import "GNUstepInfo.h"
 #import "PBXTools.h"
-#import "PGProjectFile.h"
-#import <Moscow/Moscow.h>
 
 NSString *const PGProjErrorDomain = @"com.projectgalen.PBXBuilder";
 
@@ -74,7 +74,7 @@ NSString *const PGProjErrorDomain = @"com.projectgalen.PBXBuilder";
 
             int i = 1;
 
-            NSMutableArray<PGProjectFile *> *projectsList = [NSMutableArray new];
+            NSMutableArray<PBXProjectFile *> *projectsList = [NSMutableArray new];
             _projects = projectsList;
 
             while(i < argc) {
@@ -131,8 +131,8 @@ NSString *const PGProjErrorDomain = @"com.projectgalen.PBXBuilder";
                             }
 
                             if(projectName.length && projectFilename.length) {
-                                NSString      *projectPath = projectFilename.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent;
-                                PGProjectFile *projectFile = [[PGProjectFile alloc] initWithProjectName:projectName projectPath:projectPath error:&error];
+                                NSString       *projectPath = projectFilename.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent;
+                                PBXProjectFile *projectFile = [[PBXProjectFile alloc] initWithProjectName:projectName projectPath:projectPath error:&error];
 
                                 if(projectFile) {
                                     [projectsList addObject:projectFile];

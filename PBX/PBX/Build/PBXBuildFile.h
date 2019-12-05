@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
     @property(readonly)/*      */ NSDictionary<NSString *, id> *settings;
     @property(readonly)/*      */ NSArray<NSString *>          *attributes;
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 
 @end
 

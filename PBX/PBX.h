@@ -26,6 +26,7 @@ FOUNDATION_EXPORT double              PBXVersionNumber;
 FOUNDATION_EXPORT const unsigned char PBXVersionString[];
 
 #import <PBX/PBXProject.h>
+#import <PBX/PBXProjectFile.h>
 #import <PBX/PBXAggregateTarget.h>
 #import <PBX/PBXNativeTarget.h>
 #import <PBX/PBXLegacyTarget.h>

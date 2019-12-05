@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
     @property(readonly, nullable) NSString      *path;
     @property(readonly)/*      */ PBXSourceTree sourceTree;
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 
     +(PBXSourceTree)sourceTreeForId:(NSString *)sourceTreeId;
 

@@ -21,7 +21,7 @@
  *//************************************************************************/
 
 #import <Moscow/Moscow.h>
-#import "PGProjectFile.h"
+#import "PBXProjectFile.h"
 #import "PBX.h"
 
 @implementation PBXProject {
@@ -29,7 +29,7 @@
         dispatch_once_t      _targetsOnce;
     }
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
         return self;
     }

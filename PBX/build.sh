@@ -6,9 +6,12 @@ cd "$a"
 SUBPRJPATH="${PWD}"
 cd "$b"
 
+CODE_OPTS="-Ofast -g0"
+
 SUBPRJNAME=$(basename "${SUBPRJPATH}")
 SUBPRJBUILDPATH="${SUBPRJPATH}/build"
 SUBPRJHEADERSPATH="${SUBPRJBUILDPATH}/include"
+SUBPRJFWKHEADERSPATH="${SUBPRJHEADERSPATH}/${SUBPRJNAME}"
 SUBPRJOBJPATH="${SUBPRJBUILDPATH}/objs"
 
 rm -fr "${SUBPRJBUILDPATH}"
@@ -22,38 +25,37 @@ for x in $(gnustep-config --objc-flags); do
     fi
 done
 
-OPTS="${y:1} -fobjc-arc -fobjc-nonfragile-abi -I${SUBPRJHEADERSPATH} -Ofast -g0"
+OPTS="${y:1} -fobjc-arc -fobjc-nonfragile-abi -I${SUBPRJHEADERSPATH} -I${SUBPRJFWKHEADERSPATH} ${CODE_OPTS}"
 for _a in $@; do
     cd "${_a}"
     OPTS="${OPTS} -I${PWD}/build/include"
+    cd "$b"
 done
-cd "$b"
-LOPTS="$(gnustep-config --base-libs) -ldispatch"
 
 mkdir -p "${SUBPRJBUILDPATH}" || exit $?
 mkdir -p "${SUBPRJHEADERSPATH}" || exit $?
-mkdir -p "${SUBPRJHEADERSPATH}/${SUBPRJNAME}" || exit $?
+mkdir -p "${SUBPRJFWKHEADERSPATH}" || exit $?
 mkdir -p "${SUBPRJOBJPATH}" || exit $?
 
 for x in $(find "${SUBPRJPATH}" -name "*.h"); do
     y="$(basename "${x}")"
-    z="${SUBPRJHEADERSPATH}/${SUBPRJNAME}/${y}"
+    z="${SUBPRJFWKHEADERSPATH}/${y}"
     echo "cp ${x} ==> ${z}"
-    cp "${x}" "${z}" || exit $?
+    ln -s "${x}" "${z}" || exit $?
 done
 
 for x in $(find "${SUBPRJPATH}" -name "*.m"); do
     y=$(basename "${x}")
     z="${SUBPRJOBJPATH}/${y}.o"
-    echo "${y} ==> ${z}"
+    echo "${CC} ${OPTS} -c ${x} -o ${z}"
     "${CC}" ${OPTS} -c "${x}" -o "${z}" || exit $?
 done
 
-for x in $(find "${SUBPRJPATH}" -name "${SUBPRJNAME}_GNUstep_vers.[cm]"); do
+for x in $(find "${SUBPRJPATH}" -name "*.c"); do
     y=$(basename "${x}")
     z="${SUBPRJOBJPATH}/${y}.o"
-    echo "${y} ==> ${z}"
-    "${CC}" -c "${x}" -o "${z}" || exit $?
+    echo "${CC} ${CODE_OPTS} -c ${x} -o ${z}"
+    "${CC}" ${CODE_OPTS} -c "${x}" -o "${z}" || exit $?
 done
 
 exit $?

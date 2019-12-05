@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
     @property(readonly, nullable) PBXNativeTarget       *target;
     @property(readonly, nullable) PBXContainerItemProxy *targetProxy;
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 
 @end
 

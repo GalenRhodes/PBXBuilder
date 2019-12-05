@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
     @property(readonly) PBXFileEncoding fileEncoding;
     @property(readonly) BOOL            includeInIndex;
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 
 @end
 

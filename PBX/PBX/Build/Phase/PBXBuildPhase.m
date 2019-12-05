@@ -22,14 +22,14 @@
 
 #import "PBXBuildPhase.h"
 #import "PBXBuildFile.h"
-#import "PGProjectFile.h"
+#import "PBXProjectFile.h"
 
 @implementation PBXBuildPhase {
         NSArray<PBXBuildFile *> *_files;
         dispatch_once_t         _filesOnce;
     }
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
         return self;
     }

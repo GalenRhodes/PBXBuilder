@@ -22,14 +22,14 @@
 
 #import "XCConfigurationList.h"
 #import "XCBuildConfiguration.h"
-#import "PGProjectFile.h"
+#import "PBXProjectFile.h"
 
 @implementation XCConfigurationList {
         NSArray         *_buildConfigurations;
         dispatch_once_t _buildConfigurationsOnce;
     }
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
         return self;
     }

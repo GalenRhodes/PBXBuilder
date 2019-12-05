@@ -21,7 +21,7 @@
  *//************************************************************************/
 
 #import "PBXItem.h"
-#import "PGProjectFile.h"
+#import "PBXProjectFile.h"
 
 typedef void (^ListPrinterBlock)(id _item, NSString **_prefix, id *_subItem);
 
@@ -46,7 +46,7 @@ NS_INLINE NSString *blankString(NSUInteger length) {
     @synthesize itemId = _itemId;
     @synthesize projectFile = _projectFile;
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile {
         self = [super init];
 
         if(self) {

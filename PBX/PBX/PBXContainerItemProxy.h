@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
     @property(readonly) NSString   *remoteInfo;
     @property(readonly) NSString   *remoteGlobalIDString;
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 
 @end
 

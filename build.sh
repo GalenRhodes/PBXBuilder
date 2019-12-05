@@ -4,17 +4,23 @@ x="${PWD}"
 y=$(dirname "$0")
 cd "${y}"
 PRJDIR="${PWD}"
-
 EXENAME="pbxbuild"
+
+SUBPROJECTS="Moscow PBX PBXBuilder"
+PRIORPDIRS=""
+LINK_FILES=""
 
 rm -f "${PRJDIR}/${EXENAME}"
 
-"${PRJDIR}/Moscow/build.sh" || exit $?
-"${PRJDIR}/PBX/build.sh" "${PRJDIR}/Moscow" || exit $?
-"${PRJDIR}/PBXBuilder/build.sh" "${PRJDIR}/Moscow" "${PRJDIR}/PBX" || exit $?
+for prj in ${SUBPROJECTS}; do
+    q="${PRJDIR}/${prj}"
+    "${q}/build.sh" ${PRIORPDIRS} || exit $?
+    PRIORPDIRS="${PRIORPDIRS} ${q}"
+    LINK_FILES="${LINK_FILES} $(find "${q}/build/objs" -name "*.o")"
+done
 
 CC=$(gnustep-config --variable=CC)
-
-"${CC}" $(gnustep-config --base-libs) -ldispatch $(find "Moscow/build/objs" -name "*.o") $(find "PBXBuilder/build/objs" -name "*.o") -o "${PRJDIR}/${EXENAME}"
+echo "${CC} $(gnustep-config --base-libs) -ldispatch ${LINK_FILES} -o \"${PRJDIR}/${EXENAME}\""
+"${CC}" $(gnustep-config --base-libs) -ldispatch ${LINK_FILES} -o "${PRJDIR}/${EXENAME}"
 
 exit $?

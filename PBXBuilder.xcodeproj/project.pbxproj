@@ -10,7 +10,6 @@
 		1117D00E417096AAD7C40687 /* XCConfigurationList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DD40F15C0A31FEA7645C /* XCConfigurationList.m */; };
 		1117D0320E47956BB843FE1C /* PBXGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D3D63676B08B0532B8B1 /* PBXGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117D100224C7813E91ED305 /* PBXFrameworksBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D95F1C0420644CAC1E52 /* PBXFrameworksBuildPhase.m */; };
-		1117D1009272DDAA632030C8 /* PGProjectFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DDCDC641D953BCD0135E /* PGProjectFile.m */; };
 		1117D199D4FA1DAAEB230A3A /* PBXSourcesBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D07540C76FD128476F36 /* PBXSourcesBuildPhase.m */; };
 		1117D1C797CBB511BD2287DD /* PBXSourcesBuildPhase.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DC3F18DDF2B8454CC291 /* PBXSourcesBuildPhase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117D1D36FC8D567695D3443 /* NSString+Moscow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D7904899153BE5C7171A /* NSString+Moscow.m */; };
@@ -39,11 +38,13 @@
 		1117D595FB357B711CE6EFC2 /* PBXCopyFilesBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DC9C964AEE0421178951 /* PBXCopyFilesBuildPhase.m */; };
 		1117D5C279C5E8925476A438 /* NSMutableArray+Moscow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D3C6DEC033253D3DD60C /* NSMutableArray+Moscow.m */; };
 		1117D63B77A7E763587A8DF2 /* XCConfigurationList.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DDD40803A22835BE8D24 /* XCConfigurationList.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117D6A7CCB55EF26FC40B3E /* PBXProjectFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DE9D1C9DADCAD627DF6F /* PBXProjectFile.m */; };
 		1117D6BE0A9285206B000B06 /* PBXTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D29C921994A1775BDC67 /* PBXTarget.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117D6DAA625AEEE01F95956 /* PBXFileElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D66D2903769B7803E5AD /* PBXFileElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117D6EB4D7C3EF3EE1CF774 /* PBXFileReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DD6FFD9B35DBB084E95E /* PBXFileReference.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117D6ED27A1651F209A37AD /* PBXTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D4A80DF8B12D3C4B1F45 /* PBXTarget.m */; };
 		1117D75EB0CEBA75ADD782DD /* PBXTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D4C4F993E676E6487A24 /* PBXTools.m */; };
+		1117D7B892DBB1E175B39658 /* PBXProjectFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D23DD01E435445FB0C51 /* PBXProjectFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117D7FA1B8089839862A133 /* PBXContainerItemProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DA984BC1A42DB2F02160 /* PBXContainerItemProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117D81276B1160E145297EC /* PBXResourcesBuildPhase.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DAF3C26965F048EB37AC /* PBXResourcesBuildPhase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117D87AF9DBDBA2B67DFBB6 /* PBXShellScriptBuildPhase.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D92DC5B71238EA841518 /* PBXShellScriptBuildPhase.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -138,6 +139,7 @@
 		1117D18E1729388DF87DF904 /* NSRegularExpression+Moscow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSRegularExpression+Moscow.m"; sourceTree = "<group>"; };
 		1117D1C3490B1FC43AD0ABCD /* PBXShellScriptBuildPhase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXShellScriptBuildPhase.m; sourceTree = "<group>"; };
 		1117D203BC1EBEF34E55295A /* PBXBuildFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXBuildFile.m; sourceTree = "<group>"; };
+		1117D23DD01E435445FB0C51 /* PBXProjectFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXProjectFile.h; sourceTree = "<group>"; };
 		1117D241A5603A238ADEEF16 /* PBXContainerItemProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXContainerItemProxy.m; sourceTree = "<group>"; };
 		1117D250D3A2952935DB4F92 /* PBXItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXItem.h; sourceTree = "<group>"; };
 		1117D29C921994A1775BDC67 /* PBXTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXTarget.h; sourceTree = "<group>"; };
@@ -197,7 +199,6 @@
 		1117DD5D7B75243608FDD913 /* PBXNativeTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXNativeTarget.h; sourceTree = "<group>"; };
 		1117DD615A681AF8C3D22DD9 /* PBXVariantGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXVariantGroup.h; sourceTree = "<group>"; };
 		1117DD6FFD9B35DBB084E95E /* PBXFileReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXFileReference.h; sourceTree = "<group>"; };
-		1117DDCDC641D953BCD0135E /* PGProjectFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGProjectFile.m; sourceTree = "<group>"; };
 		1117DDD40803A22835BE8D24 /* XCConfigurationList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCConfigurationList.h; sourceTree = "<group>"; };
 		1117DDE29F95395F83425ACC /* PBXTargetDependency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXTargetDependency.h; sourceTree = "<group>"; };
 		1117DDF9822F1E82D4762BE9 /* PBXNativeTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXNativeTarget.m; sourceTree = "<group>"; };
@@ -205,10 +206,10 @@
 		1117DE6B249B85831991F8AE /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		1117DE8F0B5BE3F8B61A0C01 /* GNUstepInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNUstepInfo.h; sourceTree = "<group>"; };
 		1117DE9CC3AA67BCB92F526B /* PGBool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGBool.m; sourceTree = "<group>"; };
+		1117DE9D1C9DADCAD627DF6F /* PBXProjectFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXProjectFile.m; sourceTree = "<group>"; };
 		1117DE9F6A17CE87E1337AD6 /* PBXFrameworksBuildPhase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXFrameworksBuildPhase.h; sourceTree = "<group>"; };
 		1117DEC789F21593CB715AF4 /* NSData+Moscow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Moscow.h"; sourceTree = "<group>"; };
 		1117DF5ABE9E759A2AEB8B89 /* PGBool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGBool.h; sourceTree = "<group>"; };
-		1117DF5C3B0EBB74B50E18F7 /* PGProjectFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGProjectFile.h; sourceTree = "<group>"; };
 		1117DF71D599F3DF94BC992A /* Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tests.h; sourceTree = "<group>"; };
 		832E0CDC239852250048185F /* PBX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PBX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		832E0CDE239852250048185F /* PBX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PBX.h; sourceTree = "<group>"; };
@@ -263,11 +264,9 @@
 			isa = PBXGroup;
 			children = (
 				1117D7BF1BFDE2B32DC0CC18 /* GNUstepInfo.m */,
-				1117DF5C3B0EBB74B50E18F7 /* PGProjectFile.h */,
 				1117DE8F0B5BE3F8B61A0C01 /* GNUstepInfo.h */,
 				1117DC75D7BED83031E6C47F /* PGRunInfo.m */,
 				1117DA6307C577FE3D9465BD /* PGRunInfo.h */,
-				1117DDCDC641D953BCD0135E /* PGProjectFile.m */,
 				1117D4C4F993E676E6487A24 /* PBXTools.m */,
 				1117D90F882A6895A9DA4CAC /* PBXTools.h */,
 			);
@@ -310,6 +309,8 @@
 				1117DBA578E30B922D2067F7 /* FileElement */,
 				1117D241A5603A238ADEEF16 /* PBXContainerItemProxy.m */,
 				1117DA984BC1A42DB2F02160 /* PBXContainerItemProxy.h */,
+				1117D23DD01E435445FB0C51 /* PBXProjectFile.h */,
+				1117DE9D1C9DADCAD627DF6F /* PBXProjectFile.m */,
 			);
 			path = PBX;
 			sourceTree = "<group>";
@@ -496,6 +497,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				832E0CE0239852250048185F /* PBX.h in Headers */,
+				1117D7B892DBB1E175B39658 /* PBXProjectFile.h in Headers */,
 				1117D7FA1B8089839862A133 /* PBXContainerItemProxy.h in Headers */,
 				1117DECAA9C374EE894255F8 /* PBXProject.h in Headers */,
 				1117D511C61D8EA2454A7BC3 /* PBXLegacyTarget.h in Headers */,
@@ -704,6 +706,7 @@
 				1117DBAC6571A55E9F76747C /* PBXBuildFile.m in Sources */,
 				1117D00E417096AAD7C40687 /* XCConfigurationList.m in Sources */,
 				1117DA392DA51C4488FF72D5 /* XCBuildConfiguration.m in Sources */,
+				1117D6A7CCB55EF26FC40B3E /* PBXProjectFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -728,7 +731,6 @@
 				83E1B3972370808500427C23 /* main.m in Sources */,
 				1117D42EB90895042EF598C9 /* GNUstepInfo.m in Sources */,
 				1117DB077B632565C88E3448 /* PGRunInfo.m in Sources */,
-				1117D1009272DDAA632030C8 /* PGProjectFile.m in Sources */,
 				1117D75EB0CEBA75ADD782DD /* PBXTools.m in Sources */,
 				1117D227A341D98188E6854D /* Tests.m in Sources */,
 			);

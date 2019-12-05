@@ -20,9 +20,9 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
+#import <Moscow/Moscow.h>
 #import "PBXTools.h"
 #import "PGRunInfo.h"
-#import <Moscow/Moscow.h>
 
 NSString *const PGFoundProjectFilesKey = @"PGFoundProjectFilesKey";
 

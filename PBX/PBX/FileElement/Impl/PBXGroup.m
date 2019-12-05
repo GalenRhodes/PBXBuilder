@@ -21,14 +21,14 @@
  *//************************************************************************/
 
 #import "PBXGroup.h"
-#import "PGProjectFile.h"
+#import "PBXProjectFile.h"
 
 @implementation PBXGroup {
         NSArray<PBXFileElement *> *_children;
         dispatch_once_t           _childrenOnce;
     }
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
         return self;
     }

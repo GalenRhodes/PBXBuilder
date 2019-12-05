@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
     @property(nullable, readonly) NSString            *shellPath;
     @property(nullable, readonly) NSString            *shellScript;
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 
 @end
 

@@ -1,6 +1,6 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PGProjectFile.m
+ *    FILENAME: PBXProjectFile.m
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
  *        DATE: 11/4/19
@@ -20,14 +20,10 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import "PGProjectFile.h"
-#import "PBXItem.h"
-#import "PBXProject.h"
 #import <Moscow/Moscow.h>
-#import "PBXBuildPhase.h"
-#import "PBXTarget.h"
+#import <PBX/PBX.h>
 
-@implementation PGProjectFile {
+@implementation PBXProjectFile {
     }
 
     @synthesize projectName = _projectName;

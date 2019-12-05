@@ -22,12 +22,12 @@
 
 #import "PBXBuildFile.h"
 #import "PBXFileReference.h"
-#import "PGProjectFile.h"
+#import "PBXProjectFile.h"
 
 @implementation PBXBuildFile {
     }
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
         return self;
     }

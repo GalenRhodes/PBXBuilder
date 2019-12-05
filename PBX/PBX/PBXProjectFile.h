@@ -1,6 +1,6 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PGProjectFile.h
+ *    FILENAME: PBXProjectFile.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
  *        DATE: 11/4/19
@@ -30,7 +30,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PGProjectFile : NSObject
+@interface PBXProjectFile : NSObject
 
     @property(copy, readonly) NSString                            *projectName;
     @property(copy, readonly) NSString                            *projectPath;

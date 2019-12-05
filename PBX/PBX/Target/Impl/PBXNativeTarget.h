@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
     @property(readonly)/*      */ PBXProductType   productType;
     @property(nullable, readonly) PBXFileReference *productReference;
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile;
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 
 @end
 

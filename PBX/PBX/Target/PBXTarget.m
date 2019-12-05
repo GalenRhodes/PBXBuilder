@@ -24,7 +24,7 @@
 #import "XCConfigurationList.h"
 #import "PBXBuildPhase.h"
 #import "PBXTargetDependency.h"
-#import "PGProjectFile.h"
+#import "PBXProjectFile.h"
 
 @implementation PBXTarget {
         NSArray<PBXBuildPhase *>       *_buildPhases;
@@ -33,7 +33,7 @@
         dispatch_once_t                _dependenciesOnce;
     }
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
         return self;
     }

@@ -23,12 +23,12 @@
 #import "PBXTargetDependency.h"
 #import "PBXNativeTarget.h"
 #import "PBXContainerItemProxy.h"
-#import "PGProjectFile.h"
+#import "PBXProjectFile.h"
 
 @implementation PBXTargetDependency {
     }
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PGProjectFile *)projectFile {
+    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
         return self;
     }
