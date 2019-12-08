@@ -23,7 +23,7 @@
 #ifndef __PBXBUILDER_PBXBUILDPHASE_H__
 #define __PBXBUILDER_PBXBUILDPHASE_H__
 
-#import "PBXItem.h"
+#import <PBX/PBXItem.h>
 
 @class PBXBuildFile;
 

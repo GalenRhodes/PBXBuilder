@@ -23,7 +23,7 @@
 #ifndef __PBXBUILDER_PGXNATIVETARGET_H__
 #define __PBXBUILDER_PGXNATIVETARGET_H__
 
-#import "PBXTarget.h"
+#import <PBX/PBXTarget.h>
 
 @class PBXFileReference;
 
@@ -43,6 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 
     @property(nullable, readonly) NSString         *productInstallPath;
     @property(readonly)/*      */ PBXProductType   productType;
+    @property(nullable, readonly) NSString         *productTypeDescription;
     @property(nullable, readonly) PBXFileReference *productReference;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;

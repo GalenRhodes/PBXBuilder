@@ -23,7 +23,7 @@
 #ifndef __PBXBUILDER_PBXVARIANTGROUP_H__
 #define __PBXBUILDER_PBXVARIANTGROUP_H__
 
-#import "PBXGroup.h"
+#import <PBX/PBXGroup.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

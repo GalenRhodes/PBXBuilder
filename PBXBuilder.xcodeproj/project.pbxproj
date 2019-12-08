@@ -78,6 +78,8 @@
 		839B513223806D1800662BA3 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DE6B249B85831991F8AE /* Tools.m */; };
 		839B513323806D1800662BA3 /* Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DB05B8FA099CFA2EBD24 /* Tools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83E1B3972370808500427C23 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E1B3962370808500427C23 /* main.m */; };
+		83FAA4FA239ABFC7004A2650 /* PBX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 832E0CDC239852250048185F /* PBX.framework */; };
+		83FAA4FB239ABFE2004A2650 /* Moscow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839B512223806C2600662BA3 /* Moscow.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -226,6 +228,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83FAA4FB239ABFE2004A2650 /* Moscow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +243,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83FAA4FA239ABFC7004A2650 /* PBX.framework in Frameworks */,
 				8349E44D238449FB00274FDF /* Moscow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,9 +322,9 @@
 		1117D567D3EA43857831368F /* Build */ = {
 			isa = PBXGroup;
 			children = (
+				1117D357A1A0449AE3BFF168 /* Config */,
 				1117D203BC1EBEF34E55295A /* PBXBuildFile.m */,
 				1117D7DB3CB2BD8BEAF7FF43 /* PBXBuildFile.h */,
-				1117D357A1A0449AE3BFF168 /* Config */,
 				1117D57DA8D4EE0F1DBBB66A /* Phase */,
 			);
 			path = Build;
@@ -329,9 +333,9 @@
 		1117D57DA8D4EE0F1DBBB66A /* Phase */ = {
 			isa = PBXGroup;
 			children = (
+				1117DAC2B8E9771BA5DFAC76 /* Impl */,
 				1117D3F95229E211675E3E1A /* PBXBuildPhase.m */,
 				1117D9FC9C8821CB054613A0 /* PBXBuildPhase.h */,
-				1117DAC2B8E9771BA5DFAC76 /* Impl */,
 			);
 			path = Phase;
 			sourceTree = "<group>";
@@ -348,9 +352,9 @@
 		1117DA153F61E8CDF143C671 /* Target */ = {
 			isa = PBXGroup;
 			children = (
+				1117D076ED57672F989219AE /* Impl */,
 				1117D4A80DF8B12D3C4B1F45 /* PBXTarget.m */,
 				1117D29C921994A1775BDC67 /* PBXTarget.h */,
-				1117D076ED57672F989219AE /* Impl */,
 				1117D0E6328E9752489B41D4 /* PBXTargetDependency.m */,
 				1117DDE29F95395F83425ACC /* PBXTargetDependency.h */,
 			);

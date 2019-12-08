@@ -56,6 +56,10 @@
         return (num ? (PBXProductType)num.unsignedIntegerValue : PBX_PRODUCTTYPE_NONE);
     }
 
+    -(NSString *)productTypeDescription {
+        return [self iv:@"productType"];
+    }
+
     -(PBXFileReference *)productReference {
         return [self itemForKey:@"productReference"];
     }
@@ -63,8 +67,9 @@
     -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {
         [super appendDescBody:str indent:indent];
         PBXAppendItem(str, indent, @"productInstallPath", self.productInstallPath);
-        PBXAppendItem(str, indent, @"productType", [self iv:@"productType"]);
+        PBXAppendItem(str, indent, @"productType", self.productTypeDescription);
         PBXAppendItem(str, indent, @"productReference", self.productReference);
         return str;
     }
+
 @end

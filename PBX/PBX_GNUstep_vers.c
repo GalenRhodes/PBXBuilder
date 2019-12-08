@@ -1,9 +1,15 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: Moscow_GNUstep_vers.c
+ *    FILENAME: PBX_GNUstep_vers.c
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
  *        DATE: 11/16/19
+ * DESCRIPTION: If building under XCode (actually it's the xcodebuild
+ *              command-line app that gets called) this file would be
+ *              automatically generated and stored in the temporary
+ *              build files as "PBX_vers.c". So for GNUstep I'm simply
+ *              creating a static version called "PBX_GNUstep_vers.c"
+ *              so the linking doesn't fail.
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *

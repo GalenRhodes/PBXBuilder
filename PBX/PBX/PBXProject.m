@@ -24,6 +24,8 @@
 #import "PBXProjectFile.h"
 #import "PBX.h"
 
+NSArray<PBXTarget *> *sortTargetsByDependencies(NSMutableArray<PBXTarget *> *srcArray);
+
 @implementation PBXProject {
         NSArray<PBXTarget *> *_targets;
         dispatch_once_t      _targetsOnce;
@@ -62,13 +64,14 @@
         return [self itemForKey:@"buildConfigurationList"];
     }
 
+    -(NSMutableArray<PBXTarget *> *)getRawTargets {
+        NSMutableArray<PBXTarget *> *srcArray = [NSMutableArray new];
+        [[self iv:@"targets"] enumerateObjectsUsingBlock:^(NSString *itemId, NSUInteger idx, BOOL *stop) { [srcArray addObjectWithCheck:[self itemForID:itemId]]; }];
+        return srcArray;
+    }
+
     -(NSArray<PBXTarget *> *)targets {
-        dispatch_once(&_targetsOnce, ^{
-            NSMutableArray<PBXTarget *> *array = [NSMutableArray new];
-            NSArray<NSString *>         *refs  = [self iv:@"targets"];
-            [refs enumerateObjectsUsingBlock:^(NSString *itemId, NSUInteger idx, BOOL *stop) { [array addObjectWithCheck:[self itemForID:itemId]]; }];
-            _targets = array;
-        });
+        dispatch_once(&_targetsOnce, ^{ _targets = sortTargetsByDependencies(self.getRawTargets); });
         return _targets;
     }
 
@@ -101,3 +104,66 @@
     }
 
 @end
+
+BOOL isTargetInArray(PBXTarget *target, NSArray<PBXTarget *> *dstArray) {
+    for(PBXTargetDependency *dep in target.dependencies) if(![dstArray containsObject:dep.target]) return NO;
+    return YES;
+}
+
+BOOL moveDepTargets(NSMutableArray<PBXTarget *> *srcArray, NSMutableArray<PBXTarget *> *dstArray) {
+    __block BOOL didSomething = NO;
+
+    [srcArray enumerateObjectsUsingBlock:^(PBXTarget *target, NSUInteger idx, BOOL *stop) {
+        if(isTargetInArray(target, dstArray)) {
+            [dstArray addObject:target];
+            didSomething = YES;
+        }
+    }];
+
+    if(didSomething) [srcArray removeObjectsInArray:dstArray];
+    return didSomething;
+}
+
+BOOL moveNonDepTargets(NSMutableArray<PBXTarget *> *srcArray, NSMutableArray<PBXTarget *> *dstArray) {
+    __block BOOL didSomething = NO;
+
+    [srcArray enumerateObjectsUsingBlock:^(PBXTarget *target, NSUInteger idx, BOOL *stop) {
+        if(target.dependencies.count == 0) {
+            [dstArray addObject:target];
+            didSomething = YES;
+        }
+    }];
+
+    if(didSomething) [srcArray removeObjectsInArray:dstArray];
+    return didSomething;
+}
+
+NSArray<PBXTarget *> *sortTargetsByDependencies(NSMutableArray<PBXTarget *> *srcArray) {
+    NSMutableArray<PBXTarget *> *dstArray = [NSMutableArray new];
+
+    /*
+     * Now let's sort the targets by internal dependencies.
+     * Start by finding the targets with no dependencies and
+     * adding them to the destination array first.
+     */
+    BOOL didSomething = moveNonDepTargets(srcArray, dstArray);
+
+    /*
+     * Now do the same with the remaining targets whose dependencies are all in the
+     * destination array. Repeat until either no more targets remain in the source
+     * array or any remaining targets have no internal dependencies (ie: their
+     * dependencies are all external).
+     */
+    while(didSomething && (srcArray.count > 0)) didSomething = moveDepTargets(srcArray, dstArray);
+
+    /*
+     * Copy any remaining targets over.
+     */
+    if(srcArray.count) {
+        [dstArray addObjectsFromArray:srcArray];
+        [srcArray removeAllObjects];
+    }
+
+    return dstArray;
+}
+

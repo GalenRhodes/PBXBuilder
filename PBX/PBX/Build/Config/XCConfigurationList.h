@@ -24,7 +24,7 @@
 #define __PBXBUILDER_XCCONFIGURATIONLIST_H__
 
 #import <Cocoa/Cocoa.h>
-#import "PBXItem.h"
+#import <PBX/PBXItem.h>
 
 @class XCBuildConfiguration;
 

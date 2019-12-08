@@ -23,7 +23,7 @@
 #ifndef __PBXBUILDER_PBXLEGACYTARGET_H__
 #define __PBXBUILDER_PBXLEGACYTARGET_H__
 
-#import "PBXTarget.h"
+#import <PBX/PBXTarget.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

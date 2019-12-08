@@ -23,8 +23,8 @@
 #ifndef __PBXBUILDER_PBXFILEELEMENT_H__
 #define __PBXBUILDER_PBXFILEELEMENT_H__
 
-#import "PBXItem.h"
-#import "PBXFileElementTypes.h"
+#import <PBX/PBXItem.h>
+#import <PBX/PBXFileElementTypes.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

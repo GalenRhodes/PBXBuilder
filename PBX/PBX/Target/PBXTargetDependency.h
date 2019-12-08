@@ -23,7 +23,7 @@
 #ifndef __PBXBUILDER_PBXTARGETDEPENDENCY_H__
 #define __PBXBUILDER_PBXTARGETDEPENDENCY_H__
 
-#import "PBXItem.h"
+#import <PBX/PBXItem.h>
 
 @class PBXNativeTarget;
 @class PBXContainerItemProxy;
