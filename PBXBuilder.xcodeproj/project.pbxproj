@@ -155,6 +155,7 @@
 		1117D4A80DF8B12D3C4B1F45 /* PBXTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXTarget.m; sourceTree = "<group>"; };
 		1117D4C4F993E676E6487A24 /* PBXTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXTools.m; sourceTree = "<group>"; };
 		1117D50CB4803945840E84BC /* Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
+		1117D5D141B3AFD8CDBA4898 /* ClassOverview.docx */ = {isa = PBXFileReference; lastKnownFileType = file.docx; path = ClassOverview.docx; sourceTree = "<group>"; };
 		1117D5E62FF61A23C17291DC /* PBXAggregateTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXAggregateTarget.m; sourceTree = "<group>"; };
 		1117D60B10EBB5F947D27ABD /* PBXAggregateTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXAggregateTarget.h; sourceTree = "<group>"; };
 		1117D657E37085B8E000CFFC /* SendToServer.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = SendToServer.sh; sourceTree = "<group>"; };
@@ -469,6 +470,7 @@
 				1117D8627AEF17859F1D2E34 /* build.sh */,
 				1117D657E37085B8E000CFFC /* SendToServer.sh */,
 				1117D112D33F1583A77A8596 /* sample.txt */,
+				1117D5D141B3AFD8CDBA4898 /* ClassOverview.docx */,
 			);
 			sourceTree = "<group>";
 		};
