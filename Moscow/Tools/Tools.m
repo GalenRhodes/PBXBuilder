@@ -35,6 +35,7 @@ NSInteger PGExecuteApplication(NSString *appPath, NSArray *appParams, NSString *
         NSTask    *task = [[NSTask alloc] init];
         task.launchPath     = appPath;
         task.arguments      = appParams;
+        task.environment    = @{ @"galen": @"rhodes" };
         task.standardOutput = [NSPipe pipe];
         task.standardError  = [NSPipe pipe];
 #ifdef DEBUG
@@ -42,17 +43,17 @@ NSInteger PGExecuteApplication(NSString *appPath, NSArray *appParams, NSString *
         for(NSString *p in appParams) PGPrintf(@" \"%@\"", p);
 #endif
         [task launch];
-        NSString *output = PGStringFromPipe((NSPipe *)task.standardOutput);
+        NSString *output = PGStringFromPipe((NSPipe *)task.standardOutput, NULL);
 #ifdef DEBUG
         PGPrintf(@"\nWaiting...");
 #endif
         [task waitUntilExit];
 #ifdef DEBUG
-        PGPrintf(@"\nDone wating: %d\n", task.terminationStatus);
+        PGPrintf(@"\nDone waiting: %d\n", task.terminationStatus);
 #endif
 
         if((st = task.terminationStatus)) {
-            NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: PGStringFromPipe((NSPipe *)task.standardError) };
+            NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: PGStringFromPipe((NSPipe *)task.standardError, NULL) };
             setpptr(error, [NSError errorWithDomain:NSCocoaErrorDomain code:1001001 userInfo:userInfo]);
         }
 
@@ -66,15 +67,31 @@ NSInteger PGExecuteApplication(NSString *appPath, NSArray *appParams, NSString *
             PGPrintf(@"Exception UserInfo Key: \"%@\"\n", key);
         }
 #endif
-
-        setpptr(error, [NSError errorWithDomain:MoscowErrorDomain code:1021 userInfo:@{ NSLocalizedDescriptionKey: exception.reason }]);
+        setpptr(error, PGErrorFromException(1021, exception));
         setpptr(appOutput, nil);
         return 1021;
     }
 }
 
-NSString *PGStringFromPipe(NSPipe *pipe) {
-    return [[NSString alloc] initWithData:pipe.fileHandleForReading.readDataToEndOfFile encoding:NSUTF8StringEncoding];
+NSString *PGStringFromPipe(NSPipe *pipe, NSError **error) {
+    NSData *data = nil;
+    setpptr(error, nil);
+#ifdef __APPLE__
+    data = [pipe.fileHandleForReading readDataToEndOfFileAndReturnError:error];
+#else
+    @try { data = [pipe.fileHandleForReading readDataToEndOfFile]; } @catch(NSException *exception) { setpptr(error, PGErrorFromException(1022, exception)); }
+#endif
+    return (data ? [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] : nil);
+}
+
+NSError *PGErrorFromException(NSInteger code, NSException *ex) {
+    return PGMakeError(code, PGFormat(@"%@: %@", ex.name, ex.reason), ex.userInfo);
+}
+
+NSError *PGMakeError(NSInteger code, NSString *reason, NSDictionary *userInfo) {
+    NSMutableDictionary *_userInfo = (userInfo ? userInfo.mutableCopy : [NSMutableDictionary new]);
+    _userInfo[NSLocalizedDescriptionKey] = (reason ?: @"Unknown Error");
+    return [NSError errorWithDomain:MoscowErrorDomain code:code userInfo:_userInfo];
 }
 
 dispatch_queue_t PGWorkQueue(void) {

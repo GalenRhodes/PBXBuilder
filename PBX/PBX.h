@@ -25,20 +25,15 @@
 FOUNDATION_EXPORT double              PBXVersionNumber;
 FOUNDATION_EXPORT const unsigned char PBXVersionString[];
 
-#import <PBX/PBXProject.h>
+#import <PBX/PBXItem.h>
 #import <PBX/PBXProjectFile.h>
-#import <PBX/PBXAggregateTarget.h>
-#import <PBX/PBXNativeTarget.h>
-#import <PBX/PBXLegacyTarget.h>
+#import <PBX/PBXProject.h>
 #import <PBX/PBXTarget.h>
 #import <PBX/PBXTargetDependency.h>
-#import <PBX/PBXContainerItemProxy.h>
-#import <PBX/PBXGroup.h>
-#import <PBX/PBXVariantGroup.h>
-#import <PBX/PBXFileReference.h>
-#import <PBX/PBXFileElement.h>
-#import <PBX/PBXFileElementTypes.h>
-#import <PBX/PBXItem.h>
+#import <PBX/PBXNativeTarget.h>
+#import <PBX/PBXLegacyTarget.h>
+#import <PBX/PBXAggregateTarget.h>
+#import <PBX/PBXBuildPhase.h>
 #import <PBX/PBXCopyFilesBuildPhase.h>
 #import <PBX/PBXSourcesBuildPhase.h>
 #import <PBX/PBXFrameworksBuildPhase.h>
@@ -46,9 +41,14 @@ FOUNDATION_EXPORT const unsigned char PBXVersionString[];
 #import <PBX/PBXResourcesBuildPhase.h>
 #import <PBX/PBXShellScriptBuildPhase.h>
 #import <PBX/PBXHeadersBuildPhase.h>
-#import <PBX/PBXBuildPhase.h>
+#import <PBX/PBXFileElementTypes.h>
+#import <PBX/PBXFileElement.h>
+#import <PBX/PBXFileReference.h>
+#import <PBX/PBXGroup.h>
+#import <PBX/PBXVariantGroup.h>
+#import <PBX/PBXBuildFile.h>
+#import <PBX/PBXContainerItemProxy.h>
 #import <PBX/XCConfigurationList.h>
 #import <PBX/XCBuildConfiguration.h>
-#import <PBX/PBXBuildFile.h>
 
 

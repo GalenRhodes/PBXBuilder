@@ -39,6 +39,8 @@ FOUNDATION_EXPORT PBXErrorCodes parseFindProjectResults(NSString *dir,
                                                         NSString *_Nullable *_Nullable pProjectFilename,
                                                         NSError **error);
 
+FOUNDATION_EXPORT void printfc(NSUInteger maxLength, NSString *format, ...)  NS_FORMAT_FUNCTION(2, 3);
+
 NS_ASSUME_NONNULL_END
 
 #endif // __PBXBUILDER_PGXTOOLS_H__

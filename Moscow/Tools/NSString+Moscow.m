@@ -40,6 +40,27 @@ NS_INLINE BOOL foo(NSString *s, NSRange r) {
 
 @implementation NSString(Moscow)
 
+    -(NSString *)stringByLeftPaddingToLength:(NSUInteger)length withString:(NSString *)padding startingAtIndex:(NSUInteger)idx {
+        NSUInteger selfLength    = self.length;
+        NSUInteger paddingLength = padding.length;
+
+        if(selfLength < length) {
+            if(paddingLength == 0) @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Padding is empty" userInfo:nil];
+            if(idx >= paddingLength) @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Index beyond length of padding" userInfo:nil];
+
+            NSMutableString *str         = [NSMutableString stringWithCapacity:length];
+            NSUInteger      neededLength = (length - selfLength);
+            [str appendString:[padding substringWithRange:NSMakeRange(idx, MIN(neededLength, (paddingLength - idx)))]];
+            while((str.length + paddingLength) <= neededLength) [str appendString:padding];
+            if(str.length < neededLength) [str appendString:[padding substringWithRange:NSMakeRange(0, (neededLength - str.length))]];
+            [str appendString:self];
+
+            return str;
+        }
+
+        return self;
+    }
+
     -(NSRange)range {
         return NSMakeRange(0, self.length);
     }

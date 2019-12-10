@@ -26,6 +26,16 @@
 
 NSString *const PGFoundProjectFilesKey = @"PGFoundProjectFilesKey";
 
+void printfc(NSUInteger maxLength, NSString *format, ...) {
+    va_list args;
+    va_start(args, format);
+    NSString *str = [[NSString alloc] initWithFormat:format arguments:args];
+    if(str.length > maxLength) str = [str substringWithRange:NSMakeRange(0, maxLength)];
+    PGPrintStr(str);
+    PGPrintStr(@"\n");
+    va_end(args);
+}
+
 PBXErrorCodes parseFindProjectResults(NSString *dir, NSArray<NSString *> *array, NSString **pProjectName, NSString **pProjectFilename, NSError **error) {
     NSError             *e     = nil;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(?<=/)([^/.]+)\\.xcodeproj/project.pbxproj" options:0 error:&e];

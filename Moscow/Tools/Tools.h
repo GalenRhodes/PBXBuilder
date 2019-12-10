@@ -47,9 +47,13 @@ typedef BOOL (^PGFindBlock)(NSString *path, NSString *filename);
 
 FOUNDATION_EXPORT NSString *const MoscowErrorDomain;
 
+FOUNDATION_EXPORT NSError *PGErrorFromException(NSInteger code, NSException *ex);
+
+FOUNDATION_EXPORT NSError *PGMakeError(NSInteger code, NSString *reason, NSDictionary *_Nullable userInfo);
+
 FOUNDATION_EXPORT NSInteger PGExecuteApplication(NSString *appPath, NSArray *appParams, NSString *_Nullable *_Nullable appOutput, NSError **error);
 
-FOUNDATION_EXPORT NSString *PGStringFromPipe(NSPipe *pipe);
+FOUNDATION_EXPORT NSString *PGStringFromPipe(NSPipe *pipe, NSError **error);
 
 FOUNDATION_EXPORT dispatch_queue_t PGWorkQueue(void);
 

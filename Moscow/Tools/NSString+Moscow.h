@@ -37,6 +37,8 @@ typedef NSString *_Nullable (^PGMacroBlock)(NSString *_Nonnull macro, BOOL *_Non
 
     -(NSString *)stringByReplacingMacros:(PGMacroBlock)block;
 
+    -(NSString *)stringByLeftPaddingToLength:(NSUInteger)length withString:(NSString *)padding startingAtIndex:(NSUInteger)idx;
+
     -(NSRange)range;
 
     -(NSString *)substringFrom:(NSUInteger)fromIdx to:(NSUInteger)toIdx;
