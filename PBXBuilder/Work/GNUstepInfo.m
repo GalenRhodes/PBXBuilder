@@ -23,24 +23,23 @@
 #import <Moscow/Moscow.h>
 #import "GNUstepInfo.h"
 
+@interface GNUstepInfo()
+
+    @property(nullable, copy) NSString *ccPath;
+    @property(nullable, copy) NSString *cxxPath;
+    @property(nullable, copy) NSString *applcationPath;
+    @property(nullable, copy) NSString *toolsPath;
+    @property(nullable, copy) NSString *libraryPath;
+    @property(nullable, copy) NSString *headersPath;
+    @property(nullable, copy) NSString *libsPath;
+    @property(nullable, copy) NSString *docPath;
+    @property(nullable, copy) NSString *manPath;
+    @property(nullable, copy) NSString *infoPath;
+
+@end
+
 @implementation GNUstepInfo {
     }
-
-    @synthesize gnustepConfig = _gnustepConfig;
-    @synthesize ccPath = _ccPath;
-    @synthesize cxxPath = _cxxPath;
-    @synthesize applcationPath = _applcationPath;
-    @synthesize toolsPath = _toolsPath;
-    @synthesize libraryPath = _libraryPath;
-    @synthesize headersPath = _headersPath;
-    @synthesize libsPath = _libsPath;
-    @synthesize docPath = _docPath;
-    @synthesize manPath = _manPath;
-    @synthesize infoPath = _infoPath;
-    @synthesize objcOpts = _objcOpts;
-    @synthesize linkBaseOpts = _linkBaseOpts;
-    @synthesize linkGuiOpts = _linkGuiOpts;
-    @synthesize cpuCount = _cpuCount;
 
     -(instancetype)init {
         return (self = [self init:NULL]);
@@ -50,106 +49,72 @@
         self = [super init];
 
         if(self) {
-            if(pError) *pError = nil;
-            NSError  *error = nil;
-            NSString *str   = nil;
-
-            if(PGExecuteApplication(@"which", @[ @"gnustep-config" ], &str, &error)) {
-                setpptr(pError, error);
-                return nil;
-            }
-
-            _gnustepConfig = str.trim.copy;
-
-            NSArray<NSString *> *results = [self getGNUstepEnv:@[
-                @"--variable=CC",                      // --
-                @"--variable=CXX",                     // --
-                @"--variable=GNUSTEP_LOCAL_APPS",      // --
-                @"--variable=GNUSTEP_LOCAL_TOOLS",     // --
-                @"--variable=GNUSTEP_LOCAL_LIBRARY",   // --
-                @"--variable=GNUSTEP_LOCAL_HEADERS",   // --
-                @"--variable=GNUSTEP_LOCAL_LIBRARIES", // --
-                @"--variable=GNUSTEP_LOCAL_DOC",       // --
-                @"--variable=GNUSTEP_LOCAL_DOC_MAN",   // --
-                @"--variable=GNUSTEP_LOCAL_DOC_INFO",  // --
-            ]                                            error:&error];
-            if(!results) {
-                setpptr(pError, error);
-                return nil;
-            }
-
-            _ccPath         = results[0];
-            _cxxPath        = results[1];
-            _applcationPath = results[2];
-            _toolsPath      = results[3];
-            _libraryPath    = results[4];
-            _headersPath    = results[5];
-            _libsPath       = results[6];
-            _docPath        = results[7];
-            _manPath        = results[8];
-            _infoPath       = results[9];
-
-            if(!(_objcOpts = [self getGNUstepFlags:@"--objc-flags" error:&error].mutableCopy)) {
-                setpptr(pError, error);
-                return nil;
-            }
-
-            if(!(_linkBaseOpts = [self getGNUstepFlags:@"--base-libs" error:&error].mutableCopy)) {
-                setpptr(pError, error);
-                return nil;
-            }
-
-            if(!(_linkGuiOpts = [self getGNUstepFlags:@"--gui-libs" error:&error].mutableCopy)) {
-                setpptr(pError, error);
-                return nil;
-            }
+            setpptr(pError, nil);
+            if(![self getGNUstepConfig:pError]) return nil;
+            if(![self getGNUstepEnvironment:pError]) return nil;
+            if(!(_objcOpts     = [self getGNUstepFlags:@"--objc-flags" error:pError].mutableCopy)) return nil;
+            if(!(_linkBaseOpts = [self getGNUstepFlags:@"--base-libs" error:pError].mutableCopy)) return nil;
+            if(!(_linkGuiOpts  = [self getGNUstepFlags:@"--gui-libs" error:pError].mutableCopy)) return nil;
 
             [(NSMutableArray *)_objcOpts addObject:@"-fobjc-arc"];
             [(NSMutableArray *)_objcOpts addObject:@"-fobjc-nonfragile-abi"];
             [(NSMutableArray *)_linkBaseOpts addObject:@"-ldispatch"];
             [(NSMutableArray *)_linkGuiOpts addObject:@"-ldispatch"];
 
-            _cpuCount = [self getCpuCount:&error];
+            _cpuCount = [self getCpuCount:pError];
         }
 
         return self;
     }
 
-    -(NSUInteger)getCpuCount:(NSError **)error {
-        NSString *procInfo = [NSString stringWithContentsOfFile:@"/proc/cpuinfo" encoding:NSUTF8StringEncoding error:error];
+    -(BOOL)getGNUstepConfig:(NSError **)pError {
+        PGExecute *exe = [PGExecute exeWithAppPath:@"/bin/bash" arguments:@[ @"-c", @"which gnustep-config" ] execute:YES error:pError];
+        if(!exe || [exe waitUntilExit:pError]) return NO;
+        _gnustepConfig = exe.stdOut.trim;
+        return YES;
+    }
+
+    -(BOOL)getGNUstepEnvironment:(NSError **)pError {
+        NSDictionary<NSString *, NSString *> *fuck = @{
+            @"ccPath"        : @"--variable=CC",
+            @"cxxPath"       : @"--variable=CXX",
+            @"applcationPath": @"--variable=GNUSTEP_LOCAL_APPS",
+            @"toolsPath"     : @"--variable=GNUSTEP_LOCAL_TOOLS",
+            @"libraryPath"   : @"--variable=GNUSTEP_LOCAL_LIBRARY",
+            @"headersPath"   : @"--variable=GNUSTEP_LOCAL_HEADERS",
+            @"libsPath"      : @"--variable=GNUSTEP_LOCAL_LIBRARIES",
+            @"docPath"       : @"--variable=GNUSTEP_LOCAL_DOC",
+            @"manPath"       : @"--variable=GNUSTEP_LOCAL_DOC_MAN",
+            @"infoPath"      : @"--variable=GNUSTEP_LOCAL_DOC_INFO"
+        };
+        __block BOOL                         error = NO;
+
+        [fuck enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL *stop) {
+            PGExecute *exe2 = [PGExecute exeWithAppPath:_gnustepConfig arguments:@[ obj ] execute:YES error:pError];
+            if(exe2 && ([exe2 waitUntilExit:pError] == 0)) [self setValue:exe2.stdOut.trim forKey:key]; else *stop = error = YES;
+        }];
+
+        return !error;
+    }
+
+    -(NSUInteger)getCpuCount:(NSError **)pError {
+        NSError *error = nil;
+        setpptr(pError, nil);
+
+        NSString *procInfo = [NSString stringWithContentsOfFile:@"/proc/cpuinfo" encoding:NSUTF8StringEncoding error:&error];
         if(!procInfo) return 1;
 
-        NSRegularExpression *rx2 = [NSRegularExpression regularExpressionWithPattern:@"processor\\s+:" options:0 error:error];
+        NSRegularExpression *rx2 = [NSRegularExpression regularExpressionWithPattern:@"processor\\s+:" options:0 error:&error];
         if(!rx2) return 1;
 
         return [rx2 matchesInString:procInfo options:0 range:procInfo.range].count;
     }
 
-    -(NSArray<NSString *> *)getGNUstepEnv:(NSArray<NSString *> *)keys error:(NSError **)error {
-        NSError                    *e       = nil;
-        NSMutableArray<NSString *> *results = [NSMutableArray arrayWithCapacity:keys.count];
-
-        for(NSUInteger i = 0; i < keys.count; i++) {
-            NSString  *k = keys[i];
-            NSString  *v = nil;
-            NSInteger r  = PGExecuteApplication(_gnustepConfig, @[ k ], &v, &e);
-
-            if(r || !v) {
-                setpptr(error, e);
-                return nil;
-            }
-
-            results[i] = v.trim;
-        }
-
-        setpptr(error, nil);
-        return results;
-    }
-
     -(NSArray<NSString *> *)getGNUstepFlags:(NSString *)op error:(NSError **)error {
-        NSString *taskOutput = nil;
+        PGExecute *exe = [PGExecute exeWithAppPath:_gnustepConfig arguments:@[ op ] execute:YES error:error];
+        if(!exe || [exe waitUntilExit:error]) return nil;
+        NSString *taskOutput = exe.stdOut;
         setpptr(error, nil);
-        if(PGExecuteApplication(_gnustepConfig, @[ op ], &taskOutput, error)) return nil;
 
         NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\s+" options:0 error:error];
         if(!regex) return nil;
