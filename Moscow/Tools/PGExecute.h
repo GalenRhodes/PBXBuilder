@@ -27,31 +27,69 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+FOUNDATION_EXPORT NSString *const PGErrMsgAlreadyExecuted;
+FOUNDATION_EXPORT NSString *const PGErrMsgNotYetExecuted;
+FOUNDATION_EXPORT NSString *const PGErrMsgStillExecuting;
+FOUNDATION_EXPORT NSString *const PGErrMsgEmptyEnvVar;
+FOUNDATION_EXPORT NSString *const PGErrMsgNoExecPath;
+
+FOUNDATION_EXPORT NSString *const PGStderrOutputKey;
+
 @interface PGExecute : NSObject
 
-    @property(copy)/*                */ NSString                             *executablePath;
+    @property(readonly, copy)/*      */ NSString                             *executablePath;
     @property(copy)/*                */ NSArray<NSString *>                  *arguments;
     @property(copy)/*                */ NSDictionary<NSString *, NSString *> *environment;
     @property(readonly)/*            */ BOOL                                 isRunning;
+    @property(readonly)/*            */ BOOL                                 wasLaunched;
     @property(readonly)/*            */ NSInteger                            exitCode;
-    @property(readonly, nullable)/*  */ NSError                              *lastError;
     @property(nullable, readonly, copy) NSString                             *stdOut;
     @property(nullable, readonly, copy) NSString                             *stdErr;
     @property(nullable, readonly)/*  */ NSTask                               *task;
+    @property(nullable, readonly)/*  */ NSError                              *lastError;
 
     -(instancetype)initWithAppPath:(NSString *)executablePath
-                         arguments:(NSArray<NSString *> *)arguments
-                       environment:(NSDictionary<NSString *, NSString *> *)environment
+                         arguments:(nullable NSArray<NSString *> *)arguments
+                       environment:(nullable NSDictionary<NSString *, NSString *> *)environment
                    mergeDefaultEnv:(BOOL)mergeEnv
-                           execute:(BOOL)execute;
+                           execute:(BOOL)execute
+                             error:(NSError **)error;
 
-    -(NSInteger)waitUntilExit:(NSError **)error;
+    +(instancetype)exeWithAppPath:(NSString *)executablePath
+                        arguments:(nullable NSArray<NSString *> *)arguments
+                      environment:(nullable NSDictionary<NSString *, NSString *> *)environment
+                  mergeDefaultEnv:(BOOL)mergeEnv
+                          execute:(BOOL)execute
+                            error:(NSError **)error;
+
+    +(instancetype)exeWithAppPath:(NSString *)executablePath
+                        arguments:(nullable NSArray<NSString *> *)arguments
+                      environment:(nullable NSDictionary<NSString *, NSString *> *)environment
+                          execute:(BOOL)execute
+                            error:(NSError **)error;
+
+    +(instancetype)exeWithAppPath:(NSString *)executablePath
+                        arguments:(nullable NSArray<NSString *> *)arguments
+                      environment:(nullable NSDictionary<NSString *, NSString *> *)environment
+                            error:(NSError **)error;
+
+    +(instancetype)exeWithAppPath:(NSString *)executablePath arguments:(nullable NSArray<NSString *> *)arguments execute:(BOOL)execute error:(NSError **)error;
+
+    +(instancetype)exeWithAppPath:(NSString *)executablePath arguments:(nullable NSArray<NSString *> *)arguments error:(NSError **)error;
 
     -(instancetype)execute:(NSError **)error;
 
+    -(NSInteger)waitUntilExit:(NSError **)error;
+
     -(NSInteger)executeAndWaitUntilExit:(NSError **)error;
 
-    -(void)appendEnvironment:(NSString *)name value:(NSString *)value;
+    -(void)appendArgument:(NSString *)argument;
+
+    -(void)appendEnvironment:(NSString *)name value:(nullable NSString *)value;
+
+    -(void)appendEnvironment:(NSDictionary<NSString *, NSString *> *)environment;
+
+    -(void)removeEnvironment:(NSString *)name;
 
 @end
 

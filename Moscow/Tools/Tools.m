@@ -22,55 +22,22 @@
 
 #import "Tools.h"
 #import "NSString+Moscow.h"
+#import "PGExecute.h"
 
 NSString *const PGX_STDOUT = @"/dev/stdout";
 
 NSString *const MoscowErrorDomain = @"com.projectgalen.Moscow";
 
 NSInteger PGExecuteApplication(NSString *appPath, NSArray *appParams, NSString **appOutput, NSError **error) {
-    @try {
-        setpptr(error, nil);
+    PGExecute *exe = [PGExecute exeWithAppPath:appPath arguments:appParams error:error];
 
-        NSInteger st    = 0;
-        NSTask    *task = [[NSTask alloc] init];
-        task.launchPath     = appPath;
-        task.arguments      = appParams;
-        task.environment    = @{ @"galen": @"rhodes" };
-        task.standardOutput = [NSPipe pipe];
-        task.standardError  = [NSPipe pipe];
-#ifdef DEBUG
-        PGPrintf(@"Launching: \"%@\"", appPath);
-        for(NSString *p in appParams) PGPrintf(@" \"%@\"", p);
-#endif
-        [task launch];
-        NSString *output = PGStringFromPipe((NSPipe *)task.standardOutput, NULL);
-#ifdef DEBUG
-        PGPrintf(@"\nWaiting...");
-#endif
-        [task waitUntilExit];
-#ifdef DEBUG
-        PGPrintf(@"\nDone waiting: %d\n", task.terminationStatus);
-#endif
-
-        if((st = task.terminationStatus)) {
-            NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: PGStringFromPipe((NSPipe *)task.standardError, NULL) };
-            setpptr(error, [NSError errorWithDomain:NSCocoaErrorDomain code:1001001 userInfo:userInfo]);
-        }
-
-        setpptr(appOutput, output);
-
-        return st;
+    if(exe) {
+        NSInteger ec = [exe executeAndWaitUntilExit:error];
+        setpptr(appOutput, exe.stdOut);
+        return ec;
     }
-    @catch(NSException *exception) {
-#ifdef DEBUG
-        for(NSString *key in exception.userInfo.keyEnumerator) {
-            PGPrintf(@"Exception UserInfo Key: \"%@\"\n", key);
-        }
-#endif
-        setpptr(error, PGErrorFromException(1021, exception));
-        setpptr(appOutput, nil);
-        return 1021;
-    }
+
+    return -1;
 }
 
 NSString *PGStringFromPipe(NSPipe *pipe, NSError **error) {

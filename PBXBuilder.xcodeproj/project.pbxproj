@@ -39,7 +39,7 @@
 		1117D595FB357B711CE6EFC2 /* PBXCopyFilesBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DC9C964AEE0421178951 /* PBXCopyFilesBuildPhase.m */; };
 		1117D5DD22894CABA61514A2 /* NSRegularExpression+Moscow.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DAACE59CFD6C7C7188C1 /* NSRegularExpression+Moscow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117D63B77A7E763587A8DF2 /* XCConfigurationList.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DDD40803A22835BE8D24 /* XCConfigurationList.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1117D6437332E55B30F8F3A0 /* PGExecute.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DBEA260CC44C14E3D0A1 /* PGExecute.h */; };
+		1117D6437332E55B30F8F3A0 /* PGExecute.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DBEA260CC44C14E3D0A1 /* PGExecute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117D64AE18B6F118812C1A6 /* PGExecute.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D1313208EC4480BE833A /* PGExecute.m */; };
 		1117D65039C2F9EED6B6B2F0 /* NSScanner+Moscow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D26D95FE63B4D1F2945E /* NSScanner+Moscow.m */; };
 		1117D6A7CCB55EF26FC40B3E /* PBXProjectFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DE9D1C9DADCAD627DF6F /* PBXProjectFile.m */; };
@@ -554,10 +554,10 @@
 				1117D8D3A333151BDBE6B82E /* PGBool.h in Headers */,
 				1117D1F9D5D1BF0CCA3D59A3 /* NSData+Moscow.h in Headers */,
 				1117DA2BAACB566D4C8D395B /* NSMutableArray+Moscow.h in Headers */,
+				1117D6437332E55B30F8F3A0 /* PGExecute.h in Headers */,
 				1117D5DD22894CABA61514A2 /* NSRegularExpression+Moscow.h in Headers */,
 				1117D0A444E03F759AC22FD2 /* NSScanner+Moscow.h in Headers */,
 				1117D56A97BC146DD857C3A4 /* NSString+Moscow.h in Headers */,
-				1117D6437332E55B30F8F3A0 /* PGExecute.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

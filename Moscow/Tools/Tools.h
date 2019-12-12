@@ -39,6 +39,8 @@
 
 #define setpptr(p, e) ({ if(p) (*(p)) = (e); })
 
+#define mandalorian(l, t, e) ({ [l lock]; t v; @try { v = (e); } @finally { [l unlock]; } v = v; })
+
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^PGPrintStructBlock)(NSString *prefix, BOOL addCR);
@@ -79,6 +81,14 @@ NS_INLINE BOOL NSRangeNotFound(NSRange range) {
 
 NS_INLINE BOOL NSRangeValid(NSRange range) {
     return !((range.location == NSNotFound) && (range.length == 0));
+}
+
+NS_INLINE NSMutableArray *PGMutableArrayCopy(NSArray *array) {
+    return ([array isKindOfClass:NSMutableArray.class] ? ((NSMutableArray *)array) : array.mutableCopy);
+}
+
+NS_INLINE NSMutableDictionary *PGMutableDictCopy(NSDictionary *dict) {
+    return ([dict isKindOfClass:NSMutableDictionary.class] ? ((NSMutableDictionary *)dict) : dict.mutableCopy);
 }
 
 NS_ASSUME_NONNULL_END
