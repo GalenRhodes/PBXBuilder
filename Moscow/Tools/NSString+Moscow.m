@@ -42,6 +42,14 @@ NS_INLINE BOOL foo(NSString *s, NSRange r) {
 
 @implementation NSString(Moscow)
 
+    -(NSString *)stringByLeftPaddingToLength:(NSUInteger)length {
+        return [self stringByLeftPaddingToLength:length withString:@" " startingAtIndex:0];
+    }
+
+    -(NSString *)stringByLeftPaddingToLength:(NSUInteger)length withString:(NSString *)padding {
+        return [self stringByLeftPaddingToLength:length withString:padding startingAtIndex:0];
+    }
+
     -(NSString *)stringByLeftPaddingToLength:(NSUInteger)length withString:(NSString *)padding startingAtIndex:(NSUInteger)idx {
         NSUInteger selfLength    = self.length;
         NSUInteger paddingLength = padding.length;

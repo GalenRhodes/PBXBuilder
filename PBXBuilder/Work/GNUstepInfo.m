@@ -22,6 +22,7 @@
 
 #import <Moscow/Moscow.h>
 #import "GNUstepInfo.h"
+#import "PBXTools.h"
 
 @interface GNUstepInfo()
 
@@ -100,7 +101,7 @@
             if(exe2 && ([exe2 waitUntilExit:&e] == 0)) [self setValue:exe2.stdOut.trim forKey:key]; else *stop = error = YES;
         }];
 
-        if(error) setpptr(pError, e);
+        if(error) setpptr(pError, (e ?: pbxMakeError(1001001, @"Unknown Error", nil)));
         return !error;
     }
 
@@ -146,6 +147,46 @@
         }
 
         return objcOpts;
+    }
+
+    -(NSString *)description {
+        __block NSUInteger ml = 0;
+        NSString           *q = @"\n    | ";
+
+        NSArray<NSString *> *listNames = @[ @"Compiler Flags", @"Base Linker Flags", @"GUI Linker Flags" ];
+        NSArray<NSString *> *propNames = @[
+            @"cpuCount", @"ccPath", @"cxxPath", @"applcationPath", @"toolsPath", @"libraryPath", @"headersPath", @"libsPath", @"docPath", @"manPath", @"infoPath"
+        ];
+
+        [listNames enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) { ml = MAX(ml, key.length); }];
+        [propNames enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) { ml = MAX(ml, key.length); }];
+
+        NSMutableString *s = [NSMutableString stringWithFormat:@"Config: \"%@\"", self.gnustepConfig];
+        [s appendFormat:@"\n|________%@|", [@"" stringByPaddingToLength:self.gnustepConfig.length withString:@"_" startingAtIndex:0]];
+
+        [propNames enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
+            id value = [self valueForKey:key];
+
+            [s appendFormat:@"%@%@: ", q, [key stringByLeftPaddingToLength:ml]];
+
+            if(value == nil) [s appendString:@"<NULL>"];
+            else if([value isKindOfClass:NSNumber.class]) [s appendString:[value description]];
+            else [s appendFormat:@"\"%@\"", value];
+        }];
+
+        NSDictionary<NSString *, NSArray<NSString *> *> *lists = @{ listNames[0]: self.objcOpts, listNames[1]: self.linkBaseOpts, listNames[2]: self.linkGuiOpts };
+        [listNames enumerateObjectsUsingBlock:^(NSString *hdr, NSUInteger j, BOOL *f2) {
+            __block NSUInteger  ml1   = 0;
+            NSArray<NSString *> *opts = lists[hdr];
+            [s appendFormat:@"%@%@:", q, [hdr stringByLeftPaddingToLength:ml]];
+            [opts enumerateObjectsUsingBlock:^(NSString *o, NSUInteger i, BOOL *f1) {
+                [s appendFormat:@"%@    | %3lu> %@", q, (i + 1), o];
+                ml1 = MAX(ml1, o.length);
+            }];
+            [s appendFormat:@"%@    |______%@|", q, [@"" stringByPaddingToLength:ml1 withString:@"_" startingAtIndex:0]];
+        }];
+
+        return s;
     }
 
 @end

@@ -33,10 +33,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PGRunInfo : NSObject
 
     @property(readonly, copy) NSString                  *programPath;
+    @property(readonly, copy) NSString                  *workingDir;
     @property(readonly)/*  */ GNUstepInfo               *gnustepInfo;
     @property(readonly)/*  */ NSArray<PBXProjectFile *> *projects;
 
     -(instancetype)init:(NSError **)pError;
+
+    +(instancetype)runInfo:(NSError **)pError;
 
 @end
 

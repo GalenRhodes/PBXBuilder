@@ -33,7 +33,7 @@
     @synthesize pbxFormat = _pbxFormat;
     @synthesize project = _project;
 
-    -(instancetype)initWithProjectName:(NSString *)projectName projectPath:(NSString *)projectPath error:(NSError **)error {
+    -(instancetype)initWithName:(NSString *)projectName path:(NSString *)projectPath error:(NSError **)error {
         self = [super init];
 
         if(self) {
@@ -85,6 +85,10 @@
         }
 
         return nil;
+    }
+
+    +(instancetype)projectFileWithName:(NSString *)projectName path:(NSString *)projectPath error:(NSError **)error {
+        return [[self alloc] initWithName:projectName path:projectPath error:error];
     }
 
 @end

@@ -33,130 +33,126 @@
         self = [super init];
 
         if(self) {
-            NSError                  *error     = nil;
             NSArray<NSString *>      *arguments = NSProcessInfo.processInfo.arguments;
             NSEnumerator<NSString *> *argEnum   = arguments.objectEnumerator;
 
             _programPath = argEnum.nextObject.stringByMakingAbsolutePath;
+            if(_programPath == nil) @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Program path missing" userInfo:nil];
 
-            if(_programPath == nil) {
-                NSString *reason = @"There has to be at least one command-line argument.";
-                setpptr(pError, [NSError errorWithDomain:PGProjErrorDomain code:100 userInfo:@{ NSLocalizedDescriptionKey: reason }]);
-                return nil;
-            }
-
-            _gnustepInfo = [GNUstepInfo info:&error];
+            if((_gnustepInfo = [GNUstepInfo info:pError]) == nil) return nil;
+            if((_projects    = [self parseCommandLine:argEnum pError:pError]) == nil) return nil;
 #ifdef DEBUG
             PGPrintStr([self description]);
 #endif
-            NSMutableArray<PBXProjectFile *> *projectsList = [NSMutableArray new];
-            NSString                         *arg          = argEnum.nextObject.trim;
-
-            while(arg) {
-                if([arg isEqualToString:@"-"]) {
-                    NSString *reason = PGFormat(@"Unrecognized command-line options: \"%@\"", arg);
-                    setpptr(pError, [NSError errorWithDomain:PGProjErrorDomain code:100 userInfo:@{ NSLocalizedDescriptionKey: reason }]);
-                    return nil;
-                }
-                else if(arg.length) {
-                    NSFileManager *fm              = NSFileManager.defaultManager;
-                    NSString      *path            = arg.stringByMakingAbsolutePath;
-                    NSString      *filename        = path.lastPathComponent;
-                    NSString      *projectName     = nil;
-                    NSString      *projectFilename = nil;
-                    BOOL          isDir            = NO;
-
-                    if([filename isEqualToString:@"project.pbxproj"]) {
-                        if([fm fileExistsAtPath:filename isDirectory:&isDir]) {
-                            if(!isDir) {
-                                projectFilename = filename;
-                                projectName     = filename.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent.lastPathComponent;
-                            }
-                            else {
-                                NSString *reason = PGFormat(@"ERROR: File is a directory: \"%@\"\n", path);
-                                error = [NSError errorWithDomain:PGProjErrorDomain code:PBX_INVALID_PROJECT_FILENAME userInfo:@{ NSLocalizedDescriptionKey: reason }];
-                                setpptr(pError, error);
-                                return nil;
-                            }
-                        }
-                        else {
-                            NSString *reason = PGFormat(@"ERROR: File does not exist: \"%@\"\n", path);
-                            error = [NSError errorWithDomain:PGProjErrorDomain code:PBX_INVALID_PROJECT_FILENAME userInfo:@{ NSLocalizedDescriptionKey: reason }];
-                            setpptr(pError, error);
-                            return nil;
-                        }
-                    }
-                    else {
-                        NSArray   *files = PGFindByName(path, @"project.pbxproj", &error);
-                        NSInteger rc     = (files ? parseFindProjectResults(path, files, &projectName, &projectFilename, &error) : error.code);
-
-                        if(rc) {
-                            setpptr(pError, error);
-                            return nil;
-                        }
-                    }
-
-                    if(projectName.length && projectFilename.length) {
-                        NSString       *projectPath = projectFilename.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent;
-                        PBXProjectFile *projectFile = [[PBXProjectFile alloc] initWithProjectName:projectName projectPath:projectPath error:&error];
-
-                        if(projectFile) {
-                            [projectsList addObject:projectFile];
-                        }
-                        else {
-                            setpptr(pError, error);
-                            return nil;
-                        }
-                    }
-                    else {
-                        NSString *reason = PGFormat(@"ERROR: No project found in path: \"%@\"\n", path);
-                        setpptr(pError, [NSError errorWithDomain:PGProjErrorDomain code:PBX_NO_PROJECT_FILE_FOUND userInfo:@{ NSLocalizedDescriptionKey: reason }]);
-                        return nil;
-                    }
-                }
-
-                arg = argEnum.nextObject.trim;
-            }
-
-            _projects = projectsList;
         }
 
         return self;
     }
 
-    -(NSString *)description {
-        NSMutableString *s = [NSMutableString stringWithFormat:@"Application Name: \"%@\"\n", _programPath];
+    -(NSArray<PBXProjectFile *> *)parseCommandLine:(NSEnumerator<NSString *> *)argEnum pError:(NSError **)pError {
+        NSMutableArray<PBXProjectFile *> *projectsList = [NSMutableArray new];
+        NSString                         *arg          = argEnum.nextObject.trim;
 
-        [s appendString:@"Getting GNUstep parameters...\n"];
-        [s appendFormat:@"\nConfig: \"%@\"\n", _gnustepInfo.gnustepConfig];
+        while(arg) {
+            if([arg isEqualToString:@"-"]) {
+                setpptr(pError, pbxMakeError(PBX_UNKNOWN_CMDLINE_OPTION, PGFormat(@"Unrecognized command-line options: \"%@\"", arg), nil));
+                return nil;
+            }
+            else if(arg.length) {
+                NSFileManager *fm              = NSFileManager.defaultManager;
+                NSString      *path            = arg.stringByMakingAbsolutePath;
+                NSString      *filename        = path.lastPathComponent;
+                NSString      *projectName     = nil;
+                NSString      *projectFilename = nil;
+                BOOL          isDir            = NO;
 
-        [s appendString:@"\nCompiler Flags:\n"];
-        [self appendOptions:_gnustepInfo.objcOpts buffer:s];
+                if([filename isEqualToString:@"project.pbxproj"]) {
+                    if([fm fileExistsAtPath:filename isDirectory:&isDir]) {
+                        if(!isDir) {
+                            projectFilename = filename;
+                            projectName     = filename.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent.lastPathComponent;
+                        }
+                        else {
+                            setpptr(pError, pbxMakeError(PBX_INVALID_PROJECT_FILENAME, PGFormat(@"ERROR: File is a directory: \"%@\"\n", path), nil));
+                            return nil;
+                        }
+                    }
+                    else {
+                        setpptr(pError, pbxMakeError(PBX_INVALID_PROJECT_FILENAME, PGFormat(@"ERROR: File does not exist: \"%@\"\n", path), nil));
+                        return nil;
+                    }
+                }
+                else {
+                    NSError   *error = nil;
+                    NSArray   *files = PGFindByName(path, @"project.pbxproj", &error);
+                    NSInteger rc     = (files ? parseFindProjectResults(path, files, &projectName, &projectFilename, &error) : error.code);
 
-        [s appendString:@"\nBase Linker Flags:\n"];
-        [self appendOptions:_gnustepInfo.linkBaseOpts buffer:s];
+                    if(rc) {
+                        setpptr(pError, error);
+                        return nil;
+                    }
+                }
 
-        [s appendString:@"\nGUI Linker Flags:\n"];
-        [self appendOptions:_gnustepInfo.linkGuiOpts buffer:s];
+                if(projectName.length && projectFilename.length) {
+                    NSString       *projectPath = projectFilename.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent;
+                    PBXProjectFile *projectFile = [PBXProjectFile projectFileWithName:projectName path:projectPath error:pError];
 
-        [s appendFormat:@"\n%20s: %lu\n", "cpuCount", _gnustepInfo.cpuCount];
-        [s appendFormat:@"%20s: \"%@\"\n", "ccPath", _gnustepInfo.ccPath];
-        [s appendFormat:@"%20s: \"%@\"\n", "cxxPath", _gnustepInfo.cxxPath];
-        [s appendFormat:@"%20s: \"%@\"\n", "applcationPath", _gnustepInfo.applcationPath];
-        [s appendFormat:@"%20s: \"%@\"\n", "toolsPath", _gnustepInfo.toolsPath];
-        [s appendFormat:@"%20s: \"%@\"\n", "libraryPath", _gnustepInfo.libraryPath];
-        [s appendFormat:@"%20s: \"%@\"\n", "headersPath", _gnustepInfo.headersPath];
-        [s appendFormat:@"%20s: \"%@\"\n", "libsPath", _gnustepInfo.libsPath];
-        [s appendFormat:@"%20s: \"%@\"\n", "docPath", _gnustepInfo.docPath];
-        [s appendFormat:@"%20s: \"%@\"\n", "manPath", _gnustepInfo.manPath];
-        [s appendFormat:@"%20s: \"%@\"\n", "infoPath", _gnustepInfo.infoPath];
+                    if(projectFile) {
+                        [projectsList addObject:projectFile];
+                    }
+                    else {
+                        return nil;
+                    }
+                }
+                else {
+                    setpptr(pError, pbxMakeError(PBX_NO_PROJECT_FILE_FOUND, PGFormat(@"ERROR: No project found in path: \"%@\"\n", path), nil));
+                    return nil;
+                }
+            }
 
-        return s;
+            arg = argEnum.nextObject.trim;
+        }
+
+        return projectsList;
     }
 
-    -(void)appendOptions:(NSArray<NSString *> *)opts buffer:(NSMutableString *)b {
-        NSUInteger   c = 0;
-        for(NSString *s in opts) [b appendFormat:@"%2lu> %@\n", ++c, s];
+    +(instancetype)runInfo:(NSError **)pError {
+        return [[self alloc] init:pError];
+    }
+
+    -(NSString *)workingDir {
+        return NSFileManager.defaultManager.currentDirectoryPath;
+    }
+
+    -(NSString *)description {
+        NSMutableString *str = [NSMutableString stringWithFormat:@"  Application Name: \"%@\"", self.programPath];
+        [str appendFormat:@"\n Working Directory: \"%@\"", self.workingDir];
+        [self appendGNUstepInfo:str];
+        [self appendProjects:str];
+        return str;
+    }
+
+    -(void)appendGNUstepInfo:(NSMutableString *)str {
+        [str appendString:@"\nGNUstep parameters:"];
+        [str appendString:@"\n|__________________|"];
+
+        NSString            *s = self.gnustepInfo.description;
+        NSArray<NSString *> *l = [s split:@"\\r\\n?|\\n"];
+        if(l.count == 0) l = @[ s ];
+        for(NSString *sl in l) [str appendFormat:@"\n    | %@", sl];
+    }
+
+    -(void)appendProjects:(NSMutableString *)str {
+        [str appendString:@"\n          Projects:"];
+        [str appendString:@"\n          |________|"];
+        NSArray<PBXProjectFile *> *projects = self.projects;
+        NSUInteger                y         = projects.count;
+
+        if(y > 0)
+            for(NSUInteger x = 0; x < y; ++x) {
+                [str appendFormat:@"\n               | %2lu> %@ (%@)", (x + 1), projects[x].projectName, projects[x].projectPath];
+            }
+        else [str appendString:@"\n               | <none>"];
     }
 
 @end
