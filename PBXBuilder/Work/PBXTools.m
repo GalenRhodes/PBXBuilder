@@ -22,9 +22,16 @@
 
 #import <Moscow/Moscow.h>
 #import "PBXTools.h"
-#import "PGRunInfo.h"
 
 NSString *const PGFoundProjectFilesKey = @"PGFoundProjectFilesKey";
+NSString *const PGProjErrorDomain      = @"com.projectgalen.PBXBuilder";
+
+NSError *pbxMakeError(NSInteger code, NSString *reason, NSDictionary *userInfo) {
+    if((reason = reason.trim).length == 0) reason = @"Unknown error";
+    NSMutableDictionary *tUserInfo                = userInfo ? userInfo.mutableCopy : [NSMutableDictionary new];
+    tUserInfo[NSLocalizedDescriptionKey] = reason;
+    return [NSError errorWithDomain:PGProjErrorDomain code:code userInfo:tUserInfo];
+}
 
 void printfc(NSUInteger maxLength, NSString *format, ...) {
     va_list args;

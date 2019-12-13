@@ -30,8 +30,10 @@ NSArray<NSString *> *split(NSString *string, NSString *pattern, NSInteger limit)
 
 NSString *stringByReplacingMatches(NSString *_Nonnull string,
                                    NSMatchingOptions options,
-                                   NSRange range, NSString *_Nonnull pattern,
-                                   NSRegularExpressionOptions rxOptions, PGReplaceBlock _Nonnull block,
+                                   NSRange range,
+                                   NSString *_Nonnull pattern,
+                                   NSRegularExpressionOptions rxOptions,
+                                   PGReplaceBlock _Nonnull block,
                                    NSError **error);
 
 NS_INLINE BOOL foo(NSString *s, NSRange r) {
@@ -59,6 +61,19 @@ NS_INLINE BOOL foo(NSString *s, NSRange r) {
         }
 
         return self;
+    }
+
+    -(NSString *)stringByMakingAbsolutePath {
+        NSString *path = self;
+
+        if([path isEqualToString:@"."] || [path hasPrefix:@"./"]) {
+            path = PGFormat(@"%@%@", NSFileManager.defaultManager.currentDirectoryPath, [path substringFromIndex:1]);
+        }
+        else if([path isEqualToString:@".."] || [path hasPrefix:@"../"]) {
+            path = PGFormat(@"%@%@", NSFileManager.defaultManager.currentDirectoryPath.stringByDeletingLastPathComponent, [path substringFromIndex:2]);
+        }
+
+        return path.stringByStandardizingPath.copy;
     }
 
     -(NSRange)range {
@@ -264,38 +279,38 @@ NSArray<NSString *> *split(NSString *string, NSString *pattern, NSInteger limit)
      * Is the compiler smart enough to know that the result is supposed to survive
      * beyond the auto release pool?
      */
-        NSArray<NSString *> *_array = @[ string ];
+    NSArray<NSString *> *_array = @[ string ];
 
-        if(pattern.length && (limit != 1)) {
-            NSArray<NSTextCheckingResult *> *res = [NSRegularExpression matchesInString:string pattern:pattern];
+    if(pattern.length && (limit != 1)) {
+        NSArray<NSTextCheckingResult *> *res = [NSRegularExpression matchesInString:string pattern:pattern];
 
-            if(res.count) {
-                NSUInteger last = 0, cc = ((limit > 0) ? MIN(res.count, limit - 1) : res.count);
-                NSMutableArray<NSString *> *array = [NSMutableArray arrayWithCapacity:(cc + 1)];
+        if(res.count) {
+            NSUInteger last = 0, cc = ((limit > 0) ? MIN(res.count, limit - 1) : res.count);
+            NSMutableArray<NSString *> *array = [NSMutableArray arrayWithCapacity:(cc + 1)];
 
-                for(NSUInteger x = 0; x < cc; ++x) {
-                    NSRange r = res[x].range;
+            for(NSUInteger x = 0; x < cc; ++x) {
+                NSRange r = res[x].range;
 
-                    if((r.location || r.length) && (r.location != NSNotFound)) {
-                        [array addObject:[string substringFrom:last to:r.location]];
-                        last = NSMaxRange(r);
-                    }
-                }
-
-                [array addObject:[string substringFrom:last to:string.length]];
-
-                if(limit == 0) {
-                    NSUInteger a1 = array.count, a2 = a1;
-                    while(a1 && (array[a1 - 1].length == 0)) a1--;
-
-                    _array = ((a1 < a2) ? (a1 ? [array subarrayWithRange:NSMakeRange(0, a1)] : @[]) : array.copy);
-                }
-                else {
-                    _array = array.copy;
+                if((r.location || r.length) && (r.location != NSNotFound)) {
+                    [array addObject:[string substringFrom:last to:r.location]];
+                    last = NSMaxRange(r);
                 }
             }
-        }
 
-        return _array;
+            [array addObject:[string substringFrom:last to:string.length]];
+
+            if(limit == 0) {
+                NSUInteger a1 = array.count, a2 = a1;
+                while(a1 && (array[a1 - 1].length == 0)) a1--;
+
+                _array = ((a1 < a2) ? (a1 ? [array subarrayWithRange:NSMakeRange(0, a1)] : @[]) : array.copy);
+            }
+            else {
+                _array = array.copy;
+            }
+        }
+    }
+
+    return _array;
 }
 

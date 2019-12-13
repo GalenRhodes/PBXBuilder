@@ -67,10 +67,12 @@
 		1117DCFF615A520A4FBF018E /* PBXItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D7DE1E0A4802AA39D97F /* PBXItem.m */; };
 		1117DD371C31B357C34C6E19 /* PBXTargetDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D0E6328E9752489B41D4 /* PBXTargetDependency.m */; };
 		1117DDE409EBCFA050CB7B54 /* PBXTargetDependency.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DDE29F95395F83425ACC /* PBXTargetDependency.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117DDF248630026BA265B1B /* PGCmdLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D8512AF1AC28C7D3DC67 /* PGCmdLine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117DE10E7A18F589EAF70CB /* PBXProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D3591C1E4899179E1D30 /* PBXProject.m */; };
 		1117DE3BF6B496F661D599A0 /* PBXGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DD20800FFE368F535032 /* PBXGroup.m */; };
 		1117DE7319D91941CDACF693 /* PBXNativeTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DD5D7B75243608FDD913 /* PBXNativeTarget.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117DEA34C3F0E246141A6A2 /* NSData+Moscow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D06D3346CA3B6E871945 /* NSData+Moscow.m */; };
+		1117DEB29C7C38C8589A7D7B /* PGCmdLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D80617543814EDE7EE10 /* PGCmdLine.m */; };
 		1117DECAA9C374EE894255F8 /* PBXProject.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DA1848D6F5F5D2E72841 /* PBXProject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117DF28B3224434A0B71BF7 /* PBXFileElementTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D90BF4990C94920D4413 /* PBXFileElementTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117DF586EFF700CC12921BA /* PBXLegacyTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D9A87E94FE1A27BCF8C7 /* PBXLegacyTarget.m */; };
@@ -171,7 +173,9 @@
 		1117D7BF1BFDE2B32DC0CC18 /* GNUstepInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNUstepInfo.m; sourceTree = "<group>"; };
 		1117D7DB3CB2BD8BEAF7FF43 /* PBXBuildFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXBuildFile.h; sourceTree = "<group>"; };
 		1117D7DE1E0A4802AA39D97F /* PBXItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXItem.m; sourceTree = "<group>"; };
+		1117D80617543814EDE7EE10 /* PGCmdLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGCmdLine.m; sourceTree = "<group>"; };
 		1117D8374C061266D853CB13 /* Swift.xcspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xcspec; path = Swift.xcspec; sourceTree = "<group>"; };
+		1117D8512AF1AC28C7D3DC67 /* PGCmdLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGCmdLine.h; sourceTree = "<group>"; };
 		1117D8627AEF17859F1D2E34 /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		1117D90BF4990C94920D4413 /* PBXFileElementTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXFileElementTypes.h; sourceTree = "<group>"; };
 		1117D90F882A6895A9DA4CAC /* PBXTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXTools.h; sourceTree = "<group>"; };
@@ -267,6 +271,15 @@
 				1117DAF15BB09C93919333E5 /* PBXLegacyTarget.h */,
 			);
 			path = Impl;
+			sourceTree = "<group>";
+		};
+		1117D0E78531BC100EA263C4 /* CommandLine */ = {
+			isa = PBXGroup;
+			children = (
+				1117D80617543814EDE7EE10 /* PGCmdLine.m */,
+				1117D8512AF1AC28C7D3DC67 /* PGCmdLine.h */,
+			);
+			name = CommandLine;
 			sourceTree = "<group>";
 		};
 		1117D3171ACF9B126917ACE6 /* Work */ = {
@@ -376,6 +389,7 @@
 				1117DE6539DFE9501F3273B1 /* Categories */,
 				1117D1313208EC4480BE833A /* PGExecute.m */,
 				1117DBEA260CC44C14E3D0A1 /* PGExecute.h */,
+				1117D0E78531BC100EA263C4 /* CommandLine */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -552,9 +566,10 @@
 				839B512623806C2600662BA3 /* Moscow.h in Headers */,
 				839B513323806D1800662BA3 /* Tools.h in Headers */,
 				1117D8D3A333151BDBE6B82E /* PGBool.h in Headers */,
+				1117D6437332E55B30F8F3A0 /* PGExecute.h in Headers */,
+				1117DDF248630026BA265B1B /* PGCmdLine.h in Headers */,
 				1117D1F9D5D1BF0CCA3D59A3 /* NSData+Moscow.h in Headers */,
 				1117DA2BAACB566D4C8D395B /* NSMutableArray+Moscow.h in Headers */,
-				1117D6437332E55B30F8F3A0 /* PGExecute.h in Headers */,
 				1117D5DD22894CABA61514A2 /* NSRegularExpression+Moscow.h in Headers */,
 				1117D0A444E03F759AC22FD2 /* NSScanner+Moscow.h in Headers */,
 				1117D56A97BC146DD857C3A4 /* NSString+Moscow.h in Headers */,
@@ -743,6 +758,7 @@
 				1117D65039C2F9EED6B6B2F0 /* NSScanner+Moscow.m in Sources */,
 				1117D4CA7F74969909B63021 /* NSString+Moscow.m in Sources */,
 				1117D64AE18B6F118812C1A6 /* PGExecute.m in Sources */,
+				1117DEB29C7C38C8589A7D7B /* PGCmdLine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

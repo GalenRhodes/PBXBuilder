@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PGXTools.h
+ *    FILENAME: PGCmdLine.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/26/19
+ *        DATE: 12/12/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,30 +20,21 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_PGXTOOLS_H__
-#define __PBXBUILDER_PGXTOOLS_H__
+#ifndef __PBXBUILDER_PGCMDLINE_H__
+#define __PBXBUILDER_PGCMDLINE_H__
 
 #import <Cocoa/Cocoa.h>
 
-typedef NS_ENUM(NSInteger, PBXErrorCodes) {
-    PBX_NO_ERROR = 0, PBX_INVALID_REGEX_PATTERN, PBX_NO_PROJECT_FILE_FOUND, PBX_MULTIPLE_PROJECT_FILES_FOUND, PBX_INVALID_PROJECT_FILENAME
-};
-
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString *const PGProjErrorDomain;
-FOUNDATION_EXPORT NSString *const PGFoundProjectFilesKey;
+@interface PGCmdLine : NSObject
 
-FOUNDATION_EXPORT PBXErrorCodes parseFindProjectResults(NSString *dir,
-                                                        NSArray<NSString *> *array,
-                                                        NSString *_Nullable *_Nullable pProjectName,
-                                                        NSString *_Nullable *_Nullable pProjectFilename,
-                                                        NSError **error);
+    @property(readonly)/*  */ NSUInteger          count;
+    @property(readonly, copy) NSString            *applicationPath;
+    @property(readonly)/*  */ NSArray<NSString *> *arguments;
 
-FOUNDATION_EXPORT void printfc(NSUInteger maxLength, NSString *format, ...)  NS_FORMAT_FUNCTION(2, 3);
-
-FOUNDATION_EXPORT NSError *pbxMakeError(NSInteger code, NSString *reason, NSDictionary *userInfo);
+@end
 
 NS_ASSUME_NONNULL_END
 
-#endif // __PBXBUILDER_PGXTOOLS_H__
+#endif // __PBXBUILDER_PGCMDLINE_H__

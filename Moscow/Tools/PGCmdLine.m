@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PGRunInfo.h
+ *    FILENAME: PGCmdLine.m
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/4/19
+ *        DATE: 12/12/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,26 +20,8 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_PGRUNINFO_H__
-#define __PBXBUILDER_PGRUNINFO_H__
+#import "PGCmdLine.h"
 
-#import <Cocoa/Cocoa.h>
-
-@class PBXProjectFile;
-@class GNUstepInfo;
-
-NS_ASSUME_NONNULL_BEGIN
-
-@interface PGRunInfo : NSObject
-
-    @property(readonly, copy) NSString                  *programPath;
-    @property(readonly)/*  */ GNUstepInfo               *gnustepInfo;
-    @property(readonly)/*  */ NSArray<PBXProjectFile *> *projects;
-
-    -(instancetype)init:(NSError **)pError;
-
+@implementation PGCmdLine {
+    }
 @end
-
-NS_ASSUME_NONNULL_END
-
-#endif // __PBXBUILDER_PGRUNINFO_H__

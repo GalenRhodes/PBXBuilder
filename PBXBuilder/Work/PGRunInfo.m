@@ -26,139 +26,137 @@
 #import "GNUstepInfo.h"
 #import "PBXTools.h"
 
-NSString *const PGProjErrorDomain = @"com.projectgalen.PBXBuilder";
-
 @implementation PGRunInfo {
     }
 
-    @synthesize programPath = _programPath;
-    @synthesize gnustepInfo = _gnustepInfo;
-    @synthesize projects = _projects;
-
-    -(instancetype)initWithCommandLine:(const char *_Nonnull *_Nonnull)argv argCount:(int)argc error:(NSError **)pError {
+    -(instancetype)init:(NSError **)pError {
         self = [super init];
 
         if(self) {
-            NSError *error = nil;
-            if(argc < 1) {
+            NSError                  *error     = nil;
+            NSArray<NSString *>      *arguments = NSProcessInfo.processInfo.arguments;
+            NSEnumerator<NSString *> *argEnum   = arguments.objectEnumerator;
+
+            _programPath = argEnum.nextObject.stringByMakingAbsolutePath;
+
+            if(_programPath == nil) {
                 NSString *reason = @"There has to be at least one command-line argument.";
                 setpptr(pError, [NSError errorWithDomain:PGProjErrorDomain code:100 userInfo:@{ NSLocalizedDescriptionKey: reason }]);
                 return nil;
             }
 
-            _programPath = [NSString stringWithUTF8String:argv[0]];
-            _gnustepInfo = [[GNUstepInfo alloc] init:&error];
-            PGPrintStr(@"Getting GNUstep parameters...\n");
-            PGPrintf(@"\nConfig: \"%@\"\n", _gnustepInfo.gnustepConfig);
-
-            PGPrintStr(@"\nCompiler Flags:\n");
-            [self printOptions:_gnustepInfo.objcOpts];
-
-            PGPrintStr(@"\nBase Linker Flags:\n");
-            [self printOptions:_gnustepInfo.linkBaseOpts];
-
-            PGPrintStr(@"\nGUI Linker Flags:\n");
-            [self printOptions:_gnustepInfo.linkGuiOpts];
-
-            PGPrintf(@"\n%20s: %lu\n", "cpuCount", _gnustepInfo.cpuCount);
-            PGPrintf(@"%20s: \"%@\"\n", "ccPath", _gnustepInfo.ccPath);
-            PGPrintf(@"%20s: \"%@\"\n", "cxxPath", _gnustepInfo.cxxPath);
-            PGPrintf(@"%20s: \"%@\"\n", "applcationPath", _gnustepInfo.applcationPath);
-            PGPrintf(@"%20s: \"%@\"\n", "toolsPath", _gnustepInfo.toolsPath);
-            PGPrintf(@"%20s: \"%@\"\n", "libraryPath", _gnustepInfo.libraryPath);
-            PGPrintf(@"%20s: \"%@\"\n", "headersPath", _gnustepInfo.headersPath);
-            PGPrintf(@"%20s: \"%@\"\n", "libsPath", _gnustepInfo.libsPath);
-            PGPrintf(@"%20s: \"%@\"\n", "docPath", _gnustepInfo.docPath);
-            PGPrintf(@"%20s: \"%@\"\n", "manPath", _gnustepInfo.manPath);
-            PGPrintf(@"%20s: \"%@\"\n", "infoPath", _gnustepInfo.infoPath);
-
-            int i = 1;
-
+            _gnustepInfo = [GNUstepInfo info:&error];
+#ifdef DEBUG
+            PGPrintStr([self description]);
+#endif
             NSMutableArray<PBXProjectFile *> *projectsList = [NSMutableArray new];
-            _projects = projectsList;
+            NSString                         *arg          = argEnum.nextObject.trim;
 
-            while(i < argc) {
-                const char *arg = argv[i++];
+            while(arg) {
+                if([arg isEqualToString:@"-"]) {
+                    NSString *reason = PGFormat(@"Unrecognized command-line options: \"%@\"", arg);
+                    setpptr(pError, [NSError errorWithDomain:PGProjErrorDomain code:100 userInfo:@{ NSLocalizedDescriptionKey: reason }]);
+                    return nil;
+                }
+                else if(arg.length) {
+                    NSFileManager *fm              = NSFileManager.defaultManager;
+                    NSString      *path            = arg.stringByMakingAbsolutePath;
+                    NSString      *filename        = path.lastPathComponent;
+                    NSString      *projectName     = nil;
+                    NSString      *projectFilename = nil;
+                    BOOL          isDir            = NO;
 
-                if(*arg) {
-                    if(*arg == '-') {
-                        NSString *reason = PGFormat(@"Unrecognized command-line options: \"%s\"", arg);
-                        setpptr(pError, [NSError errorWithDomain:PGProjErrorDomain code:100 userInfo:@{ NSLocalizedDescriptionKey: reason }]);
-                        return nil;
-                    }
-                    else {
-                        /*
-                         * Seriously GNUstep?  We're returning "id" instead of "instancetype"? What year is it?
-                         */
-                        NSString *str = ((NSString *)[NSString stringWithUTF8String:arg]).trim;
-
-                        if(str.length) {
-                            NSFileManager *fm              = NSFileManager.defaultManager;
-                            NSString      *path            = str.stringByStandardizingPath;
-                            NSString      *filename        = path.lastPathComponent;
-                            BOOL          isDir            = NO;
-                            NSString      *projectName     = nil;
-                            NSString      *projectFilename = nil;
-
-                            if([filename isEqualToString:@"project.pbxproj"]) {
-                                if([fm fileExistsAtPath:filename isDirectory:&isDir]) {
-                                    if(!isDir) {
-                                        projectFilename = filename;
-                                        projectName     = filename.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent.lastPathComponent;
-                                    }
-                                    else {
-                                        NSString *reason = PGFormat(@"ERROR: File is a directory: \"%@\"\n", path);
-                                        error = [NSError errorWithDomain:PGProjErrorDomain code:PBX_INVALID_PROJECT_FILENAME userInfo:@{ NSLocalizedDescriptionKey: reason }];
-                                        setpptr(pError, error);
-                                        return nil;
-                                    }
-                                }
-                                else {
-                                    NSString *reason = PGFormat(@"ERROR: File does not exist: \"%@\"\n", path);
-                                    error = [NSError errorWithDomain:PGProjErrorDomain code:PBX_INVALID_PROJECT_FILENAME userInfo:@{ NSLocalizedDescriptionKey: reason }];
-                                    setpptr(pError, error);
-                                    return nil;
-                                }
+                    if([filename isEqualToString:@"project.pbxproj"]) {
+                        if([fm fileExistsAtPath:filename isDirectory:&isDir]) {
+                            if(!isDir) {
+                                projectFilename = filename;
+                                projectName     = filename.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent.lastPathComponent;
                             }
                             else {
-                                NSArray   *files = PGFindByName(path, @"project.pbxproj", &error);
-                                NSInteger rc     = (files ? parseFindProjectResults(path, files, &projectName, &projectFilename, &error) : error.code);
-
-                                if(rc) {
-                                    setpptr(pError, error);
-                                    return nil;
-                                }
-                            }
-
-                            if(projectName.length && projectFilename.length) {
-                                NSString       *projectPath = projectFilename.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent;
-                                PBXProjectFile *projectFile = [[PBXProjectFile alloc] initWithProjectName:projectName projectPath:projectPath error:&error];
-
-                                if(projectFile) {
-                                    [projectsList addObject:projectFile];
-                                }
-                                else {
-                                    setpptr(pError, error);
-                                    return nil;
-                                }
-                            }
-                            else {
-                                NSString *reason = PGFormat(@"ERROR: No project found in path: \"%@\"\n", path);
-                                setpptr(pError, [NSError errorWithDomain:PGProjErrorDomain code:PBX_NO_PROJECT_FILE_FOUND userInfo:@{ NSLocalizedDescriptionKey: reason }]);
+                                NSString *reason = PGFormat(@"ERROR: File is a directory: \"%@\"\n", path);
+                                error = [NSError errorWithDomain:PGProjErrorDomain code:PBX_INVALID_PROJECT_FILENAME userInfo:@{ NSLocalizedDescriptionKey: reason }];
+                                setpptr(pError, error);
                                 return nil;
                             }
                         }
+                        else {
+                            NSString *reason = PGFormat(@"ERROR: File does not exist: \"%@\"\n", path);
+                            error = [NSError errorWithDomain:PGProjErrorDomain code:PBX_INVALID_PROJECT_FILENAME userInfo:@{ NSLocalizedDescriptionKey: reason }];
+                            setpptr(pError, error);
+                            return nil;
+                        }
+                    }
+                    else {
+                        NSArray   *files = PGFindByName(path, @"project.pbxproj", &error);
+                        NSInteger rc     = (files ? parseFindProjectResults(path, files, &projectName, &projectFilename, &error) : error.code);
+
+                        if(rc) {
+                            setpptr(pError, error);
+                            return nil;
+                        }
+                    }
+
+                    if(projectName.length && projectFilename.length) {
+                        NSString       *projectPath = projectFilename.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent;
+                        PBXProjectFile *projectFile = [[PBXProjectFile alloc] initWithProjectName:projectName projectPath:projectPath error:&error];
+
+                        if(projectFile) {
+                            [projectsList addObject:projectFile];
+                        }
+                        else {
+                            setpptr(pError, error);
+                            return nil;
+                        }
+                    }
+                    else {
+                        NSString *reason = PGFormat(@"ERROR: No project found in path: \"%@\"\n", path);
+                        setpptr(pError, [NSError errorWithDomain:PGProjErrorDomain code:PBX_NO_PROJECT_FILE_FOUND userInfo:@{ NSLocalizedDescriptionKey: reason }]);
+                        return nil;
                     }
                 }
+
+                arg = argEnum.nextObject.trim;
             }
+
+            _projects = projectsList;
         }
 
         return self;
     }
 
-    -(void)printOptions:(NSArray<NSString *> *)opts {
+    -(NSString *)description {
+        NSMutableString *s = [NSMutableString stringWithFormat:@"Application Name: \"%@\"\n", _programPath];
+
+        [s appendString:@"Getting GNUstep parameters...\n"];
+        [s appendFormat:@"\nConfig: \"%@\"\n", _gnustepInfo.gnustepConfig];
+
+        [s appendString:@"\nCompiler Flags:\n"];
+        [self appendOptions:_gnustepInfo.objcOpts buffer:s];
+
+        [s appendString:@"\nBase Linker Flags:\n"];
+        [self appendOptions:_gnustepInfo.linkBaseOpts buffer:s];
+
+        [s appendString:@"\nGUI Linker Flags:\n"];
+        [self appendOptions:_gnustepInfo.linkGuiOpts buffer:s];
+
+        [s appendFormat:@"\n%20s: %lu\n", "cpuCount", _gnustepInfo.cpuCount];
+        [s appendFormat:@"%20s: \"%@\"\n", "ccPath", _gnustepInfo.ccPath];
+        [s appendFormat:@"%20s: \"%@\"\n", "cxxPath", _gnustepInfo.cxxPath];
+        [s appendFormat:@"%20s: \"%@\"\n", "applcationPath", _gnustepInfo.applcationPath];
+        [s appendFormat:@"%20s: \"%@\"\n", "toolsPath", _gnustepInfo.toolsPath];
+        [s appendFormat:@"%20s: \"%@\"\n", "libraryPath", _gnustepInfo.libraryPath];
+        [s appendFormat:@"%20s: \"%@\"\n", "headersPath", _gnustepInfo.headersPath];
+        [s appendFormat:@"%20s: \"%@\"\n", "libsPath", _gnustepInfo.libsPath];
+        [s appendFormat:@"%20s: \"%@\"\n", "docPath", _gnustepInfo.docPath];
+        [s appendFormat:@"%20s: \"%@\"\n", "manPath", _gnustepInfo.manPath];
+        [s appendFormat:@"%20s: \"%@\"\n", "infoPath", _gnustepInfo.infoPath];
+
+        return s;
+    }
+
+    -(void)appendOptions:(NSArray<NSString *> *)opts buffer:(NSMutableString *)b {
         NSUInteger   c = 0;
-        for(NSString *s in opts) PGPrintf(@"%2lu> %@\n", ++c, s);
+        for(NSString *s in opts) [b appendFormat:@"%2lu> %@\n", ++c, s];
     }
 
 @end

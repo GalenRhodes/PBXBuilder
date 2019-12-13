@@ -35,6 +35,8 @@ typedef NSString *_Nullable (^PGMacroBlock)(NSString *_Nonnull macro, BOOL *_Non
 
 @interface NSString(Moscow)
 
+    @property(readonly, copy) NSString *stringByMakingAbsolutePath;
+
     -(NSString *)stringByReplacingMacros:(PGMacroBlock)block;
 
     -(NSString *)stringByLeftPaddingToLength:(NSUInteger)length withString:(NSString *)padding startingAtIndex:(NSUInteger)idx;

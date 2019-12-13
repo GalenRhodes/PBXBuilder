@@ -67,6 +67,10 @@
         return self;
     }
 
+    +(instancetype)info:(NSError **)pError {
+        return [[self alloc] init:pError];
+    }
+
     -(BOOL)getGNUstepConfig:(NSError **)pError {
         PGExecute *exe = [PGExecute exeWithAppPath:@"/bin/bash" arguments:@[ @"-c", @"which gnustep-config" ] execute:YES error:pError];
         if(!exe || [exe waitUntilExit:pError]) return NO;
@@ -87,13 +91,16 @@
             @"manPath"       : @"--variable=GNUSTEP_LOCAL_DOC_MAN",
             @"infoPath"      : @"--variable=GNUSTEP_LOCAL_DOC_INFO"
         };
-        __block BOOL                         error = NO;
+
+        __block BOOL    error = NO;
+        __block NSError *e    = nil;
 
         [fuck enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL *stop) {
-            PGExecute *exe2 = [PGExecute exeWithAppPath:_gnustepConfig arguments:@[ obj ] execute:YES error:pError];
-            if(exe2 && ([exe2 waitUntilExit:pError] == 0)) [self setValue:exe2.stdOut.trim forKey:key]; else *stop = error = YES;
+            PGExecute *exe2 = [PGExecute exeWithAppPath:_gnustepConfig arguments:@[ obj ] execute:YES error:&e];
+            if(exe2 && ([exe2 waitUntilExit:&e] == 0)) [self setValue:exe2.stdOut.trim forKey:key]; else *stop = error = YES;
         }];
 
+        if(error) setpptr(pError, e);
         return !error;
     }
 
