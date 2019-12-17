@@ -40,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSData(Moscow)
 
 //@f:0
+-(NSData *)copyIfSameObject:(id)other;
 #ifndef __APPLE__
 
     +(nullable instancetype)dataWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;

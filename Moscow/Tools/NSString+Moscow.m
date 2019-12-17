@@ -3,7 +3,7 @@
  *    FILENAME: NSString+Moscow.m
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/16/19
+ *        DATE: 12/15/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -26,6 +26,8 @@
 
 NSString *const PGMacroPattern = @"((?<!\\\\)(?:\\\\\\\\)*)\\$\\{(\\w+)\\}";
 
+NSString *const PGErrMsgStringNotLongEnough = @"String must have a length of at least %lu. Current length %lu";
+
 NSArray<NSString *> *split(NSString *string, NSString *pattern, NSInteger limit);
 
 NSString *stringByReplacingMatches(NSString *_Nonnull string,
@@ -37,10 +39,40 @@ NSString *stringByReplacingMatches(NSString *_Nonnull string,
                                    NSError **error);
 
 NS_INLINE BOOL foo(NSString *s, NSRange r) {
-    return ((r.location == 0) && r.length == s.length);
+    return ((r.location == 0) && (r.length == s.length));
 }
 
 @implementation NSString(Moscow)
+
+    -(NSString *)stringByDupToLength:(NSUInteger)length {
+        NSUInteger slen = self.length;
+
+        if(slen) {
+            if(length == 0) return @"";
+            if(slen == length) return self.copy;
+            if(slen > length) return [self substringToIndex:length];
+
+            NSMutableString *str = [NSMutableString new];
+            do { [str appendString:self]; } while((str.length + slen) <= length);
+            if(str.length < length) [str appendString:[self substringToIndex:(length - str.length)]];
+            return str;
+        }
+
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:PGFormat(PGErrMsgStringNotLongEnough, (NSUInteger)1, slen) userInfo:nil];
+    }
+
+    -(NSArray<NSTextCheckingResult *> *)matchesForPattern:(NSString *)pattern {
+        return [self matchesForPattern:pattern options:0 error:NULL];
+    }
+
+    -(NSArray<NSTextCheckingResult *> *)matchesForPattern:(NSString *)pattern error:(NSError **)error {
+        return [self matchesForPattern:pattern options:0 error:error];
+    }
+
+    -(NSArray<NSTextCheckingResult *> *)matchesForPattern:(NSString *)pattern options:(NSRegularExpressionOptions)options error:(NSError **)error {
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:options error:error];
+        return (regex ? [regex matchesInString:self options:0 range:self.range] : nil);
+    }
 
     -(NSString *)stringByLeftPaddingToLength:(NSUInteger)length {
         return [self stringByLeftPaddingToLength:length withString:@" " startingAtIndex:0];

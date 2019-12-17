@@ -39,9 +39,11 @@ NS_ASSUME_NONNULL_BEGIN
     @property(readonly)/*  */ NSPropertyListFormat                pbxFormat;
     @property(readonly)/*  */ PBXProject                          *project;
 
-    -(instancetype)initWithName:(NSString *)projectName path:(NSString *)projectPath error:(NSError **)error;
+    -(instancetype)initWithName:(NSString *)name path:(NSString *)path error:(NSError **)error;
 
     +(instancetype)projectFileWithName:(NSString *)projectName path:(NSString *)projectPath error:(NSError **)error;
+
+    +(NSDictionary<NSString *, id> *)getPropertyListAtPath:(NSString *)pbxPath format:(NSPropertyListFormat *)format error:(NSError **)error;
 
     -(nullable id)itemForID:(NSString *)itemId;
 

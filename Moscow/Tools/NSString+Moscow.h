@@ -3,7 +3,7 @@
  *    FILENAME: NSString+Moscow.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/16/19
+ *        DATE: 12/15/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -35,7 +35,18 @@ typedef NSString *_Nullable (^PGMacroBlock)(NSString *_Nonnull macro, BOOL *_Non
 
 @interface NSString(Moscow)
 
-    @property(readonly, copy) NSString *stringByMakingAbsolutePath;
+    @property(readonly)/*            */ NSRange  range;
+    @property(readonly, copy)/*      */ NSString *trim;
+    @property(readonly, copy, nullable) NSString *nullIfEmpty;
+    @property(readonly, copy)/*      */ NSString *stringByMakingAbsolutePath;
+
+    -(NSString *)stringByDupToLength:(NSUInteger)length;
+
+    -(NSArray<NSTextCheckingResult *> *)matchesForPattern:(NSString *)pattern;
+
+    -(NSArray<NSTextCheckingResult *> *)matchesForPattern:(NSString *)pattern error:(NSError **)error;
+
+    -(NSArray<NSTextCheckingResult *> *)matchesForPattern:(NSString *)pattern options:(NSRegularExpressionOptions)options error:(NSError **)error;
 
     -(NSString *)stringByReplacingMacros:(PGMacroBlock)block;
 
@@ -45,15 +56,11 @@ typedef NSString *_Nullable (^PGMacroBlock)(NSString *_Nonnull macro, BOOL *_Non
 
     -(NSString *)stringByLeftPaddingToLength:(NSUInteger)length withString:(NSString *)padding startingAtIndex:(NSUInteger)idx;
 
-    -(NSRange)range;
-
     -(NSString *)substringFrom:(NSUInteger)fromIdx to:(NSUInteger)toIdx;
 
     -(NSArray<NSString *> *)split:(NSString *)pattern limit:(NSInteger)limit;
 
     -(NSArray<NSString *> *)split:(NSString *)pattern;
-
-    -(NSString *)nullIfEmpty;
 
     -(BOOL)matches:(NSString *)pattern;
 
@@ -66,8 +73,6 @@ typedef NSString *_Nullable (^PGMacroBlock)(NSString *_Nonnull macro, BOOL *_Non
     -(BOOL)contains:(NSString *)pattern error:(NSError **)error;
 
     -(BOOL)contains:(NSString *)pattern options:(NSRegularExpressionOptions)options error:(NSError **)error;
-
-    -(NSString *)trim;
 
     -(NSString *)copyIfSameObjectAs:(NSString *)other;
 

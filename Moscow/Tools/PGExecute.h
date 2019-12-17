@@ -77,6 +77,14 @@ FOUNDATION_EXPORT NSString *const PGStderrOutputKey;
 
     +(instancetype)exeWithAppPath:(NSString *)executablePath arguments:(nullable NSArray<NSString *> *)arguments error:(NSError **)error;
 
+    +(NSString *)executeAndGetOutput:(NSString *)executablePath arguments:(nullable NSArray<NSString *> *)arguments error:(NSError **)error;
+
+    +(NSString *)executeAndGetOutput:(NSString *)executablePath
+                           arguments:(nullable NSArray<NSString *> *)arguments
+                         environment:(nullable NSDictionary<NSString *, NSString *> *)environment
+                     mergeDefaultEnv:(BOOL)mergeEnv
+                               error:(NSError **)error;
+
     -(instancetype)execute:(NSError **)error;
 
     -(NSInteger)waitUntilExit:(NSError **)error;

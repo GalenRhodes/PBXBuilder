@@ -80,13 +80,13 @@ PBXErrorCodes parseFindProjectResults(NSString *dir, NSArray<NSString *> *array,
         else if(files.count > 1) {
             NSString     *reason = PGFormat(@"Found multiple projects in the search path \"%@\". Which did you mean?", dir);
             NSDictionary *info   = @{ NSLocalizedDescriptionKey: reason, PGFoundProjectFilesKey: files };
-            setpptr(error, [NSError errorWithDomain:PGProjErrorDomain code:PBX_MULTIPLE_PROJECT_FILES_FOUND userInfo:info]);
-            return PBX_MULTIPLE_PROJECT_FILES_FOUND;
+            setpptr(error, [NSError errorWithDomain:PGProjErrorDomain code:PBX_MULTIPLE_PROJECTS_FOUND userInfo:info]);
+            return PBX_MULTIPLE_PROJECTS_FOUND;
         }
         else {
             NSString *reason = PGFormat(@"No projects were located in the search path \"%@\".", dir);
-            setpptr(error, [NSError errorWithDomain:PGProjErrorDomain code:PBX_NO_PROJECT_FILE_FOUND userInfo:@{ NSLocalizedDescriptionKey: reason }]);
-            return PBX_NO_PROJECT_FILE_FOUND;
+            setpptr(error, [NSError errorWithDomain:PGProjErrorDomain code:PBX_PROJECT_NOT_FOUND userInfo:@{ NSLocalizedDescriptionKey: reason }]);
+            return PBX_PROJECT_NOT_FOUND;
         }
     }
     else {
@@ -95,3 +95,39 @@ PBXErrorCodes parseFindProjectResults(NSString *dir, NSArray<NSString *> *array,
     }
 }
 
+NSString *indentLines(NSString *str, NSUInteger delta) {
+    if(str.length && delta) {
+        NSUInteger          mx      = 0;
+        NSString            *pad    = [@"|" stringByLeftPaddingToLength:delta];
+        NSMutableString     *buffer = [NSMutableString new];
+        NSArray<NSString *> *lines  = [str split:@"\\r\\n?|\\n"];
+
+        if(lines.count == 0) lines = @[ str ];
+
+        for(NSString *ln in lines) {
+            [buffer appendFormat:@"%@ %@\n", pad, ln];
+            mx = MAX(mx, ln.length);
+        }
+
+        [buffer appendFormat:@"%@_%@|", pad, [@"_" stringByDupToLength:mx]];
+        return buffer;
+    }
+
+    return str;
+}
+
+NSString *makeUnderline(NSString *str) {
+    switch(str.length) {//@f:0
+        case 0: return @"";
+        case 1: return @"||";
+        case 2: return @"|_|";
+        case 3: return @"|__|";
+        case 4: return @"|___|";
+        case 5: return @"|____|";
+        case 6: return @"|_____|";
+        case 7: return @"|______|";
+        case 8: return @"|_______|";
+        case 9: return @"|________|";
+        default: return PGFormat(@"|%@|", [@"_______________" stringByDupToLength:(str.length - 1)]);
+    } //@f:1
+}

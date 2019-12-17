@@ -18,12 +18,12 @@ int pbxBuilder() {
 
     if(runInfo) {
         PGPrintStr(@"\nBuilding the following project(s):\n");
-        for(PBXProjectFile *projectFile in runInfo.projects) PGPrintf(@"    Project: %@\n", projectFile.projectName);
+        PGPrintf(@"    Project: %@\n", runInfo.projectToBuild.projectName);
     }
     else {
-        PGPrintf(@"\nERROR: %@; %@\n", @(error.code), error.localizedDescription);
+        PGPrintf(@"\n%@; %@\n", @(error.code), error.localizedDescription);
 
-        if(error.code == PBX_MULTIPLE_PROJECT_FILES_FOUND) {
+        if(error.code == PBX_MULTIPLE_PROJECTS_FOUND) {
             NSArray<NSArray<NSString *> *> *foundFiles = error.userInfo[PGFoundProjectFilesKey];
             NSUInteger                     maxLength   = 0, x = 0;
 
@@ -45,9 +45,55 @@ int pbxBuilder() {
     return returnCode;
 }
 
+NSDictionary<NSString *, NSString *> *locateFiles2(NSString *dir) {
+    NSMutableDictionary<NSString *, NSString *> *results  = [NSMutableDictionary new];
+    NSDirectoryEnumerator                       *dirEnum  = [NSFileManager.defaultManager enumeratorAtPath:dir];
+    NSString                                    *filename = dirEnum.nextObject;
+
+    PGPrintf(@"\nEnumerating Across: %@\n\n", dir);
+
+    while(filename) {
+        NSError      *error        = nil;
+        NSString     *fullFilename = PGFormat(@"%@/%@", dir, filename);
+        NSDictionary *attrs        = dirEnum.fileAttributes;
+
+        if([@"project.pbxproj" isEqualToString:filename.lastPathComponent]) {
+            PGPrintf(@"> %@\n", fullFilename);
+            NSString *a = fullFilename.stringByDeletingLastPathComponent.lastPathComponent;
+            PGPrintf(@"> %@\n", a);
+
+            if([@"xcodeproj" isEqualToString:a.pathExtension]) {
+                results[a.stringByDeletingPathExtension] = fullFilename;
+            }
+        }
+        else if([NSFileTypeSymbolicLink isEqualToString:attrs[NSFileType]]) {
+            NSString     *newFullFilename = fullFilename.stringByResolvingSymlinksInPath;
+            NSDictionary *_attrs          = [NSFileManager.defaultManager attributesOfItemAtPath:newFullFilename error:&error];
+
+            if([NSFileTypeDirectory isEqualToString:_attrs[NSFileType]]) {
+                NSDictionary<NSString *, NSString *> *subResults = locateFiles2(newFullFilename);
+                if(subResults.count) [results addEntriesFromDictionary:subResults];
+            }
+        }
+
+        filename = dirEnum.nextObject;
+    }
+
+    return results;
+};
+
 int main(int argc, const char *argv[]) {
     @autoreleasepool {
-        return pbxBuilder();
+        NSDictionary<NSString *, NSString *> *z = locateFiles2(NSFileManager.defaultManager.currentDirectoryPath);
+
+        PGPrintf(@"Located %lu project(s):\n", z.count);
+
+        [z enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL *stop) {
+            PGPrintf(@"   %@ ====> %@\n", key, obj);
+        }];
+
+        return 0;
+        // return pbxBuilder();
     }
 }
 

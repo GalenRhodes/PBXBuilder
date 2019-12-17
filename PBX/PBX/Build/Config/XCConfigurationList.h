@@ -34,9 +34,12 @@ NS_ASSUME_NONNULL_BEGIN
 
     @property(readonly)/*      */ BOOL                            defaultConfigurationIsVisible;
     @property(readonly, nullable) NSString                        *defaultConfigurationName;
+    @property(readonly, nullable) XCBuildConfiguration            *defaultConfiguration;
     @property(readonly)/*      */ NSArray<XCBuildConfiguration *> *buildConfigurations;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
+
+    -(nullable XCBuildConfiguration *)buildConfigurationForName:(NSString *)name;
 
 @end
 

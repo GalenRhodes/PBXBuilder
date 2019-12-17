@@ -10,6 +10,6 @@ REMOTE_HOST="galenrhodes.com"
 REMOTE_USER="grhodes"
 REMOTE_PATH="Projects/2019"
 
-rsync -avz --delete-after "${SCRIPTDIR}" "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}"
+#rsync -avz --delete-after "${SCRIPTDIR}" "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}"
 
 exit "$?"

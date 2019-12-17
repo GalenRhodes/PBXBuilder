@@ -29,13 +29,13 @@
 		1117D41AC8087777043C7FB8 /* PBXBuildPhase.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D9FC9C8821CB054613A0 /* PBXBuildPhase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117D42EB90895042EF598C9 /* GNUstepInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D7BF1BFDE2B32DC0CC18 /* GNUstepInfo.m */; };
 		1117D43AEA2DAB68299B051C /* PBXFileElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D185CEF64CC4C899EA52 /* PBXFileElement.m */; };
+		1117D43D720ECF1A2A922CB4 /* NSString+Moscow.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DF33633E287BCC2A71D4 /* NSString+Moscow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117D45078AB4EBC41CAEA3C /* NSMutableArray+Moscow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D97DB6D481D10BF8EB42 /* NSMutableArray+Moscow.m */; };
 		1117D49E538A10B57673394C /* PBXResourcesBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DB4C9C5CF1EEF13A14C8 /* PBXResourcesBuildPhase.m */; };
-		1117D4CA7F74969909B63021 /* NSString+Moscow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DE9FA8C055490293F220 /* NSString+Moscow.m */; };
 		1117D4DE43051804E982B94D /* PBXFileReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D3BF5FF1DD90267EC33E /* PBXFileReference.m */; };
+		1117D4F234F8BFD66FE1D9DD /* NSString+Moscow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DB4D04DC08A66EAAEF66 /* NSString+Moscow.m */; };
 		1117D511C61D8EA2454A7BC3 /* PBXLegacyTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DAF15BB09C93919333E5 /* PBXLegacyTarget.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117D538B17754ABE09C5604 /* PBXVariantGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DD615A681AF8C3D22DD9 /* PBXVariantGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1117D56A97BC146DD857C3A4 /* NSString+Moscow.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DD7E8C3BCEECDE434088 /* NSString+Moscow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117D595FB357B711CE6EFC2 /* PBXCopyFilesBuildPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DC9C964AEE0421178951 /* PBXCopyFilesBuildPhase.m */; };
 		1117D5DD22894CABA61514A2 /* NSRegularExpression+Moscow.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DAACE59CFD6C7C7188C1 /* NSRegularExpression+Moscow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117D63B77A7E763587A8DF2 /* XCConfigurationList.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DDD40803A22835BE8D24 /* XCConfigurationList.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -196,6 +196,7 @@
 		1117DAF3C26965F048EB37AC /* PBXResourcesBuildPhase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXResourcesBuildPhase.h; sourceTree = "<group>"; };
 		1117DB05B8FA099CFA2EBD24 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		1117DB4C9C5CF1EEF13A14C8 /* PBXResourcesBuildPhase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXResourcesBuildPhase.m; sourceTree = "<group>"; };
+		1117DB4D04DC08A66EAAEF66 /* NSString+Moscow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Moscow.m"; sourceTree = "<group>"; };
 		1117DBEA260CC44C14E3D0A1 /* PGExecute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGExecute.h; sourceTree = "<group>"; };
 		1117DC3F18DDF2B8454CC291 /* PBXSourcesBuildPhase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXSourcesBuildPhase.h; sourceTree = "<group>"; };
 		1117DC735E9339B57255A797 /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
@@ -210,7 +211,6 @@
 		1117DD5D7B75243608FDD913 /* PBXNativeTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXNativeTarget.h; sourceTree = "<group>"; };
 		1117DD615A681AF8C3D22DD9 /* PBXVariantGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXVariantGroup.h; sourceTree = "<group>"; };
 		1117DD6FFD9B35DBB084E95E /* PBXFileReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXFileReference.h; sourceTree = "<group>"; };
-		1117DD7E8C3BCEECDE434088 /* NSString+Moscow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Moscow.h"; sourceTree = "<group>"; };
 		1117DDD40803A22835BE8D24 /* XCConfigurationList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCConfigurationList.h; sourceTree = "<group>"; };
 		1117DDE29F95395F83425ACC /* PBXTargetDependency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXTargetDependency.h; sourceTree = "<group>"; };
 		1117DDF9822F1E82D4762BE9 /* PBXNativeTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXNativeTarget.m; sourceTree = "<group>"; };
@@ -219,7 +219,7 @@
 		1117DE9CC3AA67BCB92F526B /* PGBool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGBool.m; sourceTree = "<group>"; };
 		1117DE9D1C9DADCAD627DF6F /* PBXProjectFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXProjectFile.m; sourceTree = "<group>"; };
 		1117DE9F6A17CE87E1337AD6 /* PBXFrameworksBuildPhase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXFrameworksBuildPhase.h; sourceTree = "<group>"; };
-		1117DE9FA8C055490293F220 /* NSString+Moscow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Moscow.m"; sourceTree = "<group>"; };
+		1117DF33633E287BCC2A71D4 /* NSString+Moscow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Moscow.h"; sourceTree = "<group>"; };
 		1117DF5ABE9E759A2AEB8B89 /* PGBool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGBool.h; sourceTree = "<group>"; };
 		1117DF71D599F3DF94BC992A /* Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tests.h; sourceTree = "<group>"; };
 		832E0CDC239852250048185F /* PBX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PBX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -447,8 +447,8 @@
 				1117D1F751602114B44BD467 /* NSRegularExpression+Moscow.m */,
 				1117D475243EDB11F72EAED4 /* NSScanner+Moscow.h */,
 				1117D26D95FE63B4D1F2945E /* NSScanner+Moscow.m */,
-				1117DD7E8C3BCEECDE434088 /* NSString+Moscow.h */,
-				1117DE9FA8C055490293F220 /* NSString+Moscow.m */,
+				1117DB4D04DC08A66EAAEF66 /* NSString+Moscow.m */,
+				1117DF33633E287BCC2A71D4 /* NSString+Moscow.h */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -569,10 +569,10 @@
 				1117D6437332E55B30F8F3A0 /* PGExecute.h in Headers */,
 				1117DDF248630026BA265B1B /* PGCmdLine.h in Headers */,
 				1117D1F9D5D1BF0CCA3D59A3 /* NSData+Moscow.h in Headers */,
+				1117D43D720ECF1A2A922CB4 /* NSString+Moscow.h in Headers */,
 				1117DA2BAACB566D4C8D395B /* NSMutableArray+Moscow.h in Headers */,
 				1117D5DD22894CABA61514A2 /* NSRegularExpression+Moscow.h in Headers */,
 				1117D0A444E03F759AC22FD2 /* NSScanner+Moscow.h in Headers */,
-				1117D56A97BC146DD857C3A4 /* NSString+Moscow.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -756,9 +756,9 @@
 				1117D45078AB4EBC41CAEA3C /* NSMutableArray+Moscow.m in Sources */,
 				1117D3579CC18EE9BCB37213 /* NSRegularExpression+Moscow.m in Sources */,
 				1117D65039C2F9EED6B6B2F0 /* NSScanner+Moscow.m in Sources */,
-				1117D4CA7F74969909B63021 /* NSString+Moscow.m in Sources */,
 				1117D64AE18B6F118812C1A6 /* PGExecute.m in Sources */,
 				1117DEB29C7C38C8589A7D7B /* PGCmdLine.m in Sources */,
+				1117D4F234F8BFD66FE1D9DD /* NSString+Moscow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

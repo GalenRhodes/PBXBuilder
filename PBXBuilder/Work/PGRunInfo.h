@@ -27,15 +27,30 @@
 
 @class PBXProjectFile;
 @class GNUstepInfo;
+@class PBXTarget;
+@class XCBuildConfiguration;
 
 NS_ASSUME_NONNULL_BEGIN
 
+FOUNDATION_EXPORT NSString *const PGErrMsgNoProgramPath;
+FOUNDATION_EXPORT NSString *const PGErrMsgUnknownCmdLineOption;
+FOUNDATION_EXPORT NSString *const PGErrMsgNoProjectFound;
+FOUNDATION_EXPORT NSString *const PGErrMsgProjectNotFound;
+FOUNDATION_EXPORT NSString *const PGErrMsgMissingProjectName;
+FOUNDATION_EXPORT NSString *const PGErrMsgMultipleProjects;
+FOUNDATION_EXPORT NSString *const PGErrMsgMissingTargetName;
+FOUNDATION_EXPORT NSString *const PGErrMsgTargetNotFound;
+FOUNDATION_EXPORT NSString *const PGErrMsgUnknownBuildConfig;
+
 @interface PGRunInfo : NSObject
 
-    @property(readonly, copy) NSString                  *programPath;
-    @property(readonly, copy) NSString                  *workingDir;
-    @property(readonly)/*  */ GNUstepInfo               *gnustepInfo;
-    @property(readonly)/*  */ NSArray<PBXProjectFile *> *projects;
+    @property(readonly, copy) NSString             *programPath;
+    @property(readonly, copy) NSString             *workingDir;
+    @property(readonly)/*  */ GNUstepInfo          *gnustepInfo;
+    @property(readonly)/*  */ PBXProjectFile       *projectToBuild;
+    @property(readonly)/*  */ NSArray<PBXTarget *> *targetsToBuild;
+    @property(readonly)/*  */ NSArray<NSString *>  *actions;
+    @property(readonly)/*  */ XCBuildConfiguration *buildConfiguration;
 
     -(instancetype)init:(NSError **)pError;
 

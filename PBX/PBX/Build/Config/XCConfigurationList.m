@@ -42,6 +42,10 @@
         return [self iv:@"defaultConfigurationName"];
     }
 
+    -(XCBuildConfiguration *)defaultConfiguration {
+        return [self buildConfigurationForName:self.defaultConfigurationName];
+    }
+
     -(NSArray<XCBuildConfiguration *> *)buildConfigurations {
         dispatch_once(&_buildConfigurationsOnce, ^{
             NSArray<NSString *> *list  = [self iv:@"buildConfigurations"];
@@ -52,6 +56,11 @@
         });
 
         return _buildConfigurations;
+    }
+
+    -(XCBuildConfiguration *)buildConfigurationForName:(NSString *)name {
+        for(XCBuildConfiguration *xcbc in self.buildConfigurations) if([name isEqualToString:xcbc.name]) return xcbc;
+        return nil;
     }
 
     -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {

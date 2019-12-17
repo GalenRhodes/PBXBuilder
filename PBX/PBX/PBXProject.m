@@ -87,6 +87,11 @@ NSArray<PBXTarget *> *sortTargetsByDependencies(NSMutableArray<PBXTarget *> *src
         return [self itemForKey:@"mainGroup"];
     }
 
+    -(PBXTarget *)targetWithName:(NSString *)name {
+        for(PBXTarget *target in self.targets) if([target.name isEqualToString:name]) return target;
+        return nil;
+    }
+
     -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {
         [super appendDescBody:str indent:indent];
         PBXAppendItem(str, indent, @"compatibilityVersion", self.compatibilityVersion);

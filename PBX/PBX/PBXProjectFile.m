@@ -33,29 +33,29 @@
     @synthesize pbxFormat = _pbxFormat;
     @synthesize project = _project;
 
-    -(instancetype)initWithName:(NSString *)projectName path:(NSString *)projectPath error:(NSError **)error {
+    -(instancetype)initWithName:(NSString *)name path:(NSString *)path error:(NSError **)error {
         self = [super init];
 
         if(self) {
-            _projectName  = [projectName copy];
-            _projectPath  = [projectPath copy];
+            _projectName  = [name copy];
+            _projectPath  = [path.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent copy];
             _pbxItemCache = [NSMutableDictionary new];
 
-            NSString *pbxPath = [NSString stringWithFormat:@"%@/%@.xcodeproj/project.pbxproj", _projectPath, _projectName];
 #ifdef DEBUG
-            PGPrintf(@"Loading Project: \"%@\"\n", pbxPath);
+            PGPrintf(@"Loading Project: \"%@\"\n", path);
 #endif
-            NSData *pbxData = [NSData dataWithContentsOfFile:pbxPath options:NSDataReadingMappedIfSafe error:error];
-            if(pbxData == nil) return nil;
-
-            NSDictionary *pbx = [NSPropertyListSerialization propertyListWithData:pbxData options:NSPropertyListImmutable format:&_pbxFormat error:error];
-            if(pbx == nil) return nil;
+            NSDictionary *pbx = [PBXProjectFile getPropertyListAtPath:path format:&_pbxFormat error:error];
 
             _projectPBX = pbx[@"objects"];
             _project    = [self itemForID:pbx[@"rootObject"]];
         }
 
         return self;
+    }
+
+    +(NSDictionary<NSString *, id> *)getPropertyListAtPath:(NSString *)pbxPath format:(NSPropertyListFormat *)format error:(NSError **)error {
+        NSData *pbxData = [NSData dataWithContentsOfFile:pbxPath options:NSDataReadingMappedIfSafe error:error];
+        return ((pbxData == nil) ? nil : [NSPropertyListSerialization propertyListWithData:pbxData options:NSPropertyListImmutable format:format error:error]);
     }
 
     -(id)itemForID:(NSString *)itemId {

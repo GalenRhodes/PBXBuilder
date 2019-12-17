@@ -126,6 +126,20 @@ typedef NSDictionary<NSString *, NSString *> *StringMap;
         return [[self alloc] initWithAppPath:executablePath arguments:arguments environment:environment mergeDefaultEnv:YES execute:NO error:error];
     }
 
+    +(NSString *)executeAndGetOutput:(NSString *)executablePath arguments:(nullable NSArray<NSString *> *)arguments error:(NSError **)error {
+        PGExecute *exe = [[PGExecute alloc] initWithAppPath:executablePath arguments:arguments environment:nil mergeDefaultEnv:YES execute:YES error:error];
+        return ((exe && ([exe waitUntilExit:error] == 0)) ? exe.stdOut : nil);
+    }
+
+    +(NSString *)executeAndGetOutput:(NSString *)executablePath
+                           arguments:(nullable NSArray<NSString *> *)arguments
+                         environment:(nullable NSDictionary<NSString *, NSString *> *)environment
+                     mergeDefaultEnv:(BOOL)mergeEnv
+                               error:(NSError **)error {
+        PGExecute *exe = [[PGExecute alloc] initWithAppPath:executablePath arguments:arguments environment:environment mergeDefaultEnv:mergeEnv execute:YES error:error];
+        return ((exe && ([exe waitUntilExit:error] == 0)) ? exe.stdOut : nil);
+    }
+
     -(void)handleTaskTerminatedEvent:(NSNotification *)notification {
         id o = notification.object;
         if(o && [o isKindOfClass:NSTask.class]) {

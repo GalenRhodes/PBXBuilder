@@ -48,6 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 
+    -(PBXTarget *)targetWithName:(NSString *)name;
 @end
 
 NS_ASSUME_NONNULL_END

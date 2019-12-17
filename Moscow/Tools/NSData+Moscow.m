@@ -24,6 +24,10 @@
 
 @implementation NSData(Moscow)
 
+    -(NSData *)copyIfSameObject:(id)other {
+        return ((other == self) ? [self copy] : self);
+    }
+
 //@f:0
 #ifndef __APPLE__
 

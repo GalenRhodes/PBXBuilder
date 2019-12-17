@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSScanner(Moscow)
 
-    +(unsigned long long)atoull:(NSString *)str success:(BOOL *)success;
+    +(unsigned long long)atoull:(NSString *)str success:(nullable BOOL *)success;
 
 #ifndef __APPLE__
 
