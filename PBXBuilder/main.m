@@ -8,13 +8,13 @@
 
 #import <Moscow/Moscow.h>
 #import <PBX/PBX.h>
-#import "PGRunInfo.h"
+#import "PBXRunInfo.h"
 #import "PBXTools.h"
 
 int pbxBuilder() {
-    int       returnCode = 0;
-    NSError   *error     = nil;
-    PGRunInfo *runInfo   = [[PGRunInfo alloc] init:&error];
+    int        returnCode = 0;
+    NSError    *error     = nil;
+    PBXRunInfo *runInfo   = [[PBXRunInfo alloc] init:&error];
 
     if(runInfo) {
         PGPrintStr(@"\nBuilding the following project(s):\n");

@@ -49,6 +49,12 @@ typedef BOOL (^PGFindBlock)(NSString *path, NSString *filename);
 
 FOUNDATION_EXPORT NSString *const MoscowErrorDomain;
 
+FOUNDATION_EXPORT void *PGMalloc(size_t size);
+
+FOUNDATION_EXPORT void *PGRealloc(void *buffer, size_t size);
+
+FOUNDATION_EXPORT NSString *PGStrError(int error_num);
+
 FOUNDATION_EXPORT NSError *PGErrorFromException(NSInteger code, NSException *ex);
 
 FOUNDATION_EXPORT NSError *PGMakeError(NSInteger code, NSString *reason, NSDictionary *_Nullable userInfo);

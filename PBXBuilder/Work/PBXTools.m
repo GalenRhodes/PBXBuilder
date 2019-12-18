@@ -22,6 +22,7 @@
 
 #import <Moscow/Moscow.h>
 #import "PBXTools.h"
+#import "PBXStrings.h"
 
 NSString *const PGFoundProjectFilesKey = @"PGFoundProjectFilesKey";
 NSString *const PGProjErrorDomain      = @"com.projectgalen.PBXBuilder";
@@ -130,4 +131,57 @@ NSString *makeUnderline(NSString *str) {
         case 9: return @"|________|";
         default: return PGFormat(@"|%@|", [@"_______________" stringByDupToLength:(str.length - 1)]);
     } //@f:1
+}
+
+BOOL pbxMakeErr(NSError **pError, NSInteger code, NSString *fmt, ...) {
+    if(pError) {
+        va_list ap;
+        va_start(ap, fmt);
+        NSString *reason = [[NSString alloc] initWithFormat:fmt arguments:ap];
+        NSError  *error  = pbxMakeError(code, reason, nil);
+        *pError = error;
+        va_end(ap);
+    }
+    return NO;
+};
+
+void handleFilename(NSMutableDictionary<NSString *, NSString *> *results, NSString *fullFilename) {
+    NSString *a = fullFilename.stringByDeletingLastPathComponent.lastPathComponent;
+    if([a.pathExtension isEqualToString:PBXProjectFileExtension]) results[a.stringByDeletingPathExtension] = fullFilename;
+}
+
+void handleSymbolicLink(NSString *symlink, NSMutableDictionary<NSString *, NSString *> *results, NSFileManager *fm) {
+    NSError  *error    = nil;
+    NSString *filename = [fm destinationOfSymbolicLinkAtPath:symlink error:&error];
+
+    if(filename) {
+        NSDictionary *subAttrs = [fm attributesOfItemAtPath:filename error:&error];
+
+        if([subAttrs.fileType isEqualToString:NSFileTypeDirectory]) {
+            NSDictionary < NSString * , NSString * > *subResults = locateProjectFiles(filename, fm);
+            if(subResults.count) [results addEntriesFromDictionary:subResults];
+        }
+    }
+}
+
+NSDictionary<NSString *, NSString *> *locateProjectFiles(NSString *dir, NSFileManager *fm) {
+    NSMutableDictionary < NSString * , NSString * > *results = [NSMutableDictionary new];
+    NSDirectoryEnumerator *dirEnum                           = [fm enumeratorAtPath:dir];
+    NSString              *filename                          = dirEnum.nextObject;
+
+    while(filename) {
+        NSString     *fullFilename = [dir stringByAppendingPathComponent:filename];
+        NSDictionary *attrs        = dirEnum.fileAttributes;
+
+        if([fullFilename.lastPathComponent isEqualToString:PGPBXFilename]) {
+            handleFilename(results, fullFilename);
+        }
+        else if([attrs.fileType isEqualToString:NSFileTypeSymbolicLink]) {
+            handleSymbolicLink(fullFilename, results, fm);
+        }
+
+        filename = dirEnum.nextObject;
+    }
+
+    return results;
 }

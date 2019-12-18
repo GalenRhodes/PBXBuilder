@@ -1,6 +1,6 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PGRunInfo.h
+ *    FILENAME: PBXRunInfo.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
  *        DATE: 11/4/19
@@ -32,17 +32,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString *const PGErrMsgNoProgramPath;
-FOUNDATION_EXPORT NSString *const PGErrMsgUnknownCmdLineOption;
-FOUNDATION_EXPORT NSString *const PGErrMsgNoProjectFound;
-FOUNDATION_EXPORT NSString *const PGErrMsgProjectNotFound;
-FOUNDATION_EXPORT NSString *const PGErrMsgMissingProjectName;
-FOUNDATION_EXPORT NSString *const PGErrMsgMultipleProjects;
-FOUNDATION_EXPORT NSString *const PGErrMsgMissingTargetName;
-FOUNDATION_EXPORT NSString *const PGErrMsgTargetNotFound;
-FOUNDATION_EXPORT NSString *const PGErrMsgUnknownBuildConfig;
-
-@interface PGRunInfo : NSObject
+@interface PBXRunInfo : NSObject
 
     @property(readonly, copy) NSString             *programPath;
     @property(readonly, copy) NSString             *workingDir;

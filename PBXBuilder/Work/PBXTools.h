@@ -24,19 +24,7 @@
 #define __PBXBUILDER_PGXTOOLS_H__
 
 #import <Cocoa/Cocoa.h>
-
-typedef NS_ENUM(NSInteger, PBXErrorCodes) {
-    PBX_NO_ERROR = 0,
-    PBX_INVALID_REGEX_PATTERN,
-    PBX_UNKNOWN_CMDLINE_OPTION,
-    PBX_PROJECT_NOT_FOUND,
-    PBX_MULTIPLE_PROJECTS_FOUND,
-    PBX_MISSING_PROJECT_NAME,
-    PBX_INVALID_PROJECT_FILE,
-    PBX_TARGET_NOT_FOUND,
-    PBX_MISSING_TARGET_NAME,
-    PBX_UNKNOWN_BUILD_CONFIG
-};
+#import "PBXBuilderTypes.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -53,9 +41,13 @@ FOUNDATION_EXPORT void printfc(NSUInteger maxLength, NSString *format, ...)  NS_
 
 FOUNDATION_EXPORT NSError *pbxMakeError(NSInteger code, NSString *reason, NSDictionary *_Nullable userInfo);
 
+FOUNDATION_EXPORT BOOL pbxMakeErr(NSError **pError, NSInteger code, NSString *fmt, ...) NS_FORMAT_FUNCTION(3, 4);
+
 FOUNDATION_EXPORT NSString *indentLines(NSString *str, NSUInteger delta);
 
 FOUNDATION_EXPORT NSString *makeUnderline(NSString *str);
+
+FOUNDATION_EXPORT NSDictionary<NSString *, NSString *> *locateProjectFiles(NSString *dir, NSFileManager *fm);
 
 NS_ASSUME_NONNULL_END
 

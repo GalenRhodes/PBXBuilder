@@ -45,9 +45,9 @@ NS_ASSUME_NONNULL_BEGIN
     @property(readonly)/*            */ NSArray<NSString *> *linkBaseOpts;
     @property(readonly)/*            */ NSArray<NSString *> *linkGuiOpts;
 
-    -(instancetype)init:(NSError **)pError NS_DESIGNATED_INITIALIZER;
+    -(instancetype)initGNUstepInfo:(NSError **)pError NS_DESIGNATED_INITIALIZER;
 
-    +(instancetype)info:(NSError **)pError;
+    +(instancetype)GNUstepInfo:(NSError **)pError;
 
 @end
 

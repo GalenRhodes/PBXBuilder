@@ -255,3 +255,47 @@ NSArray<NSString *> *PGFindWithBlock(NSString *dir, PGFindBlock block, NSError *
     return results;
 }
 
+void *PGMalloc(size_t size) {
+    void *buffer = malloc(size);
+    if(buffer) return buffer;
+    @throw [NSException exceptionWithName:NSMallocException reason:@"Not enough memory" userInfo:nil];
+}
+
+void *PGRealloc(void *buffer, size_t size) {
+    void *nbuffer = realloc(buffer, size);
+    if(nbuffer) return nbuffer;
+    @throw [NSException exceptionWithName:NSMallocException reason:@"Not enough memory" userInfo:nil];
+}
+
+NSString *PGStrError(int error_num) {
+    int      o_errno = errno;
+    size_t   bsize   = 1024;
+    char     *buffer = PGMalloc(bsize);
+    NSString *errMsg;
+
+    @try {
+        do {
+#if defined(__APPLE__) || ((_POSIX_C_SOURCE >= 200112L) && !_GNU_SOURCE)
+            int res = strerror_r(error_num, buffer, bsize);
+            if((res == ERANGE) || (((res < 0) && (errno == ERANGE)))) {
+#else
+                errno = 0;
+                char *res = strerror_r(error_num, buffer, bsize);
+                if(errno == ERANGE) {
+#endif
+                buffer = PGRealloc(buffer, (bsize *= 2));
+            }
+            else {
+                errMsg = [NSString stringWithUTF8String:buffer];
+                break;
+            }
+        }
+        while(1);
+    }
+    @finally {
+        free(buffer);
+    }
+
+    errno            = o_errno;
+    return errMsg;
+}

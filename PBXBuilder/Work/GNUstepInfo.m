@@ -47,10 +47,10 @@ NS_INLINE void bar(NSMutableArray<NSString *> *array, NSString *str) {
     }
 
     -(instancetype)init {
-        return (self = [self init:NULL]);
+        return (self = [self initGNUstepInfo:NULL]);
     }
 
-    -(instancetype)init:(NSError **)pError {
+    -(instancetype)initGNUstepInfo:(NSError **)pError {
         self = [super init];
 
         if(self) {
@@ -71,8 +71,8 @@ NS_INLINE void bar(NSMutableArray<NSString *> *array, NSString *str) {
         return self;
     }
 
-    +(instancetype)info:(NSError **)pError {
-        return [[self alloc] init:pError];
+    +(instancetype)GNUstepInfo:(NSError **)pError {
+        return [[self alloc] initGNUstepInfo:pError];
     }
 
     -(BOOL)getGNUstepEnvironment:(NSError **)pError {
