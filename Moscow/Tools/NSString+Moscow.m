@@ -74,6 +74,14 @@ NS_INLINE BOOL foo(NSString *s, NSRange r) {
         return (regex ? [regex matchesInString:self options:0 range:self.range] : nil);
     }
 
+    -(NSString *)stringByPaddingToLength:(NSUInteger)length {
+        return [self stringByPaddingToLength:length withString:@" " startingAtIndex:0];
+    }
+
+    -(NSString *)stringByPaddingToLength:(NSUInteger)length withString:(NSString *)padding {
+        return [self stringByPaddingToLength:length withString:padding startingAtIndex:0];
+    }
+
     -(NSString *)stringByLeftPaddingToLength:(NSUInteger)length {
         return [self stringByLeftPaddingToLength:length withString:@" " startingAtIndex:0];
     }

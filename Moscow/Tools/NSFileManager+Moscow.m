@@ -20,6 +20,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
+#import "Tools.h"
 #import "NSFileManager+Moscow.h"
 
 @implementation NSFileManager(Moscow)

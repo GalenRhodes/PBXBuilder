@@ -34,3 +34,5 @@ FOUNDATION_EXPORT const unsigned char MoscowVersionString[];
 #import <Moscow/PGBool.h>
 #import <Moscow/PGExecute.h>
 #import <Moscow/PGCmdLine.h>
+#import <Moscow/NSFileManager+Moscow.h>
+

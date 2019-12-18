@@ -39,6 +39,7 @@
             NSUInteger          argc     = args.count;
             BOOL                badStart = ((argc == 0) || ((_programPath = args[0].stringByMakingAbsolutePath) == nil));
 
+            _workingDir = NSFileManager.defaultManager.currentDirectoryPath;
             if(badStart) @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:PGErrMsgNoProgramPath userInfo:nil];
             if((_gnustepInfo = [GNUstepInfo GNUstepInfo:pError]) == nil) return nil;
             if(![self parseCommandLineArguments:[args subarrayWithRange:NSMakeRange(1, (argc - 1))] pError:pError]) return nil;
@@ -57,7 +58,7 @@
         NSString *arg = enArgs.nextObject;
         if(arg) return [self parseCommandLineArguments:enArgs firstArgument:arg projects:projects error:pError];
         else if(projects.count == 1) return [self setDefaultProjectForNoOptions:projects error:pError];
-        else return pbxMakeErr(pError, PBX_MULTIPLE_PROJECTS_FOUND, @"%@", PGErrMsgMultipleProjects);
+        else return [self getMultiProjError:projects error:pError];
     }
 
     -(BOOL)parseCommandLineArguments:(NSEnumerator<NSString *> *)enArgs
@@ -135,18 +136,10 @@
         }
         else {
             NSMutableArray<PBXTarget *> *array = [NSMutableArray new];
-
-            for(NSString *targetName in names) {
+            for(NSString                *targetName in names) {
                 PBXTarget *target = [project targetWithName:targetName];
-
-                if(target) {
-                    [array addObject:target];
-                }
-                else {
-                    return pbxMakeErr(pError, PBX_TARGET_NOT_FOUND, PGErrMsgTargetNotFound, targetName, projectName);
-                }
+                if(target) [array addObject:target]; else return pbxMakeErr(pError, PBX_TARGET_NOT_FOUND, PGErrMsgTargetNotFound, targetName, projectName);
             }
-
             _targetsToBuild = array;
         }
 
@@ -155,19 +148,19 @@
 
     -(BOOL)setDefaultProject:(NSDictionary<NSString *, NSString *> *)projects error:(NSError **)pError {
         if(!_projectToBuild) {
-            if(projects.count == 1) {
-                return ((_projectToBuild = [PBXProjectFile projectFileWithName:projects.allKeys[0] path:projects.allValues[0] error:pError]) != nil);
-            }
-            else {
-                return pbxMakeErr(pError, PBX_MULTIPLE_PROJECTS_FOUND, @"%@", PGErrMsgMultipleProjects);
-            }
+            if(projects.count == 1) return ((_projectToBuild = [self getFirstProjectFile:projects error:pError]) != nil);
+            else return [self getMultiProjError:projects error:pError];
         }
-
         return YES;
     }
 
+    -(BOOL)getMultiProjError:(NSDictionary<NSString *, NSString *> *)projects error:(NSError **)pError {
+        setpptr(pError, pbxMakeError(PBX_MULTIPLE_PROJECTS_FOUND, PGErrMsgMultipleProjects, @{ PGFoundProjectFilesKey: projects.copy }));
+        return NO;
+    }
+
     -(BOOL)setDefaultProjectForNoOptions:(NSDictionary<NSString *, NSString *> *)projects error:(NSError **)pError {
-        if((_projectToBuild = [PBXProjectFile projectFileWithName:projects.allKeys[0] path:projects.allValues[0] error:pError])) {
+        if((_projectToBuild = [self getFirstProjectFile:projects error:pError])) {
             _targetsToBuild     = _projectToBuild.project.targets.copy;
             _buildConfiguration = _projectToBuild.project.buildConfigurationList.defaultConfiguration;
             _actions            = @[ PBXActionBuild ];
@@ -175,6 +168,10 @@
         }
 
         return NO;
+    }
+
+    -(PBXProjectFile *)getFirstProjectFile:(NSDictionary<NSString *, NSString *> *)projects error:(NSError **)pError {
+        return [PBXProjectFile projectFileWithName:projects.allKeys[0] path:projects.allValues[0] error:pError];
     }
 
     -(BOOL)handleTargetOption:(NSEnumerator<NSString *> *)enArgs targetNames:(NSMutableArray<NSString *> *)targetNames error:(NSError **)pError {

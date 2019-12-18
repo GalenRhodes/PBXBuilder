@@ -22,7 +22,6 @@
 
 #import <Moscow/Moscow.h>
 #import "GNUstepInfo.h"
-#import "PBXTools.h"
 
 @interface GNUstepInfo()
 
@@ -43,6 +42,8 @@ NS_INLINE void bar(NSMutableArray<NSString *> *array, NSString *str) {
     if(![array containsObject:str]) [array addObject:str];
 }
 
+NSMutableArray<NSString *> *barx(NSArray<NSString *> *array);
+
 @implementation GNUstepInfo {
     }
 
@@ -55,16 +56,20 @@ NS_INLINE void bar(NSMutableArray<NSString *> *array, NSString *str) {
 
         if(self) {
             setpptr(pError, nil);
+#ifdef __APPLE__
+            _gnustepConfig = @"/opt/objc/bin/gnustep-config";
+#else
             if((_gnustepConfig = [PGExecute executeAndGetOutput:@"/bin/bash" arguments:@[ @"-c", @"which gnustep-config" ] error:pError].trim) == nil) return nil;
+#endif
             if(![self getGNUstepEnvironment:pError]) return nil;
-            if((_objcOpts     = [self getGNUstepFlags:@"--objc-flags" error:pError].mutableCopy) == nil) return nil;
+            if((_objcOpts     = barx([self getGNUstepFlags:@"--objc-flags" error:pError])) == nil) return nil;
             if((_linkBaseOpts = [self getGNUstepFlags:@"--base-libs" error:pError].mutableCopy) == nil) return nil;
             if((_linkGuiOpts  = [self getGNUstepFlags:@"--gui-libs" error:pError].mutableCopy) == nil) return nil;
-
-            [((NSMutableArray *)_objcOpts) addObjectsFromArray:@[ @"-fobjc-arc", @"-fobjc-nonfragile-abi" ]];
+#ifndef __APPLE__
+            [((NSMutableArray *)_objcOpts) addObjectsFromArray:@[ @"-fobjc-arc", @"-fobjc-nonfragile-abi", @"-Ofast", @"-Wno-unknown-pragmas" ]];
             [((NSMutableArray *)_linkBaseOpts) addObject:@"-ldispatch"];
             [((NSMutableArray *)_linkGuiOpts) addObject:@"-ldispatch"];
-
+#endif
             _cpuCount = [self getCpuCount:pError];
         }
 
@@ -76,6 +81,22 @@ NS_INLINE void bar(NSMutableArray<NSString *> *array, NSString *str) {
     }
 
     -(BOOL)getGNUstepEnvironment:(NSError **)pError {
+#ifdef __APPLE__
+        NSDictionary<NSString *, NSString *> *fuck = @{
+            @"ccPath"        : @"/opt/objc/clang9/bin/clang",
+            @"cxxPath"       : @"/opt/objc/clang9/bin/clang++",
+            @"applcationPath": @"/opt/objc/lib/GNUstep/Applications",
+            @"toolsPath"     : @"/opt/objc/bin",
+            @"libraryPath"   : @"/opt/objc/lib/GNUstep",
+            @"headersPath"   : @"/opt/objc/include",
+            @"libsPath"      : @"/opt/objc/lib",
+            @"docPath"       : @"/opt/objc/share/GNUstep/Documentation",
+            @"manPath"       : @"/opt/objc/share/man",
+            @"infoPath"      : @"/opt/objc/share/info"
+        };
+
+        for(NSString *key in fuck.allKeys) [self setValue:fuck[key] forKey:key];
+#else
         NSDictionary<NSString *, NSString *> *fuck = @{
             @"ccPath"        : @"--variable=CC",
             @"cxxPath"       : @"--variable=CXX",
@@ -89,16 +110,12 @@ NS_INLINE void bar(NSMutableArray<NSString *> *array, NSString *str) {
             @"infoPath"      : @"--variable=GNUSTEP_LOCAL_DOC_INFO"
         };
 
-        __block BOOL    error = NO;
-        __block NSError *e    = nil;
-
-        [fuck enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL *stop) {
-            NSString *out = [PGExecute executeAndGetOutput:_gnustepConfig arguments:@[ obj ] error:&e].trim;
-            if(out) [self setValue:out forKey:key]; else *stop = error = YES;
-        }];
-
-        if(error) setpptr(pError, (e ?: pbxMakeError(1001001, @"Unknown Error", nil)));
-        return !error;
+        for(NSString *key in fuck.allKeys) {
+            NSString *out = [PGExecute executeAndGetOutput:_gnustepConfig arguments:@[ fuck[key] ] error:pError].trim;
+            if(out) [self setValue:out forKey:key]; else return NO;
+        }
+#endif
+        return YES;
     }
 
     -(NSUInteger)getCpuCount:(NSError **)pError {
@@ -113,11 +130,15 @@ NS_INLINE void bar(NSMutableArray<NSString *> *array, NSString *str) {
 
     -(NSArray<NSString *> *)getGNUstepFlags:(NSString *)op error:(NSError **)error {
         setpptr(error, nil);
+#ifdef __APPLE__
+        return @[];
+#else
         return [self splitCommandLine:[PGExecute executeAndGetOutput:_gnustepConfig arguments:@[ op ] error:error].trim];
+#endif
     }
 
     -(NSArray<NSString *> *)splitCommandLine:(NSString *)commandLine {
-        NSArray<NSTextCheckingResult *> *array = [commandLine matchesForPattern:@"\\s+" error:NULL];
+        NSArray<NSTextCheckingResult *> *array = [commandLine matchesForPattern:@"\\s+"];
 
         if(array.count) {
             NSMutableArray<NSString *> *objcOpts = [NSMutableArray arrayWithCapacity:10];
@@ -135,3 +156,9 @@ NS_INLINE void bar(NSMutableArray<NSString *> *array, NSString *str) {
     }
 
 @end
+
+NSMutableArray<NSString *> *barx(NSArray<NSString *> *array) {
+    NSMutableArray<NSString *> *narray = [NSMutableArray new];
+    for(NSString               *opt in array) if(!([opt hasPrefix:@"-O"] || [opt hasPrefix:@"-g"])) [narray addObject:opt];
+    return narray;
+}

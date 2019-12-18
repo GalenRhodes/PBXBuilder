@@ -50,6 +50,10 @@ typedef NSString *_Nullable (^PGMacroBlock)(NSString *_Nonnull macro, BOOL *_Non
 
     -(NSString *)stringByReplacingMacros:(PGMacroBlock)block;
 
+    -(NSString *)stringByPaddingToLength:(NSUInteger)length;
+
+    -(NSString *)stringByPaddingToLength:(NSUInteger)length withString:(NSString *)padding;
+
     -(NSString *)stringByLeftPaddingToLength:(NSUInteger)length;
 
     -(NSString *)stringByLeftPaddingToLength:(NSUInteger)length withString:(NSString *)padding;

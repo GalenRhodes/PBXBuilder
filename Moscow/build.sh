@@ -6,7 +6,7 @@ cd "$a"
 SUBPRJPATH="${PWD}"
 cd "$b"
 
-CODE_OPTS="-Ofast -g0"
+CODE_OPTS="-Ofast -g0 -Wno-unknown-pragmas"
 
 SUBPRJNAME=$(basename "${SUBPRJPATH}")
 SUBPRJBUILDPATH="${SUBPRJPATH}/build"
