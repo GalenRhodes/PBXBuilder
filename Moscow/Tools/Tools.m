@@ -226,9 +226,6 @@ NSArray<NSString *> *PGFindWithBlock(NSString *dir, PGFindBlock block, NSError *
         NSInteger i       = PGExecuteApplication(@"/usr/bin/find", @[ dir ], &output, &e);
 
         if(output && i == 0) {
-#ifdef DEBUG
-            PGPrintf(@"Results: %li; Output:\n%@\n", i, output);
-#endif
             NSArray<NSString *> *files = [output split:@"\\r\\n?|\\n" limit:0];
 
             results = [NSMutableArray new];
@@ -244,9 +241,6 @@ NSArray<NSString *> *PGFindWithBlock(NSString *dir, PGFindBlock block, NSError *
         }
 #endif
     else {
-#ifdef DEBUG
-        PGPrintf(@"Results: %li\nError: %@\nOutput:\n%@\n", i, e.localizedDescription, output);
-#endif
         setpptr(error, [NSError errorWithDomain:MoscowErrorDomain code:1024 userInfo:@{
             NSLocalizedDescriptionKey: PGFormat(@"Results: %li\nError: %@\nOutput:\n%@\n", i, e.localizedDescription, output)
         }]);

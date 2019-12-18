@@ -25,7 +25,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-#ifndef __APPLE__
+#if GNUSTEP
+
     #if !defined(NS_INLINE)
         #if defined(__GNUC__)
             #define NS_INLINE static __inline__ __attribute__((always_inline))
@@ -35,6 +36,7 @@
             #define NS_INLINE static __inline
         #endif
     #endif
+
 #endif
 
 #define setpptr(p, e) ({ if(p) (*(p)) = (e); })

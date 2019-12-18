@@ -65,7 +65,7 @@ NSMutableArray<NSString *> *barx(NSArray<NSString *> *array);
             if((_objcOpts     = barx([self getGNUstepFlags:@"--objc-flags" error:pError])) == nil) return nil;
             if((_linkBaseOpts = [self getGNUstepFlags:@"--base-libs" error:pError].mutableCopy) == nil) return nil;
             if((_linkGuiOpts  = [self getGNUstepFlags:@"--gui-libs" error:pError].mutableCopy) == nil) return nil;
-#ifndef __APPLE__
+#if GNUSTEP
             [((NSMutableArray *)_objcOpts) addObjectsFromArray:@[ @"-fobjc-arc", @"-fobjc-nonfragile-abi", @"-Ofast", @"-Wno-unknown-pragmas" ]];
             [((NSMutableArray *)_linkBaseOpts) addObject:@"-ldispatch"];
             [((NSMutableArray *)_linkGuiOpts) addObject:@"-ldispatch"];

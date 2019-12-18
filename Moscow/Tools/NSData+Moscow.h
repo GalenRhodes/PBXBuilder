@@ -25,7 +25,7 @@
 
 #import <Moscow/Tools.h>
 
-#ifndef __APPLE__
+#if GNUSTEP
 
 typedef NS_OPTIONS(NSUInteger, NSDataReadingOptions) {
     NSDataReadingMappedIfSafe = 1UL << 0,	// Hint to map the file in if possible and safe
@@ -39,14 +39,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSData(Moscow)
 
-//@f:0
--(NSData *)copyIfSameObject:(id)other;
-#ifndef __APPLE__
+    -(NSData *)copyIfSameObject:(id)other;
+
+#if GNUSTEP
 
     +(nullable instancetype)dataWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr;
 
 #endif
-//@f:1
 
 @end
 

@@ -25,13 +25,10 @@
 
 @implementation NSFileManager(Moscow)
 
-#ifndef __APPLE__
-
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "OCDFAInspection"
+#if GNUSTEP
 
 -(NSString *)destinationOfSymbolicLinkAtPath:(NSString *)path error:(NSError **)error {
-    size_t bsize   = 1024;
+    size_t bsize   = PATH_MAX;
     char   *buffer = PGMalloc(bsize);
 
     @try {
@@ -59,8 +56,6 @@
         free(buffer);
     }
 }
-
-#pragma clang diagnostic pop
 
 #endif
 

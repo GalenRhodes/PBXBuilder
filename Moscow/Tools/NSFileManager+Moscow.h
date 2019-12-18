@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSFileManager(Moscow)
 
-#ifndef __APPLE__
+#if GNUSTEP
 
     -(NSString *)destinationOfSymbolicLinkAtPath:(NSString *)path error:(NSError **)error;
 

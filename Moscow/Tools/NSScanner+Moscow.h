@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
     +(unsigned long long)atoull:(NSString *)str success:(nullable BOOL *)success;
 
-#ifndef __APPLE__
+#if GNUSTEP
 
     -(BOOL)scanUnsignedLongLong:(unsigned long long *)ullVal;
 

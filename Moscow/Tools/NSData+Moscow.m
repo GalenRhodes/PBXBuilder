@@ -28,16 +28,14 @@
         return ((other == self) ? [self copy] : self);
     }
 
-//@f:0
-#ifndef __APPLE__
+#if GNUSTEP
 
-    +(instancetype)dataWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr {
-        NSData *data = [NSData dataWithContentsOfMappedFile:path];
-        if(!data && errorPtr) *errorPtr = [NSError errorWithDomain:NSCocoaErrorDomain code:1001001 userInfo:@{ NSLocalizedDescriptionKey: @"Unknown Error" }];
-        return data;
-    }
++(instancetype)dataWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)readOptionsMask error:(NSError **)errorPtr {
+    NSData *data = [NSData dataWithContentsOfMappedFile:path];
+    if(!data && errorPtr) *errorPtr = [NSError errorWithDomain:NSCocoaErrorDomain code:1001001 userInfo:@{ NSLocalizedDescriptionKey: @"Unknown Error" }];
+    return data;
+}
 
 #endif
-//@f:1
 
 @end

@@ -46,7 +46,7 @@
     }
 
 //@f:0
-#ifndef __APPLE__
+#if GNUSTEP
 
     -(BOOL)scanUnsignedLongLong:(unsigned long long *)ullVal {
         char               *s = strdup(self.string.UTF8String);
