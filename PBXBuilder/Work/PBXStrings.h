@@ -41,6 +41,17 @@ FOUNDATION_EXPORT NSString *const PBXOptionTarget;
 FOUNDATION_EXPORT NSString *const PBXOptionAllTargets;
 FOUNDATION_EXPORT NSString *const PBXOptionBuildConfig;
 
+FOUNDATION_EXPORT NSString *const PBXMessageAction;
+FOUNDATION_EXPORT NSString *const PBXMessageBuilding;
+FOUNDATION_EXPORT NSString *const PBXMessageProject;
+FOUNDATION_EXPORT NSString *const PBXMessageRemovingBuildDir;
+FOUNDATION_EXPORT NSString *const PBXMessageCreatingBuildDir;
+FOUNDATION_EXPORT NSString *const PBXMessageNothingToDo;
+FOUNDATION_EXPORT NSString *const PBXMessageTarget;
+FOUNDATION_EXPORT NSString *const PBXMessageBuildPhase;
+FOUNDATION_EXPORT NSString *const PBXMessageConfiguration;
+FOUNDATION_EXPORT NSString *const PBXMessageSuccess;
+
 NS_ASSUME_NONNULL_END
 
 #endif // __PBXBUILDER_PBXSTRINGS_H__

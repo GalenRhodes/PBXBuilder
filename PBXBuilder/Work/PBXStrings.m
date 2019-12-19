@@ -35,3 +35,14 @@ NSString *const PBXOptionProject     = @"-project";
 NSString *const PBXOptionTarget      = @"-target";
 NSString *const PBXOptionAllTargets  = @"-alltargets";
 NSString *const PBXOptionBuildConfig = @"-configuration";
+
+NSString *const PBXMessageAction           = @"ACTION";
+NSString *const PBXMessageBuilding         = @"Building the following project";
+NSString *const PBXMessageProject          = @"Project";
+NSString *const PBXMessageRemovingBuildDir = @"Removing build directory";
+NSString *const PBXMessageCreatingBuildDir = @"Creating build directory";
+NSString *const PBXMessageNothingToDo      = @"Nothing to do!";
+NSString *const PBXMessageTarget           = @"Target";
+NSString *const PBXMessageBuildPhase       = @"Build Phase";
+NSString *const PBXMessageConfiguration    = @"Configuration";
+NSString *const PBXMessageSuccess          = @"Success!";

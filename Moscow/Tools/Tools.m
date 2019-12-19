@@ -23,6 +23,7 @@
 #import "Tools.h"
 #import "NSString+Moscow.h"
 #import "PGExecute.h"
+#import "PGBool.h"
 
 NSString *const PGX_STDOUT = @"/dev/stdout";
 
@@ -290,6 +291,32 @@ NSString *PGStrError(int error_num) {
         free(buffer);
     }
 
-    errno            = o_errno;
+    errno = o_errno;
     return errMsg;
+}
+
+NSString *PGpLeft(id obj, NSString *padding, BOOL truncate, NSUInteger length) PG_OVERLOADED {
+    NSString   *desc = ([obj description] ?: @"(NULL)");
+    NSUInteger dlen  = desc.length, plen = padding.length, nlen = (length - dlen);
+
+    if(dlen == length) return desc;
+    if(dlen > length) return (truncate ? [desc substringWithRange:NSMakeRange(nlen, length)] : desc);
+
+    NSMutableString *str = [NSMutableString new];
+
+    while((str.length + plen) <= nlen) {
+        [str appendString:padding];
+    }
+
+    if(str.length < nlen) [str appendString:[padding substringWithRange:NSMakeRange(0, (nlen - str.length))]];
+    [str appendString:desc];
+    return str;
+}
+
+NSString *PGpLeft(id obj, NSString *padding, NSUInteger length) PG_OVERLOADED {
+    return PGpLeft(obj, padding, NO, length);
+}
+
+NSString *PGpLeft(id obj, NSUInteger length) PG_OVERLOADED {
+    return PGpLeft(obj, @"                                                                     ", NO, length);
 }

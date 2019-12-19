@@ -43,9 +43,17 @@
             if(badStart) @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:PGErrMsgNoProgramPath userInfo:nil];
             if((_gnustepInfo = [GNUstepInfo GNUstepInfo:pError]) == nil) return nil;
             if(![self parseCommandLineArguments:[args subarrayWithRange:NSMakeRange(1, (argc - 1))] pError:pError]) return nil;
+
+            _buildDir     = PGFormat(@"%@/build", self.projectToBuild.projectPath);
+            _builtTargets = [NSMutableArray new];
         }
 
         return self;
+    }
+
+    -(BOOL)hasTargetBeenBuilt:(NSString *)targetName {
+        for(PBXTarget *target in self.builtTargets) if([target.name isEqualToString:targetName]) return YES;
+        return NO;
     }
 
     -(BOOL)parseCommandLineArguments:(NSArray<NSString *> *)args pError:(NSError **)pError {
@@ -72,7 +80,8 @@
 
         while(arg) {
             if([arg isEqualToString:PBXOptionBuildConfig]) {
-                configName = arg;
+                configName = enArgs.nextObject;
+                if(!configName) return pbxMakeErr(pError, PBX_MISSING_BUILD_CONFIG, @"%@", PGErrMsgMissingBuildConfig);
             }
             else if([arg isEqualToString:PBXOptionProject]) {
                 if(![self handleProjectOption:enArgs projects:projects error:pError]) return NO;

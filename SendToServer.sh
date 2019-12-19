@@ -6,7 +6,7 @@ SCRIPTDIR="${PWD}"
 cd "${CURRDIR}"
 
 REMOTE_HOST="goober"
-#REMOTE_HOST="galenrhodes.com"
+REMOTE_HOST="galenrhodes.com"
 REMOTE_USER="grhodes"
 REMOTE_PATH="Projects/2019"
 

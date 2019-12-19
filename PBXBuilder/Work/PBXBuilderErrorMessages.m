@@ -22,12 +22,14 @@
 
 #import "PBXBuilderErrorMessages.h"
 
-NSString *const PGErrMsgNoProgramPath        = @"ERROR: Program path missing";
-NSString *const PGErrMsgUnknownCmdLineOption = @"ERROR: Unrecognized command-line options: \"%@\"";
-NSString *const PGErrMsgNoProjectFound       = @"ERROR: No project found in path: \"%@\"";
-NSString *const PGErrMsgProjectNotFound      = @"ERROR: Project \"%@\" not found in path \"%@\".";
-NSString *const PGErrMsgMissingProjectName   = @"ERROR: Missing project name after \"-project\"";
-NSString *const PGErrMsgMultipleProjects     = @"ERROR: Multiple projects found. Use the \"-project\" option to specify which project to use.";
-NSString *const PGErrMsgMissingTargetName    = @"ERROR: Missing target name after \"-target\"";
-NSString *const PGErrMsgTargetNotFound       = @"ERROR: Target \"%@\" not found in project \"%@\"";
-NSString *const PGErrMsgUnknownBuildConfig   = @"ERROR: Unknown build configuration: \"%@\"";
+NSString *const PGErrMsgNoProgramPath        = @"Program path missing";
+NSString *const PGErrMsgUnknownCmdLineOption = @"Unrecognized command-line options: \"%@\"";
+NSString *const PGErrMsgNoProjectFound       = @"No project found in path: \"%@\"";
+NSString *const PGErrMsgProjectNotFound      = @"Project \"%@\" not found in path \"%@\".";
+NSString *const PGErrMsgMissingProjectName   = @"Missing project name after \"-project\"";
+NSString *const PGErrMsgMultipleProjects     = @"Multiple projects found. Use the \"-project\" option to specify which project to use.";
+NSString *const PGErrMsgMissingTargetName    = @"Missing target name after \"-target\"";
+NSString *const PGErrMsgTargetNotFound       = @"Target \"%@\" not found in project \"%@\"";
+NSString *const PGErrMsgUnknownBuildConfig   = @"Unknown build configuration: \"%@\"";
+NSString *const PGErrMsgMissingBuildConfig   = @"Missing build configuration after \"-configuration\"";
+NSString *const PBXErrMsgDirIsFile           = @"The file exists but is not a directory: %@";

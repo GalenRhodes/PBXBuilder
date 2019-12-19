@@ -36,6 +36,8 @@ FOUNDATION_EXPORT NSString *const PGErrMsgMultipleProjects;
 FOUNDATION_EXPORT NSString *const PGErrMsgMissingTargetName;
 FOUNDATION_EXPORT NSString *const PGErrMsgTargetNotFound;
 FOUNDATION_EXPORT NSString *const PGErrMsgUnknownBuildConfig;
+FOUNDATION_EXPORT NSString *const PGErrMsgMissingBuildConfig;
+FOUNDATION_EXPORT NSString *const PBXErrMsgDirIsFile;
 
 NS_ASSUME_NONNULL_END
 

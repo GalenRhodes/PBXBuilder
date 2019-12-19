@@ -25,6 +25,10 @@
 
 #import <Cocoa/Cocoa.h>
 
+#ifndef PG_OVERLOADED
+    #define PG_OVERLOADED __attribute__((overloadable))
+#endif
+
 #if GNUSTEP
 
     #if !defined(NS_INLINE)
@@ -48,6 +52,12 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^PGPrintStructBlock)(NSString *prefix, BOOL addCR);
 
 typedef BOOL (^PGFindBlock)(NSString *path, NSString *filename);
+
+FOUNDATION_EXPORT NSString *PGpLeft(id obj, NSString *padding, BOOL truncate, NSUInteger length) PG_OVERLOADED;
+
+FOUNDATION_EXPORT NSString *PGpLeft(id obj, NSString *padding, NSUInteger length) PG_OVERLOADED;
+
+FOUNDATION_EXPORT NSString *PGpLeft(id obj, NSUInteger length) PG_OVERLOADED;
 
 FOUNDATION_EXPORT NSString *const MoscowErrorDomain;
 
