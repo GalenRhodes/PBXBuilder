@@ -25,6 +25,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PBXBuilderTypes.h"
+#import "PBXStrings.h"
+#import "PBXBuilderErrorMessages.h"
+#import "GNUstepInfo.h"
+#import "PBXRunInfo.h"
+#import "PBXNativeTarget+PBXBuilder.h"
+#import "PBXTarget+PBXBuilder.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -48,6 +54,10 @@ FOUNDATION_EXPORT NSString *indentLines(NSString *str, NSUInteger delta);
 FOUNDATION_EXPORT NSString *makeUnderline(NSString *str);
 
 FOUNDATION_EXPORT NSDictionary<NSString *, NSString *> *locateProjectFiles(NSString *dir, NSFileManager *fm);
+
+FOUNDATION_EXPORT NSInteger printError(NSInteger returnCode, NSError *error) PG_OVERLOADED;
+
+FOUNDATION_EXPORT NSInteger printError(NSError *error) PG_OVERLOADED;
 
 NS_ASSUME_NONNULL_END
 

@@ -20,7 +20,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import "PBXBuilderErrorMessages.h"
+#import "PBXTools.h"
 
 NSString *const PGErrMsgNoProgramPath        = @"Program path missing";
 NSString *const PGErrMsgUnknownCmdLineOption = @"Unrecognized command-line options: \"%@\"";

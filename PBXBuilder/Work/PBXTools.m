@@ -22,10 +22,19 @@
 
 #import <Moscow/Moscow.h>
 #import "PBXTools.h"
-#import "PBXStrings.h"
 
 NSString *const PGFoundProjectFilesKey = @"PGFoundProjectFilesKey";
 NSString *const PGProjErrorDomain      = @"com.projectgalen.PBXBuilder";
+NSString *const PBXPrintError          = @"\nERROR: (%@) - %@\n";
+
+NSInteger printError(NSInteger returnCode, NSError *error) PG_OVERLOADED {
+    PGPrintf(PBXPrintError, @(error.code), error.localizedDescription);
+    return (returnCode ?: error.code);
+}
+
+NSInteger printError(NSError *error) PG_OVERLOADED {
+    return printError(0, error);
+}
 
 NSError *pbxMakeError(NSInteger code, NSString *reason, NSDictionary *userInfo) {
     if((reason = reason.trim).length == 0) reason = @"Unknown error";
@@ -158,16 +167,16 @@ void handleSymbolicLink(NSString *symlink, NSMutableDictionary<NSString *, NSStr
         NSDictionary *subAttrs = [fm attributesOfItemAtPath:filename error:&error];
 
         if([subAttrs.fileType isEqualToString:NSFileTypeDirectory]) {
-            NSDictionary < NSString * , NSString * > *subResults = locateProjectFiles(filename, fm);
+            NSDictionary < NSString *, NSString * > *subResults = locateProjectFiles(filename, fm);
             if(subResults.count) [results addEntriesFromDictionary:subResults];
         }
     }
 }
 
 NSDictionary<NSString *, NSString *> *locateProjectFiles(NSString *dir, NSFileManager *fm) {
-    NSMutableDictionary < NSString * , NSString * > *results = [NSMutableDictionary new];
-    NSDirectoryEnumerator *dirEnum                           = [fm enumeratorAtPath:dir];
-    NSString              *filename                          = dirEnum.nextObject;
+    NSMutableDictionary < NSString *, NSString * > *results  = [NSMutableDictionary new];
+    NSDirectoryEnumerator                          *dirEnum  = [fm enumeratorAtPath:dir];
+    NSString                                       *filename = dirEnum.nextObject;
 
     while(filename) {
         NSString     *fullFilename = [dir stringByAppendingPathComponent:filename];

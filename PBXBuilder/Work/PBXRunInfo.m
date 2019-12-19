@@ -22,11 +22,7 @@
 
 #import <Moscow/Moscow.h>
 #import <PBX/PBX.h>
-#import "GNUstepInfo.h"
-#import "PBXRunInfo.h"
 #import "PBXTools.h"
-#import "PBXStrings.h"
-#import "PBXBuilderErrorMessages.h"
 
 @implementation PBXRunInfo {
     }

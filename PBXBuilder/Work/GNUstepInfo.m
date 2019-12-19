@@ -21,7 +21,7 @@
  *//************************************************************************/
 
 #import <Moscow/Moscow.h>
-#import "GNUstepInfo.h"
+#import "PBXTools.h"
 
 @interface GNUstepInfo()
 

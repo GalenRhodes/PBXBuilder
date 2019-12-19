@@ -20,7 +20,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import "PBXStrings.h"
+#import "PBXTools.h"
 
 NSString *const PGPBXFilename           = @"project.pbxproj";
 NSString *const PBXProjectFileExtension = @"xcodeproj";
