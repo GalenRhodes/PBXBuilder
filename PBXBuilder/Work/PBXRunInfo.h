@@ -42,12 +42,13 @@ NS_ASSUME_NONNULL_BEGIN
     @property(readonly)/*  */ NSArray<NSString *>  *actions;
     @property(readonly)/*  */ XCBuildConfiguration *buildConfiguration;
     @property(readonly, copy) NSString             *buildDir;
+    @property(readonly)/*  */ NSUInteger           targetNameMaxLength;
 
     @property(readonly) NSMutableArray<PBXTarget *> *builtTargets;
 
     -(instancetype)init:(NSError **)pError;
 
-    -(BOOL)hasTargetBeenBuilt:(NSString *)targetName;
+    -(BOOL)hasTargetBeenBuilt:(NSString *)itemId;
 
     +(instancetype)runInfo:(NSError **)pError;
 

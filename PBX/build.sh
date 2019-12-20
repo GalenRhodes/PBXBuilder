@@ -40,22 +40,13 @@ mkdir -p "${SUBPRJOBJPATH}" || exit $?
 for x in $(find "${SUBPRJPATH}" -name "*.h"); do
     y="$(basename "${x}")"
     z="${SUBPRJFWKHEADERSPATH}/${y}"
-    echo "cp ${x} ==> ${z}"
     ln -s "${x}" "${z}" || exit $?
 done
 
-for x in $(find "${SUBPRJPATH}" -name "*.m"); do
-    y=$(basename "${x}")
-    z="${SUBPRJOBJPATH}/${y}.o"
-    echo "${CC} ${OPTS} -c ${x} -o ${z}"
-    "${CC}" ${OPTS} -c "${x}" -o "${z}" || exit $?
-done
+pushd "${SUBPRJOBJPATH}" 2> /dev/null > /dev/null
+echo "Compiling subproject ${SUBPRJNAME}"
+${CC} ${OPTS} -c $(find "${SUBPRJPATH}" -name "*.m") || exit $?
+${CC} ${CODE_OPTS} -c $(find "${SUBPRJPATH}" -name "*.c") || exit $?
+popd 2> /dev/null > /dev/null
 
-for x in $(find "${SUBPRJPATH}" -name "*.c"); do
-    y=$(basename "${x}")
-    z="${SUBPRJOBJPATH}/${y}.o"
-    echo "${CC} ${CODE_OPTS} -c ${x} -o ${z}"
-    "${CC}" ${CODE_OPTS} -c "${x}" -o "${z}" || exit $?
-done
-
-exit $?
+exit 0

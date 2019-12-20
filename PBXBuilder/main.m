@@ -12,18 +12,6 @@
 
 const NSUInteger T = 4;
 
-NSString *const PBXFormat1 = @"    ] %@\n";
-NSString *const PBXFormat2 = @"    ] %@: %@\n";
-NSString *const PBXFormat3 = @"    ] %@:[%@]; %@:[%@]\n";
-NSString *const PBXFormat4 = @"\n%@: %@";
-NSString *const PBXFormat5 = @"\n%@:";
-NSString *const PBXFormat6 = @"\n\n%@: %@...\n";
-
-NSString *const PBXMessageDoubleLF = @"\n\n";
-NSString *const PBXMessageSingleLF = @"\n";
-
-NSString *const PBXPrintErrorProjectList = @"%2lu> %@ ==> \"%@\"\n";
-
 NSInteger pbxBuilder() {
     NSInteger  returnCode = 0;
     NSError    *error     = nil;
@@ -44,32 +32,39 @@ NSInteger pbxBuilder() {
 
         PGPrintStr(PBXMessageDoubleLF);
 
+        struct timespec delay = { .tv_sec = 0, .tv_nsec = 500000000 };
+
         /*
          * CLEAN ACTION
          */
         if([runInfo.actions containsObject:PBXActionClean]) {
-            PGPrintf(PBXFormat6, PBXMessageAction, PBXActionClean.capitalizedString);
+            PGPrintf(PBXFormat6, PBXMessageAction, PGFormat(PBXFormat11, PBXActionClean.capitalizedString));
+            PGPrintf(PBXFormat7, PBXMessageRemoving, PGFormat(PBXFormat10, PBXMessageBuildDirectory, runInfo.buildDir), PBXMessageWorking);
+            nanosleep(&delay, NULL);
+
             BOOL isDir     = NO;
             BOOL doesExist = [NSFileManager.defaultManager fileExistsAtPath:runInfo.buildDir isDirectory:&isDir];
 
             if(doesExist && isDir) {
-                PGPrintf(PBXFormat2, PBXMessageRemovingBuildDir, runInfo.buildDir);
-                if([NSFileManager.defaultManager removeItemAtPath:runInfo.buildDir error:&error]) PGPrintf(PBXFormat1, PBXMessageSuccess);
-                else return printError(PBX_COCOA_ERROR, error);
+                if([NSFileManager.defaultManager removeItemAtPath:runInfo.buildDir error:&error]) PGPrintf(PBXFormat8, PBXMessageSuccess);
+                else return printError2(PBX_COCOA_ERROR, error);
             }
-            else if(doesExist && !isDir) printError(pbxMakeError(PBX_DIR_IS_FILE, PGFormat(PBXErrMsgDirIsFile, runInfo.buildDir), nil));
-            else PGPrintf(PBXFormat1, PBXMessageNothingToDo);
+            else if(doesExist && !isDir) return printError2(pbxMakeError(PBX_DIR_IS_FILE, PGFormat(PBXErrMsgDirIsFile, runInfo.buildDir), nil));
+            else PGPrintf(PBXFormat8, PBXMessageNothingToDo);
         }
 
         /*
          * BUILD ACTION
          */
         if([runInfo.actions containsObject:PBXActionBuild]) {
-            PGPrintf(PBXFormat6, PBXMessageAction, PBXActionBuild.capitalizedString);
+            PGPrintf(PBXFormat6, PBXMessageAction, PGFormat(PBXFormat11, PBXActionBuild.capitalizedString));
+            PGPrintf(PBXFormat7, PBXMessageCreating, PGFormat(PBXFormat10, PBXMessageBuildDirectory, runInfo.buildDir), PBXMessageWorking);
+            nanosleep(&delay, NULL);
+
             NSFileManager *fm = NSFileManager.defaultManager;
 
-            PGPrintf(PBXFormat2, PBXMessageCreatingBuildDir, runInfo.buildDir);
-            if(![fm createDirectoryAtPath:runInfo.buildDir withIntermediateDirectories:YES attributes:nil error:&error]) return printError(error);
+            if([fm createDirectoryAtPath:runInfo.buildDir withIntermediateDirectories:YES attributes:nil error:&error]) PGPrintf(PBXFormat8, PBXMessageSuccess);
+            else return printError2(error);
 
             for(PBXTarget *target in targets) {
                 NSInteger res = [target build:runInfo error:&error];
@@ -81,7 +76,7 @@ NSInteger pbxBuilder() {
          * INSTALL ACTION
          */
         if([runInfo.actions containsObject:PBXActionInstall]) {
-            PGPrintf(PBXFormat6, PBXMessageAction, PBXActionInstall.capitalizedString);
+            PGPrintf(PBXFormat6, PBXMessageAction, PGFormat(PBXFormat11, PBXActionInstall.capitalizedString));
         }
     }
     else {

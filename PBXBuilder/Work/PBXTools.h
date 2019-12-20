@@ -31,11 +31,19 @@
 #import "PBXRunInfo.h"
 #import "PBXNativeTarget+PBXBuilder.h"
 #import "PBXTarget+PBXBuilder.h"
+#import "PBXBuildPhase+PBXBuilder.h"
+#import "PBXHeadersBuildPhase+PBXBuilder.h"
+#import "PBXCopyFilesBuildPhase+PBXBuilder.h"
+#import "PBXFrameworksBuildPhase+PBXBuilder.h"
+#import "PBXResourcesBuildPhase+PBXBuilder.h"
+#import "PBXSourcesBuildPhase+PBXBuilder.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString *const PGProjErrorDomain;
-FOUNDATION_EXPORT NSString *const PGFoundProjectFilesKey;
+typedef NS_OPTIONS(NSUInteger, PBXPrintStatusOptions) {
+    PBX_PS_EOL = (1 << 0), // Stay at end-of-line
+    PBX_PS_LF  = (1 << 1), // Move to next line (implies PBX_PS_EOL)
+};
 
 FOUNDATION_EXPORT PBXErrorCodes parseFindProjectResults(NSString *dir,
                                                         NSArray<NSString *> *array,
@@ -58,6 +66,16 @@ FOUNDATION_EXPORT NSDictionary<NSString *, NSString *> *locateProjectFiles(NSStr
 FOUNDATION_EXPORT NSInteger printError(NSInteger returnCode, NSError *error) PG_OVERLOADED;
 
 FOUNDATION_EXPORT NSInteger printError(NSError *error) PG_OVERLOADED;
+
+FOUNDATION_EXPORT NSInteger printError2(NSInteger returnCode, NSError *error) PG_OVERLOADED;
+
+FOUNDATION_EXPORT NSInteger printError2(NSError *error) PG_OVERLOADED;
+
+FOUNDATION_EXPORT void printStatus(NSString *status, ANSIGraphicsRendition color, NSUInteger options) PG_OVERLOADED;
+
+FOUNDATION_EXPORT void printStatus(NSString *status, ANSIGraphicsRendition color) PG_OVERLOADED;
+
+FOUNDATION_EXPORT void printSuccess(void);
 
 NS_ASSUME_NONNULL_END
 

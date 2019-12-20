@@ -27,6 +27,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+FOUNDATION_EXPORT NSString *const PGProjErrorDomain;
+
+FOUNDATION_EXPORT NSString *const PGFoundProjectFilesKey;
+
 FOUNDATION_EXPORT NSString *const PGPBXFilename;
 FOUNDATION_EXPORT NSString *const PBXProjectFileExtension;
 
@@ -44,13 +48,30 @@ FOUNDATION_EXPORT NSString *const PBXOptionBuildConfig;
 FOUNDATION_EXPORT NSString *const PBXMessageAction;
 FOUNDATION_EXPORT NSString *const PBXMessageBuilding;
 FOUNDATION_EXPORT NSString *const PBXMessageProject;
-FOUNDATION_EXPORT NSString *const PBXMessageRemovingBuildDir;
-FOUNDATION_EXPORT NSString *const PBXMessageCreatingBuildDir;
 FOUNDATION_EXPORT NSString *const PBXMessageNothingToDo;
 FOUNDATION_EXPORT NSString *const PBXMessageTarget;
 FOUNDATION_EXPORT NSString *const PBXMessageBuildPhase;
 FOUNDATION_EXPORT NSString *const PBXMessageConfiguration;
 FOUNDATION_EXPORT NSString *const PBXMessageSuccess;
+FOUNDATION_EXPORT NSString *const PBXMessageBuildDirectory;
+FOUNDATION_EXPORT NSString *const PBXMessageWorking;
+FOUNDATION_EXPORT NSString *const PBXMessageRemoving;
+FOUNDATION_EXPORT NSString *const PBXMessageCreating;
+
+FOUNDATION_EXPORT NSString *const PBXFormat3;
+FOUNDATION_EXPORT NSString *const PBXFormat4;
+FOUNDATION_EXPORT NSString *const PBXFormat5;
+FOUNDATION_EXPORT NSString *const PBXFormat6;
+FOUNDATION_EXPORT NSString *const PBXFormat7;
+FOUNDATION_EXPORT NSString *const PBXFormat8;
+FOUNDATION_EXPORT NSString *const PBXFormat10;
+FOUNDATION_EXPORT NSString *const PBXFormat11;
+FOUNDATION_EXPORT NSString *const PBXFormatError;
+
+FOUNDATION_EXPORT NSString *const PBXMessageDoubleLF;
+FOUNDATION_EXPORT NSString *const PBXMessageSingleLF;
+
+FOUNDATION_EXPORT NSString *const PBXPrintErrorProjectList;
 
 NS_ASSUME_NONNULL_END
 

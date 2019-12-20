@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXTarget+PBXBuilder.m
+ *    FILENAME: PBXBuildPhase+PBXBuilder.m
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 12/19/19
+ *        DATE: 12/20/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -22,25 +22,9 @@
 
 #import "PBXTools.h"
 
-@implementation PBXTarget(PBXBuilder)
+@implementation PBXBuildPhase(PBXBuilder)
 
-    -(BOOL)isBuilt:(PBXRunInfo *)runInfo {
-        return [runInfo hasTargetBeenBuilt:self.itemId];
-    }
-
-    -(NSInteger)completeBuild:(PBXRunInfo *)runInfo error:(NSError **)pError {
-        [runInfo.builtTargets addObject:self];
-        return 0;
-    }
-
-    -(NSInteger)build:(PBXRunInfo *)runInfo error:(NSError **)pError {
-        if(![self isBuilt:runInfo]) {
-            for(PBXTargetDependency *dep in self.dependencies) {
-                NSInteger res = [dep.target build:runInfo error:pError];
-                if(res) return res;
-            }
-        }
-
+    -(NSInteger)build:(PBXRunInfo *)runInfo target:(PBXTarget *)target error:(NSError **)pError {
         return 0;
     }
 

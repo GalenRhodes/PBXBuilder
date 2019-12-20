@@ -23,12 +23,17 @@
 #import <Moscow/Moscow.h>
 #import "PBXTools.h"
 
-NSString *const PGFoundProjectFilesKey = @"PGFoundProjectFilesKey";
-NSString *const PGProjErrorDomain      = @"com.projectgalen.PBXBuilder";
-NSString *const PBXPrintError          = @"\nERROR: (%@) - %@\n";
+NSInteger printError2(NSError *error) PG_OVERLOADED {
+    return printError2(0, error);
+}
+
+NSInteger printError2(NSInteger returnCode, NSError *error) PG_OVERLOADED {
+    PGPrintStr(@"\e[91mFAILURE\e[0m\e[0K");
+    return printError(returnCode, error);
+}
 
 NSInteger printError(NSInteger returnCode, NSError *error) PG_OVERLOADED {
-    PGPrintf(PBXPrintError, @(error.code), error.localizedDescription);
+    PGPrintf(PBXFormatError, @(error.code), error.localizedDescription);
     return (returnCode ?: error.code);
 }
 
@@ -167,16 +172,16 @@ void handleSymbolicLink(NSString *symlink, NSMutableDictionary<NSString *, NSStr
         NSDictionary *subAttrs = [fm attributesOfItemAtPath:filename error:&error];
 
         if([subAttrs.fileType isEqualToString:NSFileTypeDirectory]) {
-            NSDictionary < NSString *, NSString * > *subResults = locateProjectFiles(filename, fm);
+            NSDictionary<NSString *, NSString *> *subResults = locateProjectFiles(filename, fm);
             if(subResults.count) [results addEntriesFromDictionary:subResults];
         }
     }
 }
 
 NSDictionary<NSString *, NSString *> *locateProjectFiles(NSString *dir, NSFileManager *fm) {
-    NSMutableDictionary < NSString *, NSString * > *results  = [NSMutableDictionary new];
-    NSDirectoryEnumerator                          *dirEnum  = [fm enumeratorAtPath:dir];
-    NSString                                       *filename = dirEnum.nextObject;
+    NSMutableDictionary<NSString *, NSString *> *results  = [NSMutableDictionary new];
+    NSDirectoryEnumerator                       *dirEnum  = [fm enumeratorAtPath:dir];
+    NSString                                    *filename = dirEnum.nextObject;
 
     while(filename) {
         NSString     *fullFilename = [dir stringByAppendingPathComponent:filename];
@@ -193,4 +198,20 @@ NSDictionary<NSString *, NSString *> *locateProjectFiles(NSString *dir, NSFileMa
     }
 
     return results;
+}
+
+void printSuccess(void) {
+    printStatus(@"SUCCESS", ANSI_GR_FG_GREEN, PBX_PS_LF);
+}
+
+void printStatus(NSString *status, ANSIGraphicsRendition color) PG_OVERLOADED {
+    printStatus(status, color, PBX_PS_EOL);
+}
+
+void printStatus(NSString *status, ANSIGraphicsRendition color, NSUInteger options) PG_OVERLOADED {
+    BOOL     savePos = ((options & (PBX_PS_EOL | PBX_PS_LF)) == 0);
+    BOOL     newLine = ((options & PBX_PS_LF) == PBX_PS_LF);
+    NSString *out    = PGFormat(@"\e[0J\e[0;1;97m [\e[22;%@m%@\e[1;97m]\e[0m", @(color), status);
+
+    if(savePos) PGPrintf(@"\e[s%@\e[u", out); else if(newLine) PGPrintf(@"%@\n", out); else PGPrintStr(out);
 }

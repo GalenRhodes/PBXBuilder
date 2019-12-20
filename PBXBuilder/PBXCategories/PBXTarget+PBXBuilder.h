@@ -34,6 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 
     -(BOOL)isBuilt:(PBXRunInfo *)runInfo;
 
+    -(NSInteger)completeBuild:(PBXRunInfo *)runInfo error:(NSError **)pError;
+
     -(NSInteger)build:(PBXRunInfo *)runInfo error:(NSError **)pError;
 
 @end

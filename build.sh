@@ -20,7 +20,7 @@ for prj in ${SUBPROJECTS}; do
 done
 
 CC=$(gnustep-config --variable=CC)
-echo "${CC} $(gnustep-config --base-libs) -ldispatch ${LINK_FILES} -o \"${PRJDIR}/${EXENAME}\""
+echo "Linking ${EXENAME}"
 "${CC}" $(gnustep-config --base-libs) -ldispatch ${LINK_FILES} -o "${PRJDIR}/${EXENAME}"
 
 exit $?

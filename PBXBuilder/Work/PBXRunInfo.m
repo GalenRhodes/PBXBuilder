@@ -42,13 +42,16 @@
 
             _buildDir     = PGFormat(@"%@/build", self.projectToBuild.projectPath);
             _builtTargets = [NSMutableArray new];
+
+            _targetNameMaxLength = 0;
+            for(PBXTarget *target in _projectToBuild.project.targets) _targetNameMaxLength = MAX(_targetNameMaxLength, target.name.length);
         }
 
         return self;
     }
 
-    -(BOOL)hasTargetBeenBuilt:(NSString *)targetName {
-        for(PBXTarget *target in self.builtTargets) if([target.name isEqualToString:targetName]) return YES;
+    -(BOOL)hasTargetBeenBuilt:(NSString *)itemId {
+        for(PBXTarget *target in self.builtTargets) if([target.itemId isEqualToString:itemId]) return YES;
         return NO;
     }
 

@@ -25,6 +25,83 @@
 
 #import <Cocoa/Cocoa.h>
 
+typedef NS_ENUM(NSUInteger, ANSIGraphicsRendition) {
+    ANSI_GR_RESET              = 0,
+    ANSI_GR_BOLD,
+    ANSI_GR_FAINT,
+    ANSI_GR_ITALIC,
+    ANSI_GR_UNDERLINE,
+    ANSI_GR_BLINK,
+    ANSI_GR_FAST_BLINK,
+    ANSI_GR_INVERSE,
+    ANSI_GR_CONCEAL,
+    ANSI_GR_STRIKE,
+    ANSI_GR_DEFAULT_FONT       = 10,
+    ANSI_GR_ALT_FONT_1,
+    ANSI_GR_ALT_FONT_2,
+    ANSI_GR_ALT_FONT_3,
+    ANSI_GR_ALT_FONT_4,
+    ANSI_GR_ALT_FONT_5,
+    ANSI_GR_ALT_FONT_6,
+    ANSI_GR_ALT_FONT_7,
+    ANSI_GR_ALT_FONT_8,
+    ANSI_GR_ALT_FONT_9,
+    ANSI_GR_FRAKTUR            = 20,
+    ANSI_GR_BOLD_OFF,
+    ANSI_GR_NORMAL_COLOR,
+    ANSI_GR_ITALIC_OFF,
+    ANSI_GR_UNDERLINE_OFF,
+    ANSI_GR_BLINK_OFF,
+    ANSI_GR_INVERSE_OFF        = 27, // #26 is not defined
+    ANSI_GR_REVEAL,
+    ANSI_GR_STRIKE_OFF,
+    ANSI_GR_FG_BLACK           = 30,
+    ANSI_GR_FG_RED,
+    ANSI_GR_FG_GREEN,
+    ANSI_GR_FG_YELLOW,
+    ANSI_GR_FG_BLUE,
+    ANSI_GR_FG_MAGENTA,
+    ANSI_GR_FG_CYAN,
+    ANSI_GR_FG_WHITE,
+    ANSI_GR_FG_DEFAULT         = 39, // #38 is complex
+    ANSI_GR_BG_BLACK           = 40,
+    ANSI_GR_BG_RED,
+    ANSI_GR_BG_GREEN,
+    ANSI_GR_BG_YELLOW,
+    ANSI_GR_BG_BLUE,
+    ANSI_GR_BG_MAGENTA,
+    ANSI_GR_BG_CYAN,
+    ANSI_GR_BG_WHITE,
+    ANSI_GR_BG_DEFAULT         = 49, // #48 is complex
+    ANSI_GR_FRAMED             = 51, // #50 is not defined
+    ANSI_GR_ENCIRCLED,
+    ANSI_GR_OVERLINED,
+    ANSI_GR_FRAMED_OVERLINED_OFF,
+    ANSI_GR_OVERLINED_OFF,
+    ANSI_GR_IDEOGRAM_UNDERLINE = 60, // #56-59 are not defined
+    ANSI_GR_IDEOGRAM_DOUBLE_UNDERLINE,
+    ANSI_GR_IDEOGRAM_OVERLINE,
+    ANSI_GR_IDEOGRAM_DOUBLE_OVERLINE,
+    ANSI_GR_IDEOGRAM_STRESS_MARKING,
+    ANSI_GR_IDEOGRAMS_OFF,
+    ANSI_GR_FG_BRIGHT_BLACK    = 90, // #66-89 are not defined
+    ANSI_GR_FG_BRIGHT_RED,
+    ANSI_GR_FG_BRIGHT_GREEN,
+    ANSI_GR_FG_BRIGHT_YELLOW,
+    ANSI_GR_FG_BRIGHT_BLUE,
+    ANSI_GR_FG_BRIGHT_MAGENTA,
+    ANSI_GR_FG_BRIGHT_CYAN,
+    ANSI_GR_FG_BRIGHT_WHITE,
+    ANSI_GR_BG_BRIGHT_BLACK    = 100, // #98-99 are not defined
+    ANSI_GR_BG_BRIGHT_RED,
+    ANSI_GR_BG_BRIGHT_GREEN,
+    ANSI_GR_BG_BRIGHT_YELLOW,
+    ANSI_GR_BG_BRIGHT_BLUE,
+    ANSI_GR_BG_BRIGHT_MAGENTA,
+    ANSI_GR_BG_BRIGHT_CYAN,
+    ANSI_GR_BG_BRIGHT_WHITE
+};
+
 #ifndef PG_OVERLOADED
     #define PG_OVERLOADED __attribute__((overloadable))
 #endif
@@ -52,6 +129,8 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^PGPrintStructBlock)(NSString *prefix, BOOL addCR);
 
 typedef BOOL (^PGFindBlock)(NSString *path, NSString *filename);
+
+FOUNDATION_EXPORT NSString *PGAddANSI(id obj, NSUInteger count, ANSIGraphicsRendition *colors, NSUInteger afterCount);
 
 FOUNDATION_EXPORT NSString *PGpLeft(id obj, NSString *padding, BOOL truncate, NSUInteger length) PG_OVERLOADED;
 

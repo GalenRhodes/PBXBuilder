@@ -320,3 +320,30 @@ NSString *PGpLeft(id obj, NSString *padding, NSUInteger length) PG_OVERLOADED {
 NSString *PGpLeft(id obj, NSUInteger length) PG_OVERLOADED {
     return PGpLeft(obj, @"                                                                     ", NO, length);
 }
+
+NSString *PGAddANSI(id obj, NSUInteger count, ANSIGraphicsRendition *colors, NSUInteger afterCount) {
+    NSString *objStr = [obj description];
+
+    if(count) {
+        NSUInteger beforeCount = (count - MIN(count, afterCount));
+        NSMutableString *str = [NSMutableString new];
+
+        if(beforeCount) {
+            [str appendFormat:@"\e[%lu", (NSUInteger)colors[0]];
+            for(NSUInteger x = 1; x < beforeCount; ++x) [str appendFormat:@";%lu", (NSUInteger)colors[x]];
+            [str appendString:@"m"];
+        }
+
+        [str appendString:objStr];
+
+        if(beforeCount < count) {
+            [str appendFormat:@"\e[%lu", (NSUInteger)colors[beforeCount]];
+            for(NSUInteger x = (beforeCount + 1); x < count; ++x) [str appendFormat:@";%lu", (NSUInteger)colors[x]];
+            [str appendString:@"m"];
+        }
+
+        return str;
+    }
+
+    return objStr;
+}

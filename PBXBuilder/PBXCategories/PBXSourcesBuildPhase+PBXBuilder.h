@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXTarget+PBXBuilder.m
+ *    FILENAME: PBXSourcesBuildPhase+PBXBuilder.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 12/19/19
+ *        DATE: 12/20/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,28 +20,20 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#import "PBXTools.h"
+#ifndef __PBXBUILDER_PBXSOURCESBUILDPHASE_PBXBUILDER_H__
+#define __PBXBUILDER_PBXSOURCESBUILDPHASE_PBXBUILDER_H__
 
-@implementation PBXTarget(PBXBuilder)
+#import <Cocoa/Cocoa.h>
+#import <PBX/PBX.h>
 
-    -(BOOL)isBuilt:(PBXRunInfo *)runInfo {
-        return [runInfo hasTargetBeenBuilt:self.itemId];
-    }
+NS_ASSUME_NONNULL_BEGIN
 
-    -(NSInteger)completeBuild:(PBXRunInfo *)runInfo error:(NSError **)pError {
-        [runInfo.builtTargets addObject:self];
-        return 0;
-    }
+@interface PBXSourcesBuildPhase(PBXBuilder)
 
-    -(NSInteger)build:(PBXRunInfo *)runInfo error:(NSError **)pError {
-        if(![self isBuilt:runInfo]) {
-            for(PBXTargetDependency *dep in self.dependencies) {
-                NSInteger res = [dep.target build:runInfo error:pError];
-                if(res) return res;
-            }
-        }
-
-        return 0;
-    }
+    -(NSInteger)build:(PBXRunInfo *)runInfo target:(PBXTarget *)target error:(NSError **)pError;
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#endif // __PBXBUILDER_PBXSOURCESBUILDPHASE_PBXBUILDER_H__

@@ -22,13 +22,6 @@
 
 #import "PBXTools.h"
 
-NSString *const PBXFormat1 = @"    ] %@\n";
-NSString *const PBXFormat2 = @"    ] %@: %@\n";
-NSString *const PBXFormat3 = @"    ] %@:[%@]; %@:[%@]\n";
-NSString *const PBXFormat4 = @"\n%@: %@";
-NSString *const PBXFormat5 = @"\n%@:";
-NSString *const PBXFormat6 = @"\n\n%@: %@...\n";
-
 @implementation PBXNativeTarget(PBXBuilder)
 
     -(NSInteger)build:(PBXRunInfo *)runInfo error:(NSError **)pError {
@@ -37,8 +30,11 @@ NSString *const PBXFormat6 = @"\n\n%@: %@...\n";
             if(res) return res;
 
             for(PBXBuildPhase *buildPhase in self.buildPhases) {
-                PGPrintf(PBXFormat3, PBXMessageTarget, self.name, PBXMessageBuildPhase, NSStringFromClass(buildPhase.class));
+                NSUInteger i = ((runInfo.targetNameMaxLength - self.name.length) + 1);
+                PGPrintf(PBXFormat3, PBXMessageTarget, self.name, i, PBXMessageBuildPhase, NSStringFromClass(buildPhase.class));
             }
+
+            return [self completeBuild:runInfo error:pError];
         }
 
         return 0;
