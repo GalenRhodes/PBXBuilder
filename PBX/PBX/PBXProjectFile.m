@@ -48,6 +48,9 @@
 
             _projectPBX = pbx[@"objects"];
             _project    = [self itemForID:pbx[@"rootObject"]];
+
+            PGPrintf(@"Project Name: %@\n", _projectName);
+            PGPrintf(@"Project Path: %@\n", _projectPath);
         }
 
         return self;

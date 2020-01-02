@@ -20,7 +20,6 @@ NSInteger pbxBuilder() {
     if(runInfo) {
 
         PBXProjectFile       *projectFile = runInfo.projectToBuild;
-        // PBXProject              *project     = projectFile.project;
         NSArray<PBXTarget *> *targets     = runInfo.targetsToBuild;
         XCBuildConfiguration *xcbc        = runInfo.buildConfiguration;
         NSUInteger           i1           = (MAX(PBXMessageTarget.length, PBXMessageConfiguration.length) + (T * 2));

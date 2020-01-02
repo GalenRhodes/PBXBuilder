@@ -23,24 +23,33 @@
 #import "PBXGroup.h"
 #import "PBXProjectFile.h"
 
+@interface PBXFileElement()
+
+    @property(nullable) PBXGroup *parent;
+
+@end
+
 @implementation PBXGroup {
-        NSArray<PBXFileElement *> *_children;
-        dispatch_once_t           _childrenOnce;
     }
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
-        return self;
-    }
 
-    -(NSArray<PBXFileElement *> *)children {
-        dispatch_once(&_childrenOnce, ^{
+        if(self) {
             NSArray<NSString *> *childrenIDs = [self iv:@"children"];
             NSMutableArray      *array       = [NSMutableArray new];
-            [childrenIDs enumerateObjectsUsingBlock:^(NSString *childId, NSUInteger idx, BOOL *stop) { [array addObjectWithCheck:[self itemForID:childId]]; }];
-            _children = array;
-        });
-        return _children;
+
+            for(NSString *childId in childrenIDs) {
+                PBXFileElement *child = [self itemForID:childId];
+
+                if(child) {
+                    [array addObject:child];
+                    child.parent = self;
+                }
+            }
+        }
+
+        return self;
     }
 
     -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {

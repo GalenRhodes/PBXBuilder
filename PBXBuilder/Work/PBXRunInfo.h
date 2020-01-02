@@ -29,8 +29,17 @@
 @class GNUstepInfo;
 @class PBXTarget;
 @class XCBuildConfiguration;
+@class PBXBuildPhase;
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef NS_ENUM(NSUInteger, PBXBuildTools) {
+    PBX_BUILD_TOOL_CC,     // C compiler options
+    PBX_BUILD_TOOL_CPP,    // C++ compiler options
+    PBX_BUILD_TOOL_OBJC,   // Objective-C compiler options
+    PBX_BUILD_TOOL_OBJCPP, // Objective-C++ compiler options
+    PBX_BUILD_TOOL_LD,     // Linker options
+};
 
 @interface PBXRunInfo : NSObject
 
@@ -41,12 +50,16 @@ NS_ASSUME_NONNULL_BEGIN
     @property(readonly)/*  */ NSArray<PBXTarget *> *targetsToBuild;
     @property(readonly)/*  */ NSArray<NSString *>  *actions;
     @property(readonly)/*  */ XCBuildConfiguration *buildConfiguration;
-    @property(readonly, copy) NSString             *buildDir;
-    @property(readonly)/*  */ NSUInteger           targetNameMaxLength;
 
-    @property(readonly) NSMutableArray<PBXTarget *> *builtTargets;
+    @property(readonly, copy) NSString                    *buildDir;
+    @property(readonly)/*  */ NSUInteger                  targetNameMaxLength;
+    @property(readonly)/*  */ NSMutableArray<PBXTarget *> *builtTargets;
 
     -(instancetype)init:(NSError **)pError;
+
+    -(void)addOptionsForTarget:(PBXTarget *)target buildPhase:(PBXBuildPhase *)buildPhase buildTool:(PBXBuildTools)buildTool toolOption:(NSString *)toolOption;
+
+    -(NSArray<NSString *> *)getOptionsForTarget:(PBXTarget *)target buildPhase:(PBXBuildPhase *)buildPhase buildTool:(PBXBuildTools)buildTool;
 
     -(BOOL)hasTargetBeenBuilt:(NSString *)itemId;
 

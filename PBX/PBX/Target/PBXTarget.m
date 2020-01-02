@@ -27,14 +27,16 @@
 #import "PBXProjectFile.h"
 
 @implementation PBXTarget {
-        NSArray<PBXBuildPhase *>       *_buildPhases;
-        NSArray<PBXTargetDependency *> *_dependencies;
-        dispatch_once_t                _buildPhasesOnce;
-        dispatch_once_t                _dependenciesOnce;
     }
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
+
+        if(self) {
+            _buildPhases  = [self ivx:@"buildPhases"];
+            _dependencies = [self ivx:@"dependencies"];
+        }
+
         return self;
     }
 
@@ -48,26 +50,6 @@
 
     -(XCConfigurationList *)buildConfigurationList {
         return [self itemForKey:@"buildConfigurationList"];
-    }
-
-    -(NSArray<PBXBuildPhase *> *)buildPhases {
-        dispatch_once(&_buildPhasesOnce, ^{
-            NSMutableArray<PBXBuildPhase *> *array = [NSMutableArray new];
-            NSArray<NSString *>             *list  = [self iv:@"buildPhases"];
-            [list enumerateObjectsUsingBlock:^(NSString *itemId, NSUInteger idx, BOOL *stop) { [array addObjectWithCheck:[self itemForID:itemId]]; }];
-            _buildPhases = [array copy];
-        });
-        return _buildPhases;
-    }
-
-    -(NSArray<PBXTargetDependency *> *)dependencies {
-        dispatch_once(&_dependenciesOnce, ^{
-            NSMutableArray<PBXTargetDependency *> *array = [NSMutableArray new];
-            NSArray<NSString *>                   *list  = [self iv:@"dependencies"];
-            [list enumerateObjectsUsingBlock:^(NSString *itemId, NSUInteger idx, BOOL *stop) { [array addObjectWithCheck:[self itemForID:itemId]]; }];
-            _dependencies = [array copy];
-        });
-        return _dependencies;
     }
 
     -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {

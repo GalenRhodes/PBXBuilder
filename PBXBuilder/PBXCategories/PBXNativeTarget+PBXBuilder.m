@@ -32,6 +32,8 @@
             for(PBXBuildPhase *buildPhase in self.buildPhases) {
                 NSUInteger i = ((runInfo.targetNameMaxLength - self.name.length) + 1);
                 PGPrintf(PBXFormat3, PBXMessageTarget, self.name, i, PBXMessageBuildPhase, NSStringFromClass(buildPhase.class));
+
+                if((res = [buildPhase build:runInfo target:self error:pError])) return res;
             }
 
             return [self completeBuild:runInfo error:pError];

@@ -25,12 +25,15 @@
 #import "PBXProjectFile.h"
 
 @implementation XCConfigurationList {
-        NSArray         *_buildConfigurations;
-        dispatch_once_t _buildConfigurationsOnce;
     }
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
+
+        if(self) {
+            _buildConfigurations = [self ivx:@"buildConfigurations"];
+        }
+
         return self;
     }
 
@@ -44,18 +47,6 @@
 
     -(XCBuildConfiguration *)defaultConfiguration {
         return [self buildConfigurationForName:self.defaultConfigurationName];
-    }
-
-    -(NSArray<XCBuildConfiguration *> *)buildConfigurations {
-        dispatch_once(&_buildConfigurationsOnce, ^{
-            NSArray<NSString *> *list  = [self iv:@"buildConfigurations"];
-            NSMutableArray      *array = [NSMutableArray arrayWithCapacity:list.count ?: 10];
-
-            [list enumerateObjectsUsingBlock:^(NSString *str, NSUInteger idx, BOOL *stop) { [array addObjectWithCheck:[self itemForID:str]]; }];
-            _buildConfigurations = array;
-        });
-
-        return _buildConfigurations;
     }
 
     -(XCBuildConfiguration *)buildConfigurationForName:(NSString *)name {

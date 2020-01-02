@@ -26,13 +26,21 @@
 #import <PBX/PBXItem.h>
 #import <PBX/PBXFileElementTypes.h>
 
+@class PBXGroup;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PBXFileElement : PBXItem
 
+    @property(class, readonly) NSDictionary<NSString *, NSNumber *> *fileTypeMap;
+    @property(class, readonly) NSDictionary<NSString *, NSNumber *> *sourceTreeMap;
+    @property(class, readonly) NSDictionary<NSNumber *, NSString *> *fileEncodingMap;
+
     @property(readonly, nullable) NSString      *name;
     @property(readonly, nullable) NSString      *path;
     @property(readonly)/*      */ PBXSourceTree sourceTree;
+    @property(readonly, nullable) NSString      *realPath;
+    @property(readonly, nullable) PBXGroup      *parent;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 
@@ -41,8 +49,6 @@ NS_ASSUME_NONNULL_BEGIN
     +(PBXFileEncoding)cleanFileEncoding:(NSUInteger)encodingId;
 
     +(NSString *)fileEncodingForId:(PBXFileEncoding)encodingId;
-
-    +(NSDictionary<NSNumber *, NSString *> *)fileEncodings;
 
     +(PBXFileType)fileTypeForId:(NSString *)typeId;
 

@@ -41,15 +41,13 @@
     }
 
     -(BOOL)isPublic {
-        __block BOOL flag = NO;
-        [self.attributes enumerateObjectsUsingBlock:^(NSString *str, NSUInteger idx, BOOL *stop) { if([str isEqualToString:@"Public"]) *stop = flag = YES; }];
-        return flag;
+        for(NSString *str in self.attributes) if([str isEqualToString:@"Public"]) return YES;
+        return NO;
     }
 
     -(BOOL)isPrivate {
-        __block BOOL flag = NO;
-        [self.attributes enumerateObjectsUsingBlock:^(NSString *str, NSUInteger idx, BOOL *stop) { if([str isEqualToString:@"Private"]) *stop = flag = YES; }];
-        return flag;
+        for(NSString *str in self.attributes) if([str isEqualToString:@"Private"]) return YES;
+        return NO;
     }
 
     -(PBXFileReference *)fileRef {

@@ -24,7 +24,13 @@
 #import <PBX/PBX.h>
 #import "PBXTools.h"
 
+typedef NSMutableArray<NSString *>                                   *PBXToolOptionsList;
+typedef NSMutableDictionary<NSNumber *, PBXToolOptionsList>          *PBXToolOptionsMap;
+typedef NSMutableDictionary<NSString *, PBXToolOptionsMap>           *PBXBuildPhaseToolOptionsMap;
+typedef NSMutableDictionary<NSString *, PBXBuildPhaseToolOptionsMap> *PBXToolOptions;
+
 @implementation PBXRunInfo {
+        PBXToolOptions _additionalToolOptions;
     }
 
     -(instancetype)init:(NSError **)pError {
@@ -45,9 +51,28 @@
 
             _targetNameMaxLength = 0;
             for(PBXTarget *target in _projectToBuild.project.targets) _targetNameMaxLength = MAX(_targetNameMaxLength, target.name.length);
+
+            _additionalToolOptions = [NSMutableDictionary new];
         }
 
         return self;
+    }
+
+    -(void)addOptionsForTarget:(PBXTarget *)target buildPhase:(PBXBuildPhase *)buildPhase buildTool:(PBXBuildTools)buildTool toolOption:(NSString *)toolOption {
+        PBXBuildPhaseToolOptionsMap buildPhaseMap = _additionalToolOptions[target.itemId];
+        if(!buildPhaseMap) _additionalToolOptions[target.itemId] = buildPhaseMap = [NSMutableDictionary new];
+
+        PBXToolOptionsMap buildToolMap = buildPhaseMap[buildPhase.itemId];
+        if(!buildToolMap) buildPhaseMap[buildPhase.itemId] = buildToolMap = [NSMutableDictionary new];
+
+        PBXToolOptionsList toolOptionList = buildToolMap[@(buildTool)];
+        if(!toolOptionList) buildToolMap[@(buildTool)] = toolOptionList = [NSMutableArray new];
+
+        [toolOptionList addObject:toolOption];
+    }
+
+    -(NSArray<NSString *> *)getOptionsForTarget:(PBXTarget *)target buildPhase:(PBXBuildPhase *)buildPhase buildTool:(PBXBuildTools)buildTool {
+        return ((target && buildPhase) ? (((NSArray<NSString *> *)_additionalToolOptions[target.itemId][buildPhase.itemId][@(buildTool)]) ?: @[]) : @[]);
     }
 
     -(BOOL)hasTargetBeenBuilt:(NSString *)itemId {

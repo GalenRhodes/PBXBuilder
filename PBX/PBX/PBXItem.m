@@ -68,8 +68,19 @@ NS_INLINE NSString *blankString(NSUInteger length) {
     }
 
     -(nullable id)iv:(NSString *)key {
-        NSDictionary<NSString *, NSDictionary<NSString *, id> *> *dict = self.projectFile.projectPBX[self.itemId];
-        return dict[key];
+        return ((NSDictionary *)self.projectFile.projectPBX[self.itemId])[key];
+    }
+
+    -(NSArray *)ivx:(NSString *)key {
+        NSArray<NSString *> *itemIDs = [self iv:key];
+
+        if(itemIDs.count) {
+            NSMutableArray *items = [NSMutableArray new];
+            for(NSString   *itemId in itemIDs) [items addObjectWithCheck:[self itemForID:itemId]];
+            return items;
+        }
+
+        return @[];
     }
 
     -(BOOL)ivBool:(NSString *)key {

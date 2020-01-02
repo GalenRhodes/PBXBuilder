@@ -24,15 +24,20 @@
 #import "PBXProjectFile.h"
 #import "PBX.h"
 
-NSArray<PBXTarget *> *sortTargetsByDependencies(NSMutableArray<PBXTarget *> *srcArray);
+NSArray<PBXTarget *> *sortTargetsByDependencies(NSArray<PBXTarget *> *srcArrayX);
 
 @implementation PBXProject {
-        NSArray<PBXTarget *> *_targets;
-        dispatch_once_t      _targetsOnce;
     }
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
+
+        if(self) {
+            _mainGroup       = [self itemForKey:@"mainGroup"];
+            _productRefGroup = [self itemForKey:@"productRefGroup"];
+            _targets         = sortTargetsByDependencies([self ivx:@"targets"]);
+        }
+
         return self;
     }
 
@@ -64,27 +69,8 @@ NSArray<PBXTarget *> *sortTargetsByDependencies(NSMutableArray<PBXTarget *> *src
         return [self itemForKey:@"buildConfigurationList"];
     }
 
-    -(NSMutableArray<PBXTarget *> *)getRawTargets {
-        NSMutableArray<PBXTarget *> *srcArray = [NSMutableArray new];
-        [[self iv:@"targets"] enumerateObjectsUsingBlock:^(NSString *itemId, NSUInteger idx, BOOL *stop) { [srcArray addObjectWithCheck:[self itemForID:itemId]]; }];
-        return srcArray;
-    }
-
-    -(NSArray<PBXTarget *> *)targets {
-        dispatch_once(&_targetsOnce, ^{ _targets = sortTargetsByDependencies(self.getRawTargets); });
-        return _targets;
-    }
-
     -(NSDictionary<NSString *, id> *)attributes {
         return ([self iv:@"attributes"] ?: [NSDictionary new]);
-    }
-
-    -(PBXGroup *)productRefGroup {
-        return [self itemForKey:@"productRefGroup"];
-    }
-
-    -(PBXGroup *)mainGroup {
-        return [self itemForKey:@"mainGroup"];
     }
 
     -(PBXTarget *)targetWithName:(NSString *)name {
@@ -116,34 +102,35 @@ BOOL isTargetInArray(PBXTarget *target, NSArray<PBXTarget *> *dstArray) {
 }
 
 BOOL moveDepTargets(NSMutableArray<PBXTarget *> *srcArray, NSMutableArray<PBXTarget *> *dstArray) {
-    __block BOOL didSomething = NO;
+    BOOL didSomething = NO;
 
-    [srcArray enumerateObjectsUsingBlock:^(PBXTarget *target, NSUInteger idx, BOOL *stop) {
+    for(PBXTarget *target in srcArray) {
         if(isTargetInArray(target, dstArray)) {
             [dstArray addObject:target];
             didSomething = YES;
         }
-    }];
+    }
 
     if(didSomething) [srcArray removeObjectsInArray:dstArray];
     return didSomething;
 }
 
 BOOL moveNonDepTargets(NSMutableArray<PBXTarget *> *srcArray, NSMutableArray<PBXTarget *> *dstArray) {
-    __block BOOL didSomething = NO;
+    BOOL didSomething = NO;
 
-    [srcArray enumerateObjectsUsingBlock:^(PBXTarget *target, NSUInteger idx, BOOL *stop) {
+    for(PBXTarget *target in srcArray) {
         if(target.dependencies.count == 0) {
             [dstArray addObject:target];
             didSomething = YES;
         }
-    }];
+    }
 
     if(didSomething) [srcArray removeObjectsInArray:dstArray];
     return didSomething;
 }
 
-NSArray<PBXTarget *> *sortTargetsByDependencies(NSMutableArray<PBXTarget *> *srcArray) {
+NSArray<PBXTarget *> *sortTargetsByDependencies(NSArray<PBXTarget *> *srcArrayX) {
+    NSMutableArray<PBXTarget *> *srcArray = [NSMutableArray arrayWithArray:srcArrayX];
     NSMutableArray<PBXTarget *> *dstArray = [NSMutableArray new];
 
     /*

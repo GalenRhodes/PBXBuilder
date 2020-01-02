@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PBXGroup : PBXFileElement
 
-    @property(readonly) NSArray<PBXFileElement *> *children;
+    @property(readonly)/*      */ NSArray<PBXFileElement *> *children;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 

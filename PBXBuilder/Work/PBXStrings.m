@@ -60,7 +60,7 @@ NSString *const PBXFormat6     = @"\n\n\e[0m\e[97;40m%@: %@...\n";
 NSString *const PBXFormat7     = @"\e[0m\e[97;40m    ] [\e[38;5;6m%@\e[97m] \e[97m%@\e[97m - \e[38;5;32m%@\e[97m";
 NSString *const PBXFormat8     = @"\e[38;5;46m%@\e[97m\e[0J\n";
 NSString *const PBXFormat10    = @"%@ \e[38;5;180m%@";
-NSString *const PBXFormat11    = @"\e[38;5;32m%@\e[0m";
+NSString *const PBXFormat11    = @"\e[38;5;32m%@";
 NSString *const PBXFormatError = @"\n\n\e[38;5;226m\e[48;5;196mERROR:\e[40;97m (\e[38;5;51m%@\e[97m) - \e[38;5;226m%@\e[97m\n";
 
 NSString *const PBXMessageDoubleLF = @"\n\n";

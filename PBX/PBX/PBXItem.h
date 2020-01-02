@@ -40,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 
     -(nullable id)iv:(NSString *)key;
 
+    -(NSArray *)ivx:(NSString *)key;
+
     -(BOOL)ivBool:(NSString *)key;
 
     -(NSInteger)ivInt:(NSString *)key;

@@ -28,6 +28,20 @@
         NSInteger res = [super build:runInfo target:target error:pError];
         if(res) return res;
 
+        NSFileManager *fm          = NSFileManager.defaultManager;
+        NSString      *destPublic  = PGFormat(@"%@/headers/%@/%@", runInfo.buildDir, @"public", target.name);
+        NSString      *destPrivate = PGFormat(@"%@/headers/%@/%@", runInfo.buildDir, @"private", target.name);
+
+        if(![fm createDirectoryAtPath:destPublic withIntermediateDirectories:YES attributes:nil error:pError]) return (*pError).code;
+        if(![fm createDirectoryAtPath:destPrivate withIntermediateDirectories:YES attributes:nil error:pError]) return (*pError).code;
+
+        for(PBXBuildFile *file in self.files) {
+            NSString *dest = PGFormat(@"%@/%@", (file.isPublic ? destPublic : destPrivate), file.fileRef.path);
+            NSString *src  = file.fileRef.realPath;
+            PGPrintf(@"Copying \"%@\" to \"%@\"...\n", src, dest);
+            //if(![fm copyItemAtPath:src toPath:dest error:pError]) return (*pError).code;
+        }
+
         /*
          * DO BUILDPHASE STUFF.
          */

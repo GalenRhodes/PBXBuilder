@@ -21,27 +21,19 @@
  *//************************************************************************/
 
 #import "PBXBuildPhase.h"
-#import "PBXBuildFile.h"
 #import "PBXProjectFile.h"
 
 @implementation PBXBuildPhase {
-        NSArray<PBXBuildFile *> *_files;
-        dispatch_once_t         _filesOnce;
     }
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
-        return self;
-    }
 
-    -(NSArray<PBXBuildFile *> *)files {
-        dispatch_once(&_filesOnce, ^{
-            NSMutableArray      *array = [NSMutableArray new];
-            NSArray<NSString *> *refs  = (NSArray<NSString *> *)[self iv:@"files"];
-            [refs enumerateObjectsUsingBlock:^(NSString *itemId, NSUInteger idx, BOOL *stop) { [array addObjectWithCheck:[self itemForID:itemId]]; }];
-            _files = array;
-        });
-        return _files;
+        if(self) {
+            _files = [self ivx:@"files"];
+        }
+
+        return self;
     }
 
     -(NSInteger)buildActionMask {

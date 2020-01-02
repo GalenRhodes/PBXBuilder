@@ -29,31 +29,23 @@
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile {
         self = [super initWithItemId:itemId projectFile:projectFile];
+
+        if(self) {
+            NSString *key = self.productTypeDescription;
+            if([key isEqualToString:@"com.apple.product-type.application"]) _productType = PBX_PRODUCTTYPE_APPLICATION;
+            else if([key isEqualToString:@"com.apple.product-type.tool"]) _productType = PBX_PRODUCTTYPE_TOOL;
+            else if([key isEqualToString:@"com.apple.product-type.library.static"]) _productType = PBX_PRODUCTTYPE_LIBRARYSTATIC;
+            else if([key isEqualToString:@"com.apple.product-type.library.dynamic"]) _productType = PBX_PRODUCTTYPE_LIBRARYDYNAMIC;
+            else if([key isEqualToString:@"com.apple.product-type.kernel-extension"]) _productType = PBX_PRODUCTTYPE_KERNELEXTENSION;
+            else if([key isEqualToString:@"com.apple.product-type.kernel-extension.iokit"]) _productType = PBX_PRODUCTTYPE_KERNELEXTENSIONIOKIT;
+            else _productType = PBX_PRODUCTTYPE_NONE;
+        }
+
         return self;
     }
 
     -(NSString *)productInstallPath {
         return [self iv:@"productInstallPath"];
-    }
-
-    -(PBXProductType)productType {
-        static NSDictionary<NSString *, NSNumber *> *_prodTypes    = nil;
-        static dispatch_once_t                      _prodTypesOnce = 0;
-
-        dispatch_once(&_prodTypesOnce, ^{
-            _prodTypes = @{
-                @"com.apple.product-type.application"           : @(PBX_PRODUCTTYPE_APPLICATION),
-                @"com.apple.product-type.tool"                  : @(PBX_PRODUCTTYPE_TOOL),
-                @"com.apple.product-type.library.static"        : @(PBX_PRODUCTTYPE_LIBRARYSTATIC),
-                @"com.apple.product-type.library.dynamic"       : @(PBX_PRODUCTTYPE_LIBRARYDYNAMIC),
-                @"com.apple.product-type.kernel-extension"      : @(PBX_PRODUCTTYPE_KERNELEXTENSION),
-                @"com.apple.product-type.kernel-extension.iokit": @(PBX_PRODUCTTYPE_KERNELEXTENSIONIOKIT),
-            };
-        });
-
-        NSString *key = [self iv:@"productType"];
-        NSNumber *num = (key ? _prodTypes[key] : nil);
-        return (num ? (PBXProductType)num.unsignedIntegerValue : PBX_PRODUCTTYPE_NONE);
     }
 
     -(NSString *)productTypeDescription {

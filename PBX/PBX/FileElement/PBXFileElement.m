@@ -21,8 +21,13 @@
  *//************************************************************************/
 
 #import "PBXFileElement.h"
+#import "PBXGroup.h"
+#import "PBXProjectFile.h"
 
 @implementation PBXFileElement {
+        NSString        *_realPath;
+        PBXGroup        *_parent;
+        dispatch_once_t _realPathOnce;
     }
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile {
@@ -42,7 +47,70 @@
         return [PBXFileElement sourceTreeForId:[self iv:@"sourceTree"]];
     }
 
+    -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {
+        [super appendDescBody:str indent:indent];
+        PBXAppendItem(str, indent, @"name", self.name);
+        PBXAppendItem(str, indent, @"path", self.path);
+        switch(self.sourceTree) {//@f:0
+            case PBX_SOURCETREE_ABSOLUTE:           return PBXAppendItem(str, indent, @"sourceTree", @"<absolute>");
+            case PBX_SOURCETREE_GROUP:              return PBXAppendItem(str, indent, @"sourceTree", @"<group>");
+            case PBX_SOURCETREE_SOURCE_ROOT:        return PBXAppendItem(str, indent, @"sourceTree", @"SOURCE_ROOT");
+            case PBX_SOURCETREE_BUILD_PRODUCTS_DIR: return PBXAppendItem(str, indent, @"sourceTree", @"BUILD_PRODUCTS_DIR");
+            case PBX_SOURCETREE_SDKROOT:            return PBXAppendItem(str, indent, @"sourceTree", @"SDKROOT");
+            default:                                return PBXAppendItem(str, indent, @"sourceTree", @"<none>");
+        }//@f:1
+    }
+
+    -(NSString *)realPath {
+        if(self.parent)
+            dispatch_once(&_realPathOnce, ^{
+                NSMutableString *str = [NSMutableString new];
+                PBXGroup        *p   = self.parent;
+
+                [str appendString:(self.name ?: self.path)];
+
+                while(p) {
+                    NSString *s = (p.name ?: p.path);
+                    if(s.length) {
+                        [str insertString:@"/" atIndex:0];
+                        [str insertString:s atIndex:0];
+                    }
+                    p = p.parent;
+                }
+
+                [str insertString:@"/" atIndex:0];
+                [str insertString:self.projectFile.projectPath atIndex:0];
+                _realPath = str;
+            });
+
+        return _realPath;
+    }
+
+    -(PBXGroup *)parent {
+        return _parent;
+    }
+
+    -(void)setParent:(PBXGroup *)parent {
+        _parent = parent;
+    }
+
     +(PBXSourceTree)sourceTreeForId:(NSString *)sourceTreeId {
+        return (PBXSourceTree)((sourceTreeId.length ? PBXFileElement.sourceTreeMap[sourceTreeId] : nil) ?: @(PBX_SOURCETREE_NONE)).unsignedIntegerValue;
+    }
+
+    +(PBXFileEncoding)cleanFileEncoding:(NSUInteger)encodingId {
+        return ((self.fileEncodingMap[@(encodingId)] == nil) ? PBX_FILEENCODING_DEFAULT : (PBXFileEncoding)encodingId);
+    }
+
+    +(NSString *)fileEncodingForId:(PBXFileEncoding)encodingId {
+        return self.fileEncodingMap[@(encodingId)];
+    }
+
+    +(PBXFileType)fileTypeForId:(NSString *)typeId {
+        return (PBXFileType)((typeId.length ? PBXFileElement.fileTypeMap[typeId] : nil) ?: @(PBX_FILETYPE_NONE)).unsignedIntegerValue;
+    }
+
+    +(NSDictionary<NSString *, NSNumber *> *)sourceTreeMap {
         static NSDictionary<NSString *, NSNumber *> *_sourceTree    = nil;
         static dispatch_once_t                      _sourceTreeOnce = 0;
 
@@ -56,19 +124,10 @@
             };
         });
 
-        NSNumber *num = (sourceTreeId.length ? _sourceTree[sourceTreeId] : nil);
-        return (num ? (PBXSourceTree)num.unsignedIntegerValue : PBX_SOURCETREE_NONE);
+        return _sourceTree;
     }
 
-    +(PBXFileEncoding)cleanFileEncoding:(NSUInteger)encodingId {
-        return ((self.fileEncodings[@(encodingId)] == nil) ? PBX_FILEENCODING_DEFAULT : (PBXFileEncoding)encodingId);
-    }
-
-    +(NSString *)fileEncodingForId:(PBXFileEncoding)encodingId {
-        return self.fileEncodings[@(encodingId)];
-    }
-
-    +(NSDictionary<NSNumber *, NSString *> *)fileEncodings {
+    +(NSDictionary<NSNumber *, NSString *> *)fileEncodingMap {
         static NSDictionary<NSNumber *, NSString *> *_fileEncodings    = nil;
         static dispatch_once_t                      _fileEncodingsOnce = 0;
 
@@ -96,7 +155,7 @@
         return _fileEncodings;
     }
 
-    +(PBXFileType)fileTypeForId:(NSString *)typeId {
+    +(NSDictionary<NSString *, NSNumber *> *)fileTypeMap {
         static NSDictionary<NSString *, NSNumber *> *_fileTypes    = nil;
         static dispatch_once_t                      _fileTypesOnce = 0;
 
@@ -210,21 +269,7 @@
             };
         });
 
-        NSNumber *num = (typeId.length ? _fileTypes[typeId] : nil);
-        return (num ? (PBXFileType)num.unsignedIntegerValue : PBX_FILETYPE_NONE);
+        return _fileTypes;
     }
 
-    -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent {
-        [super appendDescBody:str indent:indent];
-        PBXAppendItem(str, indent, @"name", self.name);
-        PBXAppendItem(str, indent, @"path", self.path);
-        switch(self.sourceTree) {//@f:0
-            case PBX_SOURCETREE_ABSOLUTE:           return PBXAppendItem(str, indent, @"sourceTree", @"<absolute>");
-            case PBX_SOURCETREE_GROUP:              return PBXAppendItem(str, indent, @"sourceTree", @"<group>");
-            case PBX_SOURCETREE_SOURCE_ROOT:        return PBXAppendItem(str, indent, @"sourceTree", @"SOURCE_ROOT");
-            case PBX_SOURCETREE_BUILD_PRODUCTS_DIR: return PBXAppendItem(str, indent, @"sourceTree", @"BUILD_PRODUCTS_DIR");
-            case PBX_SOURCETREE_SDKROOT:            return PBXAppendItem(str, indent, @"sourceTree", @"SDKROOT");
-            default:                                return PBXAppendItem(str, indent, @"sourceTree", @"<none>");
-        }//@f:1
-    }
 @end
