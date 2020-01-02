@@ -36,10 +36,10 @@
         if(![fm createDirectoryAtPath:destPrivate withIntermediateDirectories:YES attributes:nil error:pError]) return (*pError).code;
 
         for(PBXBuildFile *file in self.files) {
-            NSString *dest = PGFormat(@"%@/%@", (file.isPublic ? destPublic : destPrivate), file.fileRef.path);
+            NSString *dest = PGFormat(@"%@/%@", (file.isPublic ? destPublic : destPrivate), (file.fileRef.name ?: file.fileRef.path));
             NSString *src  = file.fileRef.realPath;
             PGPrintf(@"Copying \"%@\" to \"%@\"...\n", src, dest);
-            //if(![fm copyItemAtPath:src toPath:dest error:pError]) return (*pError).code;
+            if(![fm copyItemAtPath:src toPath:dest error:pError]) return (*pError).code;
         }
 
         /*

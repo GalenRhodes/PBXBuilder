@@ -67,20 +67,19 @@
                 NSMutableString *str = [NSMutableString new];
                 PBXGroup        *p   = self.parent;
 
-                [str appendString:(self.name ?: self.path)];
+                [str appendString:(self.path ?: self.name)];
 
                 while(p) {
-                    NSString *s = (p.name ?: p.path);
-                    if(s.length) {
+                    if(p.path.length) {
                         [str insertString:@"/" atIndex:0];
-                        [str insertString:s atIndex:0];
+                        [str insertString:p.path atIndex:0];
                     }
                     p = p.parent;
                 }
 
                 [str insertString:@"/" atIndex:0];
                 [str insertString:self.projectFile.projectPath atIndex:0];
-                _realPath = str;
+                _realPath = str.stringByStandardizingPath;
             });
 
         return _realPath;
