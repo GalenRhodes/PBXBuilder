@@ -17,7 +17,7 @@
    </BuildAction>
    <LaunchAction
       useCustomWorkingDirectory = "YES"
-      buildConfiguration = "Debug"
+      buildConfigurationName = "Debug"
       allowLocationSimulation = "YES"
       customWorkingDirectory = "/Users/grhodes/Projects/2019/PBXBuilder">
       <BuildableProductRunnable>

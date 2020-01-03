@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: XCBuildConfiguration.h
+ *    FILENAME: PGBool.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/4/19
+ *        DATE: 12/2/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,28 +20,33 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_XCBUILDCONFIGURATION_H__
-#define __PBXBUILDER_XCBUILDCONFIGURATION_H__
+#ifndef __PBXBUILDER_PGBOOL_H__
+#define __PBXBUILDER_PGBOOL_H__
 
-#import <PBX/PBXItem.h>
+#import <Cocoa/Cocoa.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameDebug;
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameRelease;
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameDefault;
+@interface PGBool : NSObject
 
-@interface XCBuildConfiguration : PBXItem
+    @property(nonatomic, readonly) BOOL boolValue;
 
-    @property(class, readonly)/*   */ NSArray<NSString *>          *allBuildConfigurationNames;
-    @property(readonly, nullable)/**/ NSString                     *name;
-    @property(readonly, nullable)/**/ NSString                     *baseConfigurationReference;
-    @property(readonly)/*          */ NSDictionary<NSString *, id> *buildSettings;
+    +(PGBool *)boolObj:(BOOL)boolValue;
 
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
+    +(PGBool *)boolYes;
+
+    +(PGBool *)boolNo;
+
+    -(NSString *)description;
+
+    -(BOOL)isEqual:(id)other;
+
+    -(BOOL)isEqualToABool:(PGBool *)aBool;
+
+    -(NSUInteger)hash;
 
 @end
 
 NS_ASSUME_NONNULL_END
 
-#endif // __PBXBUILDER_XCBUILDCONFIGURATION_H__
+#endif // __PBXBUILDER_PGBOOL_H__

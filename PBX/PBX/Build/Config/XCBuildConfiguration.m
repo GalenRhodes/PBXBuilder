@@ -22,6 +22,10 @@
 
 #import "XCBuildConfiguration.h"
 
+NSString *const XCBuildConfigNameDebug   = @"Debug";
+NSString *const XCBuildConfigNameRelease = @"Release";
+NSString *const XCBuildConfigNameDefault = XCBuildConfigNameRelease;
+
 /*
 
     /Applications/Xcode.app/Contents/PlugIns/Xcode3Core.ideplugin/Contents/SharedSupport/Developer/Library/Xcode/Plug-ins
@@ -58,6 +62,13 @@
         PBXAppendItem(str, indent, @"baseConfigurationReference", self.baseConfigurationReference);
         PBXAppendItem(str, indent, @"buildSettings", self.buildSettings);
         return str;
+    }
+
+    +(NSArray<NSString *> *)allBuildConfigurationNames {
+        static NSArray<NSString *> *_configNames;
+        static dispatch_once_t     _configNamesOnce;
+        dispatch_once(&_configNamesOnce, ^{ _configNames = @[ XCBuildConfigNameDebug, XCBuildConfigNameRelease ]; });
+        return _configNames;
     }
 
 @end

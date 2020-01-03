@@ -29,8 +29,6 @@ NSString *const PGFoundProjectFilesKey = @"PGFoundProjectFilesKey";
 NSString *const PGPBXFilename           = @"project.pbxproj";
 NSString *const PBXProjectFileExtension = @"xcodeproj";
 
-NSString *const PBXDefaultBuildConfig = @"Release";
-
 NSString *const PBXActionBuild   = @"build";
 NSString *const PBXActionClean   = @"clean";
 NSString *const PBXActionInstall = @"install";

@@ -18,15 +18,21 @@ NSInteger pbxBuilder() {
     PBXRunInfo *runInfo   = [[PBXRunInfo alloc] init:&error];
 
     if(runInfo) {
+        PBXProjectFile *projectFile = runInfo.projectToBuild;
+        PBXProject     *project     = projectFile.project;
 
-        PBXProjectFile       *projectFile = runInfo.projectToBuild;
-        NSArray<PBXTarget *> *targets     = runInfo.targetsToBuild;
-        XCBuildConfiguration *xcbc        = runInfo.buildConfiguration;
-        NSUInteger           i1           = (MAX(PBXMessageTarget.length, PBXMessageConfiguration.length) + (T * 2));
+        for(XCBuildConfiguration *buildConfig in project.buildConfigurationList.buildConfigurations) {
+            PGPrintf(PBXFormat3, PBXMessageTarget, projectFile.projectName, 1, @"Build Configuration", buildConfig.name);
+            [buildConfig debugPrint];
+        }
+
+        NSArray<PBXTarget *> *targets = runInfo.targetsToBuild;
+        NSString             *xcbc    = runInfo.buildConfigurationName;
+        NSUInteger           i1       = (MAX(PBXMessageTarget.length, PBXMessageConfiguration.length) + (T * 2));
 
         PGPrintf(PBXFormat5, PBXMessageBuilding);
         PGPrintf(PBXFormat4, PGpLeft(PBXMessageProject, (PBXMessageProject.length + T)), projectFile.projectName);
-        PGPrintf(PBXFormat4, PGpLeft(PBXMessageConfiguration, i1), xcbc.name);
+        PGPrintf(PBXFormat4, PGpLeft(PBXMessageConfiguration, i1), xcbc);
         for(PBXTarget *target in targets) PGPrintf(PBXFormat4, PGpLeft(PBXMessageTarget, i1), target.name);
 
         PGPrintStr(PBXMessageDoubleLF);

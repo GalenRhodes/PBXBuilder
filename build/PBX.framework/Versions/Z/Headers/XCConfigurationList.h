@@ -1,6 +1,6 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: XCBuildConfiguration.h
+ *    FILENAME: XCConfigurationList.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
  *        DATE: 11/4/19
@@ -20,28 +20,29 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_XCBUILDCONFIGURATION_H__
-#define __PBXBUILDER_XCBUILDCONFIGURATION_H__
+#ifndef __PBXBUILDER_XCCONFIGURATIONLIST_H__
+#define __PBXBUILDER_XCCONFIGURATIONLIST_H__
 
+#import <Cocoa/Cocoa.h>
 #import <PBX/PBXItem.h>
+
+@class XCBuildConfiguration;
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameDebug;
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameRelease;
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameDefault;
+@interface XCConfigurationList : PBXItem
 
-@interface XCBuildConfiguration : PBXItem
-
-    @property(class, readonly)/*   */ NSArray<NSString *>          *allBuildConfigurationNames;
-    @property(readonly, nullable)/**/ NSString                     *name;
-    @property(readonly, nullable)/**/ NSString                     *baseConfigurationReference;
-    @property(readonly)/*          */ NSDictionary<NSString *, id> *buildSettings;
+    @property(readonly)/*      */ BOOL                            defaultConfigurationIsVisible;
+    @property(readonly, nullable) NSString                        *defaultConfigurationName;
+    @property(readonly, nullable) XCBuildConfiguration            *defaultConfiguration;
+    @property(readonly)/*      */ NSArray<XCBuildConfiguration *> *buildConfigurations;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
+
+    -(nullable XCBuildConfiguration *)buildConfigurationForName:(NSString *)name;
 
 @end
 
 NS_ASSUME_NONNULL_END
 
-#endif // __PBXBUILDER_XCBUILDCONFIGURATION_H__
+#endif // __PBXBUILDER_XCCONFIGURATIONLIST_H__

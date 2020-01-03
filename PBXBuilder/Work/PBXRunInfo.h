@@ -43,14 +43,13 @@ typedef NS_ENUM(NSUInteger, PBXBuildTools) {
 
 @interface PBXRunInfo : NSObject
 
-    @property(readonly, copy) NSString             *programPath;
-    @property(readonly, copy) NSString             *workingDir;
-    @property(readonly)/*  */ GNUstepInfo          *gnustepInfo;
-    @property(readonly)/*  */ PBXProjectFile       *projectToBuild;
-    @property(readonly)/*  */ NSArray<PBXTarget *> *targetsToBuild;
-    @property(readonly)/*  */ NSArray<NSString *>  *actions;
-    @property(readonly)/*  */ XCBuildConfiguration *buildConfiguration;
-
+    @property(readonly, copy) NSString                    *programPath;
+    @property(readonly, copy) NSString                    *workingDir;
+    @property(readonly)/*  */ GNUstepInfo                 *gnustepInfo;
+    @property(readonly)/*  */ PBXProjectFile              *projectToBuild;
+    @property(readonly)/*  */ NSArray<PBXTarget *>        *targetsToBuild;
+    @property(readonly)/*  */ NSArray<NSString *>         *actions;
+    @property(readonly, copy) NSString                    *buildConfigurationName;
     @property(readonly, copy) NSString                    *buildDir;
     @property(readonly)/*  */ NSUInteger                  targetNameMaxLength;
     @property(readonly)/*  */ NSMutableArray<PBXTarget *> *builtTargets;

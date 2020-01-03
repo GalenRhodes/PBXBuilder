@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: XCBuildConfiguration.h
+ *    FILENAME: NSMutableArray+Moscow.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/4/19
+ *        DATE: 11/16/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,28 +20,19 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_XCBUILDCONFIGURATION_H__
-#define __PBXBUILDER_XCBUILDCONFIGURATION_H__
+#ifndef __PBXBUILDER_NSMUTABLEARRAY_MOSCOW_H__
+#define __PBXBUILDER_NSMUTABLEARRAY_MOSCOW_H__
 
-#import <PBX/PBXItem.h>
+#import <Moscow/Tools.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameDebug;
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameRelease;
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameDefault;
+@interface NSMutableArray(Moscow)
 
-@interface XCBuildConfiguration : PBXItem
-
-    @property(class, readonly)/*   */ NSArray<NSString *>          *allBuildConfigurationNames;
-    @property(readonly, nullable)/**/ NSString                     *name;
-    @property(readonly, nullable)/**/ NSString                     *baseConfigurationReference;
-    @property(readonly)/*          */ NSDictionary<NSString *, id> *buildSettings;
-
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
+    -(void)addObjectWithCheck:(id)obj;
 
 @end
 
 NS_ASSUME_NONNULL_END
 
-#endif // __PBXBUILDER_XCBUILDCONFIGURATION_H__
+#endif // __PBXBUILDER_NSMUTABLEARRAY_MOSCOW_H__

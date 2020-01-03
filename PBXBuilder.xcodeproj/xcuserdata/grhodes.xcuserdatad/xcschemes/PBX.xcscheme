@@ -17,7 +17,7 @@
    </BuildAction>
    <LaunchAction
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Debug"
+      buildConfigurationName = "Debug"
       allowLocationSimulation = "YES">
       <LocationScenarioReference
          identifier = "com.apple.dt.IDEFoundation.CurrentLocationScenarioIdentifier"

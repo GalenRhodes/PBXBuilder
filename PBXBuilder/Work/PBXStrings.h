@@ -34,8 +34,6 @@ FOUNDATION_EXPORT NSString *const PGFoundProjectFilesKey;
 FOUNDATION_EXPORT NSString *const PGPBXFilename;
 FOUNDATION_EXPORT NSString *const PBXProjectFileExtension;
 
-FOUNDATION_EXPORT NSString *const PBXDefaultBuildConfig;
-
 FOUNDATION_EXPORT NSString *const PBXActionBuild;
 FOUNDATION_EXPORT NSString *const PBXActionClean;
 FOUNDATION_EXPORT NSString *const PBXActionInstall;

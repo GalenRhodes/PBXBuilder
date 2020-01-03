@@ -99,13 +99,23 @@ typedef NSMutableDictionary<NSString *, PBXBuildPhaseToolOptionsMap> *PBXToolOpt
                                error:(NSError **)pError {
         NSMutableArray<NSString *> *targetNames = [NSMutableArray new];
         NSMutableArray<NSString *> *actions     = [NSMutableArray new];
-        NSString                   *configName  = PBXDefaultBuildConfig; // The default.
         BOOL                       allTargets   = NO;
+
+        _buildConfigurationName = XCBuildConfigNameDefault; // The default.
 
         while(arg) {
             if([arg isEqualToString:PBXOptionBuildConfig]) {
-                configName = enArgs.nextObject;
-                if(!configName) return pbxMakeErr(pError, PBX_MISSING_BUILD_CONFIG, @"%@", PGErrMsgMissingBuildConfig);
+                NSString *configName = enArgs.nextObject;
+
+                if(!configName) {
+                    return pbxMakeErr(pError, PBX_MISSING_BUILD_CONFIG, @"%@", PGErrMsgMissingBuildConfig);
+                }
+                else if(![XCBuildConfiguration.allBuildConfigurationNames containsObject:configName]) {
+                    return pbxMakeErr(pError, PBX_UNKNOWN_BUILD_CONFIG, PGErrMsgUnknownBuildConfig, configName);
+                }
+                else {
+                    _buildConfigurationName = configName;
+                }
             }
             else if([arg isEqualToString:PBXOptionProject]) {
                 if(![self handleProjectOption:enArgs projects:projects error:pError]) return NO;
@@ -139,21 +149,11 @@ typedef NSMutableDictionary<NSString *, PBXBuildPhaseToolOptionsMap> *PBXToolOpt
         if(![self getTargetsForNames:targetNames allTargets:allTargets project:project projectName:projectName error:pError]) return NO;
 
         /*
-         * BUILD CONFIGURATION
-         */
-        if(![self getBuildConfigForName:configName project:project error:pError]) return NO;
-
-        /*
          * ACTIONS
          */
         if(actions.count == 0) _actions = @[ PBXActionBuild ]; else _actions = actions;
 
         return YES;
-    }
-
-    -(BOOL)getBuildConfigForName:(NSString *)configName project:(PBXProject *)project error:(NSError **)pError {
-        if((_buildConfiguration = [project.buildConfigurationList buildConfigurationForName:(configName ?: PBXDefaultBuildConfig)])) return YES;
-        return pbxMakeErr(pError, PBX_UNKNOWN_BUILD_CONFIG, PGErrMsgUnknownBuildConfig, configName);
     }
 
     -(BOOL)getTargetsForNames:(NSMutableArray<NSString *> *)names
@@ -194,9 +194,9 @@ typedef NSMutableDictionary<NSString *, PBXBuildPhaseToolOptionsMap> *PBXToolOpt
 
     -(BOOL)setDefaultProjectForNoOptions:(NSDictionary<NSString *, NSString *> *)projects error:(NSError **)pError {
         if((_projectToBuild = [self getFirstProjectFile:projects error:pError])) {
-            _targetsToBuild     = _projectToBuild.project.targets.copy;
-            _buildConfiguration = _projectToBuild.project.buildConfigurationList.defaultConfiguration;
-            _actions            = @[ PBXActionBuild ];
+            _targetsToBuild         = _projectToBuild.project.targets.copy;
+            _buildConfigurationName = XCBuildConfigNameDefault;
+            _actions                = @[ PBXActionBuild ];
             return YES;
         }
 

@@ -1,6 +1,6 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: XCBuildConfiguration.h
+ *    FILENAME: PBXItem.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
  *        DATE: 11/4/19
@@ -20,28 +20,44 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_XCBUILDCONFIGURATION_H__
-#define __PBXBUILDER_XCBUILDCONFIGURATION_H__
+#ifndef __PBXBUILDER_PBXITEM_H__
+#define __PBXBUILDER_PBXITEM_H__
 
-#import <PBX/PBXItem.h>
+#import <Cocoa/Cocoa.h>
+#import <Moscow/Moscow.h>
+
+@class PBXProjectFile;
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameDebug;
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameRelease;
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameDefault;
+@interface PBXItem : NSObject<NSLocking>
 
-@interface XCBuildConfiguration : PBXItem
-
-    @property(class, readonly)/*   */ NSArray<NSString *>          *allBuildConfigurationNames;
-    @property(readonly, nullable)/**/ NSString                     *name;
-    @property(readonly, nullable)/**/ NSString                     *baseConfigurationReference;
-    @property(readonly)/*          */ NSDictionary<NSString *, id> *buildSettings;
+    @property(readonly) NSString       *itemId;
+    @property(readonly) NSString       *objType;
+    @property(readonly) PBXProjectFile *projectFile;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 
+    -(nullable id)iv:(NSString *)key;
+
+    -(NSArray *)ivx:(NSString *)key;
+
+    -(BOOL)ivBool:(NSString *)key;
+
+    -(NSInteger)ivInt:(NSString *)key;
+
+    -(NSUInteger)ivUInt:(NSString *)key;
+
+    -(nullable id)itemForKey:(NSString *)key;
+
+    -(nullable id)itemForID:(NSString *)itemId;
+
+    -(NSMutableString *)appendDescBody:(NSMutableString *)str indent:(NSString *)indent;
+
 @end
+
+NSMutableString *PBXAppendItem(NSMutableString *buffer, NSString *indent, NSString *name, id item);
 
 NS_ASSUME_NONNULL_END
 
-#endif // __PBXBUILDER_XCBUILDCONFIGURATION_H__
+#endif // __PBXBUILDER_PBXITEM_H__

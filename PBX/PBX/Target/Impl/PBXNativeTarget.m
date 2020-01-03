@@ -31,17 +31,51 @@
         self = [super initWithItemId:itemId projectFile:projectFile];
 
         if(self) {
-            NSString *key = self.productTypeDescription;
-            if([key isEqualToString:@"com.apple.product-type.application"]) _productType = PBX_PRODUCTTYPE_APPLICATION;
-            else if([key isEqualToString:@"com.apple.product-type.tool"]) _productType = PBX_PRODUCTTYPE_TOOL;
-            else if([key isEqualToString:@"com.apple.product-type.library.static"]) _productType = PBX_PRODUCTTYPE_LIBRARYSTATIC;
-            else if([key isEqualToString:@"com.apple.product-type.library.dynamic"]) _productType = PBX_PRODUCTTYPE_LIBRARYDYNAMIC;
-            else if([key isEqualToString:@"com.apple.product-type.kernel-extension"]) _productType = PBX_PRODUCTTYPE_KERNELEXTENSION;
-            else if([key isEqualToString:@"com.apple.product-type.kernel-extension.iokit"]) _productType = PBX_PRODUCTTYPE_KERNELEXTENSIONIOKIT;
-            else _productType = PBX_PRODUCTTYPE_NONE;
+            @try {
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "RedundantCast"
+                //@f:0
+                _productType = (PBXProductType)((NSNumber *)(PBXNativeTarget.allProductTypeDescriptionsMap[(self.productTypeDescription ?: @"")] ?: @(PBX_PRODUCTTYPE_NONE))).unsignedIntegerValue;
+                //@f:1
+#pragma clang diagnostic pop
+            }
+            @catch(NSException *exception) {
+                NSLog(@"Exception occurred: %@, %@", exception, [exception userInfo]);
+            }
         }
 
         return self;
+    }
+
+    +(NSDictionary<NSString *, NSNumber *> *)allProductTypeDescriptionsMap {
+        static NSDictionary    *_desc    = nil;
+        static dispatch_once_t _descFlag = 0;
+        dispatch_once(&_descFlag, ^{
+            _desc = @{
+                @"com.apple.product-type.application"                        : @(PBX_PRODUCTTYPE_APPLICATION),
+                @"com.apple.product-type.application.watchapp"               : @(PBX_PRODUCTTYPE_APPLICATION_WATCH),
+                @"com.apple.product-type.application.watchapp2"              : @(PBX_PRODUCTTYPE_APPLICATION_WATCH2),
+                @"com.apple.product-type.application.watchapp2-container"    : @(PBX_PRODUCTTYPE_APPLICATION_WATCH2_CONTAINER),
+                @"com.apple.product-type.application.messages"               : @(PBX_PRODUCTTYPE_APPLICATION_MESSAGES),
+                @"com.apple.product-type.tool"                               : @(PBX_PRODUCTTYPE_TOOL),
+                @"com.apple.product-type.bundle"                             : @(PBX_PRODUCTTYPE_BUNDLE),
+                @"com.apple.product-type.bundle.unit-test"                   : @(PBX_PRODUCTTYPE_BUNDLE_UNIT_TEST),
+                @"com.apple.product-type.bundle.ui-testing"                  : @(PBX_PRODUCTTYPE_BUNDLE_UI_TEST),
+                @"com.apple.product-type.framework"                          : @(PBX_PRODUCTTYPE_FRAMEWORK),
+                @"com.apple.product-type.library.static"                     : @(PBX_PRODUCTTYPE_LIBRARY_STATIC),
+                @"com.apple.product-type.library.dynamic"                    : @(PBX_PRODUCTTYPE_LIBRARY_DYNAMIC),
+                @"com.apple.product-type.kernel-extension"                   : @(PBX_PRODUCTTYPE_KERNEL_EXTENSION),
+                @"com.apple.product-type.kernel-extension.iokit"             : @(PBX_PRODUCTTYPE_KERNEL_EXTENSION_IOKIT),
+                @"com.apple.product-type.app-extension"                      : @(PBX_PRODUCTTYPE_APP_EXTENSION),
+                @"com.apple.product-type.app-extension.messages"             : @(PBX_PRODUCTTYPE_MESSAGES_EXTENSION),
+                @"com.apple.product-type.app-extension.messages-sticker-pack": @(PBX_PRODUCTTYPE_STICKER_PACK),
+                @"com.apple.product-type.tv-app-extension"                   : @(PBX_PRODUCTTYPE_TV_EXTENSION),
+                @"com.apple.product-type.watchkit-extension"                 : @(PBX_PRODUCTTYPE_WATCH_EXTENSION),
+                @"com.apple.product-type.watchkit2-extension"                : @(PBX_PRODUCTTYPE_WATCH2_EXTENSION),
+                @"com.apple.product-type.xpc-service"                        : @(PBX_PRODUCTTYPE_XPC_SERVICE),
+            };
+        });
+        return _desc;
     }
 
     -(NSString *)productInstallPath {

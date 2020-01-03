@@ -93,9 +93,18 @@
         _parent = parent;
     }
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "RedundantCast"
+
     +(PBXSourceTree)sourceTreeForId:(NSString *)sourceTreeId {
-        return (PBXSourceTree)((sourceTreeId.length ? PBXFileElement.sourceTreeMap[sourceTreeId] : nil) ?: @(PBX_SOURCETREE_NONE)).unsignedIntegerValue;
+        return (PBXSourceTree)((NSNumber *)((sourceTreeId.length ? PBXFileElement.sourceTreeMap[sourceTreeId] : nil) ?: @(PBX_SOURCETREE_NONE))).unsignedIntegerValue;
     }
+
+    +(PBXFileType)fileTypeForId:(NSString *)typeId {
+        return (PBXFileType)((NSNumber *)((typeId.length ? PBXFileElement.fileTypeMap[typeId] : nil) ?: @(PBX_FILETYPE_NONE))).unsignedIntegerValue;
+    }
+
+#pragma clang diagnostic pop
 
     +(PBXFileEncoding)cleanFileEncoding:(NSUInteger)encodingId {
         return ((self.fileEncodingMap[@(encodingId)] == nil) ? PBX_FILEENCODING_DEFAULT : (PBXFileEncoding)encodingId);
@@ -103,10 +112,6 @@
 
     +(NSString *)fileEncodingForId:(PBXFileEncoding)encodingId {
         return self.fileEncodingMap[@(encodingId)];
-    }
-
-    +(PBXFileType)fileTypeForId:(NSString *)typeId {
-        return (PBXFileType)((typeId.length ? PBXFileElement.fileTypeMap[typeId] : nil) ?: @(PBX_FILETYPE_NONE)).unsignedIntegerValue;
     }
 
     +(NSDictionary<NSString *, NSNumber *> *)sourceTreeMap {

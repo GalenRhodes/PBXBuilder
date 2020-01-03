@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: XCBuildConfiguration.h
+ *    FILENAME: PGCmdLine.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/4/19
+ *        DATE: 12/12/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,28 +20,21 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_XCBUILDCONFIGURATION_H__
-#define __PBXBUILDER_XCBUILDCONFIGURATION_H__
+#ifndef __PBXBUILDER_PGCMDLINE_H__
+#define __PBXBUILDER_PGCMDLINE_H__
 
-#import <PBX/PBXItem.h>
+#import <Cocoa/Cocoa.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameDebug;
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameRelease;
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameDefault;
+@interface PGCmdLine : NSObject
 
-@interface XCBuildConfiguration : PBXItem
-
-    @property(class, readonly)/*   */ NSArray<NSString *>          *allBuildConfigurationNames;
-    @property(readonly, nullable)/**/ NSString                     *name;
-    @property(readonly, nullable)/**/ NSString                     *baseConfigurationReference;
-    @property(readonly)/*          */ NSDictionary<NSString *, id> *buildSettings;
-
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
+    @property(readonly)/*  */ NSUInteger          count;
+    @property(readonly, copy) NSString            *applicationPath;
+    @property(readonly)/*  */ NSArray<NSString *> *arguments;
 
 @end
 
 NS_ASSUME_NONNULL_END
 
-#endif // __PBXBUILDER_XCBUILDCONFIGURATION_H__
+#endif // __PBXBUILDER_PGCMDLINE_H__

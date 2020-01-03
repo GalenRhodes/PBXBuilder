@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: XCBuildConfiguration.h
+ *    FILENAME: PBXTargetDependency.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/4/19
+ *        DATE: 11/5/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,23 +20,20 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_XCBUILDCONFIGURATION_H__
-#define __PBXBUILDER_XCBUILDCONFIGURATION_H__
+#ifndef __PBXBUILDER_PBXTARGETDEPENDENCY_H__
+#define __PBXBUILDER_PBXTARGETDEPENDENCY_H__
 
 #import <PBX/PBXItem.h>
 
+@class PBXNativeTarget;
+@class PBXContainerItemProxy;
+
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameDebug;
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameRelease;
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameDefault;
+@interface PBXTargetDependency : PBXItem
 
-@interface XCBuildConfiguration : PBXItem
-
-    @property(class, readonly)/*   */ NSArray<NSString *>          *allBuildConfigurationNames;
-    @property(readonly, nullable)/**/ NSString                     *name;
-    @property(readonly, nullable)/**/ NSString                     *baseConfigurationReference;
-    @property(readonly)/*          */ NSDictionary<NSString *, id> *buildSettings;
+    @property(readonly, nullable) PBXNativeTarget       *target;
+    @property(readonly, nullable) PBXContainerItemProxy *targetProxy;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 
@@ -44,4 +41,4 @@ FOUNDATION_EXPORT NSString *const XCBuildConfigNameDefault;
 
 NS_ASSUME_NONNULL_END
 
-#endif // __PBXBUILDER_XCBUILDCONFIGURATION_H__
+#endif // __PBXBUILDER_PBXTARGETDEPENDENCY_H__

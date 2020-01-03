@@ -1,6 +1,6 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: XCBuildConfiguration.h
+ *    FILENAME: PBXBuildFile.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
  *        DATE: 11/4/19
@@ -20,23 +20,23 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_XCBUILDCONFIGURATION_H__
-#define __PBXBUILDER_XCBUILDCONFIGURATION_H__
+#ifndef __PBXBUILDER_PBXBUILDFILE_H__
+#define __PBXBUILDER_PBXBUILDFILE_H__
 
+#import <Cocoa/Cocoa.h>
 #import <PBX/PBXItem.h>
+
+@class PBXFileReference;
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameDebug;
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameRelease;
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameDefault;
+@interface PBXBuildFile : PBXItem
 
-@interface XCBuildConfiguration : PBXItem
-
-    @property(class, readonly)/*   */ NSArray<NSString *>          *allBuildConfigurationNames;
-    @property(readonly, nullable)/**/ NSString                     *name;
-    @property(readonly, nullable)/**/ NSString                     *baseConfigurationReference;
-    @property(readonly)/*          */ NSDictionary<NSString *, id> *buildSettings;
+    @property(readonly, nullable) PBXFileReference             *fileRef;
+    @property(readonly)/*      */ BOOL                         isPublic;
+    @property(readonly)/*      */ BOOL                         isPrivate;
+    @property(readonly)/*      */ NSDictionary<NSString *, id> *settings;
+    @property(readonly)/*      */ NSArray<NSString *>          *attributes;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 
@@ -44,4 +44,4 @@ FOUNDATION_EXPORT NSString *const XCBuildConfigNameDefault;
 
 NS_ASSUME_NONNULL_END
 
-#endif // __PBXBUILDER_XCBUILDCONFIGURATION_H__
+#endif // __PBXBUILDER_PBXBUILDFILE_H__

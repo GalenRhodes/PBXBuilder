@@ -37,6 +37,7 @@
 #import "PBXFrameworksBuildPhase+PBXBuilder.h"
 #import "PBXResourcesBuildPhase+PBXBuilder.h"
 #import "PBXSourcesBuildPhase+PBXBuilder.h"
+#import "XCBuildConfiguration+PBXBuilder.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

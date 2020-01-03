@@ -28,9 +28,11 @@
         NSInteger res = [super build:runInfo target:target error:pError];
         if(res) return res;
 
-        NSFileManager *fm          = NSFileManager.defaultManager;
-        NSString      *destPublic  = PGFormat(@"%@/headers/%@/%@", runInfo.buildDir, @"public", target.name);
-        NSString      *destPrivate = PGFormat(@"%@/headers/%@/%@", runInfo.buildDir, @"private", target.name);
+        NSFileManager *fm               = NSFileManager.defaultManager;
+        NSString      *configName       = runInfo.buildConfigurationName;
+        NSString      *frameworkVersion = ([target.buildConfigurationList buildConfigurationForName:configName].buildSettings[@"FRAMEWORK_VERSION"] ?: @"Z");
+        NSString      *destPublic       = PGFormat(@"%@/%@.framework/Versions/%@/Headers", runInfo.buildDir, target.name, frameworkVersion);
+        NSString      *destPrivate      = PGFormat(@"%@/%@.framework/Versions/%@/PrivateHeaders", runInfo.buildDir, target.name, frameworkVersion);
 
         if(![fm createDirectoryAtPath:destPublic withIntermediateDirectories:YES attributes:nil error:pError]) return (*pError).code;
         if(![fm createDirectoryAtPath:destPrivate withIntermediateDirectories:YES attributes:nil error:pError]) return (*pError).code;
@@ -38,6 +40,7 @@
         for(PBXBuildFile *file in self.files) {
             NSString *dest = PGFormat(@"%@/%@", (file.isPublic ? destPublic : destPrivate), (file.fileRef.name ?: file.fileRef.path));
             NSString *src  = file.fileRef.realPath;
+
             PGPrintf(@"Copying \"%@\" to \"%@\"...\n", src, dest);
             if(![fm copyItemAtPath:src toPath:dest error:pError]) return (*pError).code;
         }

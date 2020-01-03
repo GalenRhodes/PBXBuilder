@@ -1,9 +1,9 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: XCBuildConfiguration.h
+ *    FILENAME: PBXFileElement.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/4/19
+ *        DATE: 11/5/19
  *
  * Copyright © 2019 Project Galen. All rights reserved.
  *
@@ -20,28 +20,40 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_XCBUILDCONFIGURATION_H__
-#define __PBXBUILDER_XCBUILDCONFIGURATION_H__
+#ifndef __PBXBUILDER_PBXFILEELEMENT_H__
+#define __PBXBUILDER_PBXFILEELEMENT_H__
 
 #import <PBX/PBXItem.h>
+#import <PBX/PBXFileElementTypes.h>
+
+@class PBXGroup;
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameDebug;
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameRelease;
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameDefault;
+@interface PBXFileElement : PBXItem
 
-@interface XCBuildConfiguration : PBXItem
+    @property(class, readonly) NSDictionary<NSString *, NSNumber *> *fileTypeMap;
+    @property(class, readonly) NSDictionary<NSString *, NSNumber *> *sourceTreeMap;
+    @property(class, readonly) NSDictionary<NSNumber *, NSString *> *fileEncodingMap;
 
-    @property(class, readonly)/*   */ NSArray<NSString *>          *allBuildConfigurationNames;
-    @property(readonly, nullable)/**/ NSString                     *name;
-    @property(readonly, nullable)/**/ NSString                     *baseConfigurationReference;
-    @property(readonly)/*          */ NSDictionary<NSString *, id> *buildSettings;
+    @property(readonly, nullable) NSString      *name;
+    @property(readonly, nullable) NSString      *path;
+    @property(readonly)/*      */ PBXSourceTree sourceTree;
+    @property(readonly, nullable) NSString      *realPath;
+    @property(readonly, nullable) PBXGroup      *parent;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
+
+    +(PBXSourceTree)sourceTreeForId:(NSString *)sourceTreeId;
+
+    +(PBXFileEncoding)cleanFileEncoding:(NSUInteger)encodingId;
+
+    +(NSString *)fileEncodingForId:(PBXFileEncoding)encodingId;
+
+    +(PBXFileType)fileTypeForId:(NSString *)typeId;
 
 @end
 
 NS_ASSUME_NONNULL_END
 
-#endif // __PBXBUILDER_XCBUILDCONFIGURATION_H__
+#endif // __PBXBUILDER_PBXFILEELEMENT_H__

@@ -1,6 +1,6 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: XCBuildConfiguration.h
+ *    FILENAME: PBXFileReference.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
  *        DATE: 11/4/19
@@ -20,23 +20,20 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_XCBUILDCONFIGURATION_H__
-#define __PBXBUILDER_XCBUILDCONFIGURATION_H__
+#ifndef __PBXBUILDER_PBXFILEREFERENCE_H__
+#define __PBXBUILDER_PBXFILEREFERENCE_H__
 
-#import <PBX/PBXItem.h>
+#import <PBX/PBXFileElement.h>
+#include "PBXFileElementTypes.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameDebug;
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameRelease;
-FOUNDATION_EXPORT NSString *const XCBuildConfigNameDefault;
+@interface PBXFileReference : PBXFileElement
 
-@interface XCBuildConfiguration : PBXItem
-
-    @property(class, readonly)/*   */ NSArray<NSString *>          *allBuildConfigurationNames;
-    @property(readonly, nullable)/**/ NSString                     *name;
-    @property(readonly, nullable)/**/ NSString                     *baseConfigurationReference;
-    @property(readonly)/*          */ NSDictionary<NSString *, id> *buildSettings;
+    @property(readonly) PBXFileType     explicitFileType;
+    @property(readonly) PBXFileType     lastKnownFileType;
+    @property(readonly) PBXFileEncoding fileEncoding;
+    @property(readonly) BOOL            includeInIndex;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 
@@ -44,4 +41,4 @@ FOUNDATION_EXPORT NSString *const XCBuildConfigNameDefault;
 
 NS_ASSUME_NONNULL_END
 
-#endif // __PBXBUILDER_XCBUILDCONFIGURATION_H__
+#endif // __PBXBUILDER_PBXFILEREFERENCE_H__
