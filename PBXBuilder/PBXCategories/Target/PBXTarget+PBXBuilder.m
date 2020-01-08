@@ -39,7 +39,7 @@
                 NSInteger res = [dep.target build:runInfo error:pError];
                 if(res) return res;
             }
-
+#ifdef DEBUG
             NSUInteger   mx1 = 0;
             for(NSString *s in XCBuildConfiguration.allBuildConfigurationNames) mx1 = MAX(mx1, s.length);
             NSArray<XCBuildConfiguration *> *buildConfigurations = self.buildConfigurationList.buildConfigurations;
@@ -48,6 +48,7 @@
                 PGPrintf(PBXFormat3, PBXMessageTarget, self.name, ((runInfo.targetNameMaxLength - self.name.length) + 1), @"Build Configuration", buildConfig.name);
                 [buildConfig debugPrint];
             }
+#endif
         }
 
         return 0;

@@ -30,12 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PGBool : NSObject
 
     @property(nonatomic, readonly) BOOL boolValue;
+    @property(class, readonly) PGBool   *boolYes;
+    @property(class, readonly) PGBool   *boolNo;
 
     +(PGBool *)boolObj:(BOOL)boolValue;
-
-    +(PGBool *)boolYes;
-
-    +(PGBool *)boolNo;
 
     -(NSString *)description;
 
@@ -44,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
     -(BOOL)isEqualToABool:(PGBool *)aBool;
 
     -(NSUInteger)hash;
+
+    +(BOOL)isBool:(id)obj;
 
 @end
 

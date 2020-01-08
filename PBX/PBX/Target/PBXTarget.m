@@ -25,6 +25,7 @@
 #import "PBXBuildPhase.h"
 #import "PBXTargetDependency.h"
 #import "PBXProjectFile.h"
+#import "XCBuildConfiguration.h"
 
 @implementation PBXTarget {
     }
@@ -38,6 +39,10 @@
         }
 
         return self;
+    }
+
+    -(NSString *)buildDir {
+        return PGFormat(@"%@/%@", self.projectFile.userInfo[PBX_UI_BUILD_DIR], self.name);
     }
 
     -(NSString *)name {

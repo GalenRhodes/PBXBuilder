@@ -23,8 +23,10 @@
 #import "XCConfigurationList.h"
 #import "XCBuildConfiguration.h"
 #import "PBXProjectFile.h"
+#import "PBXPrivate.h"
 
 @implementation XCConfigurationList {
+        PBXNativeTarget *_target;
     }
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile {
@@ -32,6 +34,7 @@
 
         if(self) {
             _buildConfigurations = [self ivx:@"buildConfigurations"];
+            for(XCBuildConfiguration *bc in _buildConfigurations) bc.configurationList = self;
         }
 
         return self;
@@ -61,6 +64,14 @@
         PBXAppendItem(str, indent, @"defaultConfigurationName", self.defaultConfigurationName);
         PBXAppendItem(str, indent, @"buildConfigurations", self.buildConfigurations);
         return str;
+    }
+
+    -(PBXNativeTarget *)target {
+        return _target;
+    }
+
+    -(void)setTarget:(PBXNativeTarget *)target {
+        _target = target;
     }
 
 @end

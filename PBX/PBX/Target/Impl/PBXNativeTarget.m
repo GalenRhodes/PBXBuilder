@@ -23,6 +23,7 @@
 #import "PBXNativeTarget.h"
 #import "PBXFileReference.h"
 #import "PBXProjectFile.h"
+#import "PBXPrivate.h"
 
 @implementation PBXNativeTarget {
     }
@@ -31,11 +32,13 @@
         self = [super initWithItemId:itemId projectFile:projectFile];
 
         if(self) {
+            self.buildConfigurationList.target = self;
+
             @try {
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "RedundantCast"
                 //@f:0
-                _productType = (PBXProductType)((NSNumber *)(PBXNativeTarget.allProductTypeDescriptionsMap[(self.productTypeDescription ?: @"")] ?: @(PBX_PRODUCTTYPE_NONE))).unsignedIntegerValue;
+                _productType = (PBXProductType)((NSNumber *)(PBXNativeTarget.productTypeDescriptionsMap[(self.productTypeDescription ?: @"")] ?: @(PBX_PRODUCTTYPE_NONE))).unsignedIntegerValue;
                 //@f:1
 #pragma clang diagnostic pop
             }
@@ -47,7 +50,19 @@
         return self;
     }
 
-    +(NSDictionary<NSString *, NSNumber *> *)allProductTypeDescriptionsMap {
+    +(NSDictionary<NSNumber *, NSString *> *)productTypesMap {
+        static NSDictionary<NSNumber *, NSString *> *_dict = nil;
+        static dispatch_once_t                      _flag  = 0;
+        dispatch_once(&_flag, ^{
+            NSDictionary<NSString *, NSNumber *>        *dict  = self.productTypeDescriptionsMap;
+            NSMutableDictionary<NSNumber *, NSString *> *mdict = [NSMutableDictionary dictionaryWithCapacity:dict.count];
+            [dict enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSNumber *obj, BOOL *stop) { mdict[obj] = key; }];
+            _dict = mdict;
+        });
+        return _dict;
+    }
+
+    +(NSDictionary<NSString *, NSNumber *> *)productTypeDescriptionsMap {
         static NSDictionary    *_desc    = nil;
         static dispatch_once_t _descFlag = 0;
         dispatch_once(&_descFlag, ^{

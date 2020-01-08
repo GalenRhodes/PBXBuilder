@@ -1,11 +1,11 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXBuildPhase+PBXBuilder.h
+ *    FILENAME: NSNull+Moscow.m
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 12/20/19
+ *        DATE: 1/7/20
  *
- * Copyright © 2019 Project Galen. All rights reserved.
+ * Copyright © 2020 Project Galen. All rights reserved.
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -20,25 +20,12 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_PBXBUILDPHASE_PBXBUILDER_H__
-#define __PBXBUILDER_PBXBUILDPHASE_PBXBUILDER_H__
+#import "NSNull+Moscow.h"
 
-#import <Cocoa/Cocoa.h>
-#import <PBX/PBX.h>
+@implementation NSNull(Moscow)
 
-NS_ASSUME_NONNULL_BEGIN
+    +(BOOL)isNull:(id)obj {
+        return (obj && [obj isKindOfClass:NSNull.class]);
+    }
 
-typedef NSInteger (^PBXBuildPhasePerFile)(PBXBuildFile *buildFile, NSError **pError);
-
-@interface PBXBuildPhase(PBXBuilder)
-
-    @property(readonly) NSUInteger maxFilenameLength;
-
-    -(NSInteger)build:(PBXRunInfo *)runInfo target:(PBXTarget *)target error:(NSError **)pError;
-
-    -(NSInteger)doPerFile:(PBXBuildPhasePerFile)perFileBlock action:(NSString *)action silent:(BOOL)silent error:(NSError **)pError;
 @end
-
-NS_ASSUME_NONNULL_END
-
-#endif // __PBXBUILDER_PBXBUILDPHASE_PBXBUILDER_H__

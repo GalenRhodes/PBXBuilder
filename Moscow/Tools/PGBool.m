@@ -58,6 +58,10 @@
         return [self boolObj:NO];
     }
 
+    +(BOOL)isBool:(id)obj {
+        return (obj && [obj isKindOfClass:PGBool.class]);
+    }
+
     -(NSString *)description {
         return (self.boolValue ? @"YES" : @"NO");
     }

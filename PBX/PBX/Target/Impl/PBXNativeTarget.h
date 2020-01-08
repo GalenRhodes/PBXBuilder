@@ -60,7 +60,8 @@ NS_ASSUME_NONNULL_BEGIN
     @property(readonly)/*          */ PBXProductType                       productType;
     @property(nullable, readonly)/**/ NSString                             *productTypeDescription;
     @property(nullable, readonly)/**/ PBXFileReference                     *productReference;
-    @property(class, readonly)/*   */ NSDictionary<NSString *, NSNumber *> *allProductTypeDescriptionsMap;
+    @property(class, readonly)/*   */ NSDictionary<NSString *, NSNumber *> *productTypeDescriptionsMap;
+    @property(class, readonly)/*   */ NSDictionary<NSNumber *, NSString *> *productTypesMap;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 

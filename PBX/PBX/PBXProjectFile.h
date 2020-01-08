@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
     @property(readonly)/*  */ NSDictionary<NSString *, PBXItem *> *pbxItemCache;
     @property(readonly)/*  */ NSPropertyListFormat                pbxFormat;
     @property(readonly)/*  */ PBXProject                          *project;
+    @property(readonly)/*  */ NSMutableDictionary<NSString *, id> *userInfo;
 
     -(instancetype)initWithName:(NSString *)name path:(NSString *)path error:(NSError **)error;
 

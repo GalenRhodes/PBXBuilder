@@ -31,7 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 #if GNUSTEP
 
-    -(NSString *)destinationOfSymbolicLinkAtPath:(NSString *)path error:(NSError **)error;
+@property(readonly, copy) NSURL *homeDirectoryForCurrentUser;
+
+-(NSString *)destinationOfSymbolicLinkAtPath:(NSString *)path error:(NSError **)error;
 
 #endif
 

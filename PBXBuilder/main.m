@@ -19,12 +19,17 @@ NSInteger pbxBuilder() {
 
     if(runInfo) {
         PBXProjectFile *projectFile = runInfo.projectToBuild;
-        PBXProject     *project     = projectFile.project;
+
+        PGPrintf(PBXFormat3, PBXMessageProject, projectFile.projectName, 1, @"Path", projectFile.projectPath);
+
+#ifdef DEBUG
+        PBXProject *project = projectFile.project;
 
         for(XCBuildConfiguration *buildConfig in project.buildConfigurationList.buildConfigurations) {
-            PGPrintf(PBXFormat3, PBXMessageTarget, projectFile.projectName, 1, @"Build Configuration", buildConfig.name);
+            PGPrintf(PBXFormat3, PBXMessageProject, projectFile.projectName, 1, PBXMessageConfiguration, buildConfig.name);
             [buildConfig debugPrint];
         }
+#endif
 
         NSArray<PBXTarget *> *targets = runInfo.targetsToBuild;
         NSString             *xcbc    = runInfo.buildConfigurationName;
@@ -37,15 +42,13 @@ NSInteger pbxBuilder() {
 
         PGPrintStr(PBXMessageDoubleLF);
 
-        struct timespec delay = { .tv_sec = 0, .tv_nsec = 500000000 };
-
         /*
          * CLEAN ACTION
          */
         if([runInfo.actions containsObject:PBXActionClean]) {
+            projectFile.userInfo[PBX_UI_CURRENT_ACTION] = PBXActionClean;
             PGPrintf(PBXFormat6, PBXMessageAction, PGFormat(PBXFormat11, PBXActionClean.capitalizedString));
             PGPrintf(PBXFormat7, PBXMessageRemoving, PGFormat(PBXFormat10, PBXMessageBuildDirectory, runInfo.buildDir), PBXMessageWorking);
-            nanosleep(&delay, NULL);
 
             BOOL isDir     = NO;
             BOOL doesExist = [NSFileManager.defaultManager fileExistsAtPath:runInfo.buildDir isDirectory:&isDir];
@@ -62,9 +65,9 @@ NSInteger pbxBuilder() {
          * BUILD ACTION
          */
         if([runInfo.actions containsObject:PBXActionBuild]) {
+            projectFile.userInfo[PBX_UI_CURRENT_ACTION] = PBXActionBuild;
             PGPrintf(PBXFormat6, PBXMessageAction, PGFormat(PBXFormat11, PBXActionBuild.capitalizedString));
             PGPrintf(PBXFormat7, PBXMessageCreating, PGFormat(PBXFormat10, PBXMessageBuildDirectory, runInfo.buildDir), PBXMessageWorking);
-            nanosleep(&delay, NULL);
 
             NSFileManager *fm = NSFileManager.defaultManager;
 
@@ -81,6 +84,7 @@ NSInteger pbxBuilder() {
          * INSTALL ACTION
          */
         if([runInfo.actions containsObject:PBXActionInstall]) {
+            projectFile.userInfo[PBX_UI_CURRENT_ACTION] = PBXActionInstall;
             PGPrintf(PBXFormat6, PBXMessageAction, PGFormat(PBXFormat11, PBXActionInstall.capitalizedString));
         }
     }

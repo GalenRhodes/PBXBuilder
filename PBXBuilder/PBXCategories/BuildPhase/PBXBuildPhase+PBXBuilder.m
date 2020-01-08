@@ -22,10 +22,41 @@
 
 #import "PBXTools.h"
 
+NSString *const PBXFormatDoingWithFile = @"\e[0m\e[97;40m\e[4C]\e[10C[\e[38;5;6m%@\e[97m] \e[38;5;180m%@\e[97m - \e[38;5;32m%@";
+NSString *const PBXMessageFailed       = @"\e[91mFAILED\e[0m\e[0K";
+
 @implementation PBXBuildPhase(PBXBuilder)
 
     -(NSInteger)build:(PBXRunInfo *)runInfo target:(PBXTarget *)target error:(NSError **)pError {
+        PBXBuildPhasePerFile blk = ^NSInteger(PBXBuildFile *f, NSError **e) { return 0; };
+        return [self doPerFile:blk action:@"BUILDING" silent:NO error:pError];
+    }
+
+    -(NSInteger)doPerFile:(PBXBuildPhasePerFile)perFileBlock action:(NSString *)action silent:(BOOL)silent error:(NSError **)pError {
+        for(PBXBuildFile *file in self.files) {
+            if(!silent) PGPrintf(PBXFormatDoingWithFile, action, (file.fileRef.name ?: file.fileRef.path), PBXMessageWorking);
+            NSInteger res = perFileBlock(file, pError);
+
+            if(res) {
+                if(!silent) PGPrintStr(PBXMessageFailed);
+                return res;
+            }
+
+            if(!silent) PGPrintf(PBXFormat8, PBXMessageSuccess);
+        }
+
         return 0;
+    }
+
+    -(NSUInteger)maxFilenameLength {
+        NSUInteger mx = 0;
+
+        for(PBXBuildFile *f in self.files) {
+            NSString *fn = (f.fileRef.name ?: f.fileRef.path);
+            if(fn.length > mx) mx = fn.length;
+        }
+
+        return mx;
     }
 
 @end

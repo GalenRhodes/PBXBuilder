@@ -25,30 +25,28 @@
 @implementation PBXHeadersBuildPhase(PBXBuilder)
 
     -(NSInteger)build:(PBXRunInfo *)runInfo target:(PBXTarget *)target error:(NSError **)pError {
-        NSInteger res = [super build:runInfo target:target error:pError];
-        if(res) return res;
+        XCBuildConfiguration *config = [target.buildConfigurationList buildConfigurationForName:runInfo.buildConfigurationName];
 
-        NSFileManager *fm               = NSFileManager.defaultManager;
-        NSString      *configName       = runInfo.buildConfigurationName;
-        NSString      *frameworkVersion = ([target.buildConfigurationList buildConfigurationForName:configName].buildSettings[@"FRAMEWORK_VERSION"] ?: @"Z");
-        NSString      *destPublic       = PGFormat(@"%@/%@.framework/Versions/%@/Headers", runInfo.buildDir, target.name, frameworkVersion);
-        NSString      *destPrivate      = PGFormat(@"%@/%@.framework/Versions/%@/PrivateHeaders", runInfo.buildDir, target.name, frameworkVersion);
+        NSString *destPrivate = (config.buildSettings[@"PRIVATE_HEADERS_FOLDER_PATH"]);
+        NSString *destPublic  = (config.buildSettings[@"PUBLIC_HEADERS_FOLDER_PATH"]);
 
-        if(![fm createDirectoryAtPath:destPublic withIntermediateDirectories:YES attributes:nil error:pError]) return (*pError).code;
-        if(![fm createDirectoryAtPath:destPrivate withIntermediateDirectories:YES attributes:nil error:pError]) return (*pError).code;
+        if(!(destPublic && destPrivate)) {
+            NSString *frameworkVersion = (config.buildSettings[@"FRAMEWORK_VERSION"] ?: @"A");
+            NSString *wrapperExtension = (config.buildSettings[@"WRAPPER_EXTENSION"] ?: @"framework");
 
-        for(PBXBuildFile *file in self.files) {
-            NSString *dest = PGFormat(@"%@/%@", (file.isPublic ? destPublic : destPrivate), (file.fileRef.name ?: file.fileRef.path));
-            NSString *src  = file.fileRef.realPath;
-
-            PGPrintf(@"Copying \"%@\" to \"%@\"...\n", src, dest);
-            if(![fm copyItemAtPath:src toPath:dest error:pError]) return (*pError).code;
+            if(!destPublic) destPublic   = PGFormat(@"%@/%@.%@/Versions/%@/Headers", runInfo.buildDir, target.name, wrapperExtension, frameworkVersion);
+            if(!destPrivate) destPrivate = PGFormat(@"%@/%@.%@/Versions/%@/PrivateHeaders", runInfo.buildDir, target.name, wrapperExtension, frameworkVersion);
         }
 
-        /*
-         * DO BUILDPHASE STUFF.
-         */
-        return res;
+        if(!createDir(destPublic, pError)) return (*pError).code;
+        if(!createDir(destPrivate, pError)) return (*pError).code;
+
+        PBXBuildPhasePerFile blk = ^NSInteger(PBXBuildFile *f, NSError **e) {
+            PBXFileReference *fr = f.fileRef;
+            return (copyFile(fr.realPath, PGFormat(@"%@/%@", (f.isPublic ? destPublic : destPrivate), (fr.name ?: fr.path)), e) ? 0 : (*e).code);
+        };
+
+        return [self doPerFile:blk action:@"Copying" silent:NO error:pError];
     }
 
 @end

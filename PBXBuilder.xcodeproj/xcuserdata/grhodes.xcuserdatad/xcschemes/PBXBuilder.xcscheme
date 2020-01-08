@@ -19,7 +19,8 @@
       useCustomWorkingDirectory = "YES"
       buildConfigurationName = "Debug"
       allowLocationSimulation = "YES"
-      customWorkingDirectory = "/Users/grhodes/Projects/2019/PBXBuilder">
+      customWorkingDirectory = "/Users/grhodes/Projects/2019/PBXBuilder"
+      buildConfiguration = "Debug">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"

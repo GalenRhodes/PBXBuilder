@@ -1,11 +1,11 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXTarget.h
+ *    FILENAME: NSProcessInfo+Moscow.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/4/19
+ *        DATE: 1/7/20
  *
- * Copyright © 2019 Project Galen. All rights reserved.
+ * Copyright © 2020 Project Galen. All rights reserved.
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -20,31 +20,24 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_PBXTARGET_H__
-#define __PBXBUILDER_PBXTARGET_H__
+#ifndef __PBXBUILDER_NSPROCESSINFO_MOSCOW_H__
+#define __PBXBUILDER_NSPROCESSINFO_MOSCOW_H__
 
 #import <Cocoa/Cocoa.h>
-#import <PBX/PBXItem.h>
-
-@class XCConfigurationList;
-@class PBXBuildPhase;
-@class PBXTargetDependency;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PBXTarget : PBXItem
+@interface NSProcessInfo(Moscow)
 
-    @property(nullable, readonly) NSString                       *name;
-    @property(nullable, readonly) NSString                       *productName;
-    @property(nullable, readonly) XCConfigurationList            *buildConfigurationList;
-    @property(readonly)/*      */ NSArray<PBXBuildPhase *>       *buildPhases;
-    @property(readonly)/*      */ NSArray<PBXTargetDependency *> *dependencies;
-    @property(readonly, copy)/**/ NSString                       *buildDir;
-
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
+    @property(readonly)/*  */ NSUInteger groupID;
+    @property(readonly, copy) NSString   *groupName;
+    @property(readonly)/*  */ NSUInteger userID;
+#if GNUSTEP
+    @property(readonly, copy) NSString   *userName;
+#endif
 
 @end
 
 NS_ASSUME_NONNULL_END
 
-#endif // __PBXBUILDER_PBXTARGET_H__
+#endif // __PBXBUILDER_NSPROCESSINFO_MOSCOW_H__

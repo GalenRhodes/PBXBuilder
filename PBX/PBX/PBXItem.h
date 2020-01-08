@@ -32,9 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PBXItem : NSObject<NSLocking>
 
-    @property(readonly) NSString       *itemId;
-    @property(readonly) NSString       *objType;
-    @property(readonly) PBXProjectFile *projectFile;
+    @property(readonly) NSString                            *itemId;
+    @property(readonly) NSString                            *objType;
+    @property(readonly) PBXProjectFile                      *projectFile;
+    @property(readonly) NSMutableDictionary<NSString *, id> *userInfo;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 

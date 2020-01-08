@@ -130,6 +130,10 @@ typedef void (^PGPrintStructBlock)(NSString *prefix, BOOL addCR);
 
 typedef BOOL (^PGFindBlock)(NSString *path, NSString *filename);
 
+FOUNDATION_EXPORT NSString *PGFindTool(NSString *toolName, BOOL searchLocalFlag) PG_OVERLOADED;
+
+FOUNDATION_EXPORT NSString *PGFindTool(NSString *toolName) PG_OVERLOADED;
+
 FOUNDATION_EXPORT NSString *PGAddANSI(id obj, NSUInteger count, ANSIGraphicsRendition *colors, NSUInteger afterCount);
 
 FOUNDATION_EXPORT NSString *PGpLeft(id obj, NSString *padding, BOOL truncate, NSUInteger length) PG_OVERLOADED;

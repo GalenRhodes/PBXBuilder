@@ -27,6 +27,7 @@
 #import <PBX/PBXItem.h>
 
 @class XCBuildConfiguration;
+@class PBXNativeTarget;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -36,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
     @property(readonly, nullable) NSString                        *defaultConfigurationName;
     @property(readonly, nullable) XCBuildConfiguration            *defaultConfiguration;
     @property(readonly)/*      */ NSArray<XCBuildConfiguration *> *buildConfigurations;
+    @property(readonly)/*      */ PBXNativeTarget                 *target;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 

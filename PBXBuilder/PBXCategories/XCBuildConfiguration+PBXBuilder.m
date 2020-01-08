@@ -25,14 +25,25 @@
 @implementation XCBuildConfiguration(PBXBuilder)
 
     -(void)debugPrint {
-        NSDictionary<NSString *, id> *settings = self.buildSettings;
-        NSArray<NSString *>          *keys     = [settings.allKeys sortedArrayUsingComparator:^NSComparisonResult(NSString *s1, NSString *s2) { return [s1 compare:s2]; }];
-        NSUInteger                   mx2       = 0;
+#ifdef DEBUG2
+            NSDictionary<NSString *, id> *settings = self.buildSettings;
+            NSArray<NSString *>          *keys     = [settings.allKeys sortedArrayUsingComparator:^NSComparisonResult(NSString *s1, NSString *s2) { return [s1 compare:s2]; }];
+            NSUInteger                   mx2       = 0;
 
-        for(NSString *key in keys) mx2 = MAX(mx2, key.length);
-        for(NSString *key in keys) {
-            PGPrintf(@"\e[0m\e[97;40m\e[4C]\e[%luC\e[38;5;187m%@\e[38;5;15m = \e[38;5;123m%@\e[0m\n", ((mx2 - key.length) + 20), key, [settings[key] description]);
-        }
+            for(NSString *key in keys) mx2 = MAX(mx2, key.length);
+            for(NSString *key in keys) {
+                PGPrintf(@"\e[0m\e[97;40m\e[4C]\e[%luC\e[38;5;187m%@\e[38;5;15m = \e[38;5;123m%@\e[0m\n", ((mx2 - key.length) + 20), key, [settings[key] description]);
+            }
+#elif defined(DEBUG)
+            NSDictionary<NSNumber *, NSString *> *map = PBXVars.variableNameMap;
+            __block NSUInteger                   mx2  = 0;
+
+            [map enumerateKeysAndObjectsUsingBlock:^(NSNumber *key, NSString *obj, BOOL *stop) { mx2 = MAX(mx2, obj.length); }];
+            [map enumerateKeysAndObjectsUsingBlock:^(NSNumber *key, NSString *obj, BOOL *stop) {
+                NSString *val = [[self getDefaultSetting:(PBXVariable)key.unsignedIntegerValue defaultValue:nil] description];
+                PGPrintf(@"\e[0m\e[97;40m\e[4C]\e[%luC\e[38;5;187m%@\e[38;5;15m = \e[38;5;123m%@\e[0m\n", ((mx2 - obj.length) + 20), obj, val);
+            }];
+#endif
     }
 
 @end

@@ -29,6 +29,24 @@ NSString *const PGX_STDOUT = @"/dev/stdout";
 
 NSString *const MoscowErrorDomain = @"com.projectgalen.Moscow";
 
+NSString *PGFindTool(NSString *toolName, BOOL searchLocalFlag) PG_OVERLOADED {
+    NSString *out = [PGExecute executeAndGetOutput:@"find" arguments:@[ @"/bin", @"-name", toolName ] error:NULL];
+    if(!out) out = [PGExecute executeAndGetOutput:@"find" arguments:@[ @"/sbin", @"-name", toolName ] error:NULL];
+    if(!out) out = [PGExecute executeAndGetOutput:@"find" arguments:@[ @"/usr/bin", @"-name", toolName ] error:NULL];
+    if(!out) out = [PGExecute executeAndGetOutput:@"find" arguments:@[ @"/usr/sbin", @"-name", toolName ] error:NULL];
+
+    if(!out && searchLocalFlag) {
+        out = [PGExecute executeAndGetOutput:@"find" arguments:@[ @"/usr/local/bin", @"-name", toolName ] error:NULL];
+        if(!out) out = [PGExecute executeAndGetOutput:@"find" arguments:@[ @"/usr/local/sbin", @"-name", toolName ] error:NULL];
+    }
+
+    return (out ?: toolName).trim;
+}
+
+NSString *PGFindTool(NSString *toolName) PG_OVERLOADED {
+    return PGFindTool(toolName, NO);
+}
+
 NSInteger PGExecuteApplication(NSString *appPath, NSArray *appParams, NSString **appOutput, NSError **error) {
     PGExecute *exe = [PGExecute exeWithAppPath:appPath arguments:appParams error:error];
 

@@ -54,6 +54,7 @@ NS_INLINE NSString *blankString(NSUInteger length) {
                 _lock        = [NSRecursiveLock new];
                 _itemId      = [itemId copy];
                 _projectFile = projectFile;
+                _userInfo    = [NSMutableDictionary new];
             }
             else {
                 return nil;

@@ -20,6 +20,10 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
+#if GNUSTEP
+#import <pwd.h>
+#endif
+
 #import "Tools.h"
 #import "NSFileManager+Moscow.h"
 
@@ -55,6 +59,12 @@
     @finally {
         free(buffer);
     }
+}
+
+-(NSURL *)homeDirectoryForCurrentUser {
+    uid_t uid = getuid();
+    struct passwd *uinfo = getpwuid(uid);
+    return [NSURL fileURLWithPath:((uinfo && uinfo->pw_dir) ? [NSString stringWithUTF8String:uinfo->pw_dir]: @"~".stringByExpandingTildeInPath) isDirectory:YES];
 }
 
 #endif

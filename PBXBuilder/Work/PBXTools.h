@@ -78,6 +78,14 @@ FOUNDATION_EXPORT void printStatus(NSString *status, ANSIGraphicsRendition color
 
 FOUNDATION_EXPORT void printSuccess(void);
 
+NS_INLINE BOOL createDir(NSString *dir, NSError **pError) {
+    return [[NSFileManager defaultManager] createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:pError];
+}
+
+NS_INLINE BOOL copyFile(NSString *src, NSString *dest, NSError **pError) {
+    return [[NSFileManager defaultManager] copyItemAtPath:src toPath:dest error:pError];
+}
+
 NS_ASSUME_NONNULL_END
 
 #endif // __PBXBUILDER_PGXTOOLS_H__

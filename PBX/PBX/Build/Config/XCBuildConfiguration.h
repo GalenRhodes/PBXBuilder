@@ -24,6 +24,7 @@
 #define __PBXBUILDER_XCBUILDCONFIGURATION_H__
 
 #import <PBX/PBXItem.h>
+#import "PBXVars.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -31,15 +32,30 @@ FOUNDATION_EXPORT NSString *const XCBuildConfigNameDebug;
 FOUNDATION_EXPORT NSString *const XCBuildConfigNameRelease;
 FOUNDATION_EXPORT NSString *const XCBuildConfigNameDefault;
 
+FOUNDATION_EXPORT NSString *const PBX_UI_CURRENT_ACTION;
+FOUNDATION_EXPORT NSString *const PBX_UI_BUILD_DIR;
+
+@class XCConfigurationList;
+
+typedef NSString *_Nullable (^PBXExpMacroBlock)(NSString *macro, BOOL *stop);
+
 @interface XCBuildConfiguration : PBXItem
 
     @property(class, readonly)/*   */ NSArray<NSString *>          *allBuildConfigurationNames;
     @property(readonly, nullable)/**/ NSString                     *name;
     @property(readonly, nullable)/**/ NSString                     *baseConfigurationReference;
     @property(readonly)/*          */ NSDictionary<NSString *, id> *buildSettings;
+    @property(readonly)/*          */ XCConfigurationList          *configurationList;
 
     -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
 
+    -(id)expandMacrosIn:(id)obj usingBlock:(PBXExpMacroBlock)block;
+
+    -(id)settingForName:(NSString *)name;
+
+    -(id)getDefaultSettingForName:(NSString *)name;
+
+    -(id)getDefaultSetting:(PBXVariable)varId defaultValue:(nullable id)d2;
 @end
 
 NS_ASSUME_NONNULL_END

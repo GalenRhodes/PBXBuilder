@@ -41,18 +41,21 @@ typedef NSMutableDictionary<NSString *, PBXBuildPhaseToolOptionsMap> *PBXToolOpt
             NSUInteger          argc     = args.count;
             BOOL                badStart = ((argc == 0) || ((_programPath = args[0].stringByMakingAbsolutePath) == nil));
 
-            _workingDir = NSFileManager.defaultManager.currentDirectoryPath;
             if(badStart) @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:PGErrMsgNoProgramPath userInfo:nil];
+
+            _builtTargets          = [NSMutableArray new];
+            _additionalToolOptions = [NSMutableDictionary new];
+            _targetNameMaxLength   = 0;
+            _workingDir            = NSFileManager.defaultManager.currentDirectoryPath;
+
             if((_gnustepInfo = [GNUstepInfo GNUstepInfo:pError]) == nil) return nil;
             if(![self parseCommandLineArguments:[args subarrayWithRange:NSMakeRange(1, (argc - 1))] pError:pError]) return nil;
 
-            _buildDir     = PGFormat(@"%@/build", self.projectToBuild.projectPath);
-            _builtTargets = [NSMutableArray new];
+            _buildDir = PGFormat(@"%@/build", self.projectToBuild.projectPath);
 
-            _targetNameMaxLength = 0;
             for(PBXTarget *target in _projectToBuild.project.targets) _targetNameMaxLength = MAX(_targetNameMaxLength, target.name.length);
 
-            _additionalToolOptions = [NSMutableDictionary new];
+            _projectToBuild.userInfo[PBX_UI_BUILD_DIR] = _buildDir;
         }
 
         return self;
@@ -169,10 +172,12 @@ typedef NSMutableDictionary<NSString *, PBXBuildPhaseToolOptionsMap> *PBXToolOpt
         }
         else {
             NSMutableArray<PBXTarget *> *array = [NSMutableArray new];
-            for(NSString                *targetName in names) {
+
+            for(NSString *targetName in names) {
                 PBXTarget *target = [project targetWithName:targetName];
                 if(target) [array addObject:target]; else return pbxMakeErr(pError, PBX_TARGET_NOT_FOUND, PGErrMsgTargetNotFound, targetName, projectName);
             }
+
             _targetsToBuild = array;
         }
 
@@ -180,11 +185,9 @@ typedef NSMutableDictionary<NSString *, PBXBuildPhaseToolOptionsMap> *PBXToolOpt
     }
 
     -(BOOL)setDefaultProject:(NSDictionary<NSString *, NSString *> *)projects error:(NSError **)pError {
-        if(!_projectToBuild) {
-            if(projects.count == 1) return ((_projectToBuild = [self getFirstProjectFile:projects error:pError]) != nil);
-            else return [self getMultiProjError:projects error:pError];
-        }
-        return YES;
+        return ((!_projectToBuild) ?
+                ((projects.count == 1) ? ((_projectToBuild = [self getFirstProjectFile:projects error:pError]) != nil) : [self getMultiProjError:projects error:pError]) :
+                YES);
     }
 
     -(BOOL)getMultiProjError:(NSDictionary<NSString *, NSString *> *)projects error:(NSError **)pError {

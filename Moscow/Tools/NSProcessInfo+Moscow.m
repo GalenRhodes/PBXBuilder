@@ -1,11 +1,11 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXBuildPhase+PBXBuilder.h
+ *    FILENAME: NSProcessInfo+Moscow.m
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 12/20/19
+ *        DATE: 1/7/20
  *
- * Copyright © 2019 Project Galen. All rights reserved.
+ * Copyright © 2020 Project Galen. All rights reserved.
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -20,25 +20,35 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_PBXBUILDPHASE_PBXBUILDER_H__
-#define __PBXBUILDER_PBXBUILDPHASE_PBXBUILDER_H__
+#import <grp.h>
+#import "NSProcessInfo+Moscow.h"
 
-#import <Cocoa/Cocoa.h>
-#import <PBX/PBX.h>
+#if GNUSTEP
+#import <pwd.h>
+#endif
 
-NS_ASSUME_NONNULL_BEGIN
+@implementation NSProcessInfo(Moscow)
 
-typedef NSInteger (^PBXBuildPhasePerFile)(PBXBuildFile *buildFile, NSError **pError);
+    -(NSString *)groupName {
+        gid_t        gid    = getgid();
+        struct group *ginfo = getgrgid(gid);
+        return (ginfo && ginfo->gr_name ? [NSString stringWithUTF8String:ginfo->gr_name] : @((NSUInteger)gid).stringValue);
+    }
 
-@interface PBXBuildPhase(PBXBuilder)
+    -(NSUInteger)groupID {
+        return getgid();
+    }
 
-    @property(readonly) NSUInteger maxFilenameLength;
+    -(NSUInteger)userID {
+        return getuid();
+    }
 
-    -(NSInteger)build:(PBXRunInfo *)runInfo target:(PBXTarget *)target error:(NSError **)pError;
+#if GNUSTEP
+-(NSString *)userName {
+    uid_t         uid    = getuid();
+    struct passwd *uinfo = getpwuid(uid);
+    return ((uinfo && uinfo->pw_name) ? [NSString stringWithUTF8String:uinfo->pw_name] : @((NSUInteger)uid).stringValue);
+}
+#endif
 
-    -(NSInteger)doPerFile:(PBXBuildPhasePerFile)perFileBlock action:(NSString *)action silent:(BOOL)silent error:(NSError **)pError;
 @end
-
-NS_ASSUME_NONNULL_END
-
-#endif // __PBXBUILDER_PBXBUILDPHASE_PBXBUILDER_H__

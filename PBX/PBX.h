@@ -50,5 +50,6 @@ FOUNDATION_EXPORT const unsigned char PBXVersionString[];
 #import <PBX/PBXContainerItemProxy.h>
 #import <PBX/XCConfigurationList.h>
 #import <PBX/XCBuildConfiguration.h>
+#import <PBX/PBXVars.h>
 
 

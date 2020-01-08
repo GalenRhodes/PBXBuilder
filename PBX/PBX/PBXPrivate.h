@@ -1,11 +1,11 @@
 /************************************************************************//**
  *     PROJECT: PBXBuilder
- *    FILENAME: PBXTarget.h
+ *    FILENAME: PBXPrivate.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 11/4/19
+ *        DATE: 1/6/20
  *
- * Copyright © 2019 Project Galen. All rights reserved.
+ * Copyright © 2020 Project Galen. All rights reserved.
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -20,31 +20,25 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *//************************************************************************/
 
-#ifndef __PBXBUILDER_PBXTARGET_H__
-#define __PBXBUILDER_PBXTARGET_H__
+#ifndef ____PBX_PBXPRIVATE_H____
+#define ____PBX_PBXPRIVATE_H____
 
-#import <Cocoa/Cocoa.h>
-#import <PBX/PBXItem.h>
+#import <PBX/PBX.h>
 
 @class XCConfigurationList;
-@class PBXBuildPhase;
-@class PBXTargetDependency;
+@class XCBuildConfiguration;
+@class PBXNativeTarget;
 
-NS_ASSUME_NONNULL_BEGIN
+@interface XCBuildConfiguration()
 
-@interface PBXTarget : PBXItem
-
-    @property(nullable, readonly) NSString                       *name;
-    @property(nullable, readonly) NSString                       *productName;
-    @property(nullable, readonly) XCConfigurationList            *buildConfigurationList;
-    @property(readonly)/*      */ NSArray<PBXBuildPhase *>       *buildPhases;
-    @property(readonly)/*      */ NSArray<PBXTargetDependency *> *dependencies;
-    @property(readonly, copy)/**/ NSString                       *buildDir;
-
-    -(instancetype)initWithItemId:(NSString *)itemId projectFile:(PBXProjectFile *)projectFile;
+    @property XCConfigurationList *configurationList;
 
 @end
 
-NS_ASSUME_NONNULL_END
+@interface XCConfigurationList()
 
-#endif // __PBXBUILDER_PBXTARGET_H__
+    @property PBXNativeTarget *target;
+
+@end
+
+#endif // ____PBX_PBXPRIVATE_H____

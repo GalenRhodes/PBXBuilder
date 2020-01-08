@@ -40,17 +40,12 @@
             _projectName  = [name copy];
             _projectPath  = [path.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent copy];
             _pbxItemCache = [NSMutableDictionary new];
+            _userInfo     = [NSMutableDictionary new];
 
-#ifdef DEBUG
-            PGPrintf(@"Loading Project: \"%@\"\n", path);
-#endif
             NSDictionary *pbx = [PBXProjectFile getPropertyListAtPath:path format:&_pbxFormat error:error];
 
             _projectPBX = pbx[@"objects"];
             _project    = [self itemForID:pbx[@"rootObject"]];
-
-            PGPrintf(@"Project Name: %@\n", _projectName);
-            PGPrintf(@"Project Path: %@\n", _projectPath);
         }
 
         return self;
